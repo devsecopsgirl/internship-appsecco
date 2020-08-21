@@ -1,8 +1,9 @@
-site_name: 'Documentation'
+site_name: 'DevSecOps'
 
 pages:
 - Introduction: 'index.md'
-- Jenkins: 'Jenkins-installation.md'
-- Setup: 'Ubuntu-server-VM-setup.md'
+- Setup of VMs: 'Ubuntu-server-VM-setup.md'
+- Setup of Jenkins: 'Jenkins-installation.md'
+- MkDocs | setup, usage: 'mkdocs-setup-usage.md'
 
 theme: material
