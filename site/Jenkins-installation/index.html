@@ -1,0 +1,624 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.7">
+    
+    
+      
+        <title>Jenkins - Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.b8ac9624.min.css">
+      
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#jenkins-installation" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href=".." title="Documentation" class="md-header-nav__button md-logo" aria-label="Documentation">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            Documentation
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Jenkins
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Documentation" class="md-nav__button md-logo" aria-label="Documentation">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Jenkins
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
+        </span>
+      </label>
+    
+    <a href="./" title="Jenkins" class="md-nav__link md-nav__link--active">
+      Jenkins
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#jenkins-installation" class="md-nav__link">
+    Jenkins Installation
+  </a>
+  
+    <nav class="md-nav" aria-label="Jenkins Installation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisite" class="md-nav__link">
+    Prerequisite:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-1-installing-jenkins" class="md-nav__link">
+    STEP 1 - Installing Jenkins
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-starting-jenkins" class="md-nav__link">
+    Step 2 — Starting Jenkins
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-opening-the-firewall" class="md-nav__link">
+    Step 3 - Opening the Firewall
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-setting-up-jenkins" class="md-nav__link">
+    Step 4 — Setting Up Jenkins
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#errors-resolved" class="md-nav__link">
+    Errors resolved
+  </a>
+  
+    <nav class="md-nav" aria-label="Errors resolved">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    References
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../Ubuntu-server-VM-setup/" title="Setup" class="md-nav__link">
+      Setup
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#jenkins-installation" class="md-nav__link">
+    Jenkins Installation
+  </a>
+  
+    <nav class="md-nav" aria-label="Jenkins Installation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisite" class="md-nav__link">
+    Prerequisite:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-1-installing-jenkins" class="md-nav__link">
+    STEP 1 - Installing Jenkins
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-starting-jenkins" class="md-nav__link">
+    Step 2 — Starting Jenkins
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-opening-the-firewall" class="md-nav__link">
+    Step 3 - Opening the Firewall
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-setting-up-jenkins" class="md-nav__link">
+    Step 4 — Setting Up Jenkins
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#errors-resolved" class="md-nav__link">
+    Errors resolved
+  </a>
+  
+    <nav class="md-nav" aria-label="Errors resolved">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    References
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  
+                
+                
+                  <h1>Jenkins</h1>
+                
+                <h2 id="jenkins-installation">Jenkins Installation</h2>
+<p>Jenkin's installation is being done in the Jenkins VM we created.</p>
+<p><strong>What is Jenkins?</strong></p>
+<p>Jenkins is a self-contained, open source automation server which can be used to automate all sorts of tasks related to <code>building, testing,and delivering or deploying software</code>.</p>
+<p>Jenkins can be installed through native system packages, Docker, or even run standalone by any machine with a Java Runtime Environment (JRE) installed.</p>
+<h4 id="prerequisite">Prerequisite:</h4>
+<ol>
+<li>
+<p>Your VM should be installed with Ubuntu 18.04 server for the jenkins installation.</p>
+</li>
+<li>
+<p>Java 8 installed, installing specific versions of OpenJDK on Ubuntu 18.04.</p>
+</li>
+</ol>
+<p>We begin with the installation steps of Jenkins.</p>
+<h4 id="step-1-installing-jenkins">STEP 1 - Installing Jenkins</h4>
+<p>First, add the repository key to the system:</p>
+<pre><code>$ wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+</code></pre>
+<p>The system will return <code>OK</code> </p>
+<p><img alt="" src="../Images/2020-08-19_20-55.png" /></p>
+<p>Next, append the Debian package repository address</p>
+<pre><code>$ sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ &gt; \
+/etc/apt/sources.list.d/jenkins.list'
+
+$ sudo apt update
+</code></pre>
+<p>Finally, install Jenkins ans its dependencies:</p>
+<pre><code>$ sudo apt install jenkins
+</code></pre>
+<h4 id="step-2-starting-jenkins">Step 2 — Starting Jenkins</h4>
+<p>Let’s start Jenkins using systemctl:</p>
+<pre><code>  $ sudo systemctl start jenkins
+             OR
+  $ sudo service jenkins start
+</code></pre>
+<p>Since systemctl doesn’t display output, you can use its status command to verify that Jenkins started successfully:</p>
+<pre><code> $ sudo systemctl status jenkins
+             OR 
+ $ sudo service jenkins start
+</code></pre>
+<p>If it's successfully installed, the beginning of the output should show that the service is <strong>active</strong> and configured to start for boot.</p>
+<p><img alt="" src="../Images/2020-08-20_00-01.png" /></p>
+<p>The Jenkins is running now. To reach it from a web browser let's adjust our firewall rules to complete the initial setup.</p>
+<h4 id="step-3-opening-the-firewall">Step 3 - Opening the Firewall</h4>
+<p>By default, Jenkins runs on port 8080, so let’s open that port using ufw(Uncomplicated Firewall ):</p>
+<pre><code>    $ sudo ufw allow 8080
+</code></pre>
+<p>To check the ufw's status confirm the new rules:</p>
+<pre><code>   $ sudo ufw status
+</code></pre>
+<p>Note: If the status shows inactive. Then enable the firewall by following the following commands that will OpenSSH</p>
+<pre><code>   $ sudo ufw allow OpenSSH
+   $ sudo ufw enable
+</code></pre>
+<p>You will see the output as shown:</p>
+<p><img alt="" src="../Images/2020-08-19_21-19.png" /></p>
+<h4 id="step-4-setting-up-jenkins">Step 4 — Setting Up Jenkins</h4>
+<p>Find the IP of your system:</p>
+<pre><code>   $ ifconfig
+</code></pre>
+<p>To setup your installation, in the browser enter <code>http://your_server_ip_or_domain:8080</code></p>
+<p>The <code>Unlock Jenkins</code> screen opens,which will display where our initial password would be stored.</p>
+<p><img alt="" src="../Images/2020-08-19_13-58.png" /></p>
+<p>In the terminal window use the cat command to display the password:</p>
+<pre><code>   $ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+</code></pre>
+<p>The 32-character alphanumeric password is displayed in the terminal, paste it into the Administrator password field, then click <code>Continue</code>. </p>
+<p><strong>Installing suggested plugins</strong></p>
+<p><img alt="" src="../Images/2020-08-19_14-05.png" /></p>
+<p>We’ll click the <code>Install suggested plugins</code> option, which will immediately begin the installation process as shown:</p>
+<p><img alt="" src="../Images/2020-08-19_14-26.png" /></p>
+<p>Once the installation completes, the screen opens to <code>Create First Admin User</code>, Fill the required details.</p>
+<p><img alt="" src="../Images/2020-08-19_14-26_1.png" /></p>
+<p>click on <code>Save and Continue</code> or you can also select <code>Continue as admin</code> to skip the above step and continue as admin using the initial password we used above.</p>
+<p>The <code>Instance Configuration</code> page will be displayed which will ask you to confirm the preferred URL for your Jenkins instance. Confirm either the domain name for your server or your server’s IP address.</p>
+<p><img alt="" src="../Images/2020-08-19_14-28.png" /></p>
+<p>Confirm the appropriate information, click <code>Save and Finish</code>. You will see a confirmation page confirming that <code>Jenkins is Ready!</code></p>
+<p><img alt="" src="../Images/2020-08-19_14-29.png" /></p>
+<p>Click <code>Start using Jenkins</code> to visit the main Jenkins dashboard.</p>
+<p>Here we finish the installation of Jenkins in our VM.</p>
+<hr />
+<h2 id="errors-resolved">Errors resolved</h2>
+<p>There were few errors which I faced during the installation. </p>
+<ol>
+<li><strong>GPG key error:</strong></li>
+</ol>
+<p>A LTS (Long-Term Support) release is chosen every 12 weeks from the stream of regular releases as the stable release for that time period. </p>
+<p>The link gets updated, it gives GPG key error so find the latest link from <code>https://www.jenkins.io/doc/book/installing/#debianubuntu</code> under the Debian/Ubuntu section.</p>
+<ol>
+<li><strong>Certificate verification failed</strong></li>
+</ol>
+<p><img alt="" src="../Images/2020-08-19_13-05.png" /></p>
+<p>To resolve this pass <code>--no-check-certificate</code> as shown below:</p>
+<pre><code>   $ wget https://ftp.yz.yamagata-u.sc.jp/pub/misc/jenkins/debian-stable/jenkins_2.235_all.deb --no-check-certificate
+</code></pre>
+<p>Again reinstall the debian file of jenkins:
+       $ sudo dpkg -i jenkins_2.235.5_all.deb</p>
+<p>To fix the broken packages run:</p>
+<pre><code>   $ sudo apt install -f
+</code></pre>
+<p>Now again check the status of jenkins:
+       $ sudo service jenkins status
+It will show its active now.</p>
+<ol>
+<li><strong>Invalid user or password</strong></li>
+</ol>
+<p><img alt="" src="../Images/2020-08-20_00-48.png" /></p>
+<p>Once you are logged in successfully into Jenkins VM (Virtual Machine). Go to directory <code>Jenkins</code> and open file <code>config.xml</code>.</p>
+<pre><code>     $ sudo nano /var/lib/Jenkins/config.xml
+</code></pre>
+<p>This command will open <code>config.xml</code> file as below:</p>
+<p><img alt="" src="../Images/2020-08-20_00-53.png" /></p>
+<p>Go to <useSecurity> tag and check value, it will be <code>true</code>. </p>
+<p>You need to update <useSecurity> tag value to <code>false</code> as below.</p>
+<p><img alt="" src="../Images/2020-08-20_00-54.png" /></p>
+<p>Save this file.</p>
+<p>Once you are done with updating value in <code>config.xml</code> file. Restart Jenkins service.</p>
+<pre><code>     $ sudo service jenkins restart
+</code></pre>
+<p>It will show the status <code>active</code>.</p>
+<p>Now open Jenkins URL. It will go to dashboard direct. No credentials required. You can see after opening dashboard <code>Logged in user</code> section will be blank. As it is now <code>Anonymous user</code>.</p>
+<p>To reset all security options, go to <code>Jenkins</code> -&gt; <code>Manage Jenkins</code> option in left hand side option lists. </p>
+<p><img alt="" src="../Images/2020-08-20_10-10.png" /></p>
+<p>Go to  <code>Configure Global Security</code> option</p>
+<ul>
+<li>Enable <code>Enable Security</code> option.</li>
+<li>In Security Realm Option Select <code>Jenkins own database</code> option.</li>
+<li>Unselect / Untick <code>Allow users to sign up</code> option under <code>Jenkins own database</code> option.</li>
+</ul>
+<p><img alt="" src="../Images/2020-08-20_10-12.png" /></p>
+<p>In <code>Authorization section</code> do following changes :</p>
+<ul>
+<li>Select <code>Logged-in users can do anything</code> option (Tick).</li>
+<li>Unselect / Untick <code>Allow anonymous read access</code> option under <code>Logged-in users can do anything</code> option.</li>
+<li>Click <code>Save</code> button. </li>
+</ul>
+<p>You will be redirected to <code>Create First Admin User</code> page once you click on <code>Save</code> button.</p>
+<p><img alt="" src="../Images/2020-08-20_01-04.png" /></p>
+<p>Once you fill all the details, click on <code>Create First Admin User</code> button</p>
+<p>You will be ready with new Admin users to login again into Jenkins portal. </p>
+<h3 id="references">References</h3>
+<ol>
+<li>
+<p><a href="https://www.jenkins.io/doc/book/installing/">Installing Jenkins</a></p>
+</li>
+<li>
+<p><a href="https://www.linuxtechi.com/ubuntu-18-04-server-installation-guide/">Ubuntu Server 18.04 Installation</a></p>
+</li>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04#installing-specific-versions-of-openjdk">Installing JDK </a></li>
+</ol>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href=".." title="Introduction" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Introduction
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../Ubuntu-server-VM-setup/" title="Setup" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Setup
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/vendor.d1f5a259.min.js"></script>
+      <script src="../assets/javascripts/bundle.d5fec882.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "..",
+          features: [],
+          search: Object.assign({
+            worker: "../assets/javascripts/worker/search.fae956e7.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>
