@@ -1,0 +1,8 @@
+site_name: 'Documentation'
+
+pages:
+- Introduction: 'index.md'
+- Jenkins: 'Jenkins-installation.md'
+- Setup: 'Ubuntu-server-VM-setup.md'
+
+theme: material
