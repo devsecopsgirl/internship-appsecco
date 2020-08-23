@@ -161,12 +161,38 @@
       
       
 
+
+  <li class="md-nav__item">
+    <a href="../contents/" title="Contents" class="md-nav__link">
+      Contents
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../problem-statement/" title="Problem Statement" class="md-nav__link">
+      Problem Statement
+    </a>
+  </li>
+
+    
+      
+      
+      
+
   
 
 
   <li class="md-nav__item md-nav__item--active">
     
     <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
@@ -184,6 +210,8 @@
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon">
@@ -194,15 +222,22 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#setting-up-vm" class="md-nav__link">
-    Setting up VM
+  <a href="#objective" class="md-nav__link">
+    Objective
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#now-begin-with-the-installation-of-ubuntu-server-18045" class="md-nav__link">
-    Now begin with the installation of Ubuntu Server 18.04.5
+  <a href="#steps-for-creating-vm" class="md-nav__link">
+    Steps for creating VM:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation-steps-for-ubuntu-server-18045" class="md-nav__link">
+    Installation steps for Ubuntu Server 18.04.5
   </a>
   
 </li>
@@ -232,8 +267,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../mkdocs-setup-usage/" title="MkDocs | setup, usage" class="md-nav__link">
-      MkDocs | setup, usage
+    <a href="../mkdocs-setup-usage/" title="MkDocs setup for report" class="md-nav__link">
+      MkDocs setup for report
     </a>
   </li>
 
@@ -252,6 +287,8 @@
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon">
@@ -262,15 +299,22 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#setting-up-vm" class="md-nav__link">
-    Setting up VM
+  <a href="#objective" class="md-nav__link">
+    Objective
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#now-begin-with-the-installation-of-ubuntu-server-18045" class="md-nav__link">
-    Now begin with the installation of Ubuntu Server 18.04.5
+  <a href="#steps-for-creating-vm" class="md-nav__link">
+    Steps for creating VM:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation-steps-for-ubuntu-server-18045" class="md-nav__link">
+    Installation steps for Ubuntu Server 18.04.5
   </a>
   
 </li>
@@ -291,14 +335,13 @@
                   
                 
                 
-                  <h1>Setup of VMs</h1>
-                
-                <h2 id="setting-up-vm">Setting up VM</h2>
-<p>In this section we will we setting up two VMs:</p>
-<p>1). For jenkins deployment.</p>
-<p>2). For production Server to deploy the application (Odoo) on the server</p>
-<p>Begin by creating a Virtual machine for Jenkins deployment.</p>
-<p><strong>STEPS:</strong></p>
+                <h1 id="setting-up-vm">Setting up VM</h1>
+<h2 id="objective">Objective</h2>
+<p>The aim of this section is to set up the required infrastructure to perform the task and solve the 1st point of the problem statement under Task 1.</p>
+<p>In this section I will be setting up two VMs:
+1. For jenkins deployment.
+2. For production Server to deploy the application (Odoo) on the server</p>
+<h2 id="steps-for-creating-vm">Steps for creating VM:</h2>
 <ol>
 <li>Click on the <code>NEW</code> icon to create a new machine.</li>
 <li><code>Create Virtual Machine</code> window will open as shown in the picture.</li>
@@ -320,33 +363,28 @@
 <li>Select storage on physical hard disk <code>Dynamically allocated</code>.</li>
 <li>Click create.</li>
 </ul>
-<p>And that’s it! Your VM is ready for Ubuntu 18.04 installation.</p>
-<p>Now download the server image 18.04 on VirtualBox as it is an LTS (Long Term Support) version which is a desirable feature for a CI pipeline. Follow the link <code>https://releases.ubuntu.com/18.04/</code></p>
+<p>And that’s it! Your VM is ready for Ubuntu 18.04 server installation.</p>
+<p>TO download the server image 18.04 on VirtualBox as it is an LTS (Long Term Support) version which is a desirable feature for a CI pipeline. Follow the <a href="https://releases.ubuntu.com/18.04/">link</a></p>
 <p><img alt="" src="../Images/2020-08-18_17-18.png" /></p>
 <p><strong>What is LTS?</strong></p>
 <ol>
 <li>It is a product lifecycle management policy in which a stable release of computer software is maintained for a longer period of time than the standard edition.</li>
 <li>The term is typically reserved for open-source software.</li>
 </ol>
-<p><strong>Difference between Desktop Image and Server Image</strong></p>
-<ol>
-<li>Desktop image is GUI(Graphical User Interface) based and Server Image is CLI(Command Line Interface) based.</li>
-<li>Size of Desktop Image is (2.2 GB) and size of Server Image is (990.9 MB). So choose according to your system supports while running two VM's.</li>
-</ol>
-<h2 id="now-begin-with-the-installation-of-ubuntu-server-18045">Now begin with the installation of Ubuntu Server 18.04.5</h2>
-<p>Open the VM box and select the VM on which you want to install the server.
+<h2 id="installation-steps-for-ubuntu-server-18045">Installation steps for Ubuntu Server 18.04.5</h2>
+<p>I decided to install the Ubuntu Server 18.04.5 because my system was not able to support the Desktop Image.</p>
+<p>In the VM box I selected the VM <Jenkins-infra> to insatll the server.
 click on <code>Start</code></p>
 <p><img alt="" src="../Images/2020-08-18_22-06.png" /></p>
 <p>When the window <code>Select start-up disk</code> window opens click on the folder.</p>
-<p><img alt="" src="../Images/2020-08-18_22-07.png" /></p>
 <p>A new window opens <code>Optical Disk Selector</code>. Select the server image and click <code>Choose</code></p>
 <p><img alt="" src="../Images/2020-08-18_22-08.png" /></p>
-<p>Your server image is now selected so now click on <code>Start</code></p>
+<p>Server image is now selected and click on <code>Start</code></p>
 <p><img alt="" src="../Images/2020-08-18_22-09.png" /></p>
-<p>As you click on <code>Start</code> Jenkins VM start's running.</p>
+<p>Click on <code>Start</code> Jenkins VM start's running.</p>
 <p><img alt="" src="../Images/2020-08-18_22-10.png" /></p>
 <p>The installer is designed to be easy to use and have sensible defaults so for a first install you can mostly just accept the defaults for the most straightforward install.</p>
-<p>Let's begin with installation:</p>
+<p>Begining with installation:</p>
 <p><strong>Language selection</strong></p>
 <p><img alt="" src="../Images/2020-08-18_22-12.png" /></p>
 <p>This screen selects the language and the default language for the installed system.</p>
@@ -364,14 +402,15 @@ click on <code>Start</code></p>
 <p>The proxy configured on this screen is used for accessing the package repository and the snap store both in the installer environment and in the installed system.</p>
 <p><strong>Mirror</strong></p>
 <p><img alt="" src="../Images/2020-08-18_22-15_1.png" /></p>
-<p>The installer will attempt to use geoip to look up an appropriate default package mirror for your location. If you want or need to use a different mirror, enter its URL here.</p>
+<p>The installer will attempt to use geoip to look up an appropriate default package mirror for
+location. </p>
 <p><strong>Guided Storage Configuration</strong></p>
 <p><img alt="" src="../Images/2020-08-18_22-16.png" /></p>
 <p>I kept the storage default and selected <code>Done</code>.
 Press Enter button.</p>
 <p><strong>Storage Configuration</strong></p>
 <p><img alt="" src="../Images/2020-08-18_22-16_1.png" /></p>
-<p>Once the storage configuration is confirmed, the install begins in the background.</p>
+<p>Confirm storage configuration.</p>
 <p><img alt="" src="../Images/2020-08-18_22-19.png" /></p>
 <p>Select continue. Press <code>Enter</code> to begin the installation.</p>
 <p><strong>Profile Setup</strong></p>
@@ -389,7 +428,7 @@ Press Enter button.</p>
 <p><img alt="" src="../Images/2020-08-18_22-29.png" /></p>
 <p>Once the installation is complete, select <code>Reboot</code>. Press <code>Enter</code>.</p>
 <p>Similarly the second VM can be installed.</p>
-<p>Here we finish with the installation of <code>Ubuntu 18.04.05(LTS)</code> server.</p>
+<p>Here I finished with the installation of <code>Ubuntu 18.04.05(LTS)</code> server.</p>
                 
               
               
@@ -408,7 +447,7 @@ Press Enter button.</p>
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href=".." title="Introduction" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../problem-statement/" title="Problem Statement" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -417,7 +456,7 @@ Press Enter button.</p>
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Introduction
+                Problem Statement
               </div>
             </div>
           </a>

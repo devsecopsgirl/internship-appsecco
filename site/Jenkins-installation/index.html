@@ -163,6 +163,30 @@
 
 
   <li class="md-nav__item">
+    <a href="../contents/" title="Contents" class="md-nav__link">
+      Contents
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../problem-statement/" title="Problem Statement" class="md-nav__link">
+      Problem Statement
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
     <a href="../Ubuntu-server-VM-setup/" title="Setup of VMs" class="md-nav__link">
       Setup of VMs
     </a>
@@ -180,6 +204,8 @@
     
     <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
+      
+    
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
         Setup of Jenkins
@@ -196,6 +222,8 @@
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon">
@@ -206,11 +234,11 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#jenkins-installation" class="md-nav__link">
-    Jenkins Installation
+  <a href="#objective" class="md-nav__link">
+    Objective
   </a>
   
-    <nav class="md-nav" aria-label="Jenkins Installation">
+    <nav class="md-nav" aria-label="Objective">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -258,19 +286,6 @@
     Errors resolved
   </a>
   
-    <nav class="md-nav" aria-label="Errors resolved">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#references" class="md-nav__link">
-    References
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
     </ul>
@@ -286,8 +301,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../mkdocs-setup-usage/" title="MkDocs | setup, usage" class="md-nav__link">
-      MkDocs | setup, usage
+    <a href="../mkdocs-setup-usage/" title="MkDocs setup for report" class="md-nav__link">
+      MkDocs setup for report
     </a>
   </li>
 
@@ -306,6 +321,8 @@
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon">
@@ -316,11 +333,11 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#jenkins-installation" class="md-nav__link">
-    Jenkins Installation
+  <a href="#objective" class="md-nav__link">
+    Objective
   </a>
   
-    <nav class="md-nav" aria-label="Jenkins Installation">
+    <nav class="md-nav" aria-label="Objective">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -367,19 +384,6 @@
   <a href="#errors-resolved" class="md-nav__link">
     Errors resolved
   </a>
-  
-    <nav class="md-nav" aria-label="Errors resolved">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#references" class="md-nav__link">
-    References
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -399,89 +403,66 @@
                   
                 
                 
-                  <h1>Setup of Jenkins</h1>
-                
-                <h2 id="jenkins-installation">Jenkins Installation</h2>
-<p>Jenkin's installation is being done in the Jenkins VM we created.</p>
+                <h1 id="jenkins-installation">Jenkins Installation</h1>
+<h2 id="objective">Objective</h2>
+<p>The aim of this section is to set up the required infrastructure of Jenkins to perform the task and solve the 2nd point of the problem statement under Task 1.</p>
 <p><strong>What is Jenkins?</strong></p>
 <p>Jenkins is a self-contained, open source automation server which can be used to automate all sorts of tasks related to <code>building, testing,and delivering or deploying software</code>.</p>
 <p>Jenkins can be installed through native system packages, Docker, or even run standalone by any machine with a Java Runtime Environment (JRE) installed.</p>
-<h4 id="prerequisite">Prerequisite:</h4>
+<h3 id="prerequisite">Prerequisite:</h3>
 <ol>
-<li>
-<p>Your VM should be installed with Ubuntu 18.04 server for the jenkins installation.</p>
-</li>
-<li>
-<p>Java 8 installed, installing specific versions of OpenJDK on Ubuntu 18.04.</p>
-</li>
+<li>VM should be installed with Ubuntu 18.04 server for <a href="https://www.jenkins.io/doc/book/installing/">Installing Jenkins</a> go to Debian/Ubuntu section.</li>
+<li>Java 8 installed, <a href="https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04#installing-specific-versions-of-openjdk">installing</a>
+ on Ubuntu 18.04.  specific versions of OpenJDK </li>
 </ol>
-<p>We begin with the installation steps of Jenkins.</p>
-<h4 id="step-1-installing-jenkins">STEP 1 - Installing Jenkins</h4>
+<p>Begin with the installation steps of Jenkins.</p>
+<h3 id="step-1-installing-jenkins">STEP 1 - Installing Jenkins</h3>
 <p>First, add the repository key to the system:</p>
-<pre><code>$ wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
-</code></pre>
+<p><code>wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -</code></p>
 <p>The system will return <code>OK</code> </p>
-<p><img alt="" src="../Images/2020-08-19_20-55.png" /></p>
 <p>Next, append the Debian package repository address</p>
-<pre><code>$ sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ &gt; \
-/etc/apt/sources.list.d/jenkins.list'
-
-$ sudo apt update
-</code></pre>
+<p>sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ &gt; \
+    /etc/apt/sources.list.d/jenkins.list'</p>
+<p><code>sudo apt update</code></p>
 <p>Finally, install Jenkins ans its dependencies:</p>
-<pre><code>$ sudo apt install jenkins
-</code></pre>
-<h4 id="step-2-starting-jenkins">Step 2 — Starting Jenkins</h4>
-<p>Let’s start Jenkins using systemctl:</p>
-<pre><code>  $ sudo systemctl start jenkins
-             OR
-  $ sudo service jenkins start
-</code></pre>
-<p>Since systemctl doesn’t display output, you can use its status command to verify that Jenkins started successfully:</p>
-<pre><code> $ sudo systemctl status jenkins
-             OR 
- $ sudo service jenkins start
-</code></pre>
+<p><code>sudo apt install jenkins</code></p>
+<h3 id="step-2-starting-jenkins">Step 2 — Starting Jenkins</h3>
+<p>I started Jenkins using systemctl command because systemctl is used to examine and control the state of “systemd” system and service manager.:</p>
+<p><code>sudo systemctl start jenkins</code></p>
+<p>Since systemctl doesn’t display output,I am using its status command to verify that Jenkins started successfully:</p>
+<p><code>sudo systemctl status jenkins</code> </p>
 <p>If it's successfully installed, the beginning of the output should show that the service is <strong>active</strong> and configured to start for boot.</p>
-<p><img alt="" src="../Images/2020-08-20_00-01.png" /></p>
-<p>The Jenkins is running now. To reach it from a web browser let's adjust our firewall rules to complete the initial setup.</p>
-<h4 id="step-3-opening-the-firewall">Step 3 - Opening the Firewall</h4>
-<p>By default, Jenkins runs on port 8080, so let’s open that port using ufw(Uncomplicated Firewall ):</p>
-<pre><code>    $ sudo ufw allow 8080
-</code></pre>
+<p>The Jenkins is running now. To reach it from a web browser I will adjust the firewall rules to complete the initial setup.</p>
+<h3 id="step-3-opening-the-firewall">Step 3 - Opening the Firewall</h3>
+<p>By default, Jenkins runs on port 8080, opening that port using ufw(Uncomplicated Firewall ):</p>
+<p><code>sudo ufw allow 8080</code></p>
 <p>To check the ufw's status confirm the new rules:</p>
-<pre><code>   $ sudo ufw status
-</code></pre>
+<p><code>sudo ufw status</code></p>
 <p>Note: If the status shows inactive. Then enable the firewall by following the following commands that will OpenSSH</p>
-<pre><code>   $ sudo ufw allow OpenSSH
-   $ sudo ufw enable
-</code></pre>
-<p>You will see the output as shown:</p>
-<p><img alt="" src="../Images/2020-08-19_21-19.png" /></p>
-<h4 id="step-4-setting-up-jenkins">Step 4 — Setting Up Jenkins</h4>
+<p><code>sudo ufw allow OpenSSH</code></p>
+<p><code>sudo ufw enable</code></p>
+<h3 id="step-4-setting-up-jenkins">Step 4 — Setting Up Jenkins</h3>
 <p>Find the IP of your system:</p>
-<pre><code>   $ ifconfig
-</code></pre>
-<p>To setup your installation, in the browser enter <code>http://your_server_ip_or_domain:8080</code></p>
-<p>The <code>Unlock Jenkins</code> screen opens,which will display where our initial password would be stored.</p>
+<p><code>ifconfig</code></p>
+<p>To complete setup, in the browser I entered <code>http://your_server_ip_or_domain:8080</code></p>
+<p>The <code>Unlock Jenkins</code> screen opens,which will display where initial password would be stored.</p>
 <p><img alt="" src="../Images/2020-08-19_13-58.png" /></p>
-<p>In the terminal window use the cat command to display the password:</p>
-<pre><code>   $ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
-</code></pre>
+<p>In the terminal window I will use the cat command to display the password:</p>
+<p><code>sudo cat /var/lib/jenkins/secrets/initialAdminPassword</code></p>
 <p>The 32-character alphanumeric password is displayed in the terminal, paste it into the Administrator password field, then click <code>Continue</code>. </p>
 <p><strong>Installing suggested plugins</strong></p>
 <p><img alt="" src="../Images/2020-08-19_14-05.png" /></p>
-<p>We’ll click the <code>Install suggested plugins</code> option, which will immediately begin the installation process as shown:</p>
+<p>I clicked the <code>Install suggested plugins</code> option, which will immediately begin the installation process as shown:</p>
 <p><img alt="" src="../Images/2020-08-19_14-26.png" /></p>
-<p>Once the installation completes, the screen opens to <code>Create First Admin User</code>, Fill the required details.</p>
+<p>Once the installation completes, the screen opens to <code>Create First Admin User</code>, I filled the required details.</p>
 <p><img alt="" src="../Images/2020-08-19_14-26_1.png" /></p>
-<p>click on <code>Save and Continue</code> or you can also select <code>Continue as admin</code> to skip the above step and continue as admin using the initial password we used above.</p>
-<p>The <code>Instance Configuration</code> page will be displayed which will ask you to confirm the preferred URL for your Jenkins instance. Confirm either the domain name for your server or your server’s IP address.</p>
+<p>click on <code>Save and Continue</code> or select <code>Continue as admin</code> to skip the above step and continue as admin using the initial password used above.</p>
+<p>The <code>Instance Configuration</code> page will be displayed which will ask to confirm the preferred URL for Jenkins instance.</p>
 <p><img alt="" src="../Images/2020-08-19_14-28.png" /></p>
-<p>Confirm the appropriate information, click <code>Save and Finish</code>. You will see a confirmation page confirming that <code>Jenkins is Ready!</code></p>
+<p>Confirm the appropriate information, click <code>Save and Finish</code>. A confirmation page confirming that <code>Jenkins is Ready!</code></p>
 <p><img alt="" src="../Images/2020-08-19_14-29.png" /></p>
 <p>Click <code>Start using Jenkins</code> to visit the main Jenkins dashboard.</p>
-<p>Here we finish the installation of Jenkins in our VM.</p>
+<p>Here finish the installation of Jenkins in VM.</p>
 <hr />
 <h2 id="errors-resolved">Errors resolved</h2>
 <p>There were few errors which I faced during the installation. </p>
@@ -489,29 +470,26 @@ $ sudo apt update
 <li><strong>GPG key error:</strong></li>
 </ol>
 <p>A LTS (Long-Term Support) release is chosen every 12 weeks from the stream of regular releases as the stable release for that time period. </p>
-<p>The link gets updated, it gives GPG key error so find the latest link from <code>https://www.jenkins.io/doc/book/installing/#debianubuntu</code> under the Debian/Ubuntu section.</p>
+<p>The link gets updated, it gives GPG key error so find the latest link from <a href="https://www.jenkins.io/doc/book/installing/#debianubuntu">here</a> under the Debian/Ubuntu section.</p>
 <ol>
 <li><strong>Certificate verification failed</strong></li>
 </ol>
 <p><img alt="" src="../Images/2020-08-19_13-05.png" /></p>
 <p>To resolve this pass <code>--no-check-certificate</code> as shown below:</p>
-<pre><code>   $ wget https://ftp.yz.yamagata-u.sc.jp/pub/misc/jenkins/debian-stable/jenkins_2.235_all.deb --no-check-certificate
-</code></pre>
+<p><code>wget https://ftp.yz.yamagata-u.sc.jp/pub/misc/jenkins/debian-stable/jenkins_2.235_all.deb --no-check-certificate</code></p>
 <p>Again reinstall the debian file of jenkins:
-       $ sudo dpkg -i jenkins_2.235.5_all.deb</p>
+<code>sudo dpkg -i jenkins_2.235.5_all.deb</code></p>
 <p>To fix the broken packages run:</p>
-<pre><code>   $ sudo apt install -f
-</code></pre>
-<p>Now again check the status of jenkins:
-       $ sudo service jenkins status
-It will show its active now.</p>
+<p><code>sudo apt install -f</code></p>
+<p>Now again I check the status of jenkins:</p>
+<p><code>sudo service jenkins status</code></p>
+<p>It SHOWS its active now.</p>
 <ol>
 <li><strong>Invalid user or password</strong></li>
 </ol>
 <p><img alt="" src="../Images/2020-08-20_00-48.png" /></p>
-<p>Once you are logged in successfully into Jenkins VM (Virtual Machine). Go to directory <code>Jenkins</code> and open file <code>config.xml</code>.</p>
-<pre><code>     $ sudo nano /var/lib/Jenkins/config.xml
-</code></pre>
+<p>Once logged in successfully into Jenkins VM (Virtual Machine). Go to directory <code>Jenkins</code> and open file <code>config.xml</code>.</p>
+<p><code>sudo nano /var/lib/Jenkins/config.xml</code></p>
 <p>This command will open <code>config.xml</code> file as below:</p>
 <p><img alt="" src="../Images/2020-08-20_00-53.png" /></p>
 <p>Go to <useSecurity> tag and check value, it will be <code>true</code>. </p>
@@ -519,19 +497,31 @@ It will show its active now.</p>
 <p><img alt="" src="../Images/2020-08-20_00-54.png" /></p>
 <p>Save this file.</p>
 <p>Once you are done with updating value in <code>config.xml</code> file. Restart Jenkins service.</p>
-<pre><code>     $ sudo service jenkins restart
-</code></pre>
+<p><code>sudo service jenkins restart</code></p>
 <p>It will show the status <code>active</code>.</p>
-<p>Now open Jenkins URL. It will go to dashboard direct. No credentials required. You can see after opening dashboard <code>Logged in user</code> section will be blank. As it is now <code>Anonymous user</code>.</p>
-<p>To reset all security options, go to <code>Jenkins</code> -&gt; <code>Manage Jenkins</code> option in left hand side option lists. </p>
-<p><img alt="" src="../Images/2020-08-20_10-10.png" /></p>
-<p>Go to  <code>Configure Global Security</code> option</p>
+<p>Now on opening Jenkins URL. It will go to dashboard direct. No credentials required. After opening dashboard <code>Logged in user</code> section will be blank. As it is now <code>Anonymous user</code>.</p>
+<p>To reset all sec<a href="https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04#installing-specific-versions-of-openjdk">Installing JDK </a>
+y options, go to <code>Jenkins</code> -&gt; `Manage Jenki<a href="https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04#installing-specific-versions-of-openjdk">Installing JDK </a>
+option in left hand side option lists. </p>
+<p><img alt="" src="Images/2020-Installing JDK 
+0_10-10.png" /></p>
+<p>Go to  <code>Configur[Installing JDK ](https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04#installing-specific-versions-of-openjdk)
+obal Security</code> option</p>
 <ul>
-<li>Enable <code>Enable Security</code> option.</li>
-<li>In Security Realm Option Select <code>Jenkins own database</code> option.</li>
-<li>Unselect / Untick <code>Allow users to sign up</code> option under <code>Jenkins own database</code> option.</li>
+<li>Enable <code>Enable[Installing JDK ](https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04#installing-specific-versions-of-openjdk)
+urity</code> option.</li>
+<li>
+<p>In Security Re<a href="https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04#installing-specific-versions-of-openjdk">Installing JDK </a>
+Option Select <code>Jenkins own database</code> option<a href="https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04#installing-specific-versions-of-openjdk">Installing JDK </a></p>
+</li>
+<li>
+<p>Unselect / Unt<a href="https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04#installing-specific-versions-of-openjdk">Installing JDK </a>
+<code>Allow users to sign up</code> option under <code>Je[Installing JDK ](https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04#installing-specific-versions-of-openjdk)
+s own database</code> option.</p>
+</li>
 </ul>
-<p><img alt="" src="../Images/2020-08-20_10-12.png" /></p>
+<p><img alt="" src="Images/2020-Installing JDK 
+0_10-12.png" /></p>
 <p>In <code>Authorization section</code> do following changes :</p>
 <ul>
 <li>Select <code>Logged-in users can do anything</code> option (Tick).</li>
@@ -542,16 +532,6 @@ It will show its active now.</p>
 <p><img alt="" src="../Images/2020-08-20_01-04.png" /></p>
 <p>Once you fill all the details, click on <code>Create First Admin User</code> button</p>
 <p>You will be ready with new Admin users to login again into Jenkins portal. </p>
-<h3 id="references">References</h3>
-<ol>
-<li>
-<p><a href="https://www.jenkins.io/doc/book/installing/">Installing Jenkins</a></p>
-</li>
-<li>
-<p><a href="https://www.linuxtechi.com/ubuntu-18-04-server-installation-guide/">Ubuntu Server 18.04 Installation</a></p>
-</li>
-<li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04#installing-specific-versions-of-openjdk">Installing JDK </a></li>
-</ol>
                 
               
               
@@ -585,13 +565,13 @@ It will show its active now.</p>
           </a>
         
         
-          <a href="../mkdocs-setup-usage/" title="MkDocs | setup, usage" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../mkdocs-setup-usage/" title="MkDocs setup for report" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                MkDocs | setup, usage
+                MkDocs setup for report
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">

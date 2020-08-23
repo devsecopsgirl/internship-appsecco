@@ -15,7 +15,7 @@
     
     
       
-        <title>MkDocs | setup, usage - DevSecOps</title>
+        <title>MkDocs setup for report - DevSecOps</title>
       
     
     
@@ -49,7 +49,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#mkdocs-setup-and-usage" class="md-skip">
+        <a href="#mkdocs-setup-for-report" class="md-skip">
           Skip to content
         </a>
       
@@ -77,7 +77,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              MkDocs | setup, usage
+              MkDocs setup for report
             
           </span>
         </div>
@@ -163,6 +163,30 @@
 
 
   <li class="md-nav__item">
+    <a href="../contents/" title="Contents" class="md-nav__link">
+      Contents
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../problem-statement/" title="Problem Statement" class="md-nav__link">
+      Problem Statement
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
     <a href="../Ubuntu-server-VM-setup/" title="Setup of VMs" class="md-nav__link">
       Setup of VMs
     </a>
@@ -196,14 +220,14 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        MkDocs | setup, usage
+        MkDocs setup for report
         <span class="md-nav__icon md-icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
         </span>
       </label>
     
-    <a href="./" title="MkDocs | setup, usage" class="md-nav__link md-nav__link--active">
-      MkDocs | setup, usage
+    <a href="./" title="MkDocs setup for report" class="md-nav__link md-nav__link--active">
+      MkDocs setup for report
     </a>
     
       
@@ -222,15 +246,29 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#prerequisite" class="md-nav__link">
-    Prerequisite
+  <a href="#objective" class="md-nav__link">
+    Objective
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#steps" class="md-nav__link">
-    STEPS
+  <a href="#installing-mkdocs" class="md-nav__link">
+    Installing MkDocs:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#selecting-a-theme" class="md-nav__link">
+    Selecting a Theme
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-started-with-configuration" class="md-nav__link">
+    Getting started with Configuration
   </a>
   
 </li>
@@ -243,8 +281,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#deploying-on-netlify" class="md-nav__link">
-    Deploying on Netlify:
+  <a href="#deploying-on-netlify-from-github" class="md-nav__link">
+    Deploying on Netlify from Github:
   </a>
   
 </li>
@@ -282,15 +320,29 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#prerequisite" class="md-nav__link">
-    Prerequisite
+  <a href="#objective" class="md-nav__link">
+    Objective
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#steps" class="md-nav__link">
-    STEPS
+  <a href="#installing-mkdocs" class="md-nav__link">
+    Installing MkDocs:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#selecting-a-theme" class="md-nav__link">
+    Selecting a Theme
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-started-with-configuration" class="md-nav__link">
+    Getting started with Configuration
   </a>
   
 </li>
@@ -303,8 +355,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#deploying-on-netlify" class="md-nav__link">
-    Deploying on Netlify:
+  <a href="#deploying-on-netlify-from-github" class="md-nav__link">
+    Deploying on Netlify from Github:
   </a>
   
 </li>
@@ -325,35 +377,48 @@
                   
                 
                 
-                <h1 id="mkdocs-setup-and-usage">MkDocs: setup and usage</h1>
+                <h1 id="mkdocs-setup-for-report">MkDocs setup for Report</h1>
+<h2 id="objective">Objective</h2>
+<p>The aim of this section is to create documentation in Markdown and use MkDocs to deploy the documentation generated as a static site in reference to the 3rd point of the problem statement under Task 1.</p>
 <p><strong>MkDocs</strong> is a fast, simple and downright gorgeous static site generator that's geared towards building project documentation. Documentation source files are written in Markdown, and configured with a single YAML configuration file.</p>
-<h4 id="prerequisite">Prerequisite</h4>
+<h2 id="installing-mkdocs">Installing MkDocs:</h2>
+<p>MkDocs can be installed from this <a href="https://www.mkdocs.org/">link</a> as it is the official site.  I only referred to the 'Installing MkDocs' section under 'Manual Installation' </p>
+<h2 id="selecting-a-theme">Selecting a Theme</h2>
+<p>MkDocs allows users to use various themes to customize the style and look of the site. I saw the various themes provided from <a href="https://github.com/mkdocs/mkdocs/wiki/MkDocs-Themes">here</a>.  I selected the 'Material' theme because I liked the style the way content is displayed. To use this theme with MkDocs, it is required to be installed with pip so, I installed Material theme using the command <code>pip install mkdocs-material</code>' as mentioned in the official documentation.</p>
+<h2 id="getting-started-with-configuration">Getting started with Configuration</h2>
+<p>In the terminal:</p>
+<p><code>mkdocs new my-project</code></p>
+<p><code>cd my-project</code></p>
+<p>Take a moment to review the initial project that has been created in the VScode.</p>
 <ul>
-<li>Install Git from <a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git">here</a></li>
-<li>GitHub Account</li>
-<li>Netlify Account</li>
-<li>MkDocs can be installed from this <a href="https://www.mkdocs.org/">link</a> as it is official site.</li>
+<li>A single configuration file named mkdocs.yml, and a folder named docs that will contain documentation source files.</li>
+<li>The docs folder just contains a single documentation page, named index.md.</li>
+<li>MkDocs comes with a built-in dev-server to preview the documentation as we work on it.</li>
+<li>Start the server in the same directory as the mkdocs.yml configuration file, by running the mkdocs serve command:</li>
 </ul>
-<h4 id="steps">STEPS</h4>
-<p>I made a directory for the report where all images and .md file will be present.</p>
-<p><code>mkdir mkdocs</code></p>
-<p>Goto <em>mkdocs</em> directory and create a new MkDocs project.</p>
-<p><code>mkdocs new DevSecOps</code></p>
-<p>When I did <em>ls</em> there were 2 files - <em>docs</em>, <em>mkdocs.yml</em></p>
-<p>Now to see content of <em>mkdocs.yml</em> file </p>
-<p><code>cat mkdocs.yml</code> </p>
-<p>There the <em>site_name: My Docs</em> present</p>
-<p>I also installed python as the latest version was not present in my system</p>
-<p><code>pip3 install mkdocs-material</code></p>
-<p>Now to run the builtin development server</p>
-<p><code>mkdocs serve</code></p>
-<p><strong>I got this error: [Errno 98] Address already in use</strong></p>
-<p>Run <code>ps -a</code> to see all the running processes.
-Then kill the process by
-<code>kill -9 13897</code></p>
-<p>(13897 id the process ID)</p>
-<p>Again run the <code>mkdocs serve</code> command now it was working perfectly fine.</p>
-<h3 id="depoying-the-site-on-github">Depoying the site on github</h3>
+<p>I opened http://127.0.0.1:8000/ in browser, and saw the default home page being displayed:</p>
+<p><img alt="" src="../Images/localhost.png" /></p>
+<p><strong>YAML file</strong></p>
+<p><code>mkdocs.yml</code>, be present in the root directory of the project that configures the site structure, site title, pages, themes, etc. It is used to define properties for the site.
+  1. Theming our documentation
+Now change the configuration file to alter how the documentation is displayed by changing the theme. Edit the mkdocs.yml file. My :</p>
+<pre><code>    site_name: &lt;DevSecOps&gt;
+    nav:
+        - Introduction: 'index.md'
+        - Contents: 'contents.md'
+        - Problem Statement: 'problem-statement.md'
+        - Setup of VMs: 'Ubuntu-server-VM-setup.md'
+        - Setup of Jenkins: 'Jenkins-installation.md'
+        - MkDocs setup for report: 'mkdocs-setup-usage.md'
+
+    theme: material
+</code></pre>
+<ul>
+<li>site_name: title of the site</li>
+<li>nav:  To add some information about the order, title, and nesting of each page in the navigation header by adding a nav setting.</li>
+<li>theme: The theme we are using.</li>
+</ul>
+<h2 id="depoying-the-site-on-github">Depoying the site on github</h2>
 <p>Made a repository on Gitup <em>internship-appsecco</em> and also check the option <em>Initialize this repository with a README</em> and private repository and select <em>Create repository</em></p>
 <p>Now in the terminal run:</p>
 <p><code>git init</code></p>
@@ -363,17 +428,15 @@ Then kill the process by
 <p><code>git commit -m "merged unrelated hitories"</code></p>
 <p><code>git push -u origin master</code></p>
 <p>I can see that the file is pushed on github</p>
-<p>When we do <code>ls</code> we did not see site folder
-docs  mkdocs.yml  README.md</p>
 <p>To build site folder we will run 
 <code>mkdocs build --clean</code></p>
-<p>On doing <code>ls</code> we will also see site folder.</p>
 <p>Similarly add all the changes made in local system in vscode to git and also every time run <code>mkdocs build</code> command before adding the repository.</p>
-<h3 id="deploying-on-netlify">Deploying on Netlify:</h3>
+<h2 id="deploying-on-netlify-from-github">Deploying on Netlify from Github:</h2>
+<p>I deployed the site on github because everytime I make the changes I just have to push it to github and from there the report will be live.</p>
 <ul>
 <li>Select the option <em>Add new site</em>.</li>
 <li>Next select option Git it will start showing all repositories. </li>
-<li>Select the appsecco-internship repository and then in <strong>Publish directory</strong> column type <code>site/</code> and </li>
+<li>Select the appsecco-internship repository and then in <strong>Publish directory</strong> column type <code>site/</code></li>
 <li>Click on deploy site.</li>
 <li>The site will be deployed now and the link will be available on the screen.</li>
 </ul>
