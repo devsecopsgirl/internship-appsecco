@@ -54,7 +54,7 @@ Now change the configuration file to alter how the documentation is displayed by
 * nav:  To add some information about the order, title, and nesting of each page in the navigation header by adding a nav setting.
 * theme: The theme we are using.
 
-## Depoying the site on github
+## Deploying the site on github
 
 Made a repository on Gitup *internship-appsecco* and also check the option *Initialize this repository with a README* and private repository and select *Create repository*
 

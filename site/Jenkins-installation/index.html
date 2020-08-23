@@ -412,8 +412,7 @@
 <h3 id="prerequisite">Prerequisite:</h3>
 <ol>
 <li>VM should be installed with Ubuntu 18.04 server for <a href="https://www.jenkins.io/doc/book/installing/">Installing Jenkins</a> go to Debian/Ubuntu section.</li>
-<li>Java 8 installed, <a href="https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04#installing-specific-versions-of-openjdk">installing</a>
- on Ubuntu 18.04.  specific versions of OpenJDK </li>
+<li>Java 8 to be installed, by this <a href="https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04#installing-specific-versions-of-openjdk">link</a> specific versions of OpenJDK on Ubuntu 18.04. I decided to go with this documentation as it was concise. </li>
 </ol>
 <p>Begin with the installation steps of Jenkins.</p>
 <h3 id="step-1-installing-jenkins">STEP 1 - Installing Jenkins</h3>
@@ -421,8 +420,9 @@
 <p><code>wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -</code></p>
 <p>The system will return <code>OK</code> </p>
 <p>Next, append the Debian package repository address</p>
-<p>sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ &gt; \
-    /etc/apt/sources.list.d/jenkins.list'</p>
+<pre><code>    sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ &gt; \
+        /etc/apt/sources.list.d/jenkins.list'
+</code></pre>
 <p><code>sudo apt update</code></p>
 <p>Finally, install Jenkins ans its dependencies:</p>
 <p><code>sudo apt install jenkins</code></p>
@@ -500,28 +500,15 @@
 <p><code>sudo service jenkins restart</code></p>
 <p>It will show the status <code>active</code>.</p>
 <p>Now on opening Jenkins URL. It will go to dashboard direct. No credentials required. After opening dashboard <code>Logged in user</code> section will be blank. As it is now <code>Anonymous user</code>.</p>
-<p>To reset all sec<a href="https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04#installing-specific-versions-of-openjdk">Installing JDK </a>
-y options, go to <code>Jenkins</code> -&gt; `Manage Jenki<a href="https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04#installing-specific-versions-of-openjdk">Installing JDK </a>
-option in left hand side option lists. </p>
-<p><img alt="" src="Images/2020-Installing JDK 
-0_10-10.png" /></p>
-<p>Go to  <code>Configur[Installing JDK ](https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04#installing-specific-versions-of-openjdk)
-obal Security</code> option</p>
+<p>To reset all security options, go to <code>Jenkins</code> -&gt; <code>Manage Jenkins</code> option in left hand side option lists. </p>
+<p><img alt="" src="../Images/2020-08-20_10-10.png" /></p>
+<p>Go to  <code>Configure Global Security</code> option</p>
 <ul>
-<li>Enable <code>Enable[Installing JDK ](https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04#installing-specific-versions-of-openjdk)
-urity</code> option.</li>
-<li>
-<p>In Security Re<a href="https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04#installing-specific-versions-of-openjdk">Installing JDK </a>
-Option Select <code>Jenkins own database</code> option<a href="https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04#installing-specific-versions-of-openjdk">Installing JDK </a></p>
-</li>
-<li>
-<p>Unselect / Unt<a href="https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04#installing-specific-versions-of-openjdk">Installing JDK </a>
-<code>Allow users to sign up</code> option under <code>Je[Installing JDK ](https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04#installing-specific-versions-of-openjdk)
-s own database</code> option.</p>
-</li>
+<li>Enable <code>Enable Security</code> option.</li>
+<li>In Security Realm Option Select <code>Jenkins own database</code> option.</li>
+<li>Unselect / Untick <code>Allow users to sign up</code> option under <code>Jenkins own database</code> option.</li>
 </ul>
-<p><img alt="" src="Images/2020-Installing JDK 
-0_10-12.png" /></p>
+<p><img alt="" src="../Images/2020-08-20_10-12.png" /></p>
 <p>In <code>Authorization section</code> do following changes :</p>
 <ul>
 <li>Select <code>Logged-in users can do anything</code> option (Tick).</li>

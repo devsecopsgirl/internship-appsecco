@@ -13,6 +13,7 @@ Jenkins can be installed through native system packages, Docker, or even run sta
 ### Prerequisite:
 
 1. VM should be installed with Ubuntu 18.04 server for [Installing Jenkins](https://www.jenkins.io/doc/book/installing/) go to Debian/Ubuntu section.
+
 2. Java 8 to be installed, by this [link](https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04#installing-specific-versions-of-openjdk) specific versions of OpenJDK on Ubuntu 18.04. I decided to go with this documentation as it was concise. 
 
 Begin with the installation steps of Jenkins.
