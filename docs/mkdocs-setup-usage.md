@@ -1,84 +1,90 @@
-# MkDocs: setup and usage
+# MkDocs setup for Report
+
+## Objective
+
+The aim of this section is to create documentation in Markdown and use MkDocs to deploy the documentation generated as a static site in reference to the 3rd point of the problem statement under Task 1.
 
 **MkDocs** is a fast, simple and downright gorgeous static site generator that's geared towards building project documentation. Documentation source files are written in Markdown, and configured with a single YAML configuration file.
 
-#### Prerequisite
+## Installing MkDocs:
 
-* Install Git from [here](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
-* GitHub Account
-* Netlify Account
-* MkDocs can be installed from this [link](https://www.mkdocs.org/) as it is official site.
-  
-#### STEPS 
+MkDocs can be installed from this [link](https://www.mkdocs.org/) as it is the official site.  I only referred to the 'Installing MkDocs' section under 'Manual Installation' 
 
-I made a directory for the report where all images and .md file will be present.
+## Selecting a Theme
 
-`mkdir mkdocs`
+MkDocs allows users to use various themes to customize the style and look of the site. I saw the various themes provided from [here](https://github.com/mkdocs/mkdocs/wiki/MkDocs-Themes).  I selected the 'Material' theme because I liked the style the way content is displayed. To use this theme with MkDocs, it is required to be installed with pip so, I installed Material theme using the command `pip install mkdocs-material`' as mentioned in the official documentation.
 
-Goto *mkdocs* directory and create a new MkDocs project.
+## Getting started with Configuration
 
-`mkdocs new DevSecOps`
+In the terminal:
 
-When I did *ls* there were 2 files - *docs*, *mkdocs.yml*
+`mkdocs new my-project`
 
-Now to see content of *mkdocs.yml* file 
+`cd my-project`
 
-`cat mkdocs.yml` 
+Take a moment to review the initial project that has been created in the VScode.
 
-There the *site_name: My Docs* present
+* A single configuration file named mkdocs.yml, and a folder named docs that will contain documentation source files.
+* The docs folder just contains a single documentation page, named index.md.
+* MkDocs comes with a built-in dev-server to preview the documentation as we work on it.
+* Start the server in the same directory as the mkdocs.yml configuration file, by running the mkdocs serve command:
 
-I also installed python as the latest version was not present in my system
+I opened http://127.0.0.1:8000/ in browser, and saw the default home page being displayed:
 
-`pip3 install mkdocs-material`
+![](Images/localhost.png)
 
-Now to run the builtin development server
+**YAML file**
 
-`mkdocs serve`
+```mkdocs.yml```, be present in the root directory of the project that configures the site structure, site title, pages, themes, etc. It is used to define properties for the site.
+  1. Theming our documentation
+Now change the configuration file to alter how the documentation is displayed by changing the theme. Edit the mkdocs.yml file. My :
 
-**I got this error: [Errno 98] Address already in use**
+        site_name: <DevSecOps>
+        nav:
+            - Introduction: 'index.md'
+            - Contents: 'contents.md'
+            - Problem Statement: 'problem-statement.md'
+            - Setup of VMs: 'Ubuntu-server-VM-setup.md'
+            - Setup of Jenkins: 'Jenkins-installation.md'
+            - MkDocs setup for report: 'mkdocs-setup-usage.md'
 
-Run `ps -a` to see all the running processes.
-Then kill the process by
-`kill -9 13897`
+        theme: material
 
-(13897 id the process ID)
+* site_name: title of the site
+* nav:  To add some information about the order, title, and nesting of each page in the navigation header by adding a nav setting.
+* theme: The theme we are using.
 
-Again run the `mkdocs serve` command now it was working perfectly fine.
-
-### Depoying the site on github
+## Depoying the site on github
 
 Made a repository on Gitup *internship-appsecco* and also check the option *Initialize this repository with a README* and private repository and select *Create repository*
 
 Now in the terminal run:
 
-`git init`
+```git init```
 
-`git add .`
+```git add .```
 
-`git commit -m "demo1"`
+```git commit -m "demo1"```
 
-`git pull origin master --allow-unrelated-histories`
+```git pull origin master --allow-unrelated-histories```
 
-`git commit -m "merged unrelated hitories"`
+```git commit -m "merged unrelated hitories"```
 
-`git push -u origin master`
+```git push -u origin master```
 
 I can see that the file is pushed on github
-
-When we do `ls` we did not see site folder
-docs  mkdocs.yml  README.md
 
 To build site folder we will run 
 `mkdocs build --clean`
 
-On doing `ls` we will also see site folder.
-
 Similarly add all the changes made in local system in vscode to git and also every time run `mkdocs build` command before adding the repository.
 
-### Deploying on Netlify:
+## Deploying on Netlify from Github:
+
+I deployed the site on github because everytime I make the changes I just have to push it to github and from there the report will be live.
 
 * Select the option *Add new site*.
 * Next select option Git it will start showing all repositories. 
-* Select the appsecco-internship repository and then in **Publish directory** column type `site/` and 
+* Select the appsecco-internship repository and then in **Publish directory** column type `site/`
 * Click on deploy site.
 * The site will be deployed now and the link will be available on the screen.
