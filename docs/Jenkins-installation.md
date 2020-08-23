@@ -13,8 +13,7 @@ Jenkins can be installed through native system packages, Docker, or even run sta
 ### Prerequisite:
 
 1. VM should be installed with Ubuntu 18.04 server for [Installing Jenkins](https://www.jenkins.io/doc/book/installing/) go to Debian/Ubuntu section.
-2. Java 8 installed, [installing](https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04#installing-specific-versions-of-openjdk)
- on Ubuntu 18.04.  specific versions of OpenJDK 
+2. Java 8 to be installed, by this [link](https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04#installing-specific-versions-of-openjdk) specific versions of OpenJDK on Ubuntu 18.04. I decided to go with this documentation as it was concise. 
 
 Begin with the installation steps of Jenkins.
 
@@ -28,8 +27,8 @@ The system will return `OK`
 
 Next, append the Debian package repository address
 
-sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > \
-    /etc/apt/sources.list.d/jenkins.list'
+        sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > \
+            /etc/apt/sources.list.d/jenkins.list'
 
 ```sudo apt update```
 
@@ -172,27 +171,17 @@ It will show the status `active`.
 
 Now on opening Jenkins URL. It will go to dashboard direct. No credentials required. After opening dashboard `Logged in user` section will be blank. As it is now `Anonymous user`.
 
-To reset all sec[Installing JDK ](https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04#installing-specific-versions-of-openjdk)
-y options, go to `Jenkins` -> `Manage Jenki[Installing JDK ](https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04#installing-specific-versions-of-openjdk)
-option in left hand side option lists. 
+To reset all security options, go to `Jenkins` -> `Manage Jenkins` option in left hand side option lists. 
 
-![](Images/2020-[Installing JDK ](https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04#installing-specific-versions-of-openjdk)
-0_10-10.png)
+![](Images/2020-08-20_10-10.png)
 
-Go to  `Configur[Installing JDK ](https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04#installing-specific-versions-of-openjdk)
-obal Security` option
+Go to  `Configure Global Security` option
 
-* Enable `Enable[Installing JDK ](https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04#installing-specific-versions-of-openjdk)
-urity` option.
-* In Security Re[Installing JDK ](https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04#installing-specific-versions-of-openjdk)
-Option Select `Jenkins own database` option[Installing JDK ](https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04#installing-specific-versions-of-openjdk)
-
-* Unselect / Unt[Installing JDK ](https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04#installing-specific-versions-of-openjdk)
-`Allow users to sign up` option under `Je[Installing JDK ](https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04#installing-specific-versions-of-openjdk)
-s own database` option.
+* Enable `Enable Security` option.
+* In Security Realm Option Select `Jenkins own database` option.
+* Unselect / Untick `Allow users to sign up` option under `Jenkins own database` option.
   
-![](Images/2020-[Installing JDK ](https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04#installing-specific-versions-of-openjdk)
-0_10-12.png)
+![](Images/2020-08-20_10-12.png)
 
 In `Authorization section` do following changes :
 
