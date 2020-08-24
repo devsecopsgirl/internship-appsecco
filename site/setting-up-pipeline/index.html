@@ -15,7 +15,7 @@
     
     
       
-        <title>Problem Statement - DevSecOps</title>
+        <title>Setting Up Pipeline - DevSecOps</title>
       
     
     
@@ -49,7 +49,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#problem-statement" class="md-skip">
+        <a href="#setting-up-a-pipeline" class="md-skip">
           Skip to content
         </a>
       
@@ -77,7 +77,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              Problem Statement
+              Setting Up Pipeline
             
           </span>
         </div>
@@ -173,53 +173,11 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Problem Statement
-        <span class="md-nav__icon md-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
-        </span>
-      </label>
-    
-    <a href="./" title="Problem Statement" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../problem-statement/" title="Problem Statement" class="md-nav__link">
       Problem Statement
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-      </span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#task-1" class="md-nav__link">
-    Task 1
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
     
@@ -263,11 +221,88 @@
       
       
 
+  
 
-  <li class="md-nav__item">
-    <a href="../setting-up-pipeline/" title="Setting Up Pipeline" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Setting Up Pipeline
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
+        </span>
+      </label>
+    
+    <a href="./" title="Setting Up Pipeline" class="md-nav__link md-nav__link--active">
       Setting Up Pipeline
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objective" class="md-nav__link">
+    Objective
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-pipeline" class="md-nav__link">
+    Why Pipeline?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jenkins-pipeline-project" class="md-nav__link">
+    Jenkins pipeline Project
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jenkinsfile" class="md-nav__link">
+    Jenkinsfile
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deploying-the-files-to-production-vm" class="md-nav__link">
+    Deploying the files to Production VM
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup-ssh-keys" class="md-nav__link">
+    Setup SSH keys
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
     
@@ -297,8 +332,43 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#task-1" class="md-nav__link">
-    Task 1
+  <a href="#objective" class="md-nav__link">
+    Objective
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-pipeline" class="md-nav__link">
+    Why Pipeline?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jenkins-pipeline-project" class="md-nav__link">
+    Jenkins pipeline Project
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jenkinsfile" class="md-nav__link">
+    Jenkinsfile
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deploying-the-files-to-production-vm" class="md-nav__link">
+    Deploying the files to Production VM
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup-ssh-keys" class="md-nav__link">
+    Setup SSH keys
   </a>
   
 </li>
@@ -319,15 +389,102 @@
                   
                 
                 
-                <h1 id="problem-statement">Problem Statement</h1>
-<h2 id="task-1">Task 1</h2>
-<ol>
-<li>Setup the infrastructure, required for the task, on 2 virtual machines running locally on a laptop. One VM contains the Jenkins and related infrastructure, and the second VM is for deploying the Odoo using the pipeline.</li>
-<li>Setup the infrastructure, of <a href="https://www.jenkins.io/">Jenkins</a> for basic pipeline setup.</li>
-<li>Do document extensively in markdown and deploy the documentation in a MkDocs website.</li>
-<li>Setting up the basic pipeline.</li>
-<li>Next, Odoo should get deployed in a server that is the second VM we installed. </li>
-</ol>
+                <h1 id="setting-up-a-pipeline">Setting up a pipeline:</h1>
+<h2 id="objective">Objective</h2>
+<p>This section aims to set up a basic pipeline in Jenkins to perform the task and solve the 4th point of the <a href="https://intern-appsecco.netlify.app/problem-statement/">problem statement</a>
+under Task 1.</p>
+<h2 id="why-pipeline">Why Pipeline?</h2>
+<p>Jenkins is, fundamentally, an automation engine that supports several automation patterns. Pipeline adds a powerful set of automation tools onto Jenkins, supporting use cases that span from simple continuous integration to comprehensive CD pipelines. By modeling a series of related tasks, Pipeline has many features:</p>
+<ul>
+<li><strong>Code:</strong> Pipelines are implemented in code and typically checked into source control, giving teams the ability to edit, review, and iterate upon their delivery pipeline.</li>
+<li><strong>Durable:</strong> Pipelines can survive both planned and unplanned restarts of the Jenkins master.</li>
+<li><strong>Pausable:</strong> Pipelines can optionally stop and wait for human input or approval before continuing the Pipeline run.</li>
+<li><strong>Versatile:</strong> Pipelines support complex real-world CD requirements, including the ability to fork/join, loop, and perform work in parallel.</li>
+<li><strong>Extensible:</strong> The Pipeline plugin supports custom extensions to its DSL(Domain Specific Language) and multiple options for integration with other plugins.</li>
+</ul>
+<h2 id="jenkins-pipeline-project">Jenkins pipeline Project</h2>
+<p>I set up the Jenkins as mentioned in the <a href="https://intern-appsecco.netlify.app/jenkins-installation/">Setup of Jenkins</a> section. So for building a pipeline for Maven project I followed these steps and also downloaded Maven in my Jenkins VM because all the repositories related to it are present in the system:</p>
+<ul>
+<li>Click on the <code>New Item</code> from the main dashboard which leads to a different page. </li>
+</ul>
+<p><img alt="" src="../Images/2020-08-24_16-55.png" /></p>
+<p>Filled the project name as Jenkins-Maven and choose <code>Maven Project</code> as the project type as it was a Maven based project.</p>
+<ul>
+<li>
+<p>Next came to the project configurations page. Here:</p>
+</li>
+<li>
+<p>Under <code>General</code> section:</p>
+<ul>
+<li>I gave a description of the application being deployed and the purpose of this pipeline.</li>
+<li>Under the <code>Source Code Management</code> option I checked the <code>Git</code> option and provided the GitHub URL for the project's repository. This option allowed Jenkins to know where to fetch the project from.</li>
+</ul>
+</li>
+<li>Under <code>Build Triggers</code> section:<ul>
+<li>I checked the <code>Build whenever a SNAPSHOT dependency is built</code> option to allow automated builds.</li>
+</ul>
+</li>
+</ul>
+<p>I clicked on <code>save</code> to save the configurations.</p>
+<h2 id="jenkinsfile">Jenkinsfile</h2>
+<p>Jenkinsfile is defined as a utility where the actions that are to be performed on the build can be written in a syntactical format in a file. I followed this <a href="https://www.jenkins.io/doc/pipeline/tour/running-multiple-steps/">article</a> because it is the official documentation from Jenkins and it is easy to understand because it has a simple format with examples.</p>
+<p>The following are the contents of the Jenkinsfile which executes the pipeline:</p>
+<pre><code>pipeline {
+    agent any
+
+    stages {
+        stage ('Compile Stage') {
+
+            steps {
+                withMaven(maven : 'maven_3_5_0') {
+                    sh 'mvn clean compile'
+                }
+            }
+        }
+
+        stage ('Testing Stage') {
+
+            steps {
+                withMaven(maven : 'maven_3_5_0') {
+                    sh 'mvn test'
+                }
+            }
+        }
+
+
+        stage ('Deployment Stage') {
+            steps {
+                withMaven(maven : 'maven_3_5_0') {
+                    sh 'mvn deploy'
+                }
+            }
+        }
+    }
+}
+</code></pre>
+
+<ul>
+<li>The <code>pipeline</code> block constitutes the entire definition of the pipeline.</li>
+<li>The <code>agent</code> keyword is used to choose the way the Jenkins instance(s) are used to run the pipeline. The <code>any</code> keyword defines that Jenkins should allocate any available agent (an instance of Jenkins/a slave/the master instance) to execute the pipeline. A more thorough explanation can be found <a href="https://www.jenkins.io/doc/book/pipeline/syntax/">here</a>.</li>
+<li>The <code>stages</code> block houses all the stages that will comprise the various operations to be performed during the execution of the pipeline.</li>
+<li>The <code>stage</code> block defines the task performed through the Pipeline (e.g. "Build", "Test" and "Deploy" stages)</li>
+<li>The <code>steps</code> block defines the actions that are to be performed within a particular stage.</li>
+<li><code>sh</code> keyword is used to execute shell commands through Jenkins.</li>
+<li>Lastly, <code>mvn</code> over here stands for maven.</li>
+</ul>
+<h2 id="deploying-the-files-to-production-vm">Deploying the files to Production VM</h2>
+<p>For copying the files from Jenkins VM to production VM:</p>
+<p><code>scp -i /var/lib/jenkins/workspace/Jenkins-Maven/target production@192.168.1.4:/home/production/target</code></p>
+<p><strong>Syntax:</strong></p>
+<p>scp <source> <destination>
+In this A is Jenkins VM and B is production VM.
+To copy a file from B to A while logged into B:</p>
+<p><code>scp /path/to/file username@a:/path/to/destination</code></p>
+<p>To copy a file from B to A while logged into A:</p>
+<p><code>scp username@b:/path/to/file /path/to/destination</code></p>
+<h2 id="setup-ssh-keys">Setup SSH keys</h2>
+<p>I referred to this <a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2">document</a> of digitalocean as the way it explained is simple to understand.</p>
+<p>I followed the first three steps because I have to only set up SSH Keys and did not follow the last step.</p>
                 
               
               
@@ -346,7 +503,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../contents/" title="Contents" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../mkdocs-setup-usage/" title="MkDocs setup for report" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -355,25 +512,11 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Contents
+                MkDocs setup for report
               </div>
             </div>
           </a>
         
-        
-          <a href="../Ubuntu-server-VM-setup/" title="Setup of VMs" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
-            <div class="md-footer-nav__title">
-              <div class="md-ellipsis">
-                <span class="md-footer-nav__direction">
-                  Next
-                </span>
-                Setup of VMs
-              </div>
-            </div>
-            <div class="md-footer-nav__button md-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
-            </div>
-          </a>
         
       </nav>
     </div>

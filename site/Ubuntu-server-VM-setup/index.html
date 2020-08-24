@@ -236,8 +236,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#installation-steps-for-ubuntu-server-18045" class="md-nav__link">
-    Installation steps for Ubuntu Server 18.04.5
+  <a href="#installation-steps-for-ubuntu-server-1804" class="md-nav__link">
+    Installation steps for Ubuntu Server 18.04
   </a>
   
 </li>
@@ -269,6 +269,18 @@
   <li class="md-nav__item">
     <a href="../mkdocs-setup-usage/" title="MkDocs setup for report" class="md-nav__link">
       MkDocs setup for report
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../setting-up-pipeline/" title="Setting Up Pipeline" class="md-nav__link">
+      Setting Up Pipeline
     </a>
   </li>
 
@@ -313,8 +325,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#installation-steps-for-ubuntu-server-18045" class="md-nav__link">
-    Installation steps for Ubuntu Server 18.04.5
+  <a href="#installation-steps-for-ubuntu-server-1804" class="md-nav__link">
+    Installation steps for Ubuntu Server 18.04
   </a>
   
 </li>
@@ -337,10 +349,10 @@
                 
                 <h1 id="setting-up-vm">Setting up VM</h1>
 <h2 id="objective">Objective</h2>
-<p>The aim of this section is to set up the required infrastructure to perform the task and solve the 1st point of the problem statement under Task 1.</p>
+<p>This section aims to set up the required infrastructure to perform the task and solve the 1st point of the problem statement under Task 1.</p>
 <p>In this section I will be setting up two VMs:
-1. For jenkins deployment.
-2. For production Server to deploy the application (Odoo) on the server</p>
+1. For Jenkin's deployment.
+2. For the production server to deploy the application (Odoo) on the server</p>
 <h2 id="steps-for-creating-vm">Steps for creating VM:</h2>
 <ol>
 <li>Click on the <code>NEW</code> icon to create a new machine.</li>
@@ -368,13 +380,13 @@
 <p><img alt="" src="../Images/2020-08-18_17-18.png" /></p>
 <p><strong>What is LTS?</strong></p>
 <ol>
-<li>It is a product lifecycle management policy in which a stable release of computer software is maintained for a longer period of time than the standard edition.</li>
+<li>It is a product lifecycle management policy in which a stable release of computer software is maintained for a longer period than the standard edition.</li>
 <li>The term is typically reserved for open-source software.</li>
 </ol>
-<h2 id="installation-steps-for-ubuntu-server-18045">Installation steps for Ubuntu Server 18.04.5</h2>
-<p>I decided to install the Ubuntu Server 18.04.5 because my system was not able to support the Desktop Image.</p>
-<p>In the VM box I selected the VM <Jenkins-infra> to insatll the server.
-click on <code>Start</code></p>
+<h2 id="installation-steps-for-ubuntu-server-1804">Installation steps for Ubuntu Server 18.04</h2>
+<p>I decided to install the Ubuntu Server 18.04 because my system was not able to support the Desktop Image.</p>
+<p>In the VM box, I selected the VM <Jenkins-infra> to install the server.
+Click on <code>Start</code></p>
 <p><img alt="" src="../Images/2020-08-18_22-06.png" /></p>
 <p>When the window <code>Select start-up disk</code> window opens click on the folder.</p>
 <p>A new window opens <code>Optical Disk Selector</code>. Select the server image and click <code>Choose</code></p>
@@ -384,30 +396,30 @@ click on <code>Start</code></p>
 <p>Click on <code>Start</code> Jenkins VM start's running.</p>
 <p><img alt="" src="../Images/2020-08-18_22-10.png" /></p>
 <p>The installer is designed to be easy to use and have sensible defaults so for a first install you can mostly just accept the defaults for the most straightforward install.</p>
-<p>Begining with installation:</p>
+<p>Beginning with installation:</p>
 <p><strong>Language selection</strong></p>
 <p><img alt="" src="../Images/2020-08-18_22-12.png" /></p>
 <p>This screen selects the language and the default language for the installed system.</p>
 <p>Press the <code>Enter</code> button.</p>
 <p><strong>Keyboard configuration</strong></p>
 <p><img alt="" src="../Images/2020-08-18_22-13.png" /></p>
-<p>By default the English (US) layout and variant keyboard is selected.</p>
+<p>By default, the English (US) layout and variant keyboard is selected.</p>
 <p>Press the <code>Enter</code> button.</p>
 <p><strong>Network</strong></p>
 <p><img alt="" src="../Images/2020-08-18_22-14.png" /></p>
-<p>Configuration of the network is done from here and leave it default if no changes.</p>
+<p>Configuration of the network is done from here and leave it to default if no changes.</p>
 <p>Select <code>Done</code> and press <code>Enter</code>.</p>
 <p><strong>Configure proxy</strong></p>
 <p><img alt="" src="../Images/2020-08-18_22-15.png" /></p>
 <p>The proxy configured on this screen is used for accessing the package repository and the snap store both in the installer environment and in the installed system.</p>
 <p><strong>Mirror</strong></p>
 <p><img alt="" src="../Images/2020-08-18_22-15_1.png" /></p>
-<p>The installer will attempt to use geoip to look up an appropriate default package mirror for
+<p>The installer will attempt to use GeoIP to lookup an appropriate default package mirror for
 location. </p>
 <p><strong>Guided Storage Configuration</strong></p>
 <p><img alt="" src="../Images/2020-08-18_22-16.png" /></p>
 <p>I kept the storage default and selected <code>Done</code>.
-Press Enter button.</p>
+Press the Enter button.</p>
 <p><strong>Storage Configuration</strong></p>
 <p><img alt="" src="../Images/2020-08-18_22-16_1.png" /></p>
 <p>Confirm storage configuration.</p>
@@ -418,17 +430,17 @@ Press Enter button.</p>
 <p>Fill the required details. Select <code>Done</code> and press the <code>Enter</code> button.</p>
 <p><strong>SSH</strong></p>
 <p><img alt="" src="../Images/2020-08-18_22-27_1.png" /></p>
-<p>Select the option <code>Install OpenSSH server</code> because by default Ubuntu does not have SSH server installed. It has only SSH client installed. It is very common practice for administrators to SSH into the Ubuntu server so it's better to install the OpenSSH server here only with one click of a button.</p>
+<p>Select the option <code>Install OpenSSH server</code> because by default Ubuntu does not have an SSH server installed. It has only an SSH client installed. It is very common practice for administrators to SSH into the Ubuntu server so it's better to install the OpenSSH server here only with one click of a button.</p>
 <p>Select <code>Done</code> and press the <code>Enter</code> button.</p>
 <p><strong>Snaps</strong></p>
 <p><img alt="" src="../Images/2020-08-18_22-28.png" /></p>
-<p>If a network connection is enabled, a selection of snaps that are useful in a server environment are presented and can be selected for installation.</p>
+<p>If a network connection is enabled, a selection of snaps that are useful in a server environment is presented and can be selected for installation.</p>
 <p>After that, select <code>Done</code> and press <code>Enter</code>.</p>
 <p><strong>Installation logs</strong></p>
 <p><img alt="" src="../Images/2020-08-18_22-29.png" /></p>
 <p>Once the installation is complete, select <code>Reboot</code>. Press <code>Enter</code>.</p>
-<p>Similarly the second VM can be installed.</p>
-<p>Here I finished with the installation of <code>Ubuntu 18.04.05(LTS)</code> server.</p>
+<p>Similarly, the second VM can be installed.</p>
+<p>Here I finished with the installation of <code>Ubuntu 18.04(LTS)</code> server.</p>
                 
               
               

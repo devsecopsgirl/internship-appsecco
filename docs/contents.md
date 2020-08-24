@@ -9,3 +9,4 @@ The following is the report/documentation for the ```Problem Statement``` stated
 * [Setup of VMS](https://intern-appsecco.netlify.app/ubuntu-server-vm-setup/)
 * [Setup of Jenkins](https://intern-appsecco.netlify.app/jenkins-installation/)
 * [MkDocs setup for report](https://intern-appsecco.netlify.app/mkdocs-setup-usage/)
+* [Setting Up Pipeline](https://intern-appsecco.netlify.app/setting-up-pipeline/)

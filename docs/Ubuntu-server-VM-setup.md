@@ -2,11 +2,11 @@
 
 ## Objective
 
-The aim of this section is to set up the required infrastructure to perform the task and solve the 1st point of the problem statement under Task 1.
+This section aims to set up the required infrastructure to perform the task and solve the 1st point of the problem statement under Task 1.
 
 In this section I will be setting up two VMs:
-1. For jenkins deployment.
-2. For production Server to deploy the application (Odoo) on the server
+1. For Jenkin's deployment.
+2. For the production server to deploy the application (Odoo) on the server
 
 ## Steps for creating VM:
 
@@ -40,15 +40,15 @@ TO download the server image 18.04 on VirtualBox as it is an LTS (Long Term Supp
 
 **What is LTS?**
 
-1. It is a product lifecycle management policy in which a stable release of computer software is maintained for a longer period of time than the standard edition.
+1. It is a product lifecycle management policy in which a stable release of computer software is maintained for a longer period than the standard edition.
 2. The term is typically reserved for open-source software.
 
-## Installation steps for Ubuntu Server 18.04.5
+## Installation steps for Ubuntu Server 18.04
 
-I decided to install the Ubuntu Server 18.04.5 because my system was not able to support the Desktop Image.
+I decided to install the Ubuntu Server 18.04 because my system was not able to support the Desktop Image.
 
-In the VM box I selected the VM <Jenkins-infra> to insatll the server.
-click on `Start`
+In the VM box, I selected the VM <Jenkins-infra> to install the server.
+Click on `Start`
 
 ![](Images/2020-08-18_22-06.png)
 
@@ -68,7 +68,7 @@ Click on `Start` Jenkins VM start's running.
 
 The installer is designed to be easy to use and have sensible defaults so for a first install you can mostly just accept the defaults for the most straightforward install.
 
-Begining with installation:
+Beginning with installation:
 
 **Language selection**
 
@@ -82,7 +82,7 @@ Press the `Enter` button.
 
 ![](Images/2020-08-18_22-13.png)
 
-By default the English (US) layout and variant keyboard is selected.
+By default, the English (US) layout and variant keyboard is selected.
 
 Press the `Enter` button.
 
@@ -90,7 +90,7 @@ Press the `Enter` button.
 
 ![](Images/2020-08-18_22-14.png)
 
- Configuration of the network is done from here and leave it default if no changes.
+ Configuration of the network is done from here and leave it to default if no changes.
 
  Select `Done` and press `Enter`.
 
@@ -104,7 +104,7 @@ The proxy configured on this screen is used for accessing the package repository
 
 ![](Images/2020-08-18_22-15_1.png)
 
-The installer will attempt to use geoip to look up an appropriate default package mirror for
+The installer will attempt to use GeoIP to lookup an appropriate default package mirror for
 location. 
 
 **Guided Storage Configuration**
@@ -112,7 +112,7 @@ location.
 ![](Images/2020-08-18_22-16.png)
 
 I kept the storage default and selected `Done`.
-Press Enter button.
+Press the Enter button.
 
 **Storage Configuration**
 
@@ -134,7 +134,7 @@ Fill the required details. Select `Done` and press the `Enter` button.
 
 ![](Images/2020-08-18_22-27_1.png)
 
-Select the option `Install OpenSSH server` because by default Ubuntu does not have SSH server installed. It has only SSH client installed. It is very common practice for administrators to SSH into the Ubuntu server so it's better to install the OpenSSH server here only with one click of a button.
+Select the option `Install OpenSSH server` because by default Ubuntu does not have an SSH server installed. It has only an SSH client installed. It is very common practice for administrators to SSH into the Ubuntu server so it's better to install the OpenSSH server here only with one click of a button.
 
 Select `Done` and press the `Enter` button.
 
@@ -142,7 +142,7 @@ Select `Done` and press the `Enter` button.
 
 ![](Images/2020-08-18_22-28.png)
 
-If a network connection is enabled, a selection of snaps that are useful in a server environment are presented and can be selected for installation.
+If a network connection is enabled, a selection of snaps that are useful in a server environment is presented and can be selected for installation.
 
 After that, select `Done` and press `Enter`.
 
@@ -152,6 +152,6 @@ After that, select `Done` and press `Enter`.
 
 Once the installation is complete, select `Reboot`. Press `Enter`.
 
-Similarly the second VM can be installed.
+Similarly, the second VM can be installed.
 
-Here I finished with the installation of `Ubuntu 18.04.05(LTS)` server.
+Here I finished with the installation of `Ubuntu 18.04(LTS)` server.

@@ -6,4 +6,4 @@
 2. Setup the infrastructure, of [Jenkins](https://www.jenkins.io/) for basic pipeline setup.
 3. Do document extensively in markdown and deploy the documentation in a MkDocs website.
 4. Setting up the basic pipeline.
-5. Next, the Odoo should get deployed in a server that is the second VM we installed. 
+5. Next, Odoo should get deployed in a server that is the second VM we installed. 

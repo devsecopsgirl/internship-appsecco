@@ -243,7 +243,7 @@
         
           <li class="md-nav__item">
   <a href="#prerequisite" class="md-nav__link">
-    Prerequisite:
+    Prerequisite
   </a>
   
 </li>
@@ -307,6 +307,18 @@
   </li>
 
     
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../setting-up-pipeline/" title="Setting Up Pipeline" class="md-nav__link">
+      Setting Up Pipeline
+    </a>
+  </li>
+
+    
   </ul>
 </nav>
                   </div>
@@ -342,7 +354,7 @@
         
           <li class="md-nav__item">
   <a href="#prerequisite" class="md-nav__link">
-    Prerequisite:
+    Prerequisite
   </a>
   
 </li>
@@ -405,11 +417,11 @@
                 
                 <h1 id="jenkins-installation">Jenkins Installation</h1>
 <h2 id="objective">Objective</h2>
-<p>The aim of this section is to set up the required infrastructure of Jenkins to perform the task and solve the 2nd point of the problem statement under Task 1.</p>
+<p>This section aims to set up the required infrastructure of Jenkins to perform the task and solve the 2nd point of the problem statement under Task 1.</p>
 <p><strong>What is Jenkins?</strong></p>
-<p>Jenkins is a self-contained, open source automation server which can be used to automate all sorts of tasks related to <code>building, testing,and delivering or deploying software</code>.</p>
+<p>Jenkins is a self-contained, open-source automation server that can be used to automate all sorts of tasks related to <code>building, testing ,and delivering or deploying software</code>.</p>
 <p>Jenkins can be installed through native system packages, Docker, or even run standalone by any machine with a Java Runtime Environment (JRE) installed.</p>
-<h3 id="prerequisite">Prerequisite:</h3>
+<h3 id="prerequisite">Prerequisite</h3>
 <ol>
 <li>
 <p>VM should be installed with Ubuntu 18.04 server for <a href="https://www.jenkins.io/doc/book/installing/">Installing Jenkins</a> go to Debian/Ubuntu section.</p>
@@ -424,11 +436,13 @@
 <p><code>wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -</code></p>
 <p>The system will return <code>OK</code> </p>
 <p>Next, append the Debian package repository address</p>
-<pre><code>    sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ &gt; \
-        /etc/apt/sources.list.d/jenkins.list'
+<pre><code>sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ &gt; \
+/etc/apt/sources.list.d/jenkins.list'
+
+sudo apt update
 </code></pre>
-<p><code>sudo apt update</code></p>
-<p>Finally, install Jenkins ans its dependencies:</p>
+
+<p>Finally, install Jenkins and its dependencies:</p>
 <p><code>sudo apt install jenkins</code></p>
 <h3 id="step-2-starting-jenkins">Step 2 — Starting Jenkins</h3>
 <p>I started Jenkins using systemctl command because systemctl is used to examine and control the state of “systemd” system and service manager.:</p>
@@ -436,20 +450,22 @@
 <p>Since systemctl doesn’t display output,I am using its status command to verify that Jenkins started successfully:</p>
 <p><code>sudo systemctl status jenkins</code> </p>
 <p>If it's successfully installed, the beginning of the output should show that the service is <strong>active</strong> and configured to start for boot.</p>
-<p>The Jenkins is running now. To reach it from a web browser I will adjust the firewall rules to complete the initial setup.</p>
+<p>Jenkins is running now. To reach it from a web browser I will adjust the firewall rules to complete the initial setup.</p>
 <h3 id="step-3-opening-the-firewall">Step 3 - Opening the Firewall</h3>
 <p>By default, Jenkins runs on port 8080, opening that port using ufw(Uncomplicated Firewall ):</p>
 <p><code>sudo ufw allow 8080</code></p>
 <p>To check the ufw's status confirm the new rules:</p>
 <p><code>sudo ufw status</code></p>
 <p>Note: If the status shows inactive. Then enable the firewall by following the following commands that will OpenSSH</p>
-<p><code>sudo ufw allow OpenSSH</code></p>
-<p><code>sudo ufw enable</code></p>
+<pre><code>sudo ufw allow OpenSSH
+sudo ufw enable
+</code></pre>
+
 <h3 id="step-4-setting-up-jenkins">Step 4 — Setting Up Jenkins</h3>
 <p>Find the IP of your system:</p>
 <p><code>ifconfig</code></p>
 <p>To complete setup, in the browser I entered <code>http://your_server_ip_or_domain:8080</code></p>
-<p>The <code>Unlock Jenkins</code> screen opens,which will display where initial password would be stored.</p>
+<p>The <code>Unlock Jenkins</code> screen opens, which will display where the initial password would be stored.</p>
 <p><img alt="" src="../Images/2020-08-19_13-58.png" /></p>
 <p>In the terminal window I will use the cat command to display the password:</p>
 <p><code>sudo cat /var/lib/jenkins/secrets/initialAdminPassword</code></p>
@@ -460,7 +476,7 @@
 <p><img alt="" src="../Images/2020-08-19_14-26.png" /></p>
 <p>Once the installation completes, the screen opens to <code>Create First Admin User</code>, I filled the required details.</p>
 <p><img alt="" src="../Images/2020-08-19_14-26_1.png" /></p>
-<p>click on <code>Save and Continue</code> or select <code>Continue as admin</code> to skip the above step and continue as admin using the initial password used above.</p>
+<p>Click on <code>Save and Continue</code> or select <code>Continue as admin</code> to skip the above step and continue as admin using the initial password used above.</p>
 <p>The <code>Instance Configuration</code> page will be displayed which will ask to confirm the preferred URL for Jenkins instance.</p>
 <p><img alt="" src="../Images/2020-08-19_14-28.png" /></p>
 <p>Confirm the appropriate information, click <code>Save and Finish</code>. A confirmation page confirming that <code>Jenkins is Ready!</code></p>
@@ -469,11 +485,11 @@
 <p>Here finish the installation of Jenkins in VM.</p>
 <hr />
 <h2 id="errors-resolved">Errors resolved</h2>
-<p>There were few errors which I faced during the installation. </p>
+<p>There were a few errors that I faced during the installation. </p>
 <ol>
 <li><strong>GPG key error:</strong></li>
 </ol>
-<p>A LTS (Long-Term Support) release is chosen every 12 weeks from the stream of regular releases as the stable release for that time period. </p>
+<p>An LTS (Long-Term Support) release is chosen every 12 weeks from the stream of regular releases as the stable release for that period time. </p>
 <p>The link gets updated, it gives GPG key error so find the latest link from <a href="https://www.jenkins.io/doc/book/installing/#debianubuntu">here</a> under the Debian/Ubuntu section.</p>
 <ol>
 <li><strong>Certificate verification failed</strong></li>
@@ -481,7 +497,7 @@
 <p><img alt="" src="../Images/2020-08-19_13-05.png" /></p>
 <p>To resolve this pass <code>--no-check-certificate</code> as shown below:</p>
 <p><code>wget https://ftp.yz.yamagata-u.sc.jp/pub/misc/jenkins/debian-stable/jenkins_2.235_all.deb --no-check-certificate</code></p>
-<p>Again reinstall the debian file of jenkins:
+<p>Again reinstall the Debian file of Jenkins
 <code>sudo dpkg -i jenkins_2.235.5_all.deb</code></p>
 <p>To fix the broken packages run:</p>
 <p><code>sudo apt install -f</code></p>
@@ -500,29 +516,29 @@
 <p>You need to update <useSecurity> tag value to <code>false</code> as below.</p>
 <p><img alt="" src="../Images/2020-08-20_00-54.png" /></p>
 <p>Save this file.</p>
-<p>Once you are done with updating value in <code>config.xml</code> file. Restart Jenkins service.</p>
+<p>Once you are done with updating value in the <code>config.xml</code> file. Restart Jenkin's service.</p>
 <p><code>sudo service jenkins restart</code></p>
 <p>It will show the status <code>active</code>.</p>
-<p>Now on opening Jenkins URL. It will go to dashboard direct. No credentials required. After opening dashboard <code>Logged in user</code> section will be blank. As it is now <code>Anonymous user</code>.</p>
-<p>To reset all security options, go to <code>Jenkins</code> -&gt; <code>Manage Jenkins</code> option in left hand side option lists. </p>
+<p>Now on opening Jenkins URL. It will go to the dashboard direct. No credentials are required. After opening the dashboard <code>Logged in user</code> section will be blank. As it is now <code>Anonymous user</code>.</p>
+<p>To reset all security options, go to <code>Jenkins</code> -&gt; <code>Manage Jenkins</code> option in left-hand side option lists. </p>
 <p><img alt="" src="../Images/2020-08-20_10-10.png" /></p>
-<p>Go to  <code>Configure Global Security</code> option</p>
+<p>Go to the <code>Configure Global Security</code> option</p>
 <ul>
 <li>Enable <code>Enable Security</code> option.</li>
 <li>In Security Realm Option Select <code>Jenkins own database</code> option.</li>
-<li>Unselect / Untick <code>Allow users to sign up</code> option under <code>Jenkins own database</code> option.</li>
+<li>Unselect <code>Allow users to sign up</code> option under <code>Jenkins own database</code> option.</li>
 </ul>
 <p><img alt="" src="../Images/2020-08-20_10-12.png" /></p>
-<p>In <code>Authorization section</code> do following changes :</p>
+<p>In <code>Authorization section</code> do the following changes :</p>
 <ul>
 <li>Select <code>Logged-in users can do anything</code> option (Tick).</li>
-<li>Unselect / Untick <code>Allow anonymous read access</code> option under <code>Logged-in users can do anything</code> option.</li>
+<li>Unselect <code>Allow anonymous read access</code> option under <code>Logged-in users can do anything</code> option.</li>
 <li>Click <code>Save</code> button. </li>
 </ul>
 <p>You will be redirected to <code>Create First Admin User</code> page once you click on <code>Save</code> button.</p>
 <p><img alt="" src="../Images/2020-08-20_01-04.png" /></p>
 <p>Once you fill all the details, click on <code>Create First Admin User</code> button</p>
-<p>You will be ready with new Admin users to login again into Jenkins portal. </p>
+<p>You will be ready with new Admin users to log in again into the Jenkins portal. </p>
                 
               
               
