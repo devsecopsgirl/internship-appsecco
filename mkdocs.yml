@@ -7,6 +7,7 @@ nav:
 - Setup of VMs: 'Ubuntu-server-VM-setup.md'
 - Setup of Jenkins: 'Jenkins-installation.md'
 - MkDocs setup for report: 'mkdocs-setup-usage.md'
-- Setting Up Pipeline: 'setting-up-pipeline.md' 
+- Setting Up Pipeline: 'setting-up-pipeline.md'
+- Workflow: 'Workflow.md' 
 
 theme: material
