@@ -2,27 +2,29 @@
 
 ## Objective
 
-This section aims to set up the required infrastructure of Jenkins to perform the task and solve the 2nd point of the problem statement under Task 1.
+This section aims to set up the required infrastructure of Jenkins to perform the task and solve the 2nd point of the [problem statement](https://intern-appsecco.netlify.app/problem-statement/) under Task 1.
 
 **What is Jenkins?**
 
-Jenkins is a self-contained, open-source automation server that can be used to automate all sorts of tasks related to `building, testing ,and delivering or deploying software`.
+Jenkins is a self-contained, open-source automation server that can be used to automate all sorts of tasks related to `building, testing ,and delivering or deploying` software.
 
 Jenkins can be installed through native system packages, Docker, or even run standalone by any machine with a Java Runtime Environment (JRE) installed.
 
 ### Prerequisite
 
-1. VM should be installed with Ubuntu 18.04 server for [Installing Jenkins](https://www.jenkins.io/doc/book/installing/) go to Debian/Ubuntu section.
+1. I installed VM with Ubuntu 18.04 server for [Installing Jenkins](https://www.jenkins.io/doc/book/installing/). I followed the steps under the Debian/Ubuntu section.
 
-2. Java 8 to be installed, by this [link](https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04#installing-specific-versions-of-openjdk) specific versions of OpenJDK on Ubuntu 18.04. I decided to go with this documentation as it was concise. 
+2. I also installed Java 8, by this [link](https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04#installing-specific-versions-of-openjdk) specific versions of OpenJDK on Ubuntu 18.04. I decided to go with this documentation as it was concise. 
 
-Begin with the installation steps of Jenkins.
+## Installation steps of Jenkins.
 
 ### STEP 1 - Installing Jenkins
 
 First, add the repository key to the system:
 
-`wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -`
+```
+wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+```
 
 The system will return `OK` 
 
@@ -30,38 +32,47 @@ Next, append the Debian package repository address
 
 ```
 sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > \
-/etc/apt/sources.list.d/jenkins.list'
+    /etc/apt/sources.list.d/jenkins.list'
 
 sudo apt update
 ```
 
 Finally, install Jenkins and its dependencies:
 
-`sudo apt install jenkins`
+```
+sudo apt install jenkins
+```
 
 ### Step 2 — Starting Jenkins
 
 I started Jenkins using systemctl command because systemctl is used to examine and control the state of “systemd” system and service manager.:
 
-```sudo systemctl start jenkins```
+```
+sudo systemctl start jenkins
 
-Since systemctl doesn’t display output,I am using its status command to verify that Jenkins started successfully:
+```
 
-```sudo systemctl status jenkins``` 
+Since systemctl doesn’t display output, I am using its status command to verify that Jenkins started successfully:
 
-If it's successfully installed, the beginning of the output should show that the service is **active** and configured to start for boot.
+```
+sudo systemctl status jenkins
+``` 
 
-Jenkins is running now. To reach it from a web browser I will adjust the firewall rules to complete the initial setup.
+If it's successfully installed, the beginning of the output should show that the service is **active** and configured to start for boot. Jenkins is running now. To reach it from a web browser I will adjust the firewall rules to complete the initial setup.
 
 ### Step 3 - Opening the Firewall
 
 By default, Jenkins runs on port 8080, opening that port using ufw(Uncomplicated Firewall ):
 
-`sudo ufw allow 8080`
+```
+sudo ufw allow 8080
+```
 
 To check the ufw's status confirm the new rules:
 
-`sudo ufw status`
+```
+sudo ufw status
+```
 
 Note: If the status shows inactive. Then enable the firewall by following the following commands that will OpenSSH
 
@@ -74,7 +85,9 @@ sudo ufw enable
 
 Find the IP of your system:
 
- `ifconfig`
+ ```
+ ifconfig
+ ```
 
 To complete setup, in the browser I entered `http://your_server_ip_or_domain:8080`
 
@@ -84,7 +97,9 @@ The `Unlock Jenkins` screen opens, which will display where the initial password
 
 In the terminal window I will use the cat command to display the password:
 
-`sudo cat /var/lib/jenkins/secrets/initialAdminPassword`
+```
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+```
 
 The 32-character alphanumeric password is displayed in the terminal, paste it into the Administrator password field, then click `Continue`. 
 
@@ -118,42 +133,52 @@ Here finish the installation of Jenkins in VM.
 
 ## Errors resolved
 
-There were a few errors that I faced during the installation. 
+These were errors that I faced during the installation. 
 
-1. **GPG key error:**
+### 1. **GPG key error:**
 
 An LTS (Long-Term Support) release is chosen every 12 weeks from the stream of regular releases as the stable release for that period time. 
 
 The link gets updated, it gives GPG key error so find the latest link from [here](https://www.jenkins.io/doc/book/installing/#debianubuntu) under the Debian/Ubuntu section.
 
-2. **Certificate verification failed**
+### 2. **Certificate verification failed**
 
 ![](Images/2020-08-19_13-05.png)
 
 To resolve this pass `--no-check-certificate` as shown below:
 
-```wget https://ftp.yz.yamagata-u.sc.jp/pub/misc/jenkins/debian-stable/jenkins_2.235_all.deb --no-check-certificate```
+```
+wget https://ftp.yz.yamagata-u.sc.jp/pub/misc/jenkins/debian-stable/jenkins_2.235_all.deb --no-check-certificate
+```
 
 Again reinstall the Debian file of Jenkins
-```sudo dpkg -i jenkins_2.235.5_all.deb```
+```
+sudo dpkg -i jenkins_2.235.5_all.deb
+```
 
 To fix the broken packages run:
 
-```sudo apt install -f```
+```
+sudo apt install -f
+```
 
 Now again I check the status of jenkins:
 
-```sudo service jenkins status```
+```
+sudo service jenkins status
+```
 
 It SHOWS its active now.
 
-3. **Invalid user or password**
+### 3. **Invalid username or password**
    
 ![](Images/2020-08-20_00-48.png)
 
 Once logged in successfully into Jenkins VM (Virtual Machine). Go to directory `Jenkins` and open file `config.xml`.
 
-```sudo nano /var/lib/Jenkins/config.xml```
+```
+sudo nano /var/lib/Jenkins/config.xml
+```
 
 This command will open `config.xml` file as below:
 
@@ -169,7 +194,9 @@ Save this file.
 
 Once you are done with updating value in the `config.xml` file. Restart Jenkin's service.
 
-```sudo service jenkins restart```
+```
+sudo service jenkins restart
+```
 
 It will show the status `active`.
 

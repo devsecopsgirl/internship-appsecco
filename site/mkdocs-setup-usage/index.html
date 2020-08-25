@@ -391,28 +391,32 @@
                 
                 <h1 id="mkdocs-setup-for-report">MkDocs setup for Report</h1>
 <h2 id="objective">Objective</h2>
-<p>This section aims to create documentation in Markdown and use MkDocs to deploy the documentation generated as a static site about the 3rd point of the problem statement under Task 1.</p>
-<p><strong>MkDocs</strong> is a fast, simple, and downright gorgeous static site generator that's geared towards building project documentation. Documentation source files are written in Markdown, and configured with a single YAML configuration file.</p>
+<p>This section aims to create documentation in Markdown and use MkDocs to deploy the documentation generated as a static site and solve the 3rd point of the <a href="https://intern-appsecco.netlify.app/problem-statement/">problem statement</a> under Task 1.</p>
+<p><strong>MkDocs</strong> is a fast, simple, and static site generator that's geared towards building project documentation. Documentation source files are written in Markdown, and configured with a single YAML configuration file.</p>
 <h2 id="installing-mkdocs">Installing MkDocs</h2>
-<p>MkDocs can be installed from this <a href="https://www.mkdocs.org/">link</a> as it is the official site.  I only referred to the 'Installing MkDocs' section under 'Manual Installation' </p>
+<p>MkDocs can be installed from this <a href="https://www.mkdocs.org/">link</a> as it is the official site.  I only referred to the 'Installing MkDocs' section under 'Manual Installation'. </p>
 <h2 id="selecting-a-theme">Selecting a Theme</h2>
-<p>MkDocs allows users to use various themes to customize the style and look of the site. I saw the various themes provided from <a href="https://github.com/mkdocs/mkdocs/wiki/MkDocs-Themes">here</a>.  I selected the 'Material' theme because I liked the style the way content is displayed. To use this theme with MkDocs, it is required to be installed with pip so, I installed Material theme using the command <code>pip install mkdocs-material</code>' as mentioned in the official documentation.</p>
+<p>MkDocs allows users to use various themes to customize the style and look of the site. I saw the various themes provided from <a href="https://github.com/mkdocs/mkdocs/wiki/MkDocs-Themes">here</a>.  I selected the 'Material' theme because I liked the style of the displayed content. To use this theme with MkDocs, it is required to be installed with pip so, I installed Material theme using the command <code>pip install mkdocs-material</code>' as mentioned in the official documentation.</p>
 <h2 id="getting-started-with-configuration">Getting started with Configuration</h2>
 <p>In the terminal:</p>
-<p><code>mkdocs new my-project</code></p>
-<p><code>cd my-project</code></p>
+<pre><code>mkdocs new my-project
+</code></pre>
+
+<pre><code>cd my-project
+</code></pre>
+
 <p>Take a moment to review the initial project that has been created in the vscode.</p>
 <ul>
 <li>A single configuration file named mkdocs.yml, and a folder named docs that will contain documentation source files.</li>
 <li>The docs folder just contains a single documentation page, named index.md.</li>
 <li>MkDocs comes with a built-in dev-server to preview the documentation as we work on it.</li>
-<li>Start the server in the same directory as the mkdocs.yml configuration file, by running the MkDocs serve command:</li>
+<li>Start the server in the same directory as the mkdocs.yml configuration file, by running the <code>mkdocs serve</code> command:</li>
 </ul>
-<p>I opened http://127.0.0.1:8000/ in the browser, and saw the default home page is displayed:</p>
+<p>I opened <code>http://127.0.0.1:8000/</code> in the browser, and saw the default home page is displayed:</p>
 <p><img alt="" src="../Images/localhost.png" /></p>
 <p><strong>YAML file</strong></p>
-<p><code>mkdocs.yml</code>, be present in the root directory of the project that configures the site structure, site title, pages, themes, etc. It is used to define properties for the site.</p>
-<p>Now change the configuration file to alter how the documentation is displayed by changing the theme. Edit the mkdocs.yml file. My :</p>
+<p><code>mkdocs.yml</code>, is present in the root directory of the project that configures the site structure, site title, pages, themes, etc. It is used to define properties for the site.</p>
+<p>Now change the configuration file to alter how the documentation is displayed by changing the theme. Edit the <code>mkdocs.yml</code> file. My mkdocs.yml is as shown:</p>
 <pre><code>    site_name: &lt;DevSecOps&gt;
     nav:
         - Introduction: 'index.md'
@@ -430,7 +434,7 @@
 <li>theme: The theme we are using.</li>
 </ul>
 <h2 id="deploying-the-site-on-github">Deploying the site on GitHub</h2>
-<p>Made a repository on GitHub <em>internship-appsecco</em> and also check the option <em>Initialize this repository with a README</em> and private repository and select <em>Create repository</em></p>
+<p>Made a repository on GitHub <code>internship-appsecco</code> and also checked the option's <code>Initialize this repository with a README</code> and <code>private repository</code> and after that select the option <code>Create repository</code>.</p>
 <p>Now in the terminal run:</p>
 <pre><code>git init
 mkdocs build
@@ -439,17 +443,19 @@ git commit -m &quot;demo1&quot;
 git push -u origin master
 </code></pre>
 
-<p>I can see that the file is pushed on GitHub</p>
-<p>To build the site folder we will run 
-<code>mkdocs build --clean</code></p>
+<p>I can see that the MkDocs's files are pushed on GitHub.</p>
+<p>Note: To build the site folder in beginning we will run the below command.</p>
+<pre><code>mkdocs build --clean
+</code></pre>
+
 <h2 id="deploying-on-netlify-from-github">Deploying on Netlify from Github</h2>
 <p>I deployed the site on Github because every time I make the changes I just have to push it to GitHub and from there the report will be live.</p>
 <ul>
-<li>Select the option <em>Add new site</em>.</li>
-<li>Next select option Git it will start showing all repositories. </li>
+<li>Select the option <code>Add new site</code> on Netlify.</li>
+<li>Next select option <code>Git</code> it will start showing all repositories. </li>
 <li>Select the <code>appsecco-internship</code> repository and then in <strong>Publish directory</strong> column type <code>site/</code></li>
-<li>Click on deploy site.</li>
-<li>The site will be deployed now and the link will be available on the screen.</li>
+<li>Click on <code>deploy site</code>.</li>
+<li>The site will be deployed now and the link will be available on the screen which is used to view our report.</li>
 </ul>
                 
               

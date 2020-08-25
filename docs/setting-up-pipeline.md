@@ -18,7 +18,7 @@ Jenkins is, fundamentally, an automation engine that supports several automation
 
 ## Jenkins pipeline Project 
 
-I set up Jenkins as mentioned in the [Setup of Jenkins](https://intern-appsecco.netlify.app/jenkins-installation/) section. So for building a pipeline for Maven project I followed these steps and also downloaded Maven in my Jenkins VM because all the repositories related to it are present in the system:
+I set up Jenkins as mentioned in the [Setup of Jenkins](https://intern-appsecco.netlify.app/jenkins-installation/) section. For building a pipeline for Maven project I followed these steps and also downloaded Maven in my Jenkins VM for all the repositories related to it are present in the system:
 
 * Click on the `New Item` from the main dashboard which leads to a different page. 
   
@@ -26,11 +26,11 @@ I set up Jenkins as mentioned in the [Setup of Jenkins](https://intern-appsecco.
 
 Filled the project name as Jenkins-Maven and choose `Maven Project` as the project type as it was a Maven based project.
 
-* Next came to the project configurations page. Here:
+* Next come's the project configurations page. Here:
 
 * Under `General` section:
     * I gave a description of the application being deployed and the purpose of this pipeline.
-    * Under the `Source Code Management` option I checked the `Git` option and provided the GitHub URL for the project's repository. This option allowed Jenkins to know where to fetch the project from.
+    * Under the `Source Code Management` option I checked the `Git` option and provided the GitHub URL for the project's repository. This option allow's Jenkins to know where to fetch the project from.
 * Under `Build Triggers` section:
     * I checked the `Build whenever a SNAPSHOT dependency is built` option to allow automated builds.
 
@@ -86,22 +86,27 @@ pipeline {
 * `sh` keyword is used to execute shell commands through Jenkins.
 * Lastly, `mvn` over here stands for maven.
 
-## Setup SSH keys
+## Deploying the files to Production VM
 
-I set up an SSH access configuration for Jenkins to be able to perform operations and copy application files onto the Production VM to allow the Jenkins User to log on to the Production VM without entering for a password again and again. 
+For deploying our files from the Jenkins VM to production VM, I did the SSH Access configuration. I set up an SSH access configuration for Jenkins to be able to perform operations and copy application files onto the Production VM to allow the Jenkins User to log on to the Production VM without entering for a password again and again. 
+
+### SSH Access Configuration
+
 I referred to this [document](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2) of digitalocean as the way it explained is simple to understand.
 
 **Step 1:** Create the RSA Key Pair
 
 The first step is to create the key pair on the jenkins-infra VM :
 
-`ssh-keygen -t rsa`
+```
+ssh-keygen -t rsa
+```
 
 **Step 2:** Store the Keys and Passphrase
 
 Once I entered the above command, I got a few more questions:
 
-*Enter file in which to save the key (/home//.ssh/id_rsa):*
+*Enter file in which to save the key (/home/.ssh/id_rsa):*
 
 I pressed enter here, saving the file to the mentioned path.
 
@@ -109,26 +114,35 @@ I pressed enter here, saving the file to the mentioned path.
 
 I pressed enter because if I have given a passphrase, is then having to type it in each time I use the key pair. After this, I got the public key and private key location.
 
-**Step Three:** Copy the Public Key
+**Step 3:** Copy the Public Key
 
 The public key generated above was added to ~/.ssh/authorized_keys on the Production VM.
 
-`ssh-copy-id jenkins@198.51.100.0`
+```
+ssh-copy-id jenkins@198.51.100.0
+```
 
-### Deploying the files to Production VM
+### Copying the folder
 
 For copying the target folder of `Jenkins-Maven` Project from Jenkins VM to production VM, it didn't ask for the password this time:
 
-`scp -r /var/lib/jenkins/workspace/Jenkins-Maven/target production@192.168.1.4:/home/production/target`
+```
+scp -r /var/lib/jenkins/workspace/Jenkins-Maven/target production@192.168.1.4:/home/production/target
+```
 
 **Syntax:**
 
-scp <source> <destination>
+scp < source > < destination >
+
 In this A is Jenkins VM and B is production VM.
 To copy a file from B to A while logged into B:
 
-`scp -r /path/to/file username@a:/path/to/destination`
+```
+scp -r /path/to/file username@a:/path/to/destination
+```
 
 To copy a file from B to A while logged into A:
 
-`scp -r username@b:/path/to/file /path/to/destination`
+```
+scp -r username@b:/path/to/file /path/to/destination
+```
