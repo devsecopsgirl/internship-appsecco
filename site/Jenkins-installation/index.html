@@ -531,7 +531,6 @@ sudo apt update
 <h3 id="step-2-starting-jenkins">Step 2 — Starting Jenkins</h3>
 <p>I started Jenkins using systemctl command because systemctl is used to examine and control the state of “systemd” system and service manager.:</p>
 <pre><code>sudo systemctl start jenkins
-
 </code></pre>
 
 <p>Since systemctl doesn’t display output, I am using its status command to verify that Jenkins started successfully:</p>
@@ -555,7 +554,9 @@ sudo ufw enable
 
 <h3 id="step-4-setting-up-jenkins">Step 4 — Setting Up Jenkins</h3>
 <p>Find the IP of your system:</p>
-<p><code>ifconfig</code></p>
+<pre><code>ifconfig
+</code></pre>
+
 <p>To complete setup, in the browser I entered <code>http://your_server_ip_or_domain:8080</code></p>
 <p>The <code>Unlock Jenkins</code> screen opens, which will display where the initial password would be stored.</p>
 <p><img alt="" src="../Images/2020-08-19_13-58.png" /></p>
