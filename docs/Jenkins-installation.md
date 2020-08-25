@@ -49,11 +49,9 @@ I started Jenkins using systemctl command because systemctl is used to examine a
 
 ```
 sudo systemctl start jenkins
-
 ```
 
 Since systemctl doesn’t display output, I am using its status command to verify that Jenkins started successfully:
-
 ```
 sudo systemctl status jenkins
 ``` 
@@ -85,9 +83,9 @@ sudo ufw enable
 
 Find the IP of your system:
 
- ```
- ifconfig
- ```
+```
+ifconfig
+```
 
 To complete setup, in the browser I entered `http://your_server_ip_or_domain:8080`
 
