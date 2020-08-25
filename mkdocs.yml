@@ -8,6 +8,5 @@ nav:
 - Setup of Jenkins: 'Jenkins-installation.md'
 - MkDocs setup for report: 'mkdocs-setup-usage.md'
 - Setting Up Pipeline: 'setting-up-pipeline.md'
-- Workflow: 'Workflow.md' 
 
 theme: material

@@ -18,7 +18,7 @@ Jenkins is, fundamentally, an automation engine that supports several automation
 
 ## Jenkins pipeline Project 
 
-I set up the Jenkins as mentioned in the [Setup of Jenkins](https://intern-appsecco.netlify.app/jenkins-installation/) section. So for building a pipeline for Maven project I followed these steps and also downloaded Maven in my Jenkins VM because all the repositories related to it are present in the system:
+I set up Jenkins as mentioned in the [Setup of Jenkins](https://intern-appsecco.netlify.app/jenkins-installation/) section. So for building a pipeline for Maven project I followed these steps and also downloaded Maven in my Jenkins VM because all the repositories related to it are present in the system:
 
 * Click on the `New Item` from the main dashboard which leads to a different page. 
   
@@ -86,12 +86,40 @@ pipeline {
 * `sh` keyword is used to execute shell commands through Jenkins.
 * Lastly, `mvn` over here stands for maven.
 
+## Setup SSH keys
 
-## Deploying the files to Production VM
+I set up an SSH access configuration for Jenkins to be able to perform operations and copy application files onto the Production VM to allow the Jenkins User to log on to the Production VM without entering for a password again and again. 
+I referred to this [document](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2) of digitalocean as the way it explained is simple to understand.
 
-For copying the files from Jenkins VM to production VM:
+**Step 1:** Create the RSA Key Pair
 
-`scp -i /var/lib/jenkins/workspace/Jenkins-Maven/target production@192.168.1.4:/home/production/target`
+The first step is to create the key pair on the jenkins-infra VM :
+
+`ssh-keygen -t rsa`
+
+**Step 2:** Store the Keys and Passphrase
+
+Once I entered the above command, I got a few more questions:
+
+*Enter file in which to save the key (/home//.ssh/id_rsa):*
+
+I pressed enter here, saving the file to the mentioned path.
+
+*Enter passphrase (empty for no passphrase):*
+
+I pressed enter because if I have given a passphrase, is then having to type it in each time I use the key pair. After this, I got the public key and private key location.
+
+**Step Three:** Copy the Public Key
+
+The public key generated above was added to ~/.ssh/authorized_keys on the Production VM.
+
+`ssh-copy-id jenkins@198.51.100.0`
+
+### Deploying the files to Production VM
+
+For copying the target folder of `Jenkins-Maven` Project from Jenkins VM to production VM, it didn't ask for the password this time:
+
+`scp -r /var/lib/jenkins/workspace/Jenkins-Maven/target production@192.168.1.4:/home/production/target`
 
 **Syntax:**
 
@@ -99,14 +127,8 @@ scp <source> <destination>
 In this A is Jenkins VM and B is production VM.
 To copy a file from B to A while logged into B:
 
-`scp /path/to/file username@a:/path/to/destination`
+`scp -r /path/to/file username@a:/path/to/destination`
 
 To copy a file from B to A while logged into A:
 
-`scp username@b:/path/to/file /path/to/destination`
-
-## Setup SSH keys
-
-I referred to this [document](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2) of digitalocean as the way it explained is simple to understand.
-
-I followed the first three steps because I have to only set up SSH Keys and did not follow the last step.
+`scp -r username@b:/path/to/file /path/to/destination`

@@ -286,16 +286,22 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#setup-ssh-keys" class="md-nav__link">
+    Setup SSH keys
+  </a>
+  
+    <nav class="md-nav" aria-label="Setup SSH keys">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#deploying-the-files-to-production-vm" class="md-nav__link">
     Deploying the files to Production VM
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#setup-ssh-keys" class="md-nav__link">
-    Setup SSH keys
-  </a>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -303,18 +309,6 @@
   
 </nav>
     
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../Workflow/" title="Workflow" class="md-nav__link">
-      Workflow
-    </a>
   </li>
 
     
@@ -372,16 +366,22 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#setup-ssh-keys" class="md-nav__link">
+    Setup SSH keys
+  </a>
+  
+    <nav class="md-nav" aria-label="Setup SSH keys">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#deploying-the-files-to-production-vm" class="md-nav__link">
     Deploying the files to Production VM
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#setup-ssh-keys" class="md-nav__link">
-    Setup SSH keys
-  </a>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -415,7 +415,7 @@ under Task 1.</p>
 <li><strong>Extensible:</strong> The Pipeline plugin supports custom extensions to its DSL(Domain Specific Language) and multiple options for integration with other plugins.</li>
 </ul>
 <h2 id="jenkins-pipeline-project">Jenkins pipeline Project</h2>
-<p>I set up the Jenkins as mentioned in the <a href="https://intern-appsecco.netlify.app/jenkins-installation/">Setup of Jenkins</a> section. So for building a pipeline for Maven project I followed these steps and also downloaded Maven in my Jenkins VM because all the repositories related to it are present in the system:</p>
+<p>I set up Jenkins as mentioned in the <a href="https://intern-appsecco.netlify.app/jenkins-installation/">Setup of Jenkins</a> section. So for building a pipeline for Maven project I followed these steps and also downloaded Maven in my Jenkins VM because all the repositories related to it are present in the system:</p>
 <ul>
 <li>Click on the <code>New Item</code> from the main dashboard which leads to a different page. </li>
 </ul>
@@ -484,19 +484,31 @@ under Task 1.</p>
 <li><code>sh</code> keyword is used to execute shell commands through Jenkins.</li>
 <li>Lastly, <code>mvn</code> over here stands for maven.</li>
 </ul>
-<h2 id="deploying-the-files-to-production-vm">Deploying the files to Production VM</h2>
-<p>For copying the files from Jenkins VM to production VM:</p>
-<p><code>scp -i /var/lib/jenkins/workspace/Jenkins-Maven/target production@192.168.1.4:/home/production/target</code></p>
+<h2 id="setup-ssh-keys">Setup SSH keys</h2>
+<p>I set up an SSH access configuration for Jenkins to be able to perform operations and copy application files onto the Production VM to allow the Jenkins User to log on to the Production VM without entering for a password again and again. 
+I referred to this <a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2">document</a> of digitalocean as the way it explained is simple to understand.</p>
+<p><strong>Step 1:</strong> Create the RSA Key Pair</p>
+<p>The first step is to create the key pair on the jenkins-infra VM :</p>
+<p><code>ssh-keygen -t rsa</code></p>
+<p><strong>Step 2:</strong> Store the Keys and Passphrase</p>
+<p>Once I entered the above command, I got a few more questions:</p>
+<p><em>Enter file in which to save the key (/home//.ssh/id_rsa):</em></p>
+<p>I pressed enter here, saving the file to the mentioned path.</p>
+<p><em>Enter passphrase (empty for no passphrase):</em></p>
+<p>I pressed enter because if I have given a passphrase, is then having to type it in each time I use the key pair. After this, I got the public key and private key location.</p>
+<p><strong>Step Three:</strong> Copy the Public Key</p>
+<p>The public key generated above was added to ~/.ssh/authorized_keys on the Production VM.</p>
+<p><code>ssh-copy-id jenkins@198.51.100.0</code></p>
+<h3 id="deploying-the-files-to-production-vm">Deploying the files to Production VM</h3>
+<p>For copying the target folder of <code>Jenkins-Maven</code> Project from Jenkins VM to production VM, it didn't ask for the password this time:</p>
+<p><code>scp -r /var/lib/jenkins/workspace/Jenkins-Maven/target production@192.168.1.4:/home/production/target</code></p>
 <p><strong>Syntax:</strong></p>
 <p>scp <source> <destination>
 In this A is Jenkins VM and B is production VM.
 To copy a file from B to A while logged into B:</p>
-<p><code>scp /path/to/file username@a:/path/to/destination</code></p>
+<p><code>scp -r /path/to/file username@a:/path/to/destination</code></p>
 <p>To copy a file from B to A while logged into A:</p>
-<p><code>scp username@b:/path/to/file /path/to/destination</code></p>
-<h2 id="setup-ssh-keys">Setup SSH keys</h2>
-<p>I referred to this <a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2">document</a> of digitalocean as the way it explained is simple to understand.</p>
-<p>I followed the first three steps because I have to only set up SSH Keys and did not follow the last step.</p>
+<p><code>scp -r username@b:/path/to/file /path/to/destination</code></p>
                 
               
               
@@ -529,20 +541,6 @@ To copy a file from B to A while logged into B:</p>
             </div>
           </a>
         
-        
-          <a href="../Workflow/" title="Workflow" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
-            <div class="md-footer-nav__title">
-              <div class="md-ellipsis">
-                <span class="md-footer-nav__direction">
-                  Next
-                </span>
-                Workflow
-              </div>
-            </div>
-            <div class="md-footer-nav__button md-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
-            </div>
-          </a>
         
       </nav>
     </div>
