@@ -143,11 +143,3 @@ To check composer is installed:
 ```
 php composer.phar
 ```
-## Access SuiteCRM Web Interface
-
-I copied the files of SuiteCRM directory to the location /var/www/html/index.html using the below command
-```
-
-```
-
-Now the configuration page of SuiteCRM opened.
