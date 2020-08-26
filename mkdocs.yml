@@ -8,5 +8,6 @@ nav:
 - Setup of Jenkins: 'Jenkins-installation.md'
 - MkDocs setup for report: 'mkdocs-setup-usage.md'
 - Setting Up Pipeline: 'setting-up-pipeline.md'
+- Set Up SuiteCRM: 'setting-up-suitecrm.md'
 
 theme: material

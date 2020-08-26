@@ -10,3 +10,4 @@ The following is the report/documentation for the ```Problem Statement``` stated
 * [Setup of Jenkins](https://intern-appsecco.netlify.app/jenkins-installation/)
 * [MkDocs setup for report](https://intern-appsecco.netlify.app/mkdocs-setup-usage/)
 * [Setting Up Pipeline](https://intern-appsecco.netlify.app/setting-up-pipeline/)
+* [Set Up SuiteCRM](https://intern-appsecco.netlify.app/setting-up-suitecrm/)
