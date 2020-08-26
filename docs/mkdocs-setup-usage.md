@@ -26,7 +26,7 @@ mkdocs new my-project
 cd my-project
 ```
 
-Take a moment to review the initial project that has been created in the vscode.
+Take a moment to review the initial project that has been created in the vs code.
 
 * A single configuration file named mkdocs.yml, and a folder named docs that will contain documentation source files.
 * The docs folder just contains a single documentation page, named index.md.

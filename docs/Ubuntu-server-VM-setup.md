@@ -4,7 +4,7 @@
 
 This section aims to set up the required infrastructure to perform the task and solve the 1st point of the [problem statement](https://intern-appsecco.netlify.app/problem-statement/) under Task 1.
 
-In this section I will be setting up two VMs:
+In this section, I will be setting up two VMs:
 
 1. For Jenkin's deployment.
 2. For the production server to deploy the application (Odoo) on the server

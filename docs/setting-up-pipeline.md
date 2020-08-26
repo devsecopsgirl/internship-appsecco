@@ -92,7 +92,7 @@ For deploying our files from the Jenkins VM to production VM, I did the SSH Acce
 
 ### SSH Access Configuration
 
-I referred to this [document](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2) of digitalocean as the way it explained is simple to understand.
+I referred to this [document](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2) because the way it is explained is simple to understand.
 
 **Step 1:** Create the RSA Key Pair
 
