@@ -1,4 +1,3 @@
-
 # Setting up SuiteCRM
 
 ## Objective
@@ -115,7 +114,7 @@ Check with the systemd init system to make sure the service is running by typing
 ```
 sudo systemctl status apache2
 ```
-Once check that the Apache is `active` after that run on the browser.
+Once check that the Apache is `active` after that run on the browser
 `http://IP of production VM`. I saw the default Ubuntu 18.04 Apache web page on a web browser which indicates it's working properly.
 
 ### Cloning  SuiteCRM
@@ -143,3 +142,87 @@ To check composer is installed:
 ```
 php composer.phar
 ```
+### Error Resolved
+
+I copied the files from SuiteCRM directory to location `/var/www/html/suitecrm` because to run the application SuiteCRM. When I tried running on a browser the URL, I got this error:
+`Composer autoloader not found. please run "composer install"`
+
+In terminal, I ran the `composer install` and I got the list of issues:
+
+```
+Your requirements could not be resolved to an installable set of packages.
+
+  Problem 1
+    - The requested PHP extension ext-gd * is missing from your system. Install or enable PHP's gd extension.
+  Problem 2
+    - The requested PHP extension ext-zip * is missing from your system. Install or enable PHP's zip extension.
+  Problem 3
+    - The requested PHP extension ext-imap * is missing from your system. Install or enable PHP's imap extension.
+  Problem 4
+    - Installation request for jeremykendall/php-domain-parser 4.0.3-alpha -> satisfiable by jeremykendall/php-domain-parser[4.0.3-alpha].
+    - jeremykendall/php-domain-parser 4.0.3-alpha requires ext-intl * -> the requested PHP extension intl is missing from your system.
+  Problem 5
+    - Installation request for lcobucci/jwt 3.3.2 -> satisfiable by lcobucci/jwt[3.3.2].
+    - lcobucci/jwt 3.3.2 requires ext-mbstring * -> the requested PHP extension mbstring is missing from your system.
+  Problem 6
+    - Installation request for league/uri 4.2.3 -> satisfiable by league/uri[4.2.3].
+    - league/uri 4.2.3 requires ext-intl * -> the requested PHP extension intl is missing from your system.
+  Problem 7
+    - Installation request for codeception/codeception 3.1.2 -> satisfiable by codeception/codeception[3.1.2].
+    - codeception/codeception 3.1.2 requires ext-mbstring * -> the requested PHP extension mbstring is missing from your system.
+  Problem 8
+    - Installation request for facebook/webdriver 1.7.1 -> satisfiable by facebook/webdriver[1.7.1].
+    - facebook/webdriver 1.7.1 requires ext-mbstring * -> the requested PHP extension mbstring is missing from your system.
+  Problem 9
+    - Installation request for phpunit/phpunit 5.7.27 -> satisfiable by phpunit/phpunit[5.7.27].
+    - phpunit/phpunit 5.7.27 requires ext-mbstring * -> the requested PHP extension mbstring is missing from your system.
+  Problem 10
+    - lcobucci/jwt 3.3.2 requires ext-mbstring * -> the requested PHP extension mbstring is missing from your system.
+    - league/oauth2-server 5.1.6 requires lcobucci/jwt ^3.1 -> satisfiable by lcobucci/jwt[3.3.2].
+    - Installation request for league/oauth2-server 5.1.6 -> satisfiable by league/oauth2-server[5.1.6].
+```
+In terminal, I run the following commands to sort out the above issues and install the packages mentioned:
+```
+sudo apt install php-gd
+sudo apt install zip php-imap
+sudo apt install php-zip
+sudo apt-get install php7.2-mbstring
+sudo apt-get install php7.2-intl
+```
+I got the next error when I ran again `Install composer` 
+```
+[RuntimeException]                                                      
+  /var/www/html/suitecrm/vendor does not exist and could not be created. 
+```
+
+So I ran the command:
+```
+sudo php composer.phar install
+```
+
+## Access SuiteCRM Web Interface
+
+I entered on browser `http://IP/suitecrm/install.php` for accessing the SuiteCRM Web Interface the screen opens like this:
+
+![](Images/2020-08-27_12-05.png)
+
+Accept the License and press `Enter` a new page will open.
+
+![](Images/2020-08-27_13-46.png)
+
+Again there were two issues to resolve them, I 
+went to the location /etc/php/7.2/apache2/php.ini and enter the command
+
+```
+sudo nano /etc/php/7.2/apache2/php.ini
+```
+Made these changes in the nano file:
+
+* upload_max_filesize = 100M
+* cgi.fix_pathinfo=0
+* session.save_path = "var/www/html/suitecrm/"
+
+After this the System Environment page opened showing all the informations. 
+![](Images/2020-08-27_16-20.png)
+
+I again went to the location and changed upload_max_filesize = 6MB amd proceed further.
