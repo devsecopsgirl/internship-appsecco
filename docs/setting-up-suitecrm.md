@@ -222,7 +222,13 @@ Made these changes in the nano file:
 * cgi.fix_pathinfo=0
 * session.save_path = "var/www/html/suitecrm/"
 
-After this the System Environment page opened showing all the informations. 
+After this, the `System Environment` page opened showing, all the system environment parameters. 
 ![](Images/2020-08-27_16-20.png)
 
-I again went to the location and changed upload_max_filesize = 6MB amd proceed further.
+Click `next`, and then another screen opens, enter the database name, hostname, username, and password. Also, specify the Admin user details on the right side of the screen.
+
+I forgot my MySQL password of my database so, I ran this command mentioning the username and password.
+```
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+```
+After filling the entries, click `next` and the SuiteCRM installs. As it completes the SuiteCRM login screen will open.
