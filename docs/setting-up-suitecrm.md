@@ -231,4 +231,4 @@ I forgot my MySQL password of my database so, I ran this command mentioning the 
 ```
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
 ```
-After filling the entries, click `next` and the SuiteCRM installs. As it completes the SuiteCRM login screen will open.
+After filling the entries, click `next` and the SuiteCRM will start installing. As it completes the SuiteCRM login screen will open.
