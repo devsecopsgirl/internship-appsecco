@@ -227,6 +227,8 @@ After this, the `System Environment` page opened showing, all the system environ
 
 Click `next`, and then another screen opens, enter the database name, hostname, username, and password. Also, specify the Admin user details on the right side of the screen.
 
+![](Images/2020-08-27_17-23.png)
+
 I forgot my MySQL password of my database so, I ran this command mentioning the username and password.
 ```
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
