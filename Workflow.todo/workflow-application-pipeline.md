@@ -1,14 +1,15 @@
 
-Todo for building the pipeline:
+Todo for building the application suitecrm  pipeline:
 
   ☐ Make the pipeline project on jenkins
 
-      ☐ Complete the settings required for project
+      ☐ Complete the settings required for project in jenkins
 
-      ☐ 
-
-  ☐ Copy the files from jenkins VM to production VM.
-
+      ☐ make the jenkins-file:
+      1. clone, 
+      2. build(composer install), 
+      3. copy 
+     
   ☐ Documentation
 
      ☐ check on grammerly
@@ -16,3 +17,4 @@ Todo for building the pipeline:
      ☐ Update the YAML file, contents section
      
      ☐ mkdocs build, git add, commit,push
+    

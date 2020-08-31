@@ -11,3 +11,4 @@ The following is the report/documentation for the ```Problem Statement``` stated
 * [MkDocs setup for report](https://intern-appsecco.netlify.app/mkdocs-setup-usage/)
 * [Setting Up Pipeline](https://intern-appsecco.netlify.app/setting-up-pipeline/)
 * [Set Up SuiteCRM](https://intern-appsecco.netlify.app/setting-up-suitecrm/)
+* [Deployment of SuiteCRM pipeline](https://intern-appsecco.netlify.app/deployment-of-suitecrm/)
