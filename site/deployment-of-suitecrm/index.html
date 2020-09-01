@@ -516,7 +516,7 @@ In this stage, the files are deployed from Jenkins to production VM and also rem
 <p>Made changes in the last path in Jenkinsfile to /home/production/html/suitecrm</p>
 <p>Click On Save and then build it was successfully build this time.</p>
 <h3 id="suitecrm-web-page">SuiteCRM Web Page</h3>
-<p>When I opened the webpage  <code>http://192.168.1.4/suitecrm/install.php</code> there it showed to set the <code>session.save_path</code>. So I changed it from this <code>session.save_path = "var/www/html/suitecrm/"</code> to <code>session.save_path = "tmp"</code> by going in the file:</p>
+<p>When I opened the webpage  <code>http://192.168.1.4/suitecrm/install.php</code> there it showed to set the <code>session.save_path</code>. So I changed it from this <code>session.save_path = "var/www/html/suitecrm/"</code> to <code>session.save_path = "/tmp"</code> by going in the file:</p>
 <pre><code>sudo nano /etc/php/7.2/apache2/php.ini
 </code></pre>
 
