@@ -507,16 +507,16 @@ In this stage, the files are deployed from Jenkins to production VM and also rem
 <pre><code>/etc/apache2/sites-enabled/000-default.conf
 </code></pre>
 
-<p>So I just run </p>
+<p>So I run this command to make the changes in the nano file. </p>
 <pre><code>sudo nano /etc/apache2/sites-enabled/000-default.conf
 </code></pre>
 
 <p>I changed it to /home/production/html/suitecrm</p>
 <p>Created file suitecrm under /home/production/html</p>
 <p>Made changes in the last path in Jenkinsfile to /home/production/html/suitecrm</p>
-<p>Click On Save and then build it.</p>
+<p>Click On Save and then build it was successfully build this time.</p>
 <h3 id="suitecrm-web-page">SuiteCRM Web Page</h3>
-<p>I got this displayed</p>
+<p>This was displayed when I opened the webpage <code>http://192.168.1.4/suitecrm/install.php</code>:</p>
 <pre><code>Component Status
 Writeable Custom Directory The Custom Directory exists but is not writeable. You may have to change permissions on it (chmod 766) or right click on it and uncheck the read only option, depending on your Operating System. Please take the needed steps to make the file writeable.
 Writable Cache Sub-Directories The files or directories listed below are not writeable or are missing and cannot be created. Depending on your Operating System, correcting this may require you to change permissions on the files or parent directory (chmod 755), or to right click on the parent directory and uncheck the ‘read only’ option and apply it to all subfolders.
@@ -535,6 +535,8 @@ sudo chmod -R 755 .
 
 sudo chmod -R 775 cache custom modules themes data upload config_override.php
 </code></pre>
+
+<p>After this the web page opened for making the configurations of database and Site.</p>
                 
               
               

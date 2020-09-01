@@ -79,7 +79,7 @@ So to solve this I followed this [documentation](https://www.digitalocean.com/co
 ```
 /etc/apache2/sites-enabled/000-default.conf
 ```
-So I just run 
+So I run this command to make the changes in the nano file. 
 ```
 sudo nano /etc/apache2/sites-enabled/000-default.conf
 ```
@@ -89,11 +89,11 @@ Created file suitecrm under /home/production/html
 
 Made changes in the last path in Jenkinsfile to /home/production/html/suitecrm
 
-Click On Save and then build it.
+Click On Save and then build it was successfully build this time.
 
 ### SuiteCRM Web Page
 
-I got this displayed
+This was displayed when I opened the webpage `http://192.168.1.4/suitecrm/install.php`:
 
 ```
 Component Status
@@ -114,3 +114,4 @@ sudo chmod -R 755 .
 
 sudo chmod -R 775 cache custom modules themes data upload config_override.php
 ```
+After this the web page opened for making the configurations of database and Site.
