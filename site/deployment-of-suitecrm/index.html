@@ -310,6 +310,20 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#build-stage-permission-denied" class="md-nav__link">
+    Build Stage - Permission denied
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#suitecrm-web-page" class="md-nav__link">
+    SuiteCRM Web Page
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -376,6 +390,20 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#build-stage-permission-denied" class="md-nav__link">
+    Build Stage - Permission denied
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#suitecrm-web-page" class="md-nav__link">
+    SuiteCRM Web Page
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -428,7 +456,10 @@
 <h3 id="jenkinsfile">Jenkinsfile</h3>
 <p>I have explained about Jenkinsfile in <a href="https://intern-appsecco.netlify.app/setting-up-pipeline/">Setting Up Pipeline</a> section.</p>
 <p>The following are the contents of the Jenkinsfile which executes the pipeline:</p>
-<pre><code>stages {
+<pre><code>pipeline {
+    agent any
+
+    stages {
         stage('git') {
             steps {
                 git url: 'https://github.com/Priyam5/SuiteCRM.git/'
@@ -443,10 +474,9 @@
         stage ('Deploying App to production server'){
             steps {
                 sh 'echo &quot;Deploying App to production Server&quot;'
-                sh 'ssh -o StrictHostKeyChecking=no production@192.168.1.4 &quot;cd suitecrm &amp;&amp; bpm stop apache2&quot;'
-                sh 'ssh -o StrictHostKeyChecking=no production@192.168.1.4 &quot;rm -rf suitecrm/ &amp;&amp; mkdir suitecrm&quot;'
+                sh 'ssh -o StrictHostKeyChecking=no production@192.168.1.4 &quot;rm -rf suitecrm &amp;&amp; mkdir suitecrm&quot;'
                 sh 'scp -r * production@192.168.1.4:~/suitecrm'
-                sh 'ssh -o StrictHostKeyChecking=no production@192.168.1.4 &quot;source ./env.sh &amp;&amp; ./env.sh &amp;&amp; cd suitecrm &amp;&amp; bpm start apache2&quot;'
+                sh 'ssh -o StrictHostKeyChecking=no production@192.168.1.4 &quot;cd suitecrm &amp;&amp; cp -r * /home/production/html/suitecrm&quot;'
             }
         }
     }
@@ -468,6 +498,43 @@ In the build stage, application is built and dependencies are installed using  <
 In this stage, the files are deployed from Jenkins to production VM and also removed the files of suitecrm from production server as it might cause conflict in between the files.</p>
 </li>
 </ul>
+<h3 id="build-stage-permission-denied">Build Stage - Permission denied</h3>
+<p>In the build stage, I was getting an error for permission denied for the folder was not getting deleted and permission denied for regular files not being created.</p>
+<p>So to solve this I followed this <a href="https://www.digitalocean.com/community/tutorials/how-to-move-an-apache-web-root-to-a-new-location-on-ubuntu-16-04">documentation</a></p>
+<ul>
+<li>I changed root directory to home directory as the document root was set to /var/www/html. It was configured in the following file: </li>
+</ul>
+<pre><code>/etc/apache2/sites-enabled/000-default.conf
+</code></pre>
+
+<p>So I just run </p>
+<pre><code>sudo nano /etc/apache2/sites-enabled/000-default.conf
+</code></pre>
+
+<p>I changed it to /home/production/html/suitecrm</p>
+<p>Created file suitecrm under /home/production/html</p>
+<p>Made changes in the last path in Jenkinsfile to /home/production/html/suitecrm</p>
+<p>Click On Save and then build it.</p>
+<h3 id="suitecrm-web-page">SuiteCRM Web Page</h3>
+<p>I got this displayed</p>
+<pre><code>Component Status
+Writeable Custom Directory The Custom Directory exists but is not writeable. You may have to change permissions on it (chmod 766) or right click on it and uncheck the read only option, depending on your Operating System. Please take the needed steps to make the file writeable.
+Writable Cache Sub-Directories The files or directories listed below are not writeable or are missing and cannot be created. Depending on your Operating System, correcting this may require you to change permissions on the files or parent directory (chmod 755), or to right click on the parent directory and uncheck the ‘read only’ option and apply it to all subfolders.
+Please fix the following files or directories before proceeding:
+/home/bro303/public_html/crm/cache/images
+/home/bro303/public_html/crm/cache/layout
+/home/bro303/public_html/crm/cache/pdf
+/home/bro303/public_html/crm/cache/xml
+/home/bro303/public_html/crm/cache/include/javascript
+</code></pre>
+
+<p>I ran these commands to set the following recommended permissions on SuiteCRM instance:</p>
+<pre><code>sudo chown -R www-data:www-data .
+
+sudo chmod -R 755 .
+
+sudo chmod -R 775 cache custom modules themes data upload config_override.php
+</code></pre>
                 
               
               
