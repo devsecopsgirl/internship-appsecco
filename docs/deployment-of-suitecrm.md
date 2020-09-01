@@ -93,7 +93,12 @@ Click On Save and then build it was successfully build this time.
 
 ### SuiteCRM Web Page
 
-This was displayed when I opened the webpage `http://192.168.1.4/suitecrm/install.php`:
+When I opened the webpage  `http://192.168.1.4/suitecrm/install.php` there it showed to set the `session.save_path`. So I changed it from this `session.save_path = "var/www/html/suitecrm/"` to `session.save_path = "tmp"` by going in the file:
+
+```
+sudo nano /etc/php/7.2/apache2/php.ini
+```
+This was displayed when I opened the webpage again:
 
 ```
 Component Status

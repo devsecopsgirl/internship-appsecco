@@ -516,7 +516,11 @@ In this stage, the files are deployed from Jenkins to production VM and also rem
 <p>Made changes in the last path in Jenkinsfile to /home/production/html/suitecrm</p>
 <p>Click On Save and then build it was successfully build this time.</p>
 <h3 id="suitecrm-web-page">SuiteCRM Web Page</h3>
-<p>This was displayed when I opened the webpage <code>http://192.168.1.4/suitecrm/install.php</code>:</p>
+<p>When I opened the webpage  <code>http://192.168.1.4/suitecrm/install.php</code> there it showed to set the <code>session.save_path</code>. So I changed it from this <code>session.save_path = "var/www/html/suitecrm/"</code> to <code>session.save_path = "tmp"</code> by going in the file:</p>
+<pre><code>sudo nano /etc/php/7.2/apache2/php.ini
+</code></pre>
+
+<p>This was displayed when I opened the webpage again:</p>
 <pre><code>Component Status
 Writeable Custom Directory The Custom Directory exists but is not writeable. You may have to change permissions on it (chmod 766) or right click on it and uncheck the read only option, depending on your Operating System. Please take the needed steps to make the file writeable.
 Writable Cache Sub-Directories The files or directories listed below are not writeable or are missing and cannot be created. Depending on your Operating System, correcting this may require you to change permissions on the files or parent directory (chmod 755), or to right click on the parent directory and uncheck the ‘read only’ option and apply it to all subfolders.
