@@ -471,18 +471,31 @@
                 sh 'composer install'
             }
         }
+
+        // stage ('Dependency-Check Analysis'){
+        //     steps {
+        //         sh 'Dependency-Check'
+        //     }    
+        // }
+
         stage ('Deploying App to production server'){
             steps {
                 sh 'echo &quot;Deploying App to production Server&quot;'
                 sh 'ssh -o StrictHostKeyChecking=no production@192.168.1.4 &quot;rm -rf suitecrm &amp;&amp; mkdir suitecrm&quot;'
                 sh 'scp -r * production@192.168.1.4:~/suitecrm'
-                sh 'ssh -o StrictHostKeyChecking=no production@192.168.1.4 &quot;cd suitecrm &amp;&amp; cp -r * /home/production/html/suitecrm&quot;'
-            }
+                sh 'ssh -o StrictHostKeyChecking=no production@192.168.1.4 &quot;cd suitecrm &amp;&amp; sudo cp -r * /home/production/html/suitecrm&quot;'
+                sh 'ssh -o StrictHostKeyChecking=no production@192.168.1.4 &quot;sudo cp -r /home/production/config.php /home/production/html/suitecrm&quot;'     
+                sh 'ssh -o StrictHostKeyChecking=no production@192.168.1.4 &quot;cd /home/production/html/suitecrm &amp;&amp; sudo chmod -R 755 * &amp;&amp; sudo chown -R www-data:www-data *&quot;'
+
+           }
         }
     }
-}
+}   
 </code></pre>
 
+<ul>
+<li><code>StrictHostKeyChecking=no</code>  In host key checking, ssh automatically maintains and checks a database containing identification for all hosts it has ever been used with. If this property is set to yes, ssh will never automatically add host keys to the $HOME/.ssh/known_hosts file, and refuses to connect to hosts whose host key has changed. This property forces the user to manually add all new hosts. If this property is set to no, ssh will automatically add new host keys to the user known hosts files.</li>
+</ul>
 <h3 id="the-stages-of-pipeline">The stages of pipeline</h3>
 <ul>
 <li>
@@ -491,7 +504,7 @@ In this stage git repository of SuiteCRM is cloned. </p>
 </li>
 <li>
 <p><strong>Build :</strong>
-In the build stage, application is built and dependencies are installed using  <code>composer install</code> in the build stage on the Jenkins VM. This loads all the dependencies that the app (SuiteCRM) requires.</p>
+In the build stage, application is built and dependencies are installed using  <code>composer</code> in the build stage on the Jenkins VM. This loads all the dependencies that the app (SuiteCRM) requires.</p>
 </li>
 <li>
 <p><strong>Deploying App to production server:</strong> 
@@ -541,6 +554,15 @@ sudo chmod -R 775 cache custom modules themes data upload config_override.php
 </code></pre>
 
 <p>After this the web page opened for making the configurations of database and Site.</p>
+<p><strong>Note:</strong></p>
+<ul>
+<li>
+<p>I was getting an error of database not connected because every time I build the pipeline, it deletes the older files and creates a new one. So <code>config.php</code> file is missing. So copy the file when SuiteCRM installed manually to another place and also in suitecrm instance. and in the pipeline pass the step to copy the config.php file. After it's successfully done the application will be directly deployed by the pipeline.</p>
+</li>
+<li>
+<p>To open the config page multiple times in config.php file make the change <code>installer_locked = True</code> to <code>false</code>.</p>
+</li>
+</ul>
                 
               
               

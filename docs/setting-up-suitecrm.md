@@ -131,7 +131,7 @@ SuiteCRM packages are not built. This is due to I  cloned the repository instead
 ```
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 
-php -r "if (hash_file('sha384', 'composer-setup.php') === '8a6138e2a05a8c28539c9f0fb361159823655d7ad2deecb371b04a83966c61223adc522b0189079e3e9e277cd72b8897') { echo 'Installer verified'; }
+php -r "if (hash_file('sha384', 'composer-setup.php') === '8a6138e2a05a8c28539c9f0fb361159823655d7ad2deecb371b04a83966c61223adc522b0189079e3e9e277cd72b8897') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
 
 php composer-setup.php
 
@@ -189,7 +189,7 @@ sudo apt install php-zip
 sudo apt-get install php7.2-mbstring
 sudo apt-get install php7.2-intl
 ```
-I got the next error when I ran again `Install composer` 
+I got the next error when I ran again `composer install` 
 ```
 [RuntimeException]                                                      
   /var/www/html/suitecrm/vendor does not exist and could not be created. 

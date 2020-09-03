@@ -576,7 +576,7 @@ Apache (v6)                ALLOW       Anywhere (v6)
 <p>SuiteCRM packages are not built. This is due to I  cloned the repository instead of using the zip archive. Hence, I had to install Composer, the package manager for PHP. I followed the official <a href="https://getcomposer.org/doc/00-intro.md">documentation</a> and performed required steps to install Composer globally. After a successful installation, I ran <code>composer install</code> in the project's root directory to build the dependencies for SuiteCRM.</p>
 <pre><code>php -r &quot;copy('https://getcomposer.org/installer', 'composer-setup.php');&quot;
 
-php -r &quot;if (hash_file('sha384', 'composer-setup.php') === '8a6138e2a05a8c28539c9f0fb361159823655d7ad2deecb371b04a83966c61223adc522b0189079e3e9e277cd72b8897') { echo 'Installer verified'; }
+php -r &quot;if (hash_file('sha384', 'composer-setup.php') === '8a6138e2a05a8c28539c9f0fb361159823655d7ad2deecb371b04a83966c61223adc522b0189079e3e9e277cd72b8897') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;&quot;
 
 php composer-setup.php
 
@@ -631,7 +631,7 @@ sudo apt-get install php7.2-mbstring
 sudo apt-get install php7.2-intl
 </code></pre>
 
-<p>I got the next error when I ran again <code>Install composer</code> </p>
+<p>I got the next error when I ran again <code>composer install</code> </p>
 <pre><code>[RuntimeException]                                                      
   /var/www/html/suitecrm/vendor does not exist and could not be created. 
 </code></pre>
