@@ -135,6 +135,6 @@ After this the web page opened for making the configurations of database and Sit
 
 **Note:**
 
-* I was getting an error of database not connected because every time I build the pipeline, it deletes the older files and creates a new one. So `config.php` file is missing. So copy the file when SuiteCRM installed manually to another place and also in suitecrm instance. and in the pipeline pass the step to copy the config.php file. After it's successfully done the application will be directly deployed by the pipeline.
+* I was getting an error of `database not connected` because every time I build the pipeline, it deletes the older files and creates a new one. So `config.php` file is missing. So copy the file when SuiteCRM installed manually to another place and also in suitecrm instance. and in the pipeline pass the step to copy the config.php file. After it's successfully done the application will be directly deployed by the pipeline.
 
 * To open the config page multiple times in config.php file make the change `installer_locked = True` to `false`.
