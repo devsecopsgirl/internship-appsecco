@@ -8,3 +8,4 @@
 4. Setting up the basic pipeline.
 5. Next, [SuiteCRM](https://suitecrm.com/) should get deployed in a server that is the second VM, I installed. 
 6. Deployment of SuiteCRM on production server through jenkins pipeline.
+7. Identify suitable tools for SuiteCRM to perform SAST and generate a report.
