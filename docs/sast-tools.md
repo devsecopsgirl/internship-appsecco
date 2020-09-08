@@ -30,7 +30,7 @@ After this, I got the report in the `Console Output` after the pipeline is succe
 ```
 dependencyCheckPublisher pattern: 'dependency-check-report.xml'  
 ```
-This will create a `dependency-check-report.xml` report file in the workspace and I can also see in Jenkins the `Dependency-Check Trend` that is a graphical representation of vulnerabilities found in the SuiteCRM application and they are in which category that is critical, high, medium, low or unassigned.
+This will create a `dependency-check-report.xml` report file in the workspace and I can also see in Jenkins the `Dependency-Check Trend` that is a graphical representation of vulnerabilities found in the SuiteCRM application and they are in which category that is critical, high, medium, low or unassigned. Here is the [report](https://github.com/Priyam5/internship-appsecco/blob/master/Reports/dependency-check-report.xml) which generated after OWASP Dependency-Check.
 
 **Note:** I was getting this error `[DependencyCheck] Unable to find Dependency-Check reports to parse` because I was using the latest version 5 of OWASP Dependency-Check Plugin but writing the code according to the v4. The default path for report search was"**/dependency-check-report.xml" in v4 and has changed to "dependency-check-report.xml" in v5.
 
