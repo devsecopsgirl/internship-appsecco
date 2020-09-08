@@ -36,9 +36,46 @@ This will create a `dependency-check-report.xml` report file in the workspace an
 
 ### Snyk
 
-Snyk is an open-source security platform for finding out vulnerabilities in the source code of an application. A platform that helps monitor (open source) projects present on GitHub, Bitbucket, etc. or locally to identify dependencies with known vulnerabilities. It is available as a CLI and as a docker image.
+Snyk is an open-source security platform for finding out vulnerabilities in the source code of an application. A platform that helps monitor (open source) projects present on GitHub, Bitbucket, etc. or locally to identify dependencies with known vulnerabilities. It is available as a CLI and as a docker image. I followed the official [documentation](https://support.snyk.io/hc/en-us/articles/360004032217-Jenkins-integration-overview) snyk because all the steps are explained well. 
 
-#### Global Configuration
-Configure your Jenkins settings to install the Snyk Security Scanner plugin: 
+#### Install the Snyk plugin
+Configure Jenkins settings to install the Snyk Security Scanner plugin: 
 
-* Go to Manage Jenkins > Manage Plugins > Available and search for Snyk Security. Install the plugin.
+* Go to `Manage Jenkins` > `Manage Plugins` > `Available` and search for `Snyk Security`. Install the plugin.
+* Go to `Manage Jenkins` > `Global Tool Configuration` and add a `Snyk Installation` to have the Snyk CLI available during Jenkins builds.
+* From the Snyk app, retrieve Snyk API token:
+
+    1. From Snyk account, navigate to `Settings` >` General`.
+
+    2. Copy the key
+   
+* Go to `Manage Jenkins` > `Manage Credentials` > `System` and add a Snyk API Token to allow the Snyk Security Scanner to identify with Snyk. Specify a credential ID value in the ID field (i.e. `snyk-api-token`).
+* Use these values:
+
+    *Kind* - Snyk API token
+
+    *Scope* - Global
+
+    *Token* - Snyk API token(key) as retrieved from Snyk account
+
+    *ID* - Enter a name for the token
+
+    *Description* - optional free text
+#### Jenkins integration
+
+* From within Jenkins, generate a Snyk Security pipe:
+
+    1. Navigate to the pipeline project and click Pipeline Syntax.
+    2. From the Sample Step dropdown, select snykSecurity: Invoke Snyk Security task.
+    3. Configure the security task as follows when issues are found select `Let the build continue` display vulnerabilities and details, but allow the build to continue and provide the snyk token.
+    4. Click Generate Pipeline Script. The pipe syntax is generated and displayed
+  
+* In the pipeline add the step under the `Snyk Security` stage before build stage:
+```
+stage ('Snyk Security'){
+            steps {
+                snykSecurity failOnIssues: false, snykInstallation: 'Snyk Security Plugin', snykTokenId: 'snyk-api-token'
+            }    
+        }
+```
+Build the pipeline and the [report]() is generated. 

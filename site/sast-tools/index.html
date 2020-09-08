@@ -324,8 +324,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#global-configuration" class="md-nav__link">
-    Global Configuration
+  <a href="#install-the-snyk-plugin" class="md-nav__link">
+    Install the Snyk plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jenkins-integration" class="md-nav__link">
+    Jenkins integration
   </a>
   
 </li>
@@ -403,8 +410,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#global-configuration" class="md-nav__link">
-    Global Configuration
+  <a href="#install-the-snyk-plugin" class="md-nav__link">
+    Install the Snyk plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jenkins-integration" class="md-nav__link">
+    Jenkins integration
   </a>
   
 </li>
@@ -462,12 +476,56 @@
 <p>This will create a <code>dependency-check-report.xml</code> report file in the workspace and I can also see in Jenkins the <code>Dependency-Check Trend</code> that is a graphical representation of vulnerabilities found in the SuiteCRM application and they are in which category that is critical, high, medium, low or unassigned. Here is the <a href="https://github.com/Priyam5/internship-appsecco/blob/master/Reports/dependency-check-report.xml">report</a> which generated after OWASP Dependency-Check.</p>
 <p><strong>Note:</strong> I was getting this error <code>[DependencyCheck] Unable to find Dependency-Check reports to parse</code> because I was using the latest version 5 of OWASP Dependency-Check Plugin but writing the code according to the v4. The default path for report search was"**/dependency-check-report.xml" in v4 and has changed to "dependency-check-report.xml" in v5.</p>
 <h3 id="snyk">Snyk</h3>
-<p>Snyk is an open-source security platform for finding out vulnerabilities in the source code of an application. A platform that helps monitor (open source) projects present on GitHub, Bitbucket, etc. or locally to identify dependencies with known vulnerabilities. It is available as a CLI and as a docker image.</p>
-<h4 id="global-configuration">Global Configuration</h4>
-<p>Configure your Jenkins settings to install the Snyk Security Scanner plugin: </p>
+<p>Snyk is an open-source security platform for finding out vulnerabilities in the source code of an application. A platform that helps monitor (open source) projects present on GitHub, Bitbucket, etc. or locally to identify dependencies with known vulnerabilities. It is available as a CLI and as a docker image. I followed the official <a href="https://support.snyk.io/hc/en-us/articles/360004032217-Jenkins-integration-overview">documentation</a> snyk because all the steps are explained well. </p>
+<h4 id="install-the-snyk-plugin">Install the Snyk plugin</h4>
+<p>Configure Jenkins settings to install the Snyk Security Scanner plugin: </p>
 <ul>
-<li>Go to Manage Jenkins &gt; Manage Plugins &gt; Available and search for Snyk Security. Install the plugin.</li>
+<li>Go to <code>Manage Jenkins</code> &gt; <code>Manage Plugins</code> &gt; <code>Available</code> and search for <code>Snyk Security</code>. Install the plugin.</li>
+<li>Go to <code>Manage Jenkins</code> &gt; <code>Global Tool Configuration</code> and add a <code>Snyk Installation</code> to have the Snyk CLI available during Jenkins builds.</li>
+<li>
+<p>From the Snyk app, retrieve Snyk API token:</p>
+<ol>
+<li>
+<p>From Snyk account, navigate to <code>Settings</code> &gt;<code>General</code>.</p>
+</li>
+<li>
+<p>Copy the key</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Go to <code>Manage Jenkins</code> &gt; <code>Manage Credentials</code> &gt; <code>System</code> and add a Snyk API Token to allow the Snyk Security Scanner to identify with Snyk. Specify a credential ID value in the ID field (i.e. <code>snyk-api-token</code>).</p>
+</li>
+<li>
+<p>Use these values:</p>
+<p><em>Kind</em> - Snyk API token</p>
+<p><em>Scope</em> - Global</p>
+<p><em>Token</em> - Snyk API token(key) as retrieved from Snyk account</p>
+<p><em>ID</em> - Enter a name for the token</p>
+<p><em>Description</em> - optional free text</p>
+<h4 id="jenkins-integration">Jenkins integration</h4>
+</li>
+<li>
+<p>From within Jenkins, generate a Snyk Security pipe:</p>
+<ol>
+<li>Navigate to the pipeline project and click Pipeline Syntax.</li>
+<li>From the Sample Step dropdown, select snykSecurity: Invoke Snyk Security task.</li>
+<li>Configure the security task as follows when issues are found select <code>Let the build continue</code> display vulnerabilities and details, but allow the build to continue and provide the snyk token.</li>
+<li>Click Generate Pipeline Script. The pipe syntax is generated and displayed</li>
+</ol>
+</li>
+<li>
+<p>In the pipeline add the step under the <code>Snyk Security</code> stage before build stage:</p>
+</li>
 </ul>
+<pre><code>stage ('Snyk Security'){
+            steps {
+                snykSecurity failOnIssues: false, snykInstallation: 'Snyk Security Plugin', snykTokenId: 'snyk-api-token'
+            }    
+        }
+</code></pre>
+
+<p>Build the pipeline and the <a href="">report</a> is generated. </p>
                 
               
               
