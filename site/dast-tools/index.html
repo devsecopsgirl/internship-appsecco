@@ -15,7 +15,7 @@
     
     
       
-        <title>Static Analysis of SuiteCRM - DevSecOps</title>
+        <title>Dynamic Analysis of SuiteCRM - DevSecOps</title>
       
     
     
@@ -49,7 +49,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#sast-dependency-check" class="md-skip">
+        <a href="#dynamic-analysis" class="md-skip">
           Skip to content
         </a>
       
@@ -77,7 +77,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              Static Analysis of SuiteCRM
+              Dynamic Analysis of SuiteCRM
             
           </span>
         </div>
@@ -257,6 +257,18 @@
       
       
 
+
+  <li class="md-nav__item">
+    <a href="../sast-tools/" title="Static Analysis of SuiteCRM" class="md-nav__link">
+      Static Analysis of SuiteCRM
+    </a>
+  </li>
+
+    
+      
+      
+      
+
   
 
 
@@ -268,14 +280,14 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        Static Analysis of SuiteCRM
+        Dynamic Analysis of SuiteCRM
         <span class="md-nav__icon md-icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
         </span>
       </label>
     
-    <a href="./" title="Static Analysis of SuiteCRM" class="md-nav__link md-nav__link--active">
-      Static Analysis of SuiteCRM
+    <a href="./" title="Dynamic Analysis of SuiteCRM" class="md-nav__link md-nav__link--active">
+      Dynamic Analysis of SuiteCRM
     </a>
     
       
@@ -301,24 +313,30 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#sast" class="md-nav__link">
-    SAST
+  <a href="#dast" class="md-nav__link">
+    DAST
   </a>
   
-    <nav class="md-nav" aria-label="SAST">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#owasp-zap" class="md-nav__link">
+    OWASP ZAP
+  </a>
+  
+    <nav class="md-nav" aria-label="OWASP ZAP">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#owasp-dependency-check" class="md-nav__link">
-    OWASP dependency check
+  <a href="#installation-of-docker" class="md-nav__link">
+    Installation of docker
   </a>
   
-    <nav class="md-nav" aria-label="OWASP dependency check">
-      <ul class="md-nav__list">
+</li>
         
           <li class="md-nav__item">
-  <a href="#install-the-odc-plugin" class="md-nav__link">
-    Install the ODC plugin
+  <a href="#configure-owasp-zap-with-docker" class="md-nav__link">
+    Configure OWASP ZAP with Docker
   </a>
   
 </li>
@@ -334,55 +352,11 @@
     </nav>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#snyk" class="md-nav__link">
-    Snyk
-  </a>
-  
-    <nav class="md-nav" aria-label="Snyk">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#install-the-snyk-plugin" class="md-nav__link">
-    Install the Snyk plugin
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#jenkins-integration_1" class="md-nav__link">
-    Jenkins integration
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
       
     </ul>
   
 </nav>
     
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../dast-tools/" title="Dynamic Analysis of SuiteCRM" class="md-nav__link">
-      Dynamic Analysis of SuiteCRM
-    </a>
   </li>
 
     
@@ -419,24 +393,30 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#sast" class="md-nav__link">
-    SAST
+  <a href="#dast" class="md-nav__link">
+    DAST
   </a>
   
-    <nav class="md-nav" aria-label="SAST">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#owasp-zap" class="md-nav__link">
+    OWASP ZAP
+  </a>
+  
+    <nav class="md-nav" aria-label="OWASP ZAP">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#owasp-dependency-check" class="md-nav__link">
-    OWASP dependency check
+  <a href="#installation-of-docker" class="md-nav__link">
+    Installation of docker
   </a>
   
-    <nav class="md-nav" aria-label="OWASP dependency check">
-      <ul class="md-nav__list">
+</li>
         
           <li class="md-nav__item">
-  <a href="#install-the-odc-plugin" class="md-nav__link">
-    Install the ODC plugin
+  <a href="#configure-owasp-zap-with-docker" class="md-nav__link">
+    Configure OWASP ZAP with Docker
   </a>
   
 </li>
@@ -445,38 +425,6 @@
   <a href="#jenkins-integration" class="md-nav__link">
     Jenkins Integration
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#snyk" class="md-nav__link">
-    Snyk
-  </a>
-  
-    <nav class="md-nav" aria-label="Snyk">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#install-the-snyk-plugin" class="md-nav__link">
-    Install the Snyk plugin
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#jenkins-integration_1" class="md-nav__link">
-    Jenkins integration
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -501,84 +449,112 @@
                   
                 
                 
-                <h1 id="sast-dependency-check">SAST - Dependency-Check</h1>
+                <h1 id="dynamic-analysis">Dynamic Analysis</h1>
 <h2 id="objective">Objective</h2>
-<p>This section aims to identify suitable tools for SuiteCRM to perform SAST and generate a report to provide a solution to the 7th point of the <a href="https://intern-appsecco.netlify.app/problem-statement/">problem statement</a> under Task 1.</p>
-<h2 id="sast">SAST</h2>
-<p>SAST or Static Application Security Testing is a process that analyses a project's source code, dependencies, and related files for known security vulnerabilities. SAST could also help identify segments of the project's logic which might lead to a security vulnerability.</p>
-<h3 id="owasp-dependency-check">OWASP dependency check</h3>
-<p>As mentioned on OWASP Dependency Check's official <a href="https://plugins.jenkins.io/dependency-check-jenkins-plugin/">site</a>, Dependency-Check is a utility that identifies project dependencies and checks if there are any known, publicly disclosed, vulnerabilities.</p>
-<h4 id="install-the-odc-plugin">Install the ODC plugin</h4>
+<p>This section aims to identify suitable tools for SuiteCRM to perform DAST and generate a report to provide a solution to the 8th point of the <a href="https://intern-appsecco.netlify.app/problem-statement/">problem statement</a> under Task 1.</p>
+<h2 id="dast">DAST</h2>
+<p>DAST or Dynamic Application Security Testing is a black-box testing technique in which the DAST tool interacts with the application being tested in its <strong>running state</strong> to imitate an attacker. Unlike static analysis, DAST allow for sophisticated scans on the client-side and server-side without needing the source code or the framework the application is built on. They usually require minimal user interactions once configured. In dynamic analysis, tools are used to automate attacks on the application. DAST tools are especially helpful for detecting:</p>
 <ul>
-<li>Go to <code>Manage Jenkins</code> then <code>Manage Plugins</code> and under <code>Available</code> section search for '<code>OWASP dependency-check</code>' and install the plugin.</li>
-<li>After this go to the Global Tool Configuration and under Dependency-Check installations add the Name <code>OWASP Dependency-Check Plugin</code>.</li>
+<li>input/output validation: (e.g. cross-site scripting and SQL injections);</li>
+<li>server configuration mistakes;</li>
+<li>authentication issues; other problems which manifest in real time or become visible only when a known user logs in.</li>
 </ul>
-<h4 id="jenkins-integration">Jenkins Integration</h4>
-<p>In jenkinsfile add a stage before the build stage:</p>
-<pre><code>stage ('Dependency-Check Analysis'){
-            steps {
-                dependencyCheck additionalArguments: '', odcInstallation: 'OWASP Dependency-Check Plugin'
-            }    
-        }
+<h2 id="owasp-zap">OWASP ZAP</h2>
+<p>Zed Attack Proxy is an open-source tool used to perform dynamic application security testing designed specifically for web applications. ZAP has a desktop interface, APIs for it to be used in an automated fashion, and also a CLI. It imitates an actual user where it interacts with the application to perform various attacks. At its core, ZAP is what is known as a “man-in-the-middle proxy.” It stands between the tester’s browser and the web application so that it can intercept and inspect messages sent between a browser and web application, modify the contents if needed, and then forward those packets on to the destination. It can be used as a stand-alone application, and as a daemon process. ZAP comes with a plethora of options to use, for which further details can be found <a href="https://www.zaproxy.org/getting-started/">here</a>. ZAP also comes as a <a href="https://hub.docker.com/r/owasp/zap2docker-stable/">Docker image</a> which is more convenient to use especially if one is using the CLI interface.</p>
+<h3 id="installation-of-docker">Installation of docker</h3>
+<p>We will start by first updating the existing list of packages.</p>
+<pre><code>sudo apt update
 </code></pre>
 
-<p>After this, I got the report in the <code>Console Output</code> after the pipeline is successfully build. Now to get a copy of the report add one more step to jenkinsfile under the <code>Dependency-Check Analysis</code> stage.</p>
-<pre><code>dependencyCheckPublisher pattern: 'dependency-check-report.xml'  
+<p>Installation of prerequisite packages so that apt can use packages over HTTPS.</p>
+<pre><code>sudo apt install apt-transport-https ca-certificates curl software-properties-common
 </code></pre>
 
-<p>This will create a <code>dependency-check-report.xml</code> report file in the workspace and I can also see in Jenkins the <code>Dependency-Check Trend</code> that is a graphical representation of vulnerabilities found in the SuiteCRM application and they are in which category that is critical, high, medium, low or unassigned. Here is the <a href="https://github.com/Priyam5/internship-appsecco/blob/master/Reports/dependency-check-report.xml">report</a> which generated after OWASP Dependency-Check.</p>
-<p><strong>Note:</strong> I was getting this error <code>[DependencyCheck] Unable to find Dependency-Check reports to parse</code> because I was using the latest version 5 of OWASP Dependency-Check Plugin but writing the code according to the v4. The default path for report search was"**/dependency-check-report.xml" in v4 and has changed to "dependency-check-report.xml" in v5.</p>
-<h3 id="snyk">Snyk</h3>
-<p>Snyk is an open-source security platform for finding out vulnerabilities in the source code of an application. A platform that helps monitor (open source) projects present on GitHub, Bitbucket, etc. or locally to identify dependencies with known vulnerabilities. It is available as a CLI and as a docker image. I followed the official <a href="https://support.snyk.io/hc/en-us/articles/360004032217-Jenkins-integration-overview">documentation</a> snyk because all the steps are explained well. </p>
-<h4 id="install-the-snyk-plugin">Install the Snyk plugin</h4>
-<p>Configure Jenkins settings to install the Snyk Security Scanner plugin: </p>
+<p>Adding GPG key for the official Docker repository</p>
+<pre><code>curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+</code></pre>
+
+<p>Add the Docker repository to APT sources</p>
+<pre><code>sudo add-apt-repository &quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable&quot; &amp;&amp; sudo apt update
+</code></pre>
+
+<p>To check Docker repository version table and installation candidate, use the below command.</p>
+<pre><code>apt-cache policy docker-ce
+</code></pre>
+
+<p>Finally, install Docker</p>
+<pre><code>sudo apt install docker-ce
+</code></pre>
+
+<p>To check the running status of Docker</p>
+<pre><code>sudo service docker status
+</code></pre>
+
+<h3 id="configure-owasp-zap-with-docker">Configure OWASP ZAP with Docker</h3>
+<p>For using OWASP ZAP with docker, I have to pull the ZAP image from docker hub. I went through this <a href="https://blog.mozilla.org/fxtesteng/2016/05/11/docker-owasp-zap-part-one/">documentation</a> as a lot of errors are been resolved along with solutions. So firstly I ran ZAP on my Jenkins VM to figure out how it works and test the target URL.</p>
 <ul>
-<li>Go to <code>Manage Jenkins</code> &gt; <code>Manage Plugins</code> &gt; <code>Available</code> and search for <code>Snyk Security</code>. Install the plugin.</li>
-<li>Go to <code>Manage Jenkins</code> &gt; <code>Global Tool Configuration</code> and add a <code>Snyk Installation</code> to have the Snyk CLI available during Jenkins builds.</li>
-<li>
-<p>From the Snyk app, retrieve Snyk API token:</p>
-<ol>
-<li>
-<p>From Snyk account, navigate to <code>Settings</code> &gt;<code>General</code>.</p>
-</li>
-<li>
-<p>Copy the key</p>
-</li>
-</ol>
-</li>
-<li>
-<p>Go to <code>Manage Jenkins</code> &gt; <code>Manage Credentials</code> &gt; <code>System</code> and add a Snyk API Token to allow the Snyk Security Scanner to identify with Snyk. Specify a credential ID value in the ID field (i.e. <code>snyk-api-token</code>).</p>
-</li>
-<li>
-<p>Use these values:</p>
-<p><em>Kind</em> - Snyk API token</p>
-<p><em>Scope</em> - Global</p>
-<p><em>Token</em> - Snyk API token(key) as retrieved from Snyk account</p>
-<p><em>ID</em> - Enter a name for the token</p>
-<p><em>Description</em> - optional free text</p>
-<h4 id="jenkins-integration_1">Jenkins integration</h4>
-</li>
-<li>
-<p>From within Jenkins, generate a Snyk Security pipe:</p>
-<ol>
-<li>Navigate to the pipeline project and click Pipeline Syntax.</li>
-<li>From the Sample Step dropdown, select snykSecurity: Invoke Snyk Security task.</li>
-<li>Configure the security task as follows when issues are found select <code>Let the build continue</code> display vulnerabilities and details, but allow the build to continue and provide the snyk token.</li>
-<li>Click Generate Pipeline Script. The pipe syntax is generated and displayed</li>
-</ol>
-</li>
-<li>
-<p>In the pipeline add the step under the <code>Snyk Security</code> stage before build stage:</p>
-</li>
+<li>Firstly, I pulled the docker image to be tested.</li>
 </ul>
-<pre><code>stage ('Snyk Security'){
-            steps {
-                snykSecurity failOnIssues: false, snykInstallation: 'Snyk Security Plugin', snykTokenId: 'snyk-api-token'
-            }    
-        }
+<pre><code>docker pull owasp/zap2docker-stable
 </code></pre>
 
-<p>Build the pipeline and the <a href="https://github.com/Priyam5/internship-appsecco/blob/master/Reports/snyk_monitor_report.json">report</a> is generated. </p>
+<ul>
+<li>To run ZAP with CLI interface.</li>
+</ul>
+<pre><code>docker run -e LC_ALL=C.UTF-8 -e LANG=C.UTF-8 -i owasp/zap2docker-stable zap-cli --help
+</code></pre>
+
+<p><strong>-e</strong> flag for Docker to inject the environment variables in the container.</p>
+<p><strong>LC_ALL=C.UTF-8</strong> the environment variable that overrides all the other localization settings (except $LANGUAGE</p>
+<ul>
+<li>After this I ran a quick scan to have a look at how ZAP inputs information. ZAP is running inside a docker container. So I used the IP assigned to docker which can be found by ifconfig command. </li>
+</ul>
+<pre><code>docker run -e LC_ALL=C.UTF-8 -e LANG=C.UTF-8 -i owasp/zap2docker-stable zap-cli quick-scan --start-options '-config api.disablekey=true' --self-contained --spider -l Low http://172.17.0.1:9090
+</code></pre>
+
+<p><strong>--start-options '-config api.disablekey=true'</strong> ZAP also has an API that can be used to interact with it programmatically. Otherwise, ZAP tried (and failed) to connect to the proxy as the API key was not specified.</p>
+<p><strong>-l</strong> Specifies the severity level at which ZAP should log a vulnerability to console or to a report.</p>
+<h3 id="jenkins-integration">Jenkins Integration</h3>
+<p>I created a separate pipeline for DAST tools as the scan might become too long. So the full pipeline looks like this for DAST pipeline.</p>
+<p>'''
+pipeline {
+    agent any</p>
+<pre><code>stages {
+    stage('git') {
+        steps {
+            git url: 'https://github.com/Priyam5/SuiteCRM.git/'
+        }
+    }
+
+    stage ('Build') {
+        steps {
+            sh 'composer install'
+        }
+    }
+
+    stage ('Deploying App to production server'){
+        steps {
+            sh 'echo "Deploying App to production Server"'
+            sh 'ssh -o StrictHostKeyChecking=no production@192.168.1.4 "rm -rf suitecrm &amp;&amp; mkdir suitecrm"'
+            sh 'scp -r * production@192.168.1.4:~/suitecrm'
+            sh 'ssh -o StrictHostKeyChecking=no production@192.168.1.4 "cd suitecrm &amp;&amp; sudo cp -r * /home/production/html/suitecrm"'
+            sh 'ssh -o StrictHostKeyChecking=no production@192.168.1.4 "sudo cp -r /home/production/config.php /home/production/html/suitecrm"'     
+            sh 'ssh -o StrictHostKeyChecking=no production@192.168.1.4 "cd /home/production/html/suitecrm &amp;&amp; sudo chmod -R 755 * &amp;&amp; sudo chown -R www-data:www-data *"'
+
+       }
+    }
+
+    stage ('OWASP ZAP') {
+       steps {
+            sh 'docker pull owasp/zap2docker-stable'
+            sh 'docker rm -f zap2 ; docker run --rm -e LC_ALL=C.UTF-8 -e LANG=C.UTF-8 --name zap2 -u zap -p 8090:8080 -d owasp/zap2docker-stable zap.sh -daemon -port 8080 -host 0.0.0.0 -config api.disablekey=true'
+            sh 'docker run  -v $(pwd):/zap/wrk/ --rm -i owasp/zap2docker-stable zap-baseline.py -t "http://192.168.1.4/suitecrm" -I -r zap_baseline_report2.html -l PASS'
+       }
+    }
+}
+</code></pre>
+<p>} <br />
+'''</p>
                 
               
               
@@ -597,7 +573,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../deployment-of-suitecrm/" title="Deployment of SuiteCRM" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../sast-tools/" title="Static Analysis of SuiteCRM" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -606,25 +582,11 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Deployment of SuiteCRM
+                Static Analysis of SuiteCRM
               </div>
             </div>
           </a>
         
-        
-          <a href="../dast-tools/" title="Dynamic Analysis of SuiteCRM" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
-            <div class="md-footer-nav__title">
-              <div class="md-ellipsis">
-                <span class="md-footer-nav__direction">
-                  Next
-                </span>
-                Dynamic Analysis of SuiteCRM
-              </div>
-            </div>
-            <div class="md-footer-nav__button md-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
-            </div>
-          </a>
         
       </nav>
     </div>

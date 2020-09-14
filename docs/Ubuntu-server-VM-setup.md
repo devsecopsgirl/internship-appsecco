@@ -7,7 +7,7 @@ This section aims to set up the required infrastructure to perform the task and 
 In this section, I will be setting up two VMs:
 
 1. For Jenkin's deployment.
-2. For the production server to deploy the application (Odoo) on the server
+2. For the production server to deploy the application (SuiteCRM) on the server
 
 ## Steps for creating VM:
 

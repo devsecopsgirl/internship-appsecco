@@ -12,10 +12,12 @@ SAST or Static Application Security Testing is a process that analyses a project
 
 As mentioned on OWASP Dependency Check's official [site](https://plugins.jenkins.io/dependency-check-jenkins-plugin/), Dependency-Check is a utility that identifies project dependencies and checks if there are any known, publicly disclosed, vulnerabilities.
 
-I installed the plugin:
+#### Install the ODC plugin
 
 * Go to `Manage Jenkins` then `Manage Plugins` and under `Available` section search for '`OWASP dependency-check`' and install the plugin.
 * After this go to the Global Tool Configuration and under Dependency-Check installations add the Name `OWASP Dependency-Check Plugin`.
+
+#### Jenkins Integration 
 
 In jenkinsfile add a stage before the build stage:
 ```
