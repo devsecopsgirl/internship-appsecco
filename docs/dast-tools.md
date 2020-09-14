@@ -76,7 +76,7 @@ docker run -e LC_ALL=C.UTF-8 -e LANG=C.UTF-8 -i owasp/zap2docker-stable zap-cli 
 
 I created a separate pipeline for DAST tools as the scan might become too long. So the full pipeline looks like this for DAST pipeline.
 
-'''
+```
 pipeline {
     agent any
 
@@ -114,6 +114,7 @@ pipeline {
         }
     }
 }   
-'''
+
+```
 
 

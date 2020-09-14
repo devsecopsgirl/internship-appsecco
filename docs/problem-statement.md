@@ -2,7 +2,7 @@
 
 ## Task 1
 
-1. Setup the infrastructure, required for the task, on 2 virtual machines running locally on a laptop. One VM contains the Jenkins and related infrastructure, and the second VM is for deploying the SuiteCRM using the pipeline.
+1. Setup the infrastructure, required for the task, on 2 virtual machines running locally on a laptop. One VM contains the Jenkins and related infrastructure, and the second VM is for deploying SuiteCRM using the pipeline.
 2. Setup the infrastructure, of [Jenkins](https://www.jenkins.io/) for basic pipeline setup.
 3. Do document extensively in markdown and deploy the documentation in a MkDocs website.
 4. Setting up the basic pipeline.

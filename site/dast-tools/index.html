@@ -516,45 +516,45 @@
 <p><strong>-l</strong> Specifies the severity level at which ZAP should log a vulnerability to console or to a report.</p>
 <h3 id="jenkins-integration">Jenkins Integration</h3>
 <p>I created a separate pipeline for DAST tools as the scan might become too long. So the full pipeline looks like this for DAST pipeline.</p>
-<p>'''
-pipeline {
-    agent any</p>
-<pre><code>stages {
-    stage('git') {
-        steps {
-            git url: 'https://github.com/Priyam5/SuiteCRM.git/'
+<pre><code>pipeline {
+    agent any
+
+    stages {
+        stage('git') {
+            steps {
+                git url: 'https://github.com/Priyam5/SuiteCRM.git/'
+            }
+        }
+
+        stage ('Build') {
+            steps {
+                sh 'composer install'
+            }
+        }
+
+        stage ('Deploying App to production server'){
+            steps {
+                sh 'echo &quot;Deploying App to production Server&quot;'
+                sh 'ssh -o StrictHostKeyChecking=no production@192.168.1.4 &quot;rm -rf suitecrm &amp;&amp; mkdir suitecrm&quot;'
+                sh 'scp -r * production@192.168.1.4:~/suitecrm'
+                sh 'ssh -o StrictHostKeyChecking=no production@192.168.1.4 &quot;cd suitecrm &amp;&amp; sudo cp -r * /home/production/html/suitecrm&quot;'
+                sh 'ssh -o StrictHostKeyChecking=no production@192.168.1.4 &quot;sudo cp -r /home/production/config.php /home/production/html/suitecrm&quot;'     
+                sh 'ssh -o StrictHostKeyChecking=no production@192.168.1.4 &quot;cd /home/production/html/suitecrm &amp;&amp; sudo chmod -R 755 * &amp;&amp; sudo chown -R www-data:www-data *&quot;'
+
+           }
+        }
+
+        stage ('OWASP ZAP') {
+           steps {
+                sh 'docker pull owasp/zap2docker-stable'
+                sh 'docker rm -f zap2 ; docker run --rm -e LC_ALL=C.UTF-8 -e LANG=C.UTF-8 --name zap2 -u zap -p 8090:8080 -d owasp/zap2docker-stable zap.sh -daemon -port 8080 -host 0.0.0.0 -config api.disablekey=true'
+                sh 'docker run  -v $(pwd):/zap/wrk/ --rm -i owasp/zap2docker-stable zap-baseline.py -t &quot;http://192.168.1.4/suitecrm&quot; -I -r zap_baseline_report2.html -l PASS'
+           }
         }
     }
+}   
 
-    stage ('Build') {
-        steps {
-            sh 'composer install'
-        }
-    }
-
-    stage ('Deploying App to production server'){
-        steps {
-            sh 'echo "Deploying App to production Server"'
-            sh 'ssh -o StrictHostKeyChecking=no production@192.168.1.4 "rm -rf suitecrm &amp;&amp; mkdir suitecrm"'
-            sh 'scp -r * production@192.168.1.4:~/suitecrm'
-            sh 'ssh -o StrictHostKeyChecking=no production@192.168.1.4 "cd suitecrm &amp;&amp; sudo cp -r * /home/production/html/suitecrm"'
-            sh 'ssh -o StrictHostKeyChecking=no production@192.168.1.4 "sudo cp -r /home/production/config.php /home/production/html/suitecrm"'     
-            sh 'ssh -o StrictHostKeyChecking=no production@192.168.1.4 "cd /home/production/html/suitecrm &amp;&amp; sudo chmod -R 755 * &amp;&amp; sudo chown -R www-data:www-data *"'
-
-       }
-    }
-
-    stage ('OWASP ZAP') {
-       steps {
-            sh 'docker pull owasp/zap2docker-stable'
-            sh 'docker rm -f zap2 ; docker run --rm -e LC_ALL=C.UTF-8 -e LANG=C.UTF-8 --name zap2 -u zap -p 8090:8080 -d owasp/zap2docker-stable zap.sh -daemon -port 8080 -host 0.0.0.0 -config api.disablekey=true'
-            sh 'docker run  -v $(pwd):/zap/wrk/ --rm -i owasp/zap2docker-stable zap-baseline.py -t "http://192.168.1.4/suitecrm" -I -r zap_baseline_report2.html -l PASS'
-       }
-    }
-}
 </code></pre>
-<p>} <br />
-'''</p>
                 
               
               
