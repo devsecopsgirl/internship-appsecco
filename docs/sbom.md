@@ -29,7 +29,8 @@ composer make-bom
 
 I added a stage in the Jenkins Pipeline where I commented out SAST analysis steps just to avoid the pipeline do not take much time and added a stage for `Generating SBOM`.
 
-```stage ('Generating SBOM'){
+```
+stage ('Generating SBOM'){
             steps {
                 sh 'composer require --dev cyclonedx/cyclonedx-php-composer'
                 sh 'composer make-bom'

@@ -605,9 +605,6 @@ For using OWASP ZAP with docker, I have to pull the ZAP image from <a href="http
                 sh 'docker pull owasp/zap2docker-stable'
                 sh 'docker rm -f zap2 ; docker run --rm -e LC_ALL=C.UTF-8 -e LANG=C.UTF-8 --name zap2 -u zap -p 8090:8080 -d owasp/zap2docker-stable zap.sh -daemon -port 8080 -host 0.0.0.0 -config api.disablekey=true'
                 sh 'docker run -v $(pwd)/zap-report:/zap/wrk/:rw --rm -i owasp/zap2docker-stable zap-baseline.py -t &quot;http://192.168.1.4/suitecrm&quot; -I -r zap_baseline_report2.html -l PASS'
-               // docker rm -f zap2 ;
-               // sh 'docker run -v $(pwd):/zap/wrk/ -i owasp/zap2docker-stable zap-baseline.py -t &quot;http://192.168.1.4/suitecrm&quot; -r baseline-report.html -l PASS'
-               // sh 'docker run zap-baseline.py -t http://192.168.1.4/suitecrm -r zap_baseline_report2.html -l PASS'
            }
         }
 </code></pre>
@@ -641,7 +638,7 @@ IOError: [Errno 13] Permission denied: '/zap/wrk/zap_baseline_report2.html'
 </code></pre>
 
 <ul>
-<li>So the full pipeline looks like this for DAST pipeline.</li>
+<li>So the full pipeline looks like this for DAST pipeline which was successfull.</li>
 </ul>
 <pre><code>pipeline {
     agent any

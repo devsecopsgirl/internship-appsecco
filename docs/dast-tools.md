@@ -148,9 +148,6 @@ stage ('OWASP ZAP') {
                 sh 'docker pull owasp/zap2docker-stable'
                 sh 'docker rm -f zap2 ; docker run --rm -e LC_ALL=C.UTF-8 -e LANG=C.UTF-8 --name zap2 -u zap -p 8090:8080 -d owasp/zap2docker-stable zap.sh -daemon -port 8080 -host 0.0.0.0 -config api.disablekey=true'
                 sh 'docker run -v $(pwd)/zap-report:/zap/wrk/:rw --rm -i owasp/zap2docker-stable zap-baseline.py -t "http://192.168.1.4/suitecrm" -I -r zap_baseline_report2.html -l PASS'
-               // docker rm -f zap2 ;
-               // sh 'docker run -v $(pwd):/zap/wrk/ -i owasp/zap2docker-stable zap-baseline.py -t "http://192.168.1.4/suitecrm" -r baseline-report.html -l PASS'
-               // sh 'docker run zap-baseline.py -t http://192.168.1.4/suitecrm -r zap_baseline_report2.html -l PASS'
            }
         }
 ```
@@ -179,7 +176,7 @@ Then cat the /etc/passwd to check the permissions they have. It showed this to m
 ```
 sudo chown -R 1000:1000 /var/lib/jenkins/workspace/dast-jenkins-pipeline/zap-report/
 ```
-* So the full pipeline looks like this for DAST pipeline.
+* So the full pipeline looks like this for DAST pipeline which was successfull.
 
 ```
 pipeline {

@@ -468,12 +468,14 @@
 
 <h2 id="jenkins-integration-of-sbom">Jenkins integration of SBOM</h2>
 <p>I added a stage in the Jenkins Pipeline where I commented out SAST analysis steps just to avoid the pipeline do not take much time and added a stage for <code>Generating SBOM</code>.</p>
-<p><code>stage ('Generating SBOM'){
+<pre><code>stage ('Generating SBOM'){
             steps {
                 sh 'composer require --dev cyclonedx/cyclonedx-php-composer'
                 sh 'composer make-bom'
             }
-        }</code></p>
+        }
+</code></pre>
+
 <h2 id="sbom-for-suitesrm">SBOM for SuiteSRM</h2>
 <p>CycloneDX generated an XML format comprehensive report for SuiteCRM. In this report, it mentioned the components type, group, name, version, description, licenses, Persistent URL(PURL). The report which got generated is <a href="https://github.com/Priyam5/internship-appsecco/blob/master/Reports/bom.xml">here</a>.</p>
                 
