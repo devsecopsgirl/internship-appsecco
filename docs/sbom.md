@@ -2,7 +2,7 @@
 
 ## Objective
 
-This section aims to generate a Software Bill of Materials for SuiteCRM and generate a report to provide a solution to the 9th point of the problem statement under Task 1.
+This section aims to generate a Software Bill of Materials for SuiteCRM and generate a report to provide a solution to the 9th point of the [problem statement](https://intern-appsecco.netlify.app/problem-statement/) under Task 1.
 
 ## Software Bill of Materials
 
@@ -37,6 +37,6 @@ I added a stage in the Jenkins Pipeline where I commented out SAST analysis step
         }
 ```
 
-### SBOM for SuiteSRM
+## SBOM for SuiteSRM
 
-CycloneDX generated an XML format comprehensive report for SuiteCRM. In this report, it mentioned the components type, group, name, version, description, licenses, Persistent URL(PURL). The report which got generated is here.
+CycloneDX generated an XML format comprehensive report for SuiteCRM. In this report, it mentioned the components type, group, name, version, description, licenses, Persistent URL(PURL). The report which got generated is [here](https://github.com/Priyam5/internship-appsecco/blob/master/Reports/bom.xml).

@@ -154,6 +154,13 @@ stage ('OWASP ZAP') {
            }
         }
 ```
+* I got the error `jenkins-infra@192.168.1.2: Permission denied (public key, password)`
+For this, I ran the command 
+```
+sudo usermod -aG docker jenkins
+```
+Because Jenkins would require to use `sudo` when it will run docker commands as it is not part of `docker` user group on the Jenkins VM. I ran the above command for it, to be able to operate without using sudo.
+
 * In printing the report I was getting an error as shown below:
 ```
 Permission denied
@@ -214,3 +221,5 @@ pipeline {
 }   
 
 ```
+
+The zap-report that was generated can be found [here](https://github.com/Priyam5/internship-appsecco/blob/master/Reports/zap_baseline_report2.html)

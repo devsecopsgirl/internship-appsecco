@@ -613,6 +613,14 @@ For using OWASP ZAP with docker, I have to pull the ZAP image from <a href="http
 </code></pre>
 
 <ul>
+<li>I got the error <code>jenkins-infra@192.168.1.2: Permission denied (public key, password)</code>
+For this, I ran the command </li>
+</ul>
+<pre><code>sudo usermod -aG docker jenkins
+</code></pre>
+
+<p>Because Jenkins would require to use <code>sudo</code> when it will run docker commands as it is not part of <code>docker</code> user group on the Jenkins VM. I ran the above command for it, to be able to operate without using sudo.</p>
+<ul>
 <li>In printing the report I was getting an error as shown below:</li>
 </ul>
 <pre><code>Permission denied
@@ -674,6 +682,8 @@ IOError: [Errno 13] Permission denied: '/zap/wrk/zap_baseline_report2.html'
 }   
 
 </code></pre>
+
+<p>The zap-report that was generated can be found <a href="https://github.com/Priyam5/internship-appsecco/blob/master/Reports/zap_baseline_report2.html">here</a></p>
                 
               
               
