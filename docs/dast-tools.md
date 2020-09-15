@@ -6,11 +6,11 @@ This section aims to identify suitable tools for SuiteCRM to perform DAST and ge
 
 ## DAST
 
-DAST or Dynamic Application Security Testing is a black-box testing technique in which the DAST tool interacts with the application being tested in its **running state** to imitate an attacker. Unlike static analysis, DAST allow for sophisticated scans on the client-side and server-side without needing the source code or the framework the application is built on. They usually require minimal user interactions once configured. In dynamic analysis, tools are used to automate attacks on the application. DAST tools are especially helpful for detecting:
+DAST or Dynamic Application Security Testing is a black-box testing technique in which the DAST tool interacts with the application being tested in its **running state** to imitate an attacker. Unlike static analysis, DAST allows for sophisticated scans on the client-side and server-side without needing the source code or the framework the application is built on. They usually require minimal user interactions once configured. In dynamic analysis, tools are used to automate attacks on the application. DAST tools are especially helpful for detecting:
 
 * input/output validation: (e.g. cross-site scripting and SQL injections);
 * server configuration mistakes;
-* authentication issues; other problems which manifest in real time or become visible only when a known user logs in.
+* authentication issues; other problems which manifest in real-time or become visible only when a known user logs in.
 
 ## OWASP ZAP
 
@@ -50,7 +50,7 @@ sudo service docker status
 
 ### Configure OWASP ZAP with Docker
 
-To understand how zap works I first manually perform the steps in the jenkins pipeline and then integrate in jenkins pipeline in the next section.
+To understand how zap works I first manually perform the steps in the jenkins pipeline and then integrate with jenkins pipeline in the next section.
 For using OWASP ZAP with docker, I have to pull the ZAP image from [docker hub](https://hub.docker.com/)]. I went through this [documentation](https://blog.mozilla.org/fxtesteng/2016/05/11/docker-owasp-zap-part-one/) as a lot of errors are been resolved along with solutions. So firstly I ran ZAP on my Jenkins VM to figure out how it works and test the target URL. Ans also many flags have been used which can be found here in the official documentation of [zap](https://www.zaproxy.org/docs/docker/baseline-scan/)
 
 * Firstly, I pulled the docker image to be tested.
@@ -78,6 +78,7 @@ docker run -e LC_ALL=C.UTF-8 -e LANG=C.UTF-8 -i owasp/zap2docker-stable zap-cli 
 docker run --rm -e LC_ALL=C.UTF-8 -e LANG=C.UTF-8 --name zap -u zap -p 8090:8080 -d owasp/zap2docker-stable zap.sh -daemon -port 8080 -host 0.0.0.0 -config api.disablekey=true
 ```
 **--rm** flag to delete the container, automatically to stop it once done.
+
 **--name** for providing the name of the container created.
 
 ```
@@ -95,6 +96,7 @@ docker exec <CONTAINER NAME/ID> zap-cli active-scan <TARGET URL>
 docker run -i owasp/zap2docker-stable zap-baseline.py -t "http://172.17.0.1:9090" -l INFO
 ```
 **-t** target URL including the protocol, eg https://www.example.com
+
 **-l** l is for level; minimum level to show: PASS, IGNORE, INFO, WARN or FAIL, use with -s to hide example URLs
 
 * For saving the report on the Jenkins machine, I needed to mount a volume with Docker. I used the -v flag to mount the present working directory of the host to the /zap/wrk directory of the container 
@@ -105,9 +107,9 @@ docker run -v $(pwd):/zap/wrk/ -i owasp/zap2docker-stable zap-baseline.py -t "ht
 
 ### Jenkins Integration 
 
-Now I will integrate baseline-scan as part of SuiteCRM in the Jenkins-pipeline. I created a separate pipeline for DAST tools as the scan might become too long after combining both SAST and DAST scan. So in this pipeline we have to follow the steps of fetching the code, building the pipeline, deploying the pipeline and then at last DAST scan tools.
+Now I will integrate baseline-scan as part of SuiteCRM in the Jenkins-pipeline. I created a separate pipeline for DAST tools as the scan might become too long after combining both SAST and DAST scans. So in this pipeline, we have to follow the steps of fetching the code, building the pipeline, deploying the pipeline, and then at last DAST scan tools.
 
-* Starting with the first stage that is fetching the code of SuiteCRM from the github repository.
+* Starting with the first stage that is fetching the code of SuiteCRM from the GitHub repository.
 ```
 stages {
         stage('git') {
@@ -138,7 +140,7 @@ stage ('Deploying App to production server'){
            }
         }
 ```
-* The fourth stage is of OWASP ZAP scan. In this we will first pull the zap image after that make a container named `zap2`  and mention a port to run and it the mentioned port should not be used by any other application or it will throw error failed to access the provided URL. Then print the report `zap_baseline_report2.html`.
+* The fourth stage is of OWASP ZAP scan. In this, we will first pull the zap image after that makes a container named `zap2`  and mention a port to run and the mentioned port should not be used by any other application or it will throw error failed to access the provided URL. Then print the report `zap_baseline_report2.html`.
 
 ```
 stage ('OWASP ZAP') {
@@ -212,4 +214,3 @@ pipeline {
 }   
 
 ```
-

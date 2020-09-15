@@ -14,3 +14,4 @@ The following is the report/documentation for the ```Problem Statement``` stated
 * [Deployment of SuiteCRM](https://intern-appsecco.netlify.app/deployment-of-suitecrm/)
 * [Static Analysis of SuiteCRM](https://intern-appsecco.netlify.app/sast-tools/)
 * [Dynamic Analysis of SuiteCRM](https://intern-appsecco.netlify.app/dast-tools/)
+* [Software Bill of Materials](https://intern-appsecco.netlify.app/sbom/)

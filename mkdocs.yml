@@ -12,5 +12,6 @@ nav:
 - Deployment of SuiteCRM: 'deployment-of-suitecrm.md'
 - Static Analysis of SuiteCRM: 'sast-tools.md'
 - Dynamic Analysis of SuiteCRM: 'dast-tools.md'
+- Software Bill of Materials: 'sbom.md'
 
 theme: material

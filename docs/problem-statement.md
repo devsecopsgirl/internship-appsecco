@@ -10,3 +10,4 @@
 6. Deployment of SuiteCRM on production server through jenkins pipeline.
 7. Identify suitable tools for SuiteCRM to perform SAST and generate a report.
 8. Identifying suitable tools for SuiteCRM to perform DAST and generate a report.
+9. Generating Software Bill of Materials of SuiteCRM for all dependencies.
