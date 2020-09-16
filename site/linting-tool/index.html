@@ -1,0 +1,630 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.7">
+    
+    
+      
+        <title>Source Code Analysis - DevSecOps</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.b8ac9624.min.css">
+      
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#code-quality-analysis" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href=".." title="DevSecOps" class="md-header-nav__button md-logo" aria-label="DevSecOps">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            DevSecOps
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Source Code Analysis
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="DevSecOps" class="md-nav__button md-logo" aria-label="DevSecOps">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    DevSecOps
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../contents/" title="Contents" class="md-nav__link">
+      Contents
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../problem-statement/" title="Problem Statement" class="md-nav__link">
+      Problem Statement
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../Ubuntu-server-VM-setup/" title="Setup of VMs" class="md-nav__link">
+      Setup of VMs
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../Jenkins-installation/" title="Setup of Jenkins" class="md-nav__link">
+      Setup of Jenkins
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../mkdocs-setup-usage/" title="MkDocs setup for report" class="md-nav__link">
+      MkDocs setup for report
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../setting-up-pipeline/" title="Setting Up Pipeline" class="md-nav__link">
+      Setting Up Pipeline
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../setting-up-suitecrm/" title="Set Up SuiteCRM" class="md-nav__link">
+      Set Up SuiteCRM
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../deployment-of-suitecrm/" title="Deployment of SuiteCRM" class="md-nav__link">
+      Deployment of SuiteCRM
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../sast-tools/" title="Static Analysis of SuiteCRM" class="md-nav__link">
+      Static Analysis of SuiteCRM
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../dast-tools/" title="Dynamic Analysis of SuiteCRM" class="md-nav__link">
+      Dynamic Analysis of SuiteCRM
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../sbom/" title="Software Bill of Materials" class="md-nav__link">
+      Software Bill of Materials
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Source Code Analysis
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
+        </span>
+      </label>
+    
+    <a href="./" title="Source Code Analysis" class="md-nav__link md-nav__link--active">
+      Source Code Analysis
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objective" class="md-nav__link">
+    Objective
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-linting" class="md-nav__link">
+    Code Linting
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#linting-tools-for-suitecrm" class="md-nav__link">
+    Linting tools for SuiteCRM
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#php-code-sniffer" class="md-nav__link">
+    PHP Code Sniffer
+  </a>
+  
+    <nav class="md-nav" aria-label="PHP Code Sniffer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#code-sniffer-for-suitecrm" class="md-nav__link">
+    Code Sniffer for SuiteCRM
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jenkins-integration" class="md-nav__link">
+    Jenkins Integration
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objective" class="md-nav__link">
+    Objective
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-linting" class="md-nav__link">
+    Code Linting
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#linting-tools-for-suitecrm" class="md-nav__link">
+    Linting tools for SuiteCRM
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#php-code-sniffer" class="md-nav__link">
+    PHP Code Sniffer
+  </a>
+  
+    <nav class="md-nav" aria-label="PHP Code Sniffer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#code-sniffer-for-suitecrm" class="md-nav__link">
+    Code Sniffer for SuiteCRM
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jenkins-integration" class="md-nav__link">
+    Jenkins Integration
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  
+                
+                
+                <h1 id="code-quality-analysis">Code Quality Analysis</h1>
+<h2 id="objective">Objective</h2>
+<p>This section aims to perform a linting check on the source code of SuiteCRM and generate a report to provide a solution to the 10th point of the <a href="https://jenkins-report.netlify.app/problem_statement/">problem statement</a> under Task 1.</p>
+<h2 id="code-linting">Code Linting</h2>
+<p>Linting is the automated checking of source code for programmatic and stylistic errors. This is done by using a linting tool. A lint tool is a basic static code analyzer. Linting is important to reduce errors and improve the overall quality of code. Using lint tools can help accelerate development and reduce costs by finding errors earlier. Linting tools are language-specific and thus, the tool that can be used depends on the application being tested. Nowadays, we have different linters, which provide many types of checks like syntax errors, code standards adherence, potential problems, security checks. </p>
+<h2 id="linting-tools-for-suitecrm">Linting tools for SuiteCRM</h2>
+<p>Code Quality Analysis tools are language-specific. So for SuiteCRM which are meant for PHP applications. The tool I used is PHP Code Sniffer (PHPCS) there are many other tools available.</p>
+<h2 id="php-code-sniffer">PHP Code Sniffer</h2>
+<p>PHP_CodeSniffer is a set of two PHP scripts; the main phpcs script that helps to detect violations of pre-defined coding standards and a second phpcbf script that can automatically correct those violations.
+PHP_CodeSniffer is an essential development tool that ensures code remains clean and consistent. I followed <a href="https://github.com/squizlabs/PHP_CodeSniffer#about">this</a> GitHub documentation. And I will only go with phpcs I was only concerned with identifying the linting issues therefore skipped the second script.</p>
+<h3 id="code-sniffer-for-suitecrm">Code Sniffer for SuiteCRM</h3>
+<p>In the Jenkins VM firstly I installed PHPCS for Code Quality Analysis, I downloaded only the <code>phpcs.phar</code> files for the scanner with the command mentioned below. I also tried to git clone and download the PHP_CodeSniffer source but in this phpcs and phpcbf files were not present separately.</p>
+<pre><code>curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
+</code></pre>
+
+<p>I made it executable with <code>chmod</code> and moved it to <code>/usr/local/bin</code> for it to be accessible by all system users. </p>
+<pre><code>chmod +x phpcs.phar
+mv phpcs.phar /usr/local/bin/phpcs
+</code></pre>
+
+<p>After this I ran <code>phpcs</code> on the SuiteCRM project directory</p>
+<pre><code>phpcs /var/lib/jenkins/workspace/suitecrm-pipeline
+</code></pre>
+
+<p>Note: The cursor was getting stuck and there was no output so I ran a single PHP file with the above command. It generated the output table. It was getting stuck due to the issue of memory run out of free memory since PHPCS was not able to scan the whole project directory at once. I generated a python script <code>python3_phpcs.py</code> to identify all PHP files present in the SuiteCRM project directory and ran PHPCS on the files individually.</p>
+<pre><code>#!/usr/bin/python3
+
+import os
+import sys
+
+print('[+] Starting scan with PHP Code Sniffer...')
+
+try:
+    BASE_PATH = sys.argv[1]
+
+except IndexError:
+    print('[-] Path not supplied...')
+    sys.exit(1)
+
+paths = [BASE_PATH]
+php_files = []
+
+print('[+] Scanning directory for PHP files...')
+while paths != []:
+    base_path = paths.pop()
+
+    try:
+        with os.scandir(base_path) as entries:
+            for entry in entries:
+                if entry.is_file():
+                    if entry.name.endswith('.php'):
+                        php_files.append(os.path.join(base_path, entry.name))
+                else:
+                    paths.append(os.path.join(base_path, entry.name))
+
+    except PermissionError:
+        print(f'[-] Could not open {base_path} due to insufficient permission...')
+
+print('[+] Scan completed...')
+
+print('[+] Running PHPCS on PHP files...')
+try:
+    for php_file in php_files:
+        print(f'[+] Scanning {php_file}')
+        os.system(f'phpcs {php_file} &gt;&gt; /var/lib/jenkins/reports/phpcs-report-suitecrm')
+    print(f'[+] {len(php_files)} PHP files scanned...')
+    print('[+] Code Quality Report generated...')
+
+except KeyboardInterrupt:
+    print('[-] Exiting...')
+
+</code></pre>
+
+<h3 id="jenkins-integration">Jenkins Integration</h3>
+<p>At last, I added a stage in the pipeline to execute the Python script by supplying it with the path of the project directory to scan.
+'''
+stage ('Code Snnifer for linting'){
+            steps {
+                sh 'python3 python3_phpcs.py /var/lib/jenkins/workspace/suitecrm-pipeline'
+            }
+        }
+'''</p>
+<p>I got an error after the build of pipeline <code>permission denied</code> for not able to access the reports directory so I ran the below command</p>
+<pre><code>sudo chown -R jenkins:jenkins reports/
+</code></pre>
+
+<p>The report that was generated of Code Sniffer for SuiteCRM after the pipeline build successfully is <a href="https://github.com/Priyam5/internship-appsecco/tree/master/Reports/phpcs-report-suitecrm">here</a>.</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../sbom/" title="Software Bill of Materials" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Software Bill of Materials
+              </div>
+            </div>
+          </a>
+        
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/vendor.d1f5a259.min.js"></script>
+      <script src="../assets/javascripts/bundle.d5fec882.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "..",
+          features: [],
+          search: Object.assign({
+            worker: "../assets/javascripts/worker/search.fae956e7.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>
