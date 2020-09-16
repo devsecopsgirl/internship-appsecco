@@ -547,14 +547,14 @@ except KeyboardInterrupt:
 </code></pre>
 
 <h3 id="jenkins-integration">Jenkins Integration</h3>
-<p>At last, I added a stage in the pipeline to execute the Python script by supplying it with the path of the project directory to scan.
-'''
-stage ('Code Snnifer for linting'){
+<p>At last, I added a stage in the pipeline to execute the Python script by supplying it with the path of the project directory to scan.</p>
+<pre><code>stage ('Code Snnifer for linting'){
             steps {
                 sh 'python3 python3_phpcs.py /var/lib/jenkins/workspace/suitecrm-pipeline'
             }
         }
-'''</p>
+</code></pre>
+
 <p>I got an error after the build of pipeline <code>permission denied</code> for not able to access the reports directory so I ran the below command</p>
 <pre><code>sudo chown -R jenkins:jenkins reports/
 </code></pre>

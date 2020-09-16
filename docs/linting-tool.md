@@ -85,13 +85,13 @@ except KeyboardInterrupt:
 ### Jenkins Integration
 
 At last, I added a stage in the pipeline to execute the Python script by supplying it with the path of the project directory to scan.
-'''
+```
 stage ('Code Snnifer for linting'){
             steps {
                 sh 'python3 python3_phpcs.py /var/lib/jenkins/workspace/suitecrm-pipeline'
             }
         }
-'''
+```
 
 I got an error after the build of pipeline `permission denied` for not able to access the reports directory so I ran the below command
 ```
