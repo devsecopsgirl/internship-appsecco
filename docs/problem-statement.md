@@ -11,4 +11,8 @@
 7. Identify suitable tools for SuiteCRM to perform SAST and generate a report.
 8. Identifying suitable tools for SuiteCRM to perform DAST and generate a report.
 9. Generating Software Bill of Materials of SuiteCRM for all dependencies.
-10. Perform Source Code Quality Analysis for linting errors to improve code quality and generate quality report. 
+10. Perform Source Code Quality Analysis for linting errors to improve code quality and generate quality report.
+
+## Task 2
+
+1. Implementing SuiteCRM through Docker container and implementing through pipeline.

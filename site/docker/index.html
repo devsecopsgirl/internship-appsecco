@@ -15,7 +15,7 @@
     
     
       
-        <title>Problem Statement - DevSecOps</title>
+        <title>Implementing SuiteCRM through Docker - DevSecOps</title>
       
     
     
@@ -49,7 +49,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#problem-statement" class="md-skip">
+        <a href="#implementing-suitecrm-through-docker" class="md-skip">
           Skip to content
         </a>
       
@@ -77,7 +77,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              Problem Statement
+              Implementing SuiteCRM through Docker
             
           </span>
         </div>
@@ -173,60 +173,11 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Problem Statement
-        <span class="md-nav__icon md-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
-        </span>
-      </label>
-    
-    <a href="./" title="Problem Statement" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../problem-statement/" title="Problem Statement" class="md-nav__link">
       Problem Statement
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-      </span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#task-1" class="md-nav__link">
-    Task 1
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#task-2" class="md-nav__link">
-    Task 2
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
     
@@ -376,16 +327,36 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#task-1" class="md-nav__link">
-    Task 1
+  <a href="#objective" class="md-nav__link">
+    Objective
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#task-2" class="md-nav__link">
-    Task 2
+  <a href="#docker" class="md-nav__link">
+    Docker
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dockerfile" class="md-nav__link">
+    Dockerfile
+  </a>
+  
+    <nav class="md-nav" aria-label="Dockerfile">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#apache-installation" class="md-nav__link">
+    Apache Installation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -405,24 +376,43 @@
                   
                 
                 
-                <h1 id="problem-statement">Problem Statement</h1>
-<h2 id="task-1">Task 1</h2>
-<ol>
-<li>Setup the infrastructure, required for the task, on 2 virtual machines running locally on a laptop. One VM contains the Jenkins and related infrastructure, and the second VM is for deploying SuiteCRM using the pipeline.</li>
-<li>Setup the infrastructure, of <a href="https://www.jenkins.io/">Jenkins</a> for basic pipeline setup.</li>
-<li>Do document extensively in markdown and deploy the documentation in a MkDocs website.</li>
-<li>Setting up the basic pipeline.</li>
-<li>Next, <a href="https://suitecrm.com/">SuiteCRM</a> should get deployed in a server that is the second VM, I installed. </li>
-<li>Deployment of SuiteCRM on production server through jenkins pipeline.</li>
-<li>Identify suitable tools for SuiteCRM to perform SAST and generate a report.</li>
-<li>Identifying suitable tools for SuiteCRM to perform DAST and generate a report.</li>
-<li>Generating Software Bill of Materials of SuiteCRM for all dependencies.</li>
-<li>Perform Source Code Quality Analysis for linting errors to improve code quality and generate quality report.</li>
-</ol>
-<h2 id="task-2">Task 2</h2>
-<ol>
-<li>Implementing SuiteCRM through Docker container and implementing through pipeline.</li>
-</ol>
+                <h1 id="implementing-suitecrm-through-docker">Implementing SuiteCRM through Docker</h1>
+<h2 id="objective">Objective</h2>
+<p>This section aims to implement the application SuiteCRM through Docker and deploy it through pipeline. Solution to the first point of the problem statement under Task 2.</p>
+<h2 id="docker">Docker</h2>
+<p>An open-source project that automates the deployment of software applications inside containers by providing an additional layer of abstraction and automation of OS-level virtualization on Linux. In simple, Docker is a tool that allows developers, sys-admins etc. to deploy applications in a sandbox (which in docker world we call it containers) to run over the host operating system. For Docker commands follow this <a href="https://github.com/wsargent/docker-cheat-sheet#dockerfile">link</a>. Before installation, lets talk about little bit about container, image and Dockerfile as we will come across these terms further:</p>
+<ul>
+<li>Container - A container is a running instance of an image.</li>
+<li>Image - An image is a unit that contains everything ( the code, libraries, environments variables and configuration files) that our service requires to run.</li>
+<li>Dockerfile - Just assume it as a blueprint for creating a Docker images, it can inherit from other containers, define what software to install and what commands to run.</li>
+</ul>
+<h2 id="dockerfile">Dockerfile</h2>
+<p>Docker can build images automatically by reading the instructions from a Dockerfile. A Dockerfile is a text document that contains all the commands a user could call on the command line to assemble an image. Using <code>docker build</code> users can create an automated build that executes several command-line instructions in succession.For more details on Dockerfile I refer this official link of docker(https://docs.docker.com/engine/reference/builder/)</p>
+<p>I started with building a dockerfile in which I implemented a php image because SuiteCRM is PHP based application. I copied the image from dockerhub of <a href="https://hub.docker.com/_/php">php</a></p>
+<h3 id="apache-installation">Apache Installation</h3>
+<p>I begin with building the Dockerfile firstly with apache installation. </p>
+<p>Note: got an error <code>unable to prepare context: unable to evaluate symlinks in Dockerfile path: lstat /home/jenkins-infra/docker-files/Dockerfile: no such file or directory</code></p>
+<p>Be careful while naming the Docker file name as <code>Dockerfile</code> other names don't work.</p>
+<p>NOTE: I got an error my apache server was not getting served. I will explain in a little detail: 
+* I stopped my container <code>docker stop f9af4fb06f4c</code> and ran again <code>docker run -d --rm --name ubuntu2 -p 1234:80 4c0437bfcded</code>. After the container was build I checked If the port 1234 was open or not by <code>netstat -ntap</code> But there was no such network port 1234 open.
+* Then I checked the <code>docker logs ubuntu2</code> It showed <code>Error: No such container: ubuntu2</code> then I checked <code>docker ps -a</code> which showed the exited in a min.
+* After this I ran the above command of building container without the <code>-d flag</code> which is detached mode means running container in background then it gave the error <code>/bin/sh: 1: Syntax error: Unterminated quoted string</code>. From here I got to know I have missed a quote in my dockerfile in a command which I fixed.</p>
+<p>My Dockerfile which finally worked is </p>
+<pre><code># getting base image PHP
+
+FROM php:7.4-cli
+
+MAINTAINER priyam singh &lt;2020priyamsingh@gmail.com&gt;
+
+# Executed during the building of the image
+# Apache installation
+RUN apt-get update
+RUN apt-get install -y apache2
+
+# Executed when container created out of image
+CMD [&quot;apache2ctl&quot;,&quot;-D&quot;,&quot;FOREGROUND&quot;]
+EXPOSE 80
+</code></pre>
                 
               
               
@@ -437,41 +427,6 @@
       
         
 <footer class="md-footer">
-  
-    <div class="md-footer-nav">
-      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
-        
-          <a href="../contents/" title="Contents" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
-            <div class="md-footer-nav__button md-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-            </div>
-            <div class="md-footer-nav__title">
-              <div class="md-ellipsis">
-                <span class="md-footer-nav__direction">
-                  Previous
-                </span>
-                Contents
-              </div>
-            </div>
-          </a>
-        
-        
-          <a href="../Ubuntu-server-VM-setup/" title="Setup of VMs" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
-            <div class="md-footer-nav__title">
-              <div class="md-ellipsis">
-                <span class="md-footer-nav__direction">
-                  Next
-                </span>
-                Setup of VMs
-              </div>
-            </div>
-            <div class="md-footer-nav__button md-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
-            </div>
-          </a>
-        
-      </nav>
-    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
