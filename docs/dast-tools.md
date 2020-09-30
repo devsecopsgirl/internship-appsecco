@@ -51,7 +51,7 @@ sudo service docker status
 ### Configure OWASP ZAP with Docker
 
 To understand how zap works I first manually perform the steps in the jenkins pipeline and then integrate with jenkins pipeline in the next section.
-For using OWASP ZAP with docker, I have to pull the ZAP image from [docker hub](https://hub.docker.com/)]. I went through this [documentation](https://blog.mozilla.org/fxtesteng/2016/05/11/docker-owasp-zap-part-one/) as a lot of errors are been resolved along with solutions. So firstly I ran ZAP on my Jenkins VM to figure out how it works and test the target URL. Ans also many flags have been used which can be found here in the official documentation of [zap](https://www.zaproxy.org/docs/docker/baseline-scan/)
+For using OWASP ZAP with docker, I have to pull the ZAP image from [docker hub](https://hub.docker.com/)]. I went through this [documentation](https://blog.mozilla.org/fxtesteng/2016/05/11/docker-owasp-zap-part-one/) as a lot of errors are been resolved along with solutions. So firstly I ran ZAP on my Jenkins VM to figure out how it works and test the target URL. And also many flags have been used which can be found here in the official documentation of [zap](https://www.zaproxy.org/docs/docker/baseline-scan/)
 
 * Firstly, I pulled the docker image to be tested.
 ```
@@ -63,7 +63,7 @@ docker run -e LC_ALL=C.UTF-8 -e LANG=C.UTF-8 -i owasp/zap2docker-stable zap-cli 
 ```
 **-e** flag for Docker to inject the environment variables in the container.
 
-**LC_ALL=C.UTF-8** the environment variable that overrides all the other localization settings (except $LANGUAGE
+**LC_ALL=C.UTF-8** the environment variable that overrides all the other localization settings (except $LANGUAGE)
 
 * I ran a quick scan to have a look at how ZAP inputs information. ZAP is running inside a docker container. So I used the IP assigned to docker which can be found by ifconfig command. 
 ```
@@ -146,8 +146,9 @@ stage ('Deploying App to production server'){
 stage ('OWASP ZAP') {
            steps {
                 sh 'docker pull owasp/zap2docker-stable'
-                sh 'docker rm -f zap2 ; docker run --rm -e LC_ALL=C.UTF-8 -e LANG=C.UTF-8 --name zap2 -u zap -p 8090:8080 -d owasp/zap2docker-stable zap.sh -daemon -port 8080 -host 0.0.0.0 -config api.disablekey=true'
+                sh 'docker run --rm -e LC_ALL=C.UTF-8 -e LANG=C.UTF-8 --name zap2 -u zap -p 8090:8080 -d owasp/zap2docker-stable zap.sh -daemon -port 8080 -host 0.0.0.0 -config api.disablekey=true'
                 sh 'docker run -v $(pwd)/zap-report:/zap/wrk/:rw --rm -i owasp/zap2docker-stable zap-baseline.py -t "http://192.168.1.4/suitecrm" -I -r zap_baseline_report2.html -l PASS'
+                sh 'docker rm -f zap2'
            }
         }
 ```

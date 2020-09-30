@@ -143,8 +143,4 @@ After this, select `Done` and press `Enter`.
 
 ![](Images/2020-08-18_22-29.png)
 
-Once the installation is complete, select `Reboot`. Press `Enter`.
-
-Similarly, the second VM can be installed.
-
-Here I finished with the installation of `Ubuntu 18.04(LTS)` server.
+Once the installation is complete, select `Reboot`. Press `Enter`. Similarly, the second VM can be installed. Here I finished with the installation of `Ubuntu 18.04(LTS)` server.

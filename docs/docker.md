@@ -14,7 +14,7 @@ An open-source project that automates the deployment of software applications in
 
 ## Dockerfile
 
-Docker can build images automatically by reading the instructions from a Dockerfile. A Dockerfile is a text document that contains all the commands a user could call on the command line to assemble an image. Using `docker build` users can create an automated build that executes several command-line instructions in succession. For more details on Dockerfile, I refer this official link of docker(https://docs.docker.com/engine/reference/builder/)
+Docker can build images automatically by reading the instructions from a Dockerfile. A Dockerfile is a text document that contains all the commands a user could call on the command line to assemble an image. Using `docker build` users can create an automated build that executes several command-line instructions in succession. For more details on Dockerfile, I refer this official link of [docker](https://docs.docker.com/engine/reference/builder/)
 
 I started with building a dockerfile in which I implemented a PHP image because SuiteCRM is a PHP based application. I copied the image from dockerhub of [php](https://hub.docker.com/_/php)
 
@@ -24,9 +24,10 @@ I begin with building the Dockerfile firstly with apache installation.
 
 Note: got an error `unable to prepare context: unable to evaluate symlinks in Dockerfile path: lstat /home/jenkins-infra/docker-files/Dockerfile: no such file or directory`. Be careful while naming the Docker file name as `Dockerfile` other names don't work.
 
-NOTE: I got an error my apache server was not getting served. I will explain in a little detail: 
+NOTE: I got an error my apache server was not getting served. I will explain in a little detail:
+
 * I stopped my container `docker stop f9af4fb06f4c` and ran again `docker run -d --rm --name ubuntu2 -p 1234:80 4c0437bfcded`. After the container was build I checked If the port 1234 was open or not by `netstat -ntap` But there was no such network port 1234 open.
-* Then I checked the `docker logs ubuntu2` It showed `Error: No such container: ubuntu2` then I checked `docker ps -a` which showed the exited in a min.
+* Then I checked the `docker logs ubuntu2` It showed `Error: No such container: ubuntu2` then I checked `docker ps -a` which showed the container exited in a minute.
 * After this I ran the above command of building container without the `-d flag` which is detached mode means running container in background then it gave the error `/bin/sh: 1: Syntax error: Unterminated quoted string`. From here I got to know I have missed a quote in my dockerfile in a command which I fixed.
 
 Dockerfile which finally worked is 
@@ -81,22 +82,20 @@ So I changed the permission of SuiteCRM directory within the running container
 ```
 chown -R www-data:www-data suitecrm
 ```
-Changing permissions take too long so I mounted the directory of SuiteCRM 
+Changing permissions take too long so I mounted the directory of SuiteCRM.
 
 * I installed zip because I got error Zip module not present in docker I added this command in Dockerfile
 ```
 RUN apt-get install -y libzip-dev zip unzip zlib1g-dev
 RUN docker-php-ext-install mysqli zip
 ```
-* My database was not working so I firstly in `sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf` file binded the port 0.0.0.0 to allow all ports  and also allowed the ports 3306 the mysql port
-* Then I ran the command
+* My database was not working so I firstly in `sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf` file binded the port 0.0.0.0 to allow all ports  and also allowed the ports 3306 the mysql port. Then I ran the below command to change the `suitecrm@localhost` to `suitecrm@%` so that it is accessible from anywhere.
 ```   
 sudo mysql -u root -p
 UPDATE mysql.user SET Host='%' WHERE Host='localhost' AND User='suitecrm';
 UPDATE mysql.db SET Host='%' WHERE Host='localhost' AND User='suitecrm';
 FLUSH PRIVILEGES;
 ```
-
 * I copied the config.php file after the installation of suitecrm done. To use scp to copy files to the remote server from your computer or copy files from the remote server to your computer, you must have the scp program available in both places (computer and remote server). This documentation will be [helpful](https://linuxhint.com/linux_scp_command/)
 
 `scp -r config.php jenkins-infra@192.168.1.2:/home/jenkins-infra/docker-files`
@@ -104,7 +103,8 @@ FLUSH PRIVILEGES;
 but it gave error `bash: scp: command not found` bec. openssh not installed in container 
 `apt install -y openssh-client openssh-server` also install on client means we're saving the file the host/client `apt install -y openssh-client`
 
-## DAST scan
+## DAST scan 
+
 On VM, run the dast scan similar to earlier as in the section [DevSecOps Dynamic Analysis of SuiteCRM](https://intern-appsecco.netlify.app/dast-tools/). Just do the changes in the command of URL same to where suitecrm is running inside the docker container
 ```
 docker run -i owasp/zap2docker-stable zap-baseline.py -t "http://192.168.1.2:1234/suitecrm" -l INFO
@@ -118,7 +118,7 @@ docker rm <docker name/docker id>
 
 ## Integrating into Pipeline
 
-For integrating on pipeline we have to follow these steps:
+For integrating on pipeline I followed these steps:
 
 1. Push your Dockerfile to the GitHub SuiteCRM repository which I forked `https://github.com/Priyam5/SuiteCRM.git/` in my GitHub. The Dockerfile is:
 ```

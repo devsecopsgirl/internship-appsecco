@@ -3,7 +3,7 @@
 
 ## Objective
  
-This section aims to set up a basic pipeline in Jenkins to provide a solution to the 1st, 2nd, 5th and 6th points of the problem statement under Task 1.
+This section aims to set up a basic pipeline in Jenkins to provide a solution to the 1st, 2nd, 5th and 6th points of the [problem statement](https://intern-appsecco.netlify.app/problem-statement/) under Task 1.
 
 ## Jenkins pipeline project created
 
@@ -46,12 +46,6 @@ pipeline {
             }
         }
         
-        // stage ('Dependency-Check Analysis'){
-        //     steps {
-        //         sh 'Dependency-Check'
-        //     }    
-        // }
-        
         stage ('Deploying App to production server'){
             steps {
                 sh 'echo "Deploying App to production Server"'
@@ -81,26 +75,17 @@ In this stage, the files are deployed from Jenkins to production VM and also rem
 
 ### Build Stage - Permission denied 
 
-In the build stage, I was getting an error for permission denied for the folder was not getting deleted and permission denied for regular files not being created.
+In the build stage, I was getting an error for permission denied for the folder was not getting deleted and permission denied for regular files not being created. So to solve this I followed this [documentation](https://www.digitalocean.com/community/tutorials/how-to-move-an-apache-web-root-to-a-new-location-on-ubuntu-16-04)
 
-So to solve this I followed this [documentation](https://www.digitalocean.com/community/tutorials/how-to-move-an-apache-web-root-to-a-new-location-on-ubuntu-16-04)
-
-* I changed root directory to home directory as the document root was set to /var/www/html. It was configured in the following file: 
-  
-```
-/etc/apache2/sites-enabled/000-default.conf
-```
-So I run this command to make the changes in the nano file. 
+1. I changed `root directory` to `home directory` as the `DocumentRoot` was set to `/var/www/html`. It was configured in the following file: `/etc/apache2/sites-enabled/000-default.conf`.
+2. I run this command in terminal to make the changes in the nano file. 
 ```
 sudo nano /etc/apache2/sites-enabled/000-default.conf
 ```
-I changed it to /home/production/html/suitecrm
-
-Created file suitecrm under /home/production/html
-
-Made changes in the last path in Jenkinsfile to /home/production/html/suitecrm
-
-Click On Save and then build it was successfully build this time.
+3. I changed it to `/home/production/html/suitecrm` from `/var/www/html`
+4. Then created a file `suitecrm` under `/home/production/html`
+5. Made changes in the last path in `Jenkinsfile` to `/home/production/html/suitecrm`
+6. Click On `Save` and then build the pipeline, it was successfully build this time.
 
 ### SuiteCRM Web Page
 
