@@ -16,4 +16,4 @@ The following is the report/documentation for the ```Problem Statement``` stated
 * [Dynamic Analysis of SuiteCRM](https://intern-appsecco.netlify.app/dast-tools/)
 * [Software Bill of Materials](https://intern-appsecco.netlify.app/sbom/)
 * [Source Code Analysis](https://intern-appsecco.netlify.app/linting-tool/)
-* [Implementing SuiteCRM through Docker](https://intern-appsecco.netlify.app/docker.md/)
+* [Deploying SuiteCRM through Docker](https://intern-appsecco.netlify.app/docker/)

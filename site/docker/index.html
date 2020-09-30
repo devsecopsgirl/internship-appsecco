@@ -15,7 +15,7 @@
     
     
       
-        <title>Implementing SuiteCRM through Docker - DevSecOps</title>
+        <title>Deploying SuiteCRM through Docker - DevSecOps</title>
       
     
     
@@ -77,7 +77,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              Implementing SuiteCRM through Docker
+              Deploying SuiteCRM through Docker
             
           </span>
         </div>
@@ -316,14 +316,14 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        Implementing SuiteCRM through Docker
+        Deploying SuiteCRM through Docker
         <span class="md-nav__icon md-icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
         </span>
       </label>
     
-    <a href="./" title="Implementing SuiteCRM through Docker" class="md-nav__link md-nav__link--active">
-      Implementing SuiteCRM through Docker
+    <a href="./" title="Deploying SuiteCRM through Docker" class="md-nav__link md-nav__link--active">
+      Deploying SuiteCRM through Docker
     </a>
     
       
@@ -510,15 +510,17 @@
 <li>Dockerfile - Just assume it as a blueprint for creating Docker images, it can inherit from other containers, define what software to install and what commands to run.</li>
 </ul>
 <h2 id="dockerfile">Dockerfile</h2>
-<p>Docker can build images automatically by reading the instructions from a Dockerfile. A Dockerfile is a text document that contains all the commands a user could call on the command line to assemble an image. Using <code>docker build</code> users can create an automated build that executes several command-line instructions in succession. For more details on Dockerfile, I refer this official link of docker(https://docs.docker.com/engine/reference/builder/)</p>
+<p>Docker can build images automatically by reading the instructions from a Dockerfile. A Dockerfile is a text document that contains all the commands a user could call on the command line to assemble an image. Using <code>docker build</code> users can create an automated build that executes several command-line instructions in succession. For more details on Dockerfile, I refer this official link of <a href="https://docs.docker.com/engine/reference/builder/">docker</a></p>
 <p>I started with building a dockerfile in which I implemented a PHP image because SuiteCRM is a PHP based application. I copied the image from dockerhub of <a href="https://hub.docker.com/_/php">php</a></p>
 <h3 id="apache-installation">Apache Installation</h3>
 <p>I begin with building the Dockerfile firstly with apache installation. </p>
 <p>Note: got an error <code>unable to prepare context: unable to evaluate symlinks in Dockerfile path: lstat /home/jenkins-infra/docker-files/Dockerfile: no such file or directory</code>. Be careful while naming the Docker file name as <code>Dockerfile</code> other names don't work.</p>
-<p>NOTE: I got an error my apache server was not getting served. I will explain in a little detail: 
-* I stopped my container <code>docker stop f9af4fb06f4c</code> and ran again <code>docker run -d --rm --name ubuntu2 -p 1234:80 4c0437bfcded</code>. After the container was build I checked If the port 1234 was open or not by <code>netstat -ntap</code> But there was no such network port 1234 open.
-* Then I checked the <code>docker logs ubuntu2</code> It showed <code>Error: No such container: ubuntu2</code> then I checked <code>docker ps -a</code> which showed the exited in a min.
-* After this I ran the above command of building container without the <code>-d flag</code> which is detached mode means running container in background then it gave the error <code>/bin/sh: 1: Syntax error: Unterminated quoted string</code>. From here I got to know I have missed a quote in my dockerfile in a command which I fixed.</p>
+<p>NOTE: I got an error my apache server was not getting served. I will explain in a little detail:</p>
+<ul>
+<li>I stopped my container <code>docker stop f9af4fb06f4c</code> and ran again <code>docker run -d --rm --name ubuntu2 -p 1234:80 4c0437bfcded</code>. After the container was build I checked If the port 1234 was open or not by <code>netstat -ntap</code> But there was no such network port 1234 open.</li>
+<li>Then I checked the <code>docker logs ubuntu2</code> It showed <code>Error: No such container: ubuntu2</code> then I checked <code>docker ps -a</code> which showed the container exited in a minute.</li>
+<li>After this I ran the above command of building container without the <code>-d flag</code> which is detached mode means running container in background then it gave the error <code>/bin/sh: 1: Syntax error: Unterminated quoted string</code>. From here I got to know I have missed a quote in my dockerfile in a command which I fixed.</li>
+</ul>
 <p>Dockerfile which finally worked is </p>
 <pre><code># getting base image PHP
 
@@ -573,7 +575,7 @@ Fatal error: require_once(): Failed opening required 'modules/DynamicFields/Dyna
 <pre><code>chown -R www-data:www-data suitecrm
 </code></pre>
 
-<p>Changing permissions take too long so I mounted the directory of SuiteCRM </p>
+<p>Changing permissions take too long so I mounted the directory of SuiteCRM.</p>
 <ul>
 <li>I installed zip because I got error Zip module not present in docker I added this command in Dockerfile</li>
 </ul>
@@ -582,8 +584,7 @@ RUN docker-php-ext-install mysqli zip
 </code></pre>
 
 <ul>
-<li>My database was not working so I firstly in <code>sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf</code> file binded the port 0.0.0.0 to allow all ports  and also allowed the ports 3306 the mysql port</li>
-<li>Then I ran the command</li>
+<li>My database was not working so I firstly in <code>sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf</code> file binded the port 0.0.0.0 to allow all ports  and also allowed the ports 3306 the mysql port. Then I ran the below command to change the <code>suitecrm@localhost</code> to <code>suitecrm@%</code> so that it is accessible from anywhere.</li>
 </ul>
 <pre><code>sudo mysql -u root -p
 UPDATE mysql.user SET Host='%' WHERE Host='localhost' AND User='suitecrm';
@@ -610,75 +611,72 @@ docker rm &lt;docker name/docker id&gt;
 </code></pre>
 
 <h2 id="integrating-into-pipeline">Integrating into Pipeline</h2>
-<p>For integrating on pipeline we have to follow these steps:</p>
-<ol>
-<li>Push your Dockerfile to the GitHub SuiteCRM repository which I forked <code>https://github.com/Priyam5/SuiteCRM.git/</code> in my GitHub. The Dockerfile is:</li>
-</ol>
-<pre><code>#getting base image PHP
+<p>For integrating on pipeline I followed these steps:</p>
+<ul>
+<li>Push the Dockerfile to the GitHub SuiteCRM repository which I forked <code>https://github.com/Priyam5/SuiteCRM.git/</code> in my GitHub. The Dockerfile is:</li>
+</ul>
+<pre><code>    FROM php:7.4-apache
 
-FROM php:7.4-apache
+    MAINTAINER Priyam Singh &lt;2020priyamsingh@gmail.com&gt;
 
-MAINTAINER Priyam Singh &lt;2020priyamsingh@gmail.com&gt;
+    RUN apt-get update
+    RUN apt-get install -y libzip-dev zip unzip zlib1g-dev
+    RUN docker-php-ext-install mysqli zip
 
-# Executed during the building of the image
-RUN apt-get update
-RUN apt-get install -y libzip-dev zip unzip zlib1g-dev
-RUN docker-php-ext-install mysqli zip
-
-# Executed when container created out of image
-EXPOSE 80
-ENTRYPOINT [&quot;/usr/sbin/apache2ctl&quot;, &quot;-D&quot;, &quot;FOREGROUND&quot;]
-
+    EXPOSE 80
+    ENTRYPOINT [&quot;/usr/sbin/apache2ctl&quot;, &quot;-D&quot;, &quot;FOREGROUND&quot;]
 </code></pre>
 
 <ul>
-<li>I was also getting an apache error: <code>apache2: Syntax error on line 80 of /etc/apache2/apache2.conf: DefaultRuntimeDir must be a valid directory, absolute or relative to ServerRoot</code>. So in Dockerfile I added entrypoint as below:</li>
-</ul>
-<pre><code>ENTRYPOINT [&quot;/usr/sbin/apache2ctl&quot;, &quot;-D&quot;, &quot;FOREGROUND&quot;]
-</code></pre>
-
-<ol>
 <li>In the pipeline add the step of <code>docker deployment</code> and in this stage, we will make an image from the Dockerfile and then container and also mount the directory. The stage is shown below</li>
-</ol>
-<pre><code>stage ('docker deployment') {
-            steps {
-                sh 'docker build -t dockerimage:latest .'
-                sh 'cp /var/lib/jenkins/workspace/config.php $(pwd)'
-                sh 'docker run -v $(pwd):/var/www/html/suitecrm -d --rm --name dockerzap3 -p 1233:80 dockerimage:latest'
-            } 
-        }    
+</ul>
+<pre><code>    stage ('docker deployment') {
+                steps {
+                    sh 'docker build -t dockerimage:latest .'
+                    sh 'cp /var/lib/jenkins/workspace/config.php $(pwd)'
+                    sh 'docker run -v $(pwd):/var/www/html/suitecrm -d --rm --name dockerzap3 -p 1233:80 dockerimage:latest'
+                } 
+            }    
 </code></pre>
 
-<p>When I opened the URL http://192.168.1.2:1233/suitecrm/ the suitecrm was not getting deployed and I was getting warnings </p>
-<pre><code>Warning: sugar_file_put_contents_atomic() : fatal rename failure '/tmp/tempPRdtfq' -&gt; 'cache/modules/Employees/Employeevardefs.php' in /var/www/html/suitecrm/include/utils/sugar_file_utils.php on line 204
-
-Warning: sugar_file_put_contents_atomic() : fatal rename failure '/tmp/tempZ0yMaj' -&gt; 'cache/modules/Users/Uservardefs.php' in /var/www/html/suitecrm/include/utils/sugar_file_utils.php on line 204
-
-Warning: sugar_file_put_contents_atomic() : fatal rename failure '/tmp/tempsEJ08b' -&gt; 'cache/modules/UserPreferences/UserPreferencevardefs.php' in /var/www/html/suitecrm/include/utils/sugar_file_utils.php on line 204
-
-Warning: sugar_file_put_contents_atomic() : fatal rename failure '/tmp/tempaF8Pd5' -&gt; 'cache/modules/Administration/Administrationvardefs.php' in /var/www/html/suitecrm/include/utils/sugar_file_utils.php on line 204
-
-Warning: session_start(): Cannot start session when headers already sent in /var/www/html/suitecrm/include/MVC/SugarApplication.php on line 619
-
-Warning: Cannot modify header information - headers already sent by (output started at /var/www/html/suitecrm/include/utils/sugar_file_utils.php:204) in /var/www/html/suitecrm/include/utils.php on line 3124
-
-Warning: session_destroy(): Trying to destroy uninitialized session in /var/www/html/suitecrm/include/MVC/SugarApplication.php on line 132
+<ul>
+<li>I was getting an apache error: <code>apache2: Syntax error on line 80 of /etc/apache2/apache2.conf: DefaultRuntimeDir must be a valid directory, absolute or relative to ServerRoot</code>. So in Dockerfile I added entrypoint as below:</li>
+</ul>
+<pre><code>    ENTRYPOINT [&quot;/usr/sbin/apache2ctl&quot;, &quot;-D&quot;, &quot;FOREGROUND&quot;]
 </code></pre>
 
-<p>So it was coming because some directories of SuiteCRM were not having the appropriate permissions. So for that I just ran this command and it started working:</p>
-<pre><code>sudo chmod -R 755 .
+<ul>
+<li>When I opened the URL http://192.168.1.2:1233/suitecrm/ the suitecrm was not getting deployed and I was getting warnings </li>
+</ul>
+<pre><code>    Warning: sugar_file_put_contents_atomic() : fatal rename failure '/tmp/tempPRdtfq' -&gt; 'cache/modules/Employees/Employeevardefs.php' in /var/www/html/suitecrm/include/utils/sugar_file_utils.php on line 204
 
-sudo chmod -R 775 cache custom modules upload
+    Warning: sugar_file_put_contents_atomic() : fatal rename failure '/tmp/tempZ0yMaj' -&gt; 'cache/modules/Users/Uservardefs.php' in /var/www/html/suitecrm/include/utils/sugar_file_utils.php on line 204
+
+    Warning: sugar_file_put_contents_atomic() : fatal rename failure '/tmp/tempsEJ08b' -&gt; 'cache/modules/UserPreferences/UserPreferencevardefs.php' in /var/www/html/suitecrm/include/utils/sugar_file_utils.php on line 204
+
+    Warning: sugar_file_put_contents_atomic() : fatal rename failure '/tmp/tempaF8Pd5' -&gt; 'cache/modules/Administration/Administrationvardefs.php' in /var/www/html/suitecrm/include/utils/sugar_file_utils.php on line 204
+
+    Warning: session_start(): Cannot start session when headers already sent in /var/www/html/suitecrm/include/MVC/SugarApplication.php on line 619
+
+    Warning: Cannot modify header information - headers already sent by (output started at /var/www/html/suitecrm/include/utils/sugar_file_utils.php:204) in /var/www/html/suitecrm/include/utils.php on line 3124
+
+    Warning: session_destroy(): Trying to destroy uninitialized session in /var/www/html/suitecrm/include/MVC/SugarApplication.php on line 132
 </code></pre>
 
-<ol>
+<p>So it was coming because some directories of SuiteCRM were not having the appropriate permissions. For that I just ran this command and it started working:</p>
+<pre><code>    sudo chmod -R 755 .
+
+    sudo chmod -R 775 cache custom modules upload
+</code></pre>
+
+<ul>
 <li>Now we will do the zap scan to the container made:</li>
-</ol>
-<pre><code>stage ('OWASP ZAP') {
-           steps {
-               sh 'docker pull owasp/zap2docker-stable'
-               sh 'docker run --network=host -v $(pwd)/zap-report:/zap/wrk/ -i owasp/zap2docker-stable zap-baseline.py -t http://192.168.1.2:1233/suitecrm/ -I -r zap_baseline_report.html -l PASS'
-               sh 'docker rm -f dockerzap3'
+</ul>
+<pre><code>    stage ('OWASP ZAP') {
+            steps {
+                sh 'docker pull owasp/zap2docker-stable'
+                sh 'docker run --network=host -v $(pwd)/zap-report:/zap/wrk/ -i owasp/zap2docker-stable zap-baseline.py -t http://192.168.1.2:1233/suitecrm/ -I -r zap_baseline_report.html -l PASS'
+                sh 'docker rm -f dockerzap3'
 
 </code></pre>
 
@@ -690,13 +688,13 @@ sudo chmod -R 775 cache custom modules upload
 <p>I also got the error SuiteCRM was not able to print the report <code>/zap/wrk/zap_baseline_report.html</code>. So I gave to the directory zap-report permissions:</p>
 </li>
 </ul>
-<pre><code>sudo chown -R jenkins:jenkins zap-report
-sudo chmod 777 zap-report 
+<pre><code>    sudo chown -R jenkins:jenkins zap-report
+    sudo chmod 777 zap-report 
 </code></pre>
 
-<ol>
+<ul>
 <li>Here is the report which got generated after the <a href="https://github.com/Priyam5/internship-appsecco/blob/master/Reports/docker_zap_baseline_report.html">zap scan</a> worked successfully.</li>
-</ol>
+</ul>
                 
               
               

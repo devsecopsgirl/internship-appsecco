@@ -120,74 +120,72 @@ docker rm <docker name/docker id>
 
 For integrating on pipeline I followed these steps:
 
-1. Push your Dockerfile to the GitHub SuiteCRM repository which I forked `https://github.com/Priyam5/SuiteCRM.git/` in my GitHub. The Dockerfile is:
+* Push the Dockerfile to the GitHub SuiteCRM repository which I forked `https://github.com/Priyam5/SuiteCRM.git/` in my GitHub. The Dockerfile is:
 ```
-#getting base image PHP
+    FROM php:7.4-apache
 
-FROM php:7.4-apache
+    MAINTAINER Priyam Singh <2020priyamsingh@gmail.com>
 
-MAINTAINER Priyam Singh <2020priyamsingh@gmail.com>
+    RUN apt-get update
+    RUN apt-get install -y libzip-dev zip unzip zlib1g-dev
+    RUN docker-php-ext-install mysqli zip
 
-# Executed during the building of the image
-RUN apt-get update
-RUN apt-get install -y libzip-dev zip unzip zlib1g-dev
-RUN docker-php-ext-install mysqli zip
-
-# Executed when container created out of image
-EXPOSE 80
-ENTRYPOINT ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
-
+    EXPOSE 80
+    ENTRYPOINT ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
 ```
-* I was also getting an apache error: `apache2: Syntax error on line 80 of /etc/apache2/apache2.conf: DefaultRuntimeDir must be a valid directory, absolute or relative to ServerRoot`. So in Dockerfile I added entrypoint as below:
+
+*  In the pipeline add the step of `docker deployment` and in this stage, we will make an image from the Dockerfile and then container and also mount the directory. The stage is shown below
 ```
-ENTRYPOINT ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
+    stage ('docker deployment') {
+                steps {
+                    sh 'docker build -t dockerimage:latest .'
+                    sh 'cp /var/lib/jenkins/workspace/config.php $(pwd)'
+                    sh 'docker run -v $(pwd):/var/www/html/suitecrm -d --rm --name dockerzap3 -p 1233:80 dockerimage:latest'
+                } 
+            }    
 ```
-1. In the pipeline add the step of `docker deployment` and in this stage, we will make an image from the Dockerfile and then container and also mount the directory. The stage is shown below
+
+* I was getting an apache error: `apache2: Syntax error on line 80 of /etc/apache2/apache2.conf: DefaultRuntimeDir must be a valid directory, absolute or relative to ServerRoot`. So in Dockerfile I added entrypoint as below:
 ```
-stage ('docker deployment') {
+    ENTRYPOINT ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
+```
+* When I opened the URL http://192.168.1.2:1233/suitecrm/ the suitecrm was not getting deployed and I was getting warnings 
+```
+    Warning: sugar_file_put_contents_atomic() : fatal rename failure '/tmp/tempPRdtfq' -> 'cache/modules/Employees/Employeevardefs.php' in /var/www/html/suitecrm/include/utils/sugar_file_utils.php on line 204
+
+    Warning: sugar_file_put_contents_atomic() : fatal rename failure '/tmp/tempZ0yMaj' -> 'cache/modules/Users/Uservardefs.php' in /var/www/html/suitecrm/include/utils/sugar_file_utils.php on line 204
+
+    Warning: sugar_file_put_contents_atomic() : fatal rename failure '/tmp/tempsEJ08b' -> 'cache/modules/UserPreferences/UserPreferencevardefs.php' in /var/www/html/suitecrm/include/utils/sugar_file_utils.php on line 204
+
+    Warning: sugar_file_put_contents_atomic() : fatal rename failure '/tmp/tempaF8Pd5' -> 'cache/modules/Administration/Administrationvardefs.php' in /var/www/html/suitecrm/include/utils/sugar_file_utils.php on line 204
+
+    Warning: session_start(): Cannot start session when headers already sent in /var/www/html/suitecrm/include/MVC/SugarApplication.php on line 619
+
+    Warning: Cannot modify header information - headers already sent by (output started at /var/www/html/suitecrm/include/utils/sugar_file_utils.php:204) in /var/www/html/suitecrm/include/utils.php on line 3124
+
+    Warning: session_destroy(): Trying to destroy uninitialized session in /var/www/html/suitecrm/include/MVC/SugarApplication.php on line 132
+```
+So it was coming because some directories of SuiteCRM were not having the appropriate permissions. For that I just ran this command and it started working:
+```
+    sudo chmod -R 755 .
+
+    sudo chmod -R 775 cache custom modules upload
+```
+
+* Now we will do the zap scan to the container made:
+```
+    stage ('OWASP ZAP') {
             steps {
-                sh 'docker build -t dockerimage:latest .'
-                sh 'cp /var/lib/jenkins/workspace/config.php $(pwd)'
-                sh 'docker run -v $(pwd):/var/www/html/suitecrm -d --rm --name dockerzap3 -p 1233:80 dockerimage:latest'
-            } 
-        }    
-```
-When I opened the URL http://192.168.1.2:1233/suitecrm/ the suitecrm was not getting deployed and I was getting warnings 
-```
-Warning: sugar_file_put_contents_atomic() : fatal rename failure '/tmp/tempPRdtfq' -> 'cache/modules/Employees/Employeevardefs.php' in /var/www/html/suitecrm/include/utils/sugar_file_utils.php on line 204
-
-Warning: sugar_file_put_contents_atomic() : fatal rename failure '/tmp/tempZ0yMaj' -> 'cache/modules/Users/Uservardefs.php' in /var/www/html/suitecrm/include/utils/sugar_file_utils.php on line 204
-
-Warning: sugar_file_put_contents_atomic() : fatal rename failure '/tmp/tempsEJ08b' -> 'cache/modules/UserPreferences/UserPreferencevardefs.php' in /var/www/html/suitecrm/include/utils/sugar_file_utils.php on line 204
-
-Warning: sugar_file_put_contents_atomic() : fatal rename failure '/tmp/tempaF8Pd5' -> 'cache/modules/Administration/Administrationvardefs.php' in /var/www/html/suitecrm/include/utils/sugar_file_utils.php on line 204
-
-Warning: session_start(): Cannot start session when headers already sent in /var/www/html/suitecrm/include/MVC/SugarApplication.php on line 619
-
-Warning: Cannot modify header information - headers already sent by (output started at /var/www/html/suitecrm/include/utils/sugar_file_utils.php:204) in /var/www/html/suitecrm/include/utils.php on line 3124
-
-Warning: session_destroy(): Trying to destroy uninitialized session in /var/www/html/suitecrm/include/MVC/SugarApplication.php on line 132
-```
-So it was coming because some directories of SuiteCRM were not having the appropriate permissions. So for that I just ran this command and it started working:
-```
-sudo chmod -R 755 .
-
-sudo chmod -R 775 cache custom modules upload
-```
-3. Now we will do the zap scan to the container made:
-```
-stage ('OWASP ZAP') {
-           steps {
-               sh 'docker pull owasp/zap2docker-stable'
-               sh 'docker run --network=host -v $(pwd)/zap-report:/zap/wrk/ -i owasp/zap2docker-stable zap-baseline.py -t http://192.168.1.2:1233/suitecrm/ -I -r zap_baseline_report.html -l PASS'
-               sh 'docker rm -f dockerzap3'
+                sh 'docker pull owasp/zap2docker-stable'
+                sh 'docker run --network=host -v $(pwd)/zap-report:/zap/wrk/ -i owasp/zap2docker-stable zap-baseline.py -t http://192.168.1.2:1233/suitecrm/ -I -r zap_baseline_report.html -l PASS'
+                sh 'docker rm -f dockerzap3'
 
 ```
 * I got error `I/O error(5): ZAP failed to access: http://192.168.1.2:1233/suitecrm/` because zap container was not able to scan the provided URL due to which I added the flag `--network=host` and it worked because normally we have to forward ports from the host machine into a container, but when the containers share the host's network, any network activity happens directly on the host machine - just as it would if the program was running locally on the host instead of inside a container.
 
 * I also got the error SuiteCRM was not able to print the report `/zap/wrk/zap_baseline_report.html`. So I gave to the directory zap-report permissions:
 ```
-sudo chown -R jenkins:jenkins zap-report
-sudo chmod 777 zap-report 
+    sudo chown -R jenkins:jenkins zap-report
+    sudo chmod 777 zap-report 
 ```
-4. Here is the report which got generated after the [zap scan](https://github.com/Priyam5/internship-appsecco/blob/master/Reports/docker_zap_baseline_report.html) worked successfully.
+* Here is the report which got generated after the [zap scan](https://github.com/Priyam5/internship-appsecco/blob/master/Reports/docker_zap_baseline_report.html) worked successfully.

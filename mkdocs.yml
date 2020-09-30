@@ -14,6 +14,6 @@ nav:
 - Dynamic Analysis of SuiteCRM: 'dast-tools.md'
 - Software Bill of Materials: 'sbom.md'
 - Source Code Analysis: 'linting-tool.md'
-- Implementing SuiteCRM through Docker: 'docker.md'
+- Deploying SuiteCRM through Docker: 'docker.md'
 
 theme: material

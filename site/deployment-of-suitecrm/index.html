@@ -390,8 +390,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../docker/" title="Implementing SuiteCRM through Docker" class="md-nav__link">
-      Implementing SuiteCRM through Docker
+    <a href="../docker/" title="Deploying SuiteCRM through Docker" class="md-nav__link">
+      Deploying SuiteCRM through Docker
     </a>
   </li>
 
@@ -487,7 +487,7 @@
                 
                 <h1 id="deployment-of-suitecrm">Deployment of SuiteCRM</h1>
 <h2 id="objective">Objective</h2>
-<p>This section aims to set up a basic pipeline in Jenkins to provide a solution to the 1st, 2nd, 5th and 6th points of the problem statement under Task 1.</p>
+<p>This section aims to set up a basic pipeline in Jenkins to provide a solution to the 1st, 2nd, 5th and 6th points of the <a href="https://intern-appsecco.netlify.app/problem-statement/">problem statement</a> under Task 1.</p>
 <h2 id="jenkins-pipeline-project-created">Jenkins pipeline project created</h2>
 <p>I set up Jenkins as mentioned in the Setup of Jenkins section. For building a pipeline for Maven project. I clicked on New Item from the main dashboard which leads me to a different page. I gave <code>suitecrm-pipeline</code> as the project's name and chose <code>Pipeline</code> as the project type amongst all the options present.</p>
 <p>Next came the project configurations page. Here:</p>
@@ -532,12 +532,6 @@
             }
         }
 
-        // stage ('Dependency-Check Analysis'){
-        //     steps {
-        //         sh 'Dependency-Check'
-        //     }    
-        // }
-
         stage ('Deploying App to production server'){
             steps {
                 sh 'echo &quot;Deploying App to production Server&quot;'
@@ -572,22 +566,20 @@ In this stage, the files are deployed from Jenkins to production VM and also rem
 </li>
 </ul>
 <h3 id="build-stage-permission-denied">Build Stage - Permission denied</h3>
-<p>In the build stage, I was getting an error for permission denied for the folder was not getting deleted and permission denied for regular files not being created.</p>
-<p>So to solve this I followed this <a href="https://www.digitalocean.com/community/tutorials/how-to-move-an-apache-web-root-to-a-new-location-on-ubuntu-16-04">documentation</a></p>
-<ul>
-<li>I changed root directory to home directory as the document root was set to /var/www/html. It was configured in the following file: </li>
-</ul>
-<pre><code>/etc/apache2/sites-enabled/000-default.conf
-</code></pre>
-
-<p>So I run this command to make the changes in the nano file. </p>
+<p>In the build stage, I was getting an error for permission denied for the folder was not getting deleted and permission denied for regular files not being created. So to solve this I followed this <a href="https://www.digitalocean.com/community/tutorials/how-to-move-an-apache-web-root-to-a-new-location-on-ubuntu-16-04">documentation</a></p>
+<ol>
+<li>I changed <code>root directory</code> to <code>home directory</code> as the <code>DocumentRoot</code> was set to <code>/var/www/html</code>. It was configured in the following file: <code>/etc/apache2/sites-enabled/000-default.conf</code>.</li>
+<li>I run this command in terminal to make the changes in the nano file. </li>
+</ol>
 <pre><code>sudo nano /etc/apache2/sites-enabled/000-default.conf
 </code></pre>
 
-<p>I changed it to /home/production/html/suitecrm</p>
-<p>Created file suitecrm under /home/production/html</p>
-<p>Made changes in the last path in Jenkinsfile to /home/production/html/suitecrm</p>
-<p>Click On Save and then build it was successfully build this time.</p>
+<ol>
+<li>I changed it to <code>/home/production/html/suitecrm</code> from <code>/var/www/html</code></li>
+<li>Then created a file <code>suitecrm</code> under <code>/home/production/html</code></li>
+<li>Made changes in the last path in <code>Jenkinsfile</code> to <code>/home/production/html/suitecrm</code></li>
+<li>Click On <code>Save</code> and then build the pipeline, it was successfully build this time.</li>
+</ol>
 <h3 id="suitecrm-web-page">SuiteCRM Web Page</h3>
 <p>When I opened the webpage  <code>http://192.168.1.4/suitecrm/install.php</code> there it showed to set the <code>session.save_path</code>. So I changed it from this <code>session.save_path = "var/www/html/suitecrm/"</code> to <code>session.save_path = "tmp/"</code> by going in the file:</p>
 <pre><code>sudo nano /etc/php/7.2/apache2/php.ini

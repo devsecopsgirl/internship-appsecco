@@ -390,8 +390,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../docker/" title="Implementing SuiteCRM through Docker" class="md-nav__link">
-      Implementing SuiteCRM through Docker
+    <a href="../docker/" title="Deploying SuiteCRM through Docker" class="md-nav__link">
+      Deploying SuiteCRM through Docker
     </a>
   </li>
 
@@ -528,7 +528,7 @@
 
 <h3 id="configure-owasp-zap-with-docker">Configure OWASP ZAP with Docker</h3>
 <p>To understand how zap works I first manually perform the steps in the jenkins pipeline and then integrate with jenkins pipeline in the next section.
-For using OWASP ZAP with docker, I have to pull the ZAP image from <a href="https://hub.docker.com/">docker hub</a>]. I went through this <a href="https://blog.mozilla.org/fxtesteng/2016/05/11/docker-owasp-zap-part-one/">documentation</a> as a lot of errors are been resolved along with solutions. So firstly I ran ZAP on my Jenkins VM to figure out how it works and test the target URL. Ans also many flags have been used which can be found here in the official documentation of <a href="https://www.zaproxy.org/docs/docker/baseline-scan/">zap</a></p>
+For using OWASP ZAP with docker, I have to pull the ZAP image from <a href="https://hub.docker.com/">docker hub</a>]. I went through this <a href="https://blog.mozilla.org/fxtesteng/2016/05/11/docker-owasp-zap-part-one/">documentation</a> as a lot of errors are been resolved along with solutions. So firstly I ran ZAP on my Jenkins VM to figure out how it works and test the target URL. And also many flags have been used which can be found here in the official documentation of <a href="https://www.zaproxy.org/docs/docker/baseline-scan/">zap</a></p>
 <ul>
 <li>Firstly, I pulled the docker image to be tested.</li>
 </ul>
@@ -542,7 +542,7 @@ For using OWASP ZAP with docker, I have to pull the ZAP image from <a href="http
 </code></pre>
 
 <p><strong>-e</strong> flag for Docker to inject the environment variables in the container.</p>
-<p><strong>LC_ALL=C.UTF-8</strong> the environment variable that overrides all the other localization settings (except $LANGUAGE</p>
+<p><strong>LC_ALL=C.UTF-8</strong> the environment variable that overrides all the other localization settings (except $LANGUAGE)</p>
 <ul>
 <li>I ran a quick scan to have a look at how ZAP inputs information. ZAP is running inside a docker container. So I used the IP assigned to docker which can be found by ifconfig command. </li>
 </ul>
@@ -627,8 +627,9 @@ For using OWASP ZAP with docker, I have to pull the ZAP image from <a href="http
 <pre><code>stage ('OWASP ZAP') {
            steps {
                 sh 'docker pull owasp/zap2docker-stable'
-                sh 'docker rm -f zap2 ; docker run --rm -e LC_ALL=C.UTF-8 -e LANG=C.UTF-8 --name zap2 -u zap -p 8090:8080 -d owasp/zap2docker-stable zap.sh -daemon -port 8080 -host 0.0.0.0 -config api.disablekey=true'
+                sh 'docker run --rm -e LC_ALL=C.UTF-8 -e LANG=C.UTF-8 --name zap2 -u zap -p 8090:8080 -d owasp/zap2docker-stable zap.sh -daemon -port 8080 -host 0.0.0.0 -config api.disablekey=true'
                 sh 'docker run -v $(pwd)/zap-report:/zap/wrk/:rw --rm -i owasp/zap2docker-stable zap-baseline.py -t &quot;http://192.168.1.4/suitecrm&quot; -I -r zap_baseline_report2.html -l PASS'
+                sh 'docker rm -f zap2'
            }
         }
 </code></pre>
