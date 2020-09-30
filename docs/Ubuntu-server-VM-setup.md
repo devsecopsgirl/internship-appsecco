@@ -9,7 +9,7 @@ In this section, I will be setting up two VMs:
 1. For Jenkin's deployment.
 2. For the production server to deploy the application (SuiteCRM) on the server
 
-## Steps for creating VM:
+## Steps for creating VM
 
 1. Click on the `NEW` icon to create a new machine.
 2. `Create Virtual Machine` window will open as shown in the picture.

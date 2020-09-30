@@ -42,6 +42,38 @@ Finally, install Jenkins and its dependencies:
 ```
 sudo apt install jenkins
 ```
+#### **GPG key error:**
+
+An LTS (Long-Term Support) release is chosen every 12 weeks from the stream of regular releases as the stable release for that period time. The link gets updated, it gives GPG key error so find the latest link from [here](https://www.jenkins.io/doc/book/installing/#debianubuntu) under the Debian/Ubuntu section.
+
+#### **Certificate verification failed**
+
+![](Images/2020-08-19_13-05.png)
+
+To resolve this pass `--no-check-certificate` as shown below:
+
+```
+wget https://ftp.yz.yamagata-u.sc.jp/pub/misc/jenkins/debian-stable/jenkins_2.235_all.deb --no-check-certificate
+```
+
+Again reinstall the Debian file of Jenkins
+```
+sudo dpkg -i jenkins_2.235.5_all.deb
+```
+
+To fix the broken packages run:
+
+```
+sudo apt install -f
+```
+
+Now again I check the status of jenkins:
+
+```
+sudo service jenkins status
+```
+
+It SHOWS its active now.
 
 ### Step 2 — Starting Jenkins
 
@@ -127,49 +159,12 @@ Click `Start using Jenkins` to visit the main Jenkins dashboard.
 
 Here finish the installation of Jenkins in VM.
 
--------------
+------------- 
 
-## Errors resolved
+#### **Invalid username or password**
 
-These were errors that I faced during the installation. 
+When I try to login in Jenkins I got the error `Invalid username or password`. So I changed it by following the steps explained below.
 
-### 1. **GPG key error:**
-
-An LTS (Long-Term Support) release is chosen every 12 weeks from the stream of regular releases as the stable release for that period time. 
-
-The link gets updated, it gives GPG key error so find the latest link from [here](https://www.jenkins.io/doc/book/installing/#debianubuntu) under the Debian/Ubuntu section.
-
-### 2. **Certificate verification failed**
-
-![](Images/2020-08-19_13-05.png)
-
-To resolve this pass `--no-check-certificate` as shown below:
-
-```
-wget https://ftp.yz.yamagata-u.sc.jp/pub/misc/jenkins/debian-stable/jenkins_2.235_all.deb --no-check-certificate
-```
-
-Again reinstall the Debian file of Jenkins
-```
-sudo dpkg -i jenkins_2.235.5_all.deb
-```
-
-To fix the broken packages run:
-
-```
-sudo apt install -f
-```
-
-Now again I check the status of jenkins:
-
-```
-sudo service jenkins status
-```
-
-It SHOWS its active now.
-
-### 3. **Invalid username or password**
-   
 ![](Images/2020-08-20_00-48.png)
 
 Once logged in successfully into Jenkins VM (Virtual Machine). Go to directory `Jenkins` and open file `config.xml`.

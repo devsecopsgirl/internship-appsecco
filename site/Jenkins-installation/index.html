@@ -266,6 +266,26 @@
     STEP 1 - Installing Jenkins
   </a>
   
+    <nav class="md-nav" aria-label="STEP 1 - Installing Jenkins">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gpg-key-error" class="md-nav__link">
+    GPG key error:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#certificate-verification-failed" class="md-nav__link">
+    Certificate verification failed
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -287,39 +307,18 @@
     Step 4 — Setting Up Jenkins
   </a>
   
+    <nav class="md-nav" aria-label="Step 4 — Setting Up Jenkins">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#invalid-username-or-password" class="md-nav__link">
+    Invalid username or password
+  </a>
+  
 </li>
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#errors-resolved" class="md-nav__link">
-    Errors resolved
-  </a>
-  
-    <nav class="md-nav" aria-label="Errors resolved">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-gpg-key-error" class="md-nav__link">
-    1. GPG key error:
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-certificate-verification-failed" class="md-nav__link">
-    2. Certificate verification failed
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-invalid-username-or-password" class="md-nav__link">
-    3. Invalid username or password
-  </a>
   
 </li>
         
@@ -443,6 +442,18 @@
   </li>
 
     
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../complete-pipeline-structure/" title="Complete Pipeline Structure" class="md-nav__link">
+      Complete Pipeline Structure
+    </a>
+  </li>
+
+    
   </ul>
 </nav>
                   </div>
@@ -501,6 +512,26 @@
     STEP 1 - Installing Jenkins
   </a>
   
+    <nav class="md-nav" aria-label="STEP 1 - Installing Jenkins">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gpg-key-error" class="md-nav__link">
+    GPG key error:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#certificate-verification-failed" class="md-nav__link">
+    Certificate verification failed
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -522,39 +553,18 @@
     Step 4 — Setting Up Jenkins
   </a>
   
+    <nav class="md-nav" aria-label="Step 4 — Setting Up Jenkins">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#invalid-username-or-password" class="md-nav__link">
+    Invalid username or password
+  </a>
+  
 </li>
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#errors-resolved" class="md-nav__link">
-    Errors resolved
-  </a>
-  
-    <nav class="md-nav" aria-label="Errors resolved">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-gpg-key-error" class="md-nav__link">
-    1. GPG key error:
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-certificate-verification-failed" class="md-nav__link">
-    2. Certificate verification failed
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-invalid-username-or-password" class="md-nav__link">
-    3. Invalid username or password
-  </a>
   
 </li>
         
@@ -612,6 +622,27 @@ sudo apt update
 <pre><code>sudo apt install jenkins
 </code></pre>
 
+<h4 id="gpg-key-error"><strong>GPG key error:</strong></h4>
+<p>An LTS (Long-Term Support) release is chosen every 12 weeks from the stream of regular releases as the stable release for that period time. The link gets updated, it gives GPG key error so find the latest link from <a href="https://www.jenkins.io/doc/book/installing/#debianubuntu">here</a> under the Debian/Ubuntu section.</p>
+<h4 id="certificate-verification-failed"><strong>Certificate verification failed</strong></h4>
+<p><img alt="" src="../Images/2020-08-19_13-05.png" /></p>
+<p>To resolve this pass <code>--no-check-certificate</code> as shown below:</p>
+<pre><code>wget https://ftp.yz.yamagata-u.sc.jp/pub/misc/jenkins/debian-stable/jenkins_2.235_all.deb --no-check-certificate
+</code></pre>
+
+<p>Again reinstall the Debian file of Jenkins</p>
+<pre><code>sudo dpkg -i jenkins_2.235.5_all.deb
+</code></pre>
+
+<p>To fix the broken packages run:</p>
+<pre><code>sudo apt install -f
+</code></pre>
+
+<p>Now again I check the status of jenkins:</p>
+<pre><code>sudo service jenkins status
+</code></pre>
+
+<p>It SHOWS its active now.</p>
 <h3 id="step-2-starting-jenkins">Step 2 — Starting Jenkins</h3>
 <p>I started Jenkins using systemctl command because systemctl is used to examine and control the state of “systemd” system and service manager.:</p>
 <pre><code>sudo systemctl start jenkins
@@ -663,31 +694,8 @@ sudo ufw enable
 <p>Click <code>Start using Jenkins</code> to visit the main Jenkins dashboard.</p>
 <p>Here finish the installation of Jenkins in VM.</p>
 <hr />
-<h2 id="errors-resolved">Errors resolved</h2>
-<p>These were errors that I faced during the installation. </p>
-<h3 id="1-gpg-key-error">1. <strong>GPG key error:</strong></h3>
-<p>An LTS (Long-Term Support) release is chosen every 12 weeks from the stream of regular releases as the stable release for that period time. </p>
-<p>The link gets updated, it gives GPG key error so find the latest link from <a href="https://www.jenkins.io/doc/book/installing/#debianubuntu">here</a> under the Debian/Ubuntu section.</p>
-<h3 id="2-certificate-verification-failed">2. <strong>Certificate verification failed</strong></h3>
-<p><img alt="" src="../Images/2020-08-19_13-05.png" /></p>
-<p>To resolve this pass <code>--no-check-certificate</code> as shown below:</p>
-<pre><code>wget https://ftp.yz.yamagata-u.sc.jp/pub/misc/jenkins/debian-stable/jenkins_2.235_all.deb --no-check-certificate
-</code></pre>
-
-<p>Again reinstall the Debian file of Jenkins</p>
-<pre><code>sudo dpkg -i jenkins_2.235.5_all.deb
-</code></pre>
-
-<p>To fix the broken packages run:</p>
-<pre><code>sudo apt install -f
-</code></pre>
-
-<p>Now again I check the status of jenkins:</p>
-<pre><code>sudo service jenkins status
-</code></pre>
-
-<p>It SHOWS its active now.</p>
-<h3 id="3-invalid-username-or-password">3. <strong>Invalid username or password</strong></h3>
+<h4 id="invalid-username-or-password"><strong>Invalid username or password</strong></h4>
+<p>When I try to login in Jenkins I got the error <code>Invalid username or password</code>. So I changed it by following the steps explained below.</p>
 <p><img alt="" src="../Images/2020-08-20_00-48.png" /></p>
 <p>Once logged in successfully into Jenkins VM (Virtual Machine). Go to directory <code>Jenkins</code> and open file <code>config.xml</code>.</p>
 <pre><code>sudo nano /var/lib/Jenkins/config.xml
