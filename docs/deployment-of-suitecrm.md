@@ -124,7 +124,7 @@ Please fix the following files or directories before proceeding:
 ```
 I ran these commands to set the following recommended permissions on SuiteCRM instance:
 ```
-sudo chown -R , <user name >:< user name > .
+sudo chown -R www-data:www-data .
 
 sudo chmod -R 755 .
 

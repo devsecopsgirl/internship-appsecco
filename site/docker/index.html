@@ -370,8 +370,29 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#suitecrm-installation" class="md-nav__link">
+    SuiteCRM installation
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dast-scan" class="md-nav__link">
+    DAST scan
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integrating-into-pipeline" class="md-nav__link">
+    Integrating into Pipeline
+  </a>
   
 </li>
       
@@ -436,8 +457,29 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#suitecrm-installation" class="md-nav__link">
+    SuiteCRM installation
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dast-scan" class="md-nav__link">
+    DAST scan
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integrating-into-pipeline" class="md-nav__link">
+    Integrating into Pipeline
+  </a>
   
 </li>
       
@@ -459,31 +501,30 @@
                 
                 <h1 id="implementing-suitecrm-through-docker">Implementing SuiteCRM through Docker</h1>
 <h2 id="objective">Objective</h2>
-<p>This section aims to implement the application SuiteCRM through Docker and deploy it through pipeline. Solution to the first point of the <a href="https://intern-appsecco.netlify.app/problem-statement/">problem statement</a> under Task 2.</p>
+<p>This section aims to implement the application SuiteCRM through Docker and deploy it through a pipeline. Solution to the first point of the <a href="https://intern-appsecco.netlify.app/problem-statement/">problem statement</a> under Task 2.</p>
 <h2 id="docker">Docker</h2>
-<p>An open-source project that automates the deployment of software applications inside containers by providing an additional layer of abstraction and automation of OS-level virtualization on Linux. In simple, Docker is a tool that allows developers, sys-admins etc. to deploy applications in a sandbox (which in docker world we call it containers) to run over the host operating system. For Docker commands follow this <a href="https://github.com/wsargent/docker-cheat-sheet#dockerfile">link</a>. Before installation, lets talk about little bit about container, image and Dockerfile as we will come across these terms further:</p>
+<p>An open-source project that automates the deployment of software applications inside containers by providing an additional layer of abstraction and automation of OS-level virtualization on Linux. In simple, Docker is a tool that allows developers, sys-admins, etc. to deploy applications in a sandbox (which in docker world we call it containers) to run over the host operating system. For Docker commands follow this <a href="https://github.com/wsargent/docker-cheat-sheet#dockerfile">link</a>. Before installation, let's talk about a little bit about container, image, and Dockerfile as we will come across these terms further:</p>
 <ul>
 <li>Container - A container is a running instance of an image.</li>
-<li>Image - An image is a unit that contains everything ( the code, libraries, environments variables and configuration files) that our service requires to run.</li>
-<li>Dockerfile - Just assume it as a blueprint for creating a Docker images, it can inherit from other containers, define what software to install and what commands to run.</li>
+<li>Image - An image is a unit that contains everything ( the code, libraries, environments variables, and configuration files) that our service requires to run.</li>
+<li>Dockerfile - Just assume it as a blueprint for creating Docker images, it can inherit from other containers, define what software to install and what commands to run.</li>
 </ul>
 <h2 id="dockerfile">Dockerfile</h2>
-<p>Docker can build images automatically by reading the instructions from a Dockerfile. A Dockerfile is a text document that contains all the commands a user could call on the command line to assemble an image. Using <code>docker build</code> users can create an automated build that executes several command-line instructions in succession.For more details on Dockerfile I refer this official link of docker(https://docs.docker.com/engine/reference/builder/)</p>
-<p>I started with building a dockerfile in which I implemented a php image because SuiteCRM is PHP based application. I copied the image from dockerhub of <a href="https://hub.docker.com/_/php">php</a></p>
+<p>Docker can build images automatically by reading the instructions from a Dockerfile. A Dockerfile is a text document that contains all the commands a user could call on the command line to assemble an image. Using <code>docker build</code> users can create an automated build that executes several command-line instructions in succession. For more details on Dockerfile, I refer this official link of docker(https://docs.docker.com/engine/reference/builder/)</p>
+<p>I started with building a dockerfile in which I implemented a PHP image because SuiteCRM is a PHP based application. I copied the image from dockerhub of <a href="https://hub.docker.com/_/php">php</a></p>
 <h3 id="apache-installation">Apache Installation</h3>
 <p>I begin with building the Dockerfile firstly with apache installation. </p>
-<p>Note: got an error <code>unable to prepare context: unable to evaluate symlinks in Dockerfile path: lstat /home/jenkins-infra/docker-files/Dockerfile: no such file or directory</code></p>
-<p>Be careful while naming the Docker file name as <code>Dockerfile</code> other names don't work.</p>
+<p>Note: got an error <code>unable to prepare context: unable to evaluate symlinks in Dockerfile path: lstat /home/jenkins-infra/docker-files/Dockerfile: no such file or directory</code>. Be careful while naming the Docker file name as <code>Dockerfile</code> other names don't work.</p>
 <p>NOTE: I got an error my apache server was not getting served. I will explain in a little detail: 
 * I stopped my container <code>docker stop f9af4fb06f4c</code> and ran again <code>docker run -d --rm --name ubuntu2 -p 1234:80 4c0437bfcded</code>. After the container was build I checked If the port 1234 was open or not by <code>netstat -ntap</code> But there was no such network port 1234 open.
 * Then I checked the <code>docker logs ubuntu2</code> It showed <code>Error: No such container: ubuntu2</code> then I checked <code>docker ps -a</code> which showed the exited in a min.
 * After this I ran the above command of building container without the <code>-d flag</code> which is detached mode means running container in background then it gave the error <code>/bin/sh: 1: Syntax error: Unterminated quoted string</code>. From here I got to know I have missed a quote in my dockerfile in a command which I fixed.</p>
-<p>My Dockerfile which finally worked is </p>
+<p>Dockerfile which finally worked is </p>
 <pre><code># getting base image PHP
 
 FROM php:7.4-cli
 
-MAINTAINER priyam singh &lt;2020priyamsingh@gmail.com&gt;
+MAINTAINER Priyam Singh &lt;2020priyamsingh@gmail.com&gt;
 
 # Executed during the building of the image
 # Apache installation
@@ -494,6 +535,168 @@ RUN apt-get install -y apache2
 CMD [&quot;apache2ctl&quot;,&quot;-D&quot;,&quot;FOREGROUND&quot;]
 EXPOSE 80
 </code></pre>
+
+<h3 id="suitecrm-installation">SuiteCRM installation</h3>
+<ul>
+<li>Apache started running, but then I decided to use the image <code>php:7.4-apache</code> which have apache built-in and not to separately install it. </li>
+<li>This is the Dockerfile I am using for now</li>
+</ul>
+<pre><code>#getting base image PHP
+
+FROM php:7.4-apache
+
+MAINTAINER Priyam Singh &lt;2020priyamsingh@gmail.com&gt;
+
+# Executed during the building of the image
+RUN apt-get update
+RUN apt-get install -y libzip-dev zip unzip zlib1g-dev
+RUN docker-php-ext-install mysqli zip
+
+# Copying the SUiteCRM repositories
+COPY dast-jenkins-pipeline /var/www/html/suitecrm
+RUN chown -R www-data:www-data /var/www/html/suitecrm
+
+# Executed when container created out of image
+CMD [&quot;apache2ctl&quot;,&quot;-D&quot;,&quot;FOREGROUND&quot;]
+EXPOSE 80
+</code></pre>
+
+<ul>
+<li>I got this error on the SuiteCRM install.php page</li>
+</ul>
+<pre><code>Warning: require_once(modules/DynamicFields/DynamicField.php): failed to open stream: Permission denied in /var/www/html/suitecrm/data/SugarBean.php on line 45
+
+Fatal error: require_once(): Failed opening required 'modules/DynamicFields/DynamicField.php' (include_path='.:/usr/local/lib/php') in /var/www/html/suitecrm/data/SugarBean.php on line 45
+</code></pre>
+
+<p>So I changed the permission of SuiteCRM directory within the running container</p>
+<pre><code>chown -R www-data:www-data suitecrm
+</code></pre>
+
+<p>Changing permissions take too long so I mounted the directory of SuiteCRM </p>
+<ul>
+<li>I installed zip because I got error Zip module not present in docker I added this command in Dockerfile</li>
+</ul>
+<pre><code>RUN apt-get install -y libzip-dev zip unzip zlib1g-dev
+RUN docker-php-ext-install mysqli zip
+</code></pre>
+
+<ul>
+<li>My database was not working so I firstly in <code>sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf</code> file binded the port 0.0.0.0 to allow all ports  and also allowed the ports 3306 the mysql port</li>
+<li>Then I ran the command</li>
+</ul>
+<pre><code>sudo mysql -u root -p
+UPDATE mysql.user SET Host='%' WHERE Host='localhost' AND User='suitecrm';
+UPDATE mysql.db SET Host='%' WHERE Host='localhost' AND User='suitecrm';
+FLUSH PRIVILEGES;
+</code></pre>
+
+<ul>
+<li>I copied the config.php file after the installation of suitecrm done. To use scp to copy files to the remote server from your computer or copy files from the remote server to your computer, you must have the scp program available in both places (computer and remote server). This documentation will be <a href="https://linuxhint.com/linux_scp_command/">helpful</a></li>
+</ul>
+<p><code>scp -r config.php jenkins-infra@192.168.1.2:/home/jenkins-infra/docker-files</code></p>
+<p>but it gave error <code>bash: scp: command not found</code> bec. openssh not installed in container 
+<code>apt install -y openssh-client openssh-server</code> also install on client means we're saving the file the host/client <code>apt install -y openssh-client</code></p>
+<h2 id="dast-scan">DAST scan</h2>
+<p>On VM, run the dast scan similar to earlier as in the section <a href="https://intern-appsecco.netlify.app/dast-tools/">DevSecOps Dynamic Analysis of SuiteCRM</a>. Just do the changes in the command of URL same to where suitecrm is running inside the docker container</p>
+<pre><code>docker run -i owasp/zap2docker-stable zap-baseline.py -t &quot;http://192.168.1.2:1234/suitecrm&quot; -l INFO
+</code></pre>
+
+<ul>
+<li>An error I was facing of no space on the device so remove the images and stopped containers by using the commands</li>
+</ul>
+<pre><code>docker rmi &lt;image image name/ image id&gt;
+docker rm &lt;docker name/docker id&gt;
+</code></pre>
+
+<h2 id="integrating-into-pipeline">Integrating into Pipeline</h2>
+<p>For integrating on pipeline we have to follow these steps:</p>
+<ol>
+<li>Push your Dockerfile to the GitHub SuiteCRM repository which I forked <code>https://github.com/Priyam5/SuiteCRM.git/</code> in my GitHub. The Dockerfile is:</li>
+</ol>
+<pre><code>#getting base image PHP
+
+FROM php:7.4-apache
+
+MAINTAINER Priyam Singh &lt;2020priyamsingh@gmail.com&gt;
+
+# Executed during the building of the image
+RUN apt-get update
+RUN apt-get install -y libzip-dev zip unzip zlib1g-dev
+RUN docker-php-ext-install mysqli zip
+
+# Executed when container created out of image
+EXPOSE 80
+ENTRYPOINT [&quot;/usr/sbin/apache2ctl&quot;, &quot;-D&quot;, &quot;FOREGROUND&quot;]
+
+</code></pre>
+
+<ul>
+<li>I was also getting an apache error: <code>apache2: Syntax error on line 80 of /etc/apache2/apache2.conf: DefaultRuntimeDir must be a valid directory, absolute or relative to ServerRoot</code>. So in Dockerfile I added entrypoint as below:</li>
+</ul>
+<pre><code>ENTRYPOINT [&quot;/usr/sbin/apache2ctl&quot;, &quot;-D&quot;, &quot;FOREGROUND&quot;]
+</code></pre>
+
+<ol>
+<li>In the pipeline add the step of <code>docker deployment</code> and in this stage, we will make an image from the Dockerfile and then container and also mount the directory. The stage is shown below</li>
+</ol>
+<pre><code>stage ('docker deployment') {
+            steps {
+                sh 'docker build -t dockerimage:latest .'
+                sh 'cp /var/lib/jenkins/workspace/config.php $(pwd)'
+                sh 'docker run -v $(pwd):/var/www/html/suitecrm -d --rm --name dockerzap3 -p 1233:80 dockerimage:latest'
+            } 
+        }    
+</code></pre>
+
+<p>When I opened the URL http://192.168.1.2:1233/suitecrm/ the suitecrm was not getting deployed and I was getting warnings </p>
+<pre><code>Warning: sugar_file_put_contents_atomic() : fatal rename failure '/tmp/tempPRdtfq' -&gt; 'cache/modules/Employees/Employeevardefs.php' in /var/www/html/suitecrm/include/utils/sugar_file_utils.php on line 204
+
+Warning: sugar_file_put_contents_atomic() : fatal rename failure '/tmp/tempZ0yMaj' -&gt; 'cache/modules/Users/Uservardefs.php' in /var/www/html/suitecrm/include/utils/sugar_file_utils.php on line 204
+
+Warning: sugar_file_put_contents_atomic() : fatal rename failure '/tmp/tempsEJ08b' -&gt; 'cache/modules/UserPreferences/UserPreferencevardefs.php' in /var/www/html/suitecrm/include/utils/sugar_file_utils.php on line 204
+
+Warning: sugar_file_put_contents_atomic() : fatal rename failure '/tmp/tempaF8Pd5' -&gt; 'cache/modules/Administration/Administrationvardefs.php' in /var/www/html/suitecrm/include/utils/sugar_file_utils.php on line 204
+
+Warning: session_start(): Cannot start session when headers already sent in /var/www/html/suitecrm/include/MVC/SugarApplication.php on line 619
+
+Warning: Cannot modify header information - headers already sent by (output started at /var/www/html/suitecrm/include/utils/sugar_file_utils.php:204) in /var/www/html/suitecrm/include/utils.php on line 3124
+
+Warning: session_destroy(): Trying to destroy uninitialized session in /var/www/html/suitecrm/include/MVC/SugarApplication.php on line 132
+</code></pre>
+
+<p>So it was coming because some directories of SuiteCRM were not having the appropriate permissions. So for that I just ran this command and it started working:</p>
+<pre><code>sudo chmod -R 755 .
+
+sudo chmod -R 775 cache custom modules upload
+</code></pre>
+
+<ol>
+<li>Now we will do the zap scan to the container made:</li>
+</ol>
+<pre><code>stage ('OWASP ZAP') {
+           steps {
+               sh 'docker pull owasp/zap2docker-stable'
+               sh 'docker run --network=host -v $(pwd)/zap-report:/zap/wrk/ -i owasp/zap2docker-stable zap-baseline.py -t http://192.168.1.2:1233/suitecrm/ -I -r zap_baseline_report.html -l PASS'
+               sh 'docker rm -f dockerzap3'
+
+</code></pre>
+
+<ul>
+<li>
+<p>I got error <code>I/O error(5): ZAP failed to access: http://192.168.1.2:1233/suitecrm/</code> because zap container was not able to scan the provided URL due to which I added the flag <code>--network=host</code> and it worked because normally we have to forward ports from the host machine into a container, but when the containers share the host's network, any network activity happens directly on the host machine - just as it would if the program was running locally on the host instead of inside a container.</p>
+</li>
+<li>
+<p>I also got the error SuiteCRM was not able to print the report <code>/zap/wrk/zap_baseline_report.html</code>. So I gave to the directory zap-report permissions:</p>
+</li>
+</ul>
+<pre><code>sudo chown -R jenkins:jenkins zap-report
+sudo chmod 777 zap-report 
+</code></pre>
+
+<ol>
+<li>Here is the report which got generated after the <a href="https://github.com/Priyam5/internship-appsecco/blob/master/Reports/docker_zap_baseline_report.html">zap scan</a> worked successfully.</li>
+</ol>
                 
               
               

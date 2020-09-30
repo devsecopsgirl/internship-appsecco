@@ -2,21 +2,21 @@
 
 ## Objective
 
-This section aims to implement the application SuiteCRM through Docker and deploy it through pipeline. Solution to the first point of the [problem statement](https://intern-appsecco.netlify.app/problem-statement/) under Task 2.
+This section aims to implement the application SuiteCRM through Docker and deploy it through a pipeline. Solution to the first point of the [problem statement](https://intern-appsecco.netlify.app/problem-statement/) under Task 2.
 
 ## Docker
 
-An open-source project that automates the deployment of software applications inside containers by providing an additional layer of abstraction and automation of OS-level virtualization on Linux. In simple, Docker is a tool that allows developers, sys-admins etc. to deploy applications in a sandbox (which in docker world we call it containers) to run over the host operating system. For Docker commands follow this [link](https://github.com/wsargent/docker-cheat-sheet#dockerfile). Before installation, lets talk about little bit about container, image and Dockerfile as we will come across these terms further:
+An open-source project that automates the deployment of software applications inside containers by providing an additional layer of abstraction and automation of OS-level virtualization on Linux. In simple, Docker is a tool that allows developers, sys-admins, etc. to deploy applications in a sandbox (which in docker world we call it containers) to run over the host operating system. For Docker commands follow this [link](https://github.com/wsargent/docker-cheat-sheet#dockerfile). Before installation, let's talk about a little bit about container, image, and Dockerfile as we will come across these terms further:
 
 * Container - A container is a running instance of an image.
-* Image - An image is a unit that contains everything ( the code, libraries, environments variables and configuration files) that our service requires to run.
-* Dockerfile - Just assume it as a blueprint for creating a Docker images, it can inherit from other containers, define what software to install and what commands to run.
+* Image - An image is a unit that contains everything ( the code, libraries, environments variables, and configuration files) that our service requires to run.
+* Dockerfile - Just assume it as a blueprint for creating Docker images, it can inherit from other containers, define what software to install and what commands to run.
 
 ## Dockerfile
 
-Docker can build images automatically by reading the instructions from a Dockerfile. A Dockerfile is a text document that contains all the commands a user could call on the command line to assemble an image. Using `docker build` users can create an automated build that executes several command-line instructions in succession.For more details on Dockerfile I refer this official link of docker(https://docs.docker.com/engine/reference/builder/)
+Docker can build images automatically by reading the instructions from a Dockerfile. A Dockerfile is a text document that contains all the commands a user could call on the command line to assemble an image. Using `docker build` users can create an automated build that executes several command-line instructions in succession. For more details on Dockerfile, I refer this official link of docker(https://docs.docker.com/engine/reference/builder/)
 
-I started with building a dockerfile in which I implemented a php image because SuiteCRM is PHP based application. I copied the image from dockerhub of [php](https://hub.docker.com/_/php)
+I started with building a dockerfile in which I implemented a PHP image because SuiteCRM is a PHP based application. I copied the image from dockerhub of [php](https://hub.docker.com/_/php)
 
 ### Apache Installation
 
@@ -35,7 +35,7 @@ Dockerfile which finally worked is
 
 FROM php:7.4-cli
 
-MAINTAINER priyam singh <2020priyamsingh@gmail.com>
+MAINTAINER Priyam Singh <2020priyamsingh@gmail.com>
 
 # Executed during the building of the image
 # Apache installation
@@ -46,32 +46,30 @@ RUN apt-get install -y apache2
 CMD ["apache2ctl","-D","FOREGROUND"]
 EXPOSE 80
 ```
-* Apache was running but I decided to then use the image which have apache built in and not to separately install it `php:7.4-apache`
-* This is the Dockerfile I am using
+### SuiteCRM installation 
+* Apache started running, but then I decided to use the image `php:7.4-apache` which have apache built-in and not to separately install it. 
+* This is the Dockerfile I am using for now
  
 ```
 #getting base image PHP
 
 FROM php:7.4-apache
 
-MAINTAINER priyam singh <2020priyamsingh@gmail.com>
+MAINTAINER Priyam Singh <2020priyamsingh@gmail.com>
 
 # Executed during the building of the image
-# Apache installation
 RUN apt-get update
-
-RUN docker-php-ext-install mysqli
-RUN apt-get install zlib1g-dev
+RUN apt-get install -y libzip-dev zip unzip zlib1g-dev
+RUN docker-php-ext-install mysqli zip
 
 # Copying the SUiteCRM repositories
 COPY dast-jenkins-pipeline /var/www/html/suitecrm
+RUN chown -R www-data:www-data /var/www/html/suitecrm
 
 # Executed when container created out of image
 CMD ["apache2ctl","-D","FOREGROUND"]
 EXPOSE 80
 ```
-
-* I got some permission errors so I gave the suitable permissions to the respective folder in suiteCRM directory
 
 * I got this error on the SuiteCRM install.php page
 ```
@@ -85,30 +83,111 @@ chown -R www-data:www-data suitecrm
 ```
 Changing permissions take too long so I mounted the directory of SuiteCRM 
 
-
-**today**
-I installed zip bec I got error Zip module not present in docker I added this command in dockerfile
-
+* I installed zip because I got error Zip module not present in docker I added this command in Dockerfile
+```
+RUN apt-get install -y libzip-dev zip unzip zlib1g-dev
+RUN docker-php-ext-install mysqli zip
+```
 * My database was not working so I firstly in `sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf` file binded the port 0.0.0.0 to allow all ports  and also allowed the ports 3306 the mysql port
-* then I ran the command 
-  sudo mysql -u root -p
-  UPDATE mysql.user SET Host='%' WHERE Host='localhost' AND User='suitecrm';
-  UPDATE mysql.db SET Host='%' WHERE Host='localhost' AND User='suitecrm';
-  FLUSH PRIVILEGES;
+* Then I ran the command
+```   
+sudo mysql -u root -p
+UPDATE mysql.user SET Host='%' WHERE Host='localhost' AND User='suitecrm';
+UPDATE mysql.db SET Host='%' WHERE Host='localhost' AND User='suitecrm';
+FLUSH PRIVILEGES;
+```
 
-* Then I copied the config.php file after the installation of suitecrm done. In order to use scp to copy files to the remote server from your computer or copy files from the remote server to your computer, you must have the scp program available in both places (computer and remote server).This documentation will be [helpful](https://linuxhint.com/linux_scp_command/)
+* I copied the config.php file after the installation of suitecrm done. To use scp to copy files to the remote server from your computer or copy files from the remote server to your computer, you must have the scp program available in both places (computer and remote server). This documentation will be [helpful](https://linuxhint.com/linux_scp_command/)
 
 `scp -r config.php jenkins-infra@192.168.1.2:/home/jenkins-infra/docker-files`
 
-but gave error `bash: scp: command not found` bec. openssh not installed in container 
-`apt install -y openssh-client openssh-server` also install on client means where saving the file the host/client `apt install -y openssh-client`
+but it gave error `bash: scp: command not found` bec. openssh not installed in container 
+`apt install -y openssh-client openssh-server` also install on client means we're saving the file the host/client `apt install -y openssh-client`
 
 ## DAST scan
-On VM run the dast scan smilar to earlier as in the section [DevSecOps Dynamic Analysis of SuiteCRM](https://intern-appsecco.netlify.app/dast-tools/).
+On VM, run the dast scan similar to earlier as in the section [DevSecOps Dynamic Analysis of SuiteCRM](https://intern-appsecco.netlify.app/dast-tools/). Just do the changes in the command of URL same to where suitecrm is running inside the docker container
+```
+docker run -i owasp/zap2docker-stable zap-baseline.py -t "http://192.168.1.2:1234/suitecrm" -l INFO
+```
 
-Just do this changes in the command of IP
+* An error I was facing of no space on the device so remove the images and stopped containers by using the commands
+```
+docker rmi <image image name/ image id>
+docker rm <docker name/docker id>
+```
 
-A commom error can be faced of no space so remove the images and stopped containers
+## Integrating into Pipeline
 
-## Integrating in Pipeline
+For integrating on pipeline we have to follow these steps:
 
+1. Push your Dockerfile to the GitHub SuiteCRM repository which I forked `https://github.com/Priyam5/SuiteCRM.git/` in my GitHub. The Dockerfile is:
+```
+#getting base image PHP
+
+FROM php:7.4-apache
+
+MAINTAINER Priyam Singh <2020priyamsingh@gmail.com>
+
+# Executed during the building of the image
+RUN apt-get update
+RUN apt-get install -y libzip-dev zip unzip zlib1g-dev
+RUN docker-php-ext-install mysqli zip
+
+# Executed when container created out of image
+EXPOSE 80
+ENTRYPOINT ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
+
+```
+* I was also getting an apache error: `apache2: Syntax error on line 80 of /etc/apache2/apache2.conf: DefaultRuntimeDir must be a valid directory, absolute or relative to ServerRoot`. So in Dockerfile I added entrypoint as below:
+```
+ENTRYPOINT ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
+```
+1. In the pipeline add the step of `docker deployment` and in this stage, we will make an image from the Dockerfile and then container and also mount the directory. The stage is shown below
+```
+stage ('docker deployment') {
+            steps {
+                sh 'docker build -t dockerimage:latest .'
+                sh 'cp /var/lib/jenkins/workspace/config.php $(pwd)'
+                sh 'docker run -v $(pwd):/var/www/html/suitecrm -d --rm --name dockerzap3 -p 1233:80 dockerimage:latest'
+            } 
+        }    
+```
+When I opened the URL http://192.168.1.2:1233/suitecrm/ the suitecrm was not getting deployed and I was getting warnings 
+```
+Warning: sugar_file_put_contents_atomic() : fatal rename failure '/tmp/tempPRdtfq' -> 'cache/modules/Employees/Employeevardefs.php' in /var/www/html/suitecrm/include/utils/sugar_file_utils.php on line 204
+
+Warning: sugar_file_put_contents_atomic() : fatal rename failure '/tmp/tempZ0yMaj' -> 'cache/modules/Users/Uservardefs.php' in /var/www/html/suitecrm/include/utils/sugar_file_utils.php on line 204
+
+Warning: sugar_file_put_contents_atomic() : fatal rename failure '/tmp/tempsEJ08b' -> 'cache/modules/UserPreferences/UserPreferencevardefs.php' in /var/www/html/suitecrm/include/utils/sugar_file_utils.php on line 204
+
+Warning: sugar_file_put_contents_atomic() : fatal rename failure '/tmp/tempaF8Pd5' -> 'cache/modules/Administration/Administrationvardefs.php' in /var/www/html/suitecrm/include/utils/sugar_file_utils.php on line 204
+
+Warning: session_start(): Cannot start session when headers already sent in /var/www/html/suitecrm/include/MVC/SugarApplication.php on line 619
+
+Warning: Cannot modify header information - headers already sent by (output started at /var/www/html/suitecrm/include/utils/sugar_file_utils.php:204) in /var/www/html/suitecrm/include/utils.php on line 3124
+
+Warning: session_destroy(): Trying to destroy uninitialized session in /var/www/html/suitecrm/include/MVC/SugarApplication.php on line 132
+```
+So it was coming because some directories of SuiteCRM were not having the appropriate permissions. So for that I just ran this command and it started working:
+```
+sudo chmod -R 755 .
+
+sudo chmod -R 775 cache custom modules upload
+```
+3. Now we will do the zap scan to the container made:
+```
+stage ('OWASP ZAP') {
+           steps {
+               sh 'docker pull owasp/zap2docker-stable'
+               sh 'docker run --network=host -v $(pwd)/zap-report:/zap/wrk/ -i owasp/zap2docker-stable zap-baseline.py -t http://192.168.1.2:1233/suitecrm/ -I -r zap_baseline_report.html -l PASS'
+               sh 'docker rm -f dockerzap3'
+
+```
+* I got error `I/O error(5): ZAP failed to access: http://192.168.1.2:1233/suitecrm/` because zap container was not able to scan the provided URL due to which I added the flag `--network=host` and it worked because normally we have to forward ports from the host machine into a container, but when the containers share the host's network, any network activity happens directly on the host machine - just as it would if the program was running locally on the host instead of inside a container.
+
+* I also got the error SuiteCRM was not able to print the report `/zap/wrk/zap_baseline_report.html`. So I gave to the directory zap-report permissions:
+```
+sudo chown -R jenkins:jenkins zap-report
+sudo chmod 777 zap-report 
+```
+4. Here is the report which got generated after the [zap scan](https://github.com/Priyam5/internship-appsecco/blob/master/Reports/docker_zap_baseline_report.html) worked successfully.
