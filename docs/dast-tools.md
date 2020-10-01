@@ -126,7 +126,21 @@ stage ('Build') {
             }
         }
 ```
-* The third stage is for deploying the SuiteCRM application
+
+* The third stage is of OWASP ZAP scan. In this, we will first pull the zap image after that makes a container named `zap2`  and mention a port to run and the mentioned port should not be used by any other application or it will throw error failed to access the provided URL. Then print the report `zap_baseline_report2.html`.
+
+```
+stage ('OWASP ZAP') {
+           steps {
+                sh 'docker pull owasp/zap2docker-stable'
+                sh 'docker run --rm -e LC_ALL=C.UTF-8 -e LANG=C.UTF-8 --name zap2 -u zap -p 8090:8080 -d owasp/zap2docker-stable zap.sh -daemon -port 8080 -host 0.0.0.0 -config api.disablekey=true'
+                sh 'docker run -v $(pwd)/zap-report:/zap/wrk/:rw --rm -i owasp/zap2docker-stable zap-baseline.py -t "http://192.168.1.4/suitecrm" -I -r zap_baseline_report2.html -l PASS'
+                sh 'docker rm -f zap2'
+           }
+        }
+```
+* The fourth stage is for deploying the SuiteCRM application
+
 ```
 stage ('Deploying App to production server'){
             steps {
@@ -137,18 +151,6 @@ stage ('Deploying App to production server'){
                 sh 'ssh -o StrictHostKeyChecking=no production@192.168.1.4 "sudo cp -r /home/production/config.php /home/production/html/suitecrm"'     
                 sh 'ssh -o StrictHostKeyChecking=no production@192.168.1.4 "cd /home/production/html/suitecrm && sudo chmod -R 755 * && sudo chown -R www-data:www-data *"'
                 
-           }
-        }
-```
-* The fourth stage is of OWASP ZAP scan. In this, we will first pull the zap image after that makes a container named `zap2`  and mention a port to run and the mentioned port should not be used by any other application or it will throw error failed to access the provided URL. Then print the report `zap_baseline_report2.html`.
-
-```
-stage ('OWASP ZAP') {
-           steps {
-                sh 'docker pull owasp/zap2docker-stable'
-                sh 'docker run --rm -e LC_ALL=C.UTF-8 -e LANG=C.UTF-8 --name zap2 -u zap -p 8090:8080 -d owasp/zap2docker-stable zap.sh -daemon -port 8080 -host 0.0.0.0 -config api.disablekey=true'
-                sh 'docker run -v $(pwd)/zap-report:/zap/wrk/:rw --rm -i owasp/zap2docker-stable zap-baseline.py -t "http://192.168.1.4/suitecrm" -I -r zap_baseline_report2.html -l PASS'
-                sh 'docker rm -f zap2'
            }
         }
 ```
@@ -195,6 +197,14 @@ pipeline {
                 sh 'composer install'
             }
         }
+
+        stage ('OWASP ZAP') {
+           steps {
+                sh 'docker pull owasp/zap2docker-stable'
+                sh 'docker rm -f zap2 ; docker run --rm -e LC_ALL=C.UTF-8 -e LANG=C.UTF-8 --name zap2 -u zap -p 8090:8080 -d owasp/zap2docker-stable zap.sh -daemon -port 8080 -host 0.0.0.0 -config api.disablekey=true'
+                sh 'docker run  -v $(pwd)/zap-report:/zap/wrk/:rw --rm -i owasp/zap2docker-stable zap-baseline.py -t "http://192.168.1.4/suitecrm" -I -r zap_baseline_report2.html -l PASS'
+           }
+        }
         
         stage ('Deploying App to production server'){
             steps {
@@ -206,15 +216,7 @@ pipeline {
                 sh 'ssh -o StrictHostKeyChecking=no production@192.168.1.4 "cd /home/production/html/suitecrm && sudo chmod -R 755 * && sudo chown -R www-data:www-data *"'
                 
            }
-        }
-        
-        stage ('OWASP ZAP') {
-           steps {
-                sh 'docker pull owasp/zap2docker-stable'
-                sh 'docker rm -f zap2 ; docker run --rm -e LC_ALL=C.UTF-8 -e LANG=C.UTF-8 --name zap2 -u zap -p 8090:8080 -d owasp/zap2docker-stable zap.sh -daemon -port 8080 -host 0.0.0.0 -config api.disablekey=true'
-                sh 'docker run  -v $(pwd)/zap-report:/zap/wrk/:rw --rm -i owasp/zap2docker-stable zap-baseline.py -t "http://192.168.1.4/suitecrm" -I -r zap_baseline_report2.html -l PASS'
-           }
-        }
+        }    
     }
 }   
 

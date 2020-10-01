@@ -570,8 +570,9 @@
         }
 </code></pre>
 
-<p>After this, I got the report in the <code>Console Output</code> after the pipeline is successfully build. Now to get a copy of the report add one more step to jenkinsfile under the <code>Dependency-Check Analysis</code> stage.</p>
-<pre><code>dependencyCheckPublisher pattern: 'dependency-check-report.xml'  
+<p>After this, I got the report in the <code>Console Output</code> after the pipeline is successfully build. Now to get a copy of the report add one more step to jenkinsfile under the <code>Dependency-Check Analysis</code> stage, and I also moved the report to the <code>reports</code> directory where I will be storing all other reports.</p>
+<pre><code>dependencyCheckPublisher pattern: 'dependency-check-report.xml' 
+sh 'mv dependency-check-report.xml /var/lib/jenkins/workspace/reports' 
 </code></pre>
 
 <p>This will create a <code>dependency-check-report.xml</code> report file in the workspace and I can also see in Jenkins the <code>Dependency-Check Trend</code> that is a graphical representation of vulnerabilities found in the SuiteCRM application and they are in which category that is critical, high, medium, low or unassigned. Here is the <a href="https://github.com/Priyam5/internship-appsecco/blob/master/Reports/dependency-check-report.xml">report</a> which generated after OWASP Dependency-Check.</p>
@@ -616,12 +617,13 @@
 </ol>
 </li>
 <li>
-<p>In the pipeline add the step under the <code>Snyk Security</code> stage before build stage:</p>
+<p>In the pipeline add the step under the <code>Snyk Security</code> stage before build stage and I also moved the report to the <code>reports</code> directory where I will be storing all other reports:</p>
 </li>
 </ul>
 <pre><code>stage ('Snyk Security'){
             steps {
                 snykSecurity failOnIssues: false, snykInstallation: 'Snyk Security Plugin', snykTokenId: 'snyk-api-token'
+                sh 'mv snyk_monitor_report.json /var/lib/jenkins/workspace/reports'
             }    
         }
 </code></pre>

@@ -487,12 +487,12 @@
             }
         }
 
-    stage ('Build') {
+        stage ('Build') {
             steps {
                 sh 'composer install'
             }
         }
-    stage ('Dependency-Check Analysis'){
+        stage ('Dependency-Check Analysis'){
             steps {
                 dependencyCheck additionalArguments: '', odcInstallation: 'OWASP Dependency-Check Plugin'
                 dependencyCheckPublisher pattern: 'dependency-check-report.xml'

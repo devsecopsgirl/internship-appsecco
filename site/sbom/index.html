@@ -503,11 +503,12 @@
 </code></pre>
 
 <h2 id="jenkins-integration-of-sbom">Jenkins integration of SBOM</h2>
-<p>I added a stage in the Jenkins Pipeline where I commented out SAST analysis steps just to avoid the pipeline do not take much time and added a stage for <code>Generating SBOM</code>.</p>
+<p>I added a stage in the Jenkins Pipeline where I commented out SAST analysis steps just to avoid the pipeline do not take much time and added a stage for <code>Generating SBOM</code>. I also moved the report to the <code>reports</code> directory where I will be storing all other reports:</p>
 <pre><code>stage ('Generating SBOM'){
             steps {
                 sh 'composer require --dev cyclonedx/cyclonedx-php-composer'
                 sh 'composer make-bom'
+                sh 'mv bom.xml /var/lib/jenkins/workspace/reports'
             }
         }
 </code></pre>

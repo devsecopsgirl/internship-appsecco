@@ -27,13 +27,14 @@ composer make-bom
 
 ## Jenkins integration of SBOM
 
-I added a stage in the Jenkins Pipeline where I commented out SAST analysis steps just to avoid the pipeline do not take much time and added a stage for `Generating SBOM`.
+I added a stage in the Jenkins Pipeline where I commented out SAST analysis steps just to avoid the pipeline do not take much time and added a stage for `Generating SBOM`. I also moved the report to the `reports` directory where I will be storing all other reports:
 
 ```
 stage ('Generating SBOM'){
             steps {
                 sh 'composer require --dev cyclonedx/cyclonedx-php-composer'
                 sh 'composer make-bom'
+                sh 'mv bom.xml /var/lib/jenkins/workspace/reports'
             }
         }
 ```

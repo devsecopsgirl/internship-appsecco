@@ -561,7 +561,7 @@ print('[+] Running PHPCS on PHP files...')
 try:
     for php_file in php_files:
         print(f'[+] Scanning {php_file}')
-        os.system(f'phpcs {php_file} &gt;&gt; /var/lib/jenkins/reports/phpcs-report-suitecrm')
+        os.system(f'phpcs {php_file} &gt;&gt; /var/lib/jenkins/workspace/reports/phpcs-report-suitecrm')
     print(f'[+] {len(php_files)} PHP files scanned...')
     print('[+] Code Quality Report generated...')
 

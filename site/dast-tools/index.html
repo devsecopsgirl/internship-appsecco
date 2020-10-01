@@ -618,7 +618,20 @@ For using OWASP ZAP with docker, I have to pull the ZAP image from <a href="http
 </code></pre>
 
 <ul>
-<li>The third stage is for deploying the SuiteCRM application</li>
+<li>The third stage is of OWASP ZAP scan. In this, we will first pull the zap image after that makes a container named <code>zap2</code>  and mention a port to run and the mentioned port should not be used by any other application or it will throw error failed to access the provided URL. Then print the report <code>zap_baseline_report2.html</code>.</li>
+</ul>
+<pre><code>stage ('OWASP ZAP') {
+           steps {
+                sh 'docker pull owasp/zap2docker-stable'
+                sh 'docker run --rm -e LC_ALL=C.UTF-8 -e LANG=C.UTF-8 --name zap2 -u zap -p 8090:8080 -d owasp/zap2docker-stable zap.sh -daemon -port 8080 -host 0.0.0.0 -config api.disablekey=true'
+                sh 'docker run -v $(pwd)/zap-report:/zap/wrk/:rw --rm -i owasp/zap2docker-stable zap-baseline.py -t &quot;http://192.168.1.4/suitecrm&quot; -I -r zap_baseline_report2.html -l PASS'
+                sh 'docker rm -f zap2'
+           }
+        }
+</code></pre>
+
+<ul>
+<li>The fourth stage is for deploying the SuiteCRM application</li>
 </ul>
 <pre><code>stage ('Deploying App to production server'){
             steps {
@@ -629,19 +642,6 @@ For using OWASP ZAP with docker, I have to pull the ZAP image from <a href="http
                 sh 'ssh -o StrictHostKeyChecking=no production@192.168.1.4 &quot;sudo cp -r /home/production/config.php /home/production/html/suitecrm&quot;'     
                 sh 'ssh -o StrictHostKeyChecking=no production@192.168.1.4 &quot;cd /home/production/html/suitecrm &amp;&amp; sudo chmod -R 755 * &amp;&amp; sudo chown -R www-data:www-data *&quot;'
 
-           }
-        }
-</code></pre>
-
-<ul>
-<li>The fourth stage is of OWASP ZAP scan. In this, we will first pull the zap image after that makes a container named <code>zap2</code>  and mention a port to run and the mentioned port should not be used by any other application or it will throw error failed to access the provided URL. Then print the report <code>zap_baseline_report2.html</code>.</li>
-</ul>
-<pre><code>stage ('OWASP ZAP') {
-           steps {
-                sh 'docker pull owasp/zap2docker-stable'
-                sh 'docker run --rm -e LC_ALL=C.UTF-8 -e LANG=C.UTF-8 --name zap2 -u zap -p 8090:8080 -d owasp/zap2docker-stable zap.sh -daemon -port 8080 -host 0.0.0.0 -config api.disablekey=true'
-                sh 'docker run -v $(pwd)/zap-report:/zap/wrk/:rw --rm -i owasp/zap2docker-stable zap-baseline.py -t &quot;http://192.168.1.4/suitecrm&quot; -I -r zap_baseline_report2.html -l PASS'
-                sh 'docker rm -f zap2'
            }
         }
 </code></pre>
@@ -693,6 +693,14 @@ IOError: [Errno 13] Permission denied: '/zap/wrk/zap_baseline_report2.html'
             }
         }
 
+        stage ('OWASP ZAP') {
+           steps {
+                sh 'docker pull owasp/zap2docker-stable'
+                sh 'docker rm -f zap2 ; docker run --rm -e LC_ALL=C.UTF-8 -e LANG=C.UTF-8 --name zap2 -u zap -p 8090:8080 -d owasp/zap2docker-stable zap.sh -daemon -port 8080 -host 0.0.0.0 -config api.disablekey=true'
+                sh 'docker run  -v $(pwd)/zap-report:/zap/wrk/:rw --rm -i owasp/zap2docker-stable zap-baseline.py -t &quot;http://192.168.1.4/suitecrm&quot; -I -r zap_baseline_report2.html -l PASS'
+           }
+        }
+
         stage ('Deploying App to production server'){
             steps {
                 sh 'echo &quot;Deploying App to production Server&quot;'
@@ -703,15 +711,7 @@ IOError: [Errno 13] Permission denied: '/zap/wrk/zap_baseline_report2.html'
                 sh 'ssh -o StrictHostKeyChecking=no production@192.168.1.4 &quot;cd /home/production/html/suitecrm &amp;&amp; sudo chmod -R 755 * &amp;&amp; sudo chown -R www-data:www-data *&quot;'
 
            }
-        }
-
-        stage ('OWASP ZAP') {
-           steps {
-                sh 'docker pull owasp/zap2docker-stable'
-                sh 'docker rm -f zap2 ; docker run --rm -e LC_ALL=C.UTF-8 -e LANG=C.UTF-8 --name zap2 -u zap -p 8090:8080 -d owasp/zap2docker-stable zap.sh -daemon -port 8080 -host 0.0.0.0 -config api.disablekey=true'
-                sh 'docker run  -v $(pwd)/zap-report:/zap/wrk/:rw --rm -i owasp/zap2docker-stable zap-baseline.py -t &quot;http://192.168.1.4/suitecrm&quot; -I -r zap_baseline_report2.html -l PASS'
-           }
-        }
+        }    
     }
 }   
 
