@@ -9,7 +9,7 @@ When I completed with all the stages in the pipeline of fetching code from GitHu
 
 ### Diagrammatic representation
 
-This is the Diagrammatic representation of the final Pipeline shown:
+Below is the Diagrammatic representation of the final Pipeline:
 
 ![Image](Images/complete-pipeline.png)
 
