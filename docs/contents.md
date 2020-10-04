@@ -17,4 +17,5 @@ The following is the report/documentation for the ```Problem Statement``` stated
 * [Software Bill of Materials](https://intern-appsecco.netlify.app/sbom/)
 * [Source Code Quality Analysis](https://intern-appsecco.netlify.app/linting-tool/)
 * [Performing DAST of SuiteCRM through Docker](https://intern-appsecco.netlify.app/docker/)
+* [Software Composition Analysis](https://intern-appsecco.netlify.app/sw-composition-analysis/)
 * [Complete Pipeline Structure](https://intern-appsecco.netlify.app/complete-pipeline-structure/)

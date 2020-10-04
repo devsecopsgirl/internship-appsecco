@@ -2,7 +2,7 @@
 
 ## Objective
 
-SuiteCRM should get deployed in a server that is the second VM, to perform the task and solve the 5th point of the [problem statement](https://intern-appsecco.netlify.app/problem-statement/) under Task 1.
+This section aims to deploy SuiteCRM on a server that is the second VM, to perform the task and solve the 5th point of the [problem statement](https://intern-appsecco.netlify.app/problem-statement/) under Task 1.
 
 ## SuiteCRM
 

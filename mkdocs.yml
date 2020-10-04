@@ -15,6 +15,7 @@ nav:
 - Software Bill of Materials: 'sbom.md'
 - Source Code Quality Analysis: 'linting-tool.md'
 - Performing DAST of SuiteCRM through Docker: 'docker.md'
+- Software Composition Analysis: 'sw-composition-analysis.md'
 - Complete Pipeline Structure: 'complete-pipeline-structure.md'
 
 theme: material
