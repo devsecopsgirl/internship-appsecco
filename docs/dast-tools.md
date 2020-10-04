@@ -1,4 +1,4 @@
-# Dynamic Analysis
+# Dynamic Analysis of SuiteCRM
 
 ## Objective
 

@@ -1,4 +1,4 @@
-# Jenkins Installation
+# Setting Up Jenkins 
 
 ## Objective
 

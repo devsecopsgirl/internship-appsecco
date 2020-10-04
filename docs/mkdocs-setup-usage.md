@@ -1,4 +1,4 @@
-# MkDocs setup for Report
+# Setting Up MkDocs for Report
 
 ## Objective
 

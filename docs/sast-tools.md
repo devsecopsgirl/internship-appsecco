@@ -1,4 +1,4 @@
-# SAST - Dependency-Check
+# Static Analysis of SuiteCRM
 
 ## Objective
 

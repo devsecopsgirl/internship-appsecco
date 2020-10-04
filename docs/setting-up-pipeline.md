@@ -1,4 +1,4 @@
-# Setting up a pipeline
+# Setting up pipeline
 
 ## Objective
 
