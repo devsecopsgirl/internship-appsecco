@@ -1,4 +1,4 @@
-# Setting up a pipeline:
+# Setting up a pipeline
 
 ## Objective
 
@@ -39,7 +39,7 @@ I clicked on `save` to save the configurations.
 
 ## Jenkinsfile
 
-Jenkinsfile is defined as a utility where the actions that are to be performed on the build can be written in a syntactical format in a file. I followed this [article](https://www.jenkins.io/doc/pipeline/tour/running-multiple-steps/) because it is the official documentation from Jenkins and it is easy to understand because it has a simple format with examples.
+Jenkinsfile is defined as a utility where the actions that are to be performed on the build can be written in a syntactical format in a file. I followed this official [documentation](https://www.jenkins.io/doc/pipeline/tour/running-multiple-steps/), as it has a simple format with examples.
 
 The following are the contents of the Jenkinsfile which executes the pipeline:
 
@@ -92,7 +92,7 @@ For deploying our files from the Jenkins VM to production VM, I did the SSH Acce
 
 ### SSH Access Configuration
 
-I referred to this [document](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2) because the way it is explained is simple to understand.
+I referred to this [document](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2) because the way it is explained is easy to understand.
 
 **Step 1:** Create the RSA Key Pair
 
@@ -119,7 +119,7 @@ I pressed enter because if I have given a passphrase, is then having to type it 
 The public key generated above was added to ~/.ssh/authorized_keys on the Production VM.
 
 ```
-ssh-copy-id jenkins@198.51.100.0
+ssh-copy-id jenkins@192.168.1.4
 ```
 
 ### Copying the folder
@@ -134,15 +134,15 @@ scp -r /var/lib/jenkins/workspace/Jenkins-Maven/target production@192.168.1.4:/h
 
 scp < source > < destination >
 
-In this A is Jenkins VM and B is production VM.
-To copy a file from B to A while logged into B:
+In this `A` is Jenkins VM and `B` is production VM.
+To copy a file from `B` to `A` while logged into `B`:
 
 ```
-scp -r /path/to/file username@a:/path/to/destination
+scp -r /path/to/file username@A:/path/to/destination
 ```
 
-To copy a file from B to A while logged into A:
+To copy a file from `B` to `A` while logged into `A`:
 
 ```
-scp -r username@b:/path/to/file /path/to/destination
+scp -r username@B:/path/to/file /path/to/destination
 ```

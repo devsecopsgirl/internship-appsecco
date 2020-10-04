@@ -15,7 +15,7 @@
     
     
       
-        <title>Set Up SuiteCRM - DevSecOps</title>
+        <title>Set Up SuiteCRM - DevSecOps Pipeline</title>
       
     
     
@@ -60,7 +60,7 @@
     
       <header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid" aria-label="Header">
-    <a href=".." title="DevSecOps" class="md-header-nav__button md-logo" aria-label="DevSecOps">
+    <a href=".." title="DevSecOps Pipeline" class="md-header-nav__button md-logo" aria-label="DevSecOps Pipeline">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -73,7 +73,7 @@
       
         <div class="md-header-nav__ellipsis">
           <span class="md-header-nav__topic md-ellipsis">
-            DevSecOps
+            DevSecOps Pipeline
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
@@ -134,13 +134,13 @@
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="DevSecOps" class="md-nav__button md-logo" aria-label="DevSecOps">
+    <a href=".." title="DevSecOps Pipeline" class="md-nav__button md-logo" aria-label="DevSecOps Pipeline">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
 
     </a>
-    DevSecOps
+    DevSecOps Pipeline
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -285,6 +285,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#dependencies" class="md-nav__link">
+    Dependencies
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#install-php-on-ubuntu-1804" class="md-nav__link">
     Install PHP on Ubuntu 18.04
   </a>
@@ -320,8 +327,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#error-resolved" class="md-nav__link">
-    Error Resolved
+  <a href="#errors-resolved" class="md-nav__link">
+    Errors Resolved
   </a>
   
 </li>
@@ -411,8 +418,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../docker/" title="Deploying SuiteCRM through Docker" class="md-nav__link">
-      Deploying SuiteCRM through Docker
+    <a href="../docker/" title="Performing DAST of SuiteCRM through Docker" class="md-nav__link">
+      Performing DAST of SuiteCRM through Docker
     </a>
   </li>
 
@@ -470,6 +477,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#dependencies" class="md-nav__link">
+    Dependencies
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#install-php-on-ubuntu-1804" class="md-nav__link">
     Install PHP on Ubuntu 18.04
   </a>
@@ -505,8 +519,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#error-resolved" class="md-nav__link">
-    Error Resolved
+  <a href="#errors-resolved" class="md-nav__link">
+    Errors Resolved
   </a>
   
 </li>
@@ -546,7 +560,13 @@
 <p>The application that I chose is <a href="https://suitecrm.com/">SuiteCRM</a>. It is a Customer Relationship Management tool which is the open-source forked version of <a href="https://www.sugarcrm.com/">SugarCRM</a>. SuiteCRM adds a few additional features to its fork and is free to use. 
 I chose the application because it is easy to download and deployed faster and it is also an application that is used in the real-world and is not just a dummy application.</p>
 <p>I checked out the requirements for installing SuiteCRM and made a workflow on how to carry on further tasks.
-Since SuiteCRM is written in PHP, I had to install a few things on the production VM manually.</p>
+SuiteCRM is written in PHP and I had to install dependencies on the production VM manually.</p>
+<h3 id="dependencies">Dependencies</h3>
+<ul>
+<li>Install PHP(PHP version 5.5.9, or 7.0 and above)</li>
+<li>Install MySQL</li>
+<li>Install Apache Web Server </li>
+</ul>
 <h3 id="install-php-on-ubuntu-1804">Install PHP on Ubuntu 18.04</h3>
 <p>Ubuntu 18.04 has PHP 7.2 in its repositories. I Installed it by running the commands below in terminal:</p>
 <pre><code>sudo apt-get -y install wget php php-{pear,cgi,common,curl,mbstring,gd,mysql,gettext,bcmath,imap,json,xml,fpm}
@@ -574,7 +594,7 @@ quit
 </code></pre>
 
 <h3 id="installing-apache-web-server">Installing Apache Web Server</h3>
-<p>For installing Apache server I followed this <a href="https://www.digitalocean.com/community/tutorials/how-to-install-the-apache-web-server-on-ubuntu-18-04">documentation</a>. The way documentation is written is easy to understand.</p>
+<p>For installing Apache server I followed this <a href="https://www.digitalocean.com/community/tutorials/how-to-install-the-apache-web-server-on-ubuntu-18-04">documentation</a>. This documentation is written is easy to understand.</p>
 <p>Step 1 — Installing Apache</p>
 <pre><code>sudo apt update
 sudo apt install apache2
@@ -645,7 +665,7 @@ Apache (v6)                ALLOW       Anywhere (v6)
 </code></pre>
 
 <h3 id="installing-composer">Installing Composer</h3>
-<p>SuiteCRM packages are not built. This is due to I  cloned the repository instead of using the zip archive. Hence, I had to install Composer, the package manager for PHP. I followed the official <a href="https://getcomposer.org/doc/00-intro.md">documentation</a> and performed required steps to install Composer globally. After a successful installation, I ran <code>composer install</code> in the project's root directory to build the dependencies for SuiteCRM.</p>
+<p>SuiteCRM packages are not built. This is because I  cloned the repository instead of using the zip archive. Hence, I had to install Composer, the package manager for PHP. I followed the official <a href="https://getcomposer.org/doc/00-intro.md">documentation</a> and performed required steps to install Composer globally. After a successful installation, I ran <code>composer install</code> in the project's root directory to build the dependencies for SuiteCRM.</p>
 <pre><code>php -r &quot;copy('https://getcomposer.org/installer', 'composer-setup.php');&quot;
 
 php -r &quot;if (hash_file('sha384', 'composer-setup.php') === '8a6138e2a05a8c28539c9f0fb361159823655d7ad2deecb371b04a83966c61223adc522b0189079e3e9e277cd72b8897') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;&quot;
@@ -659,7 +679,7 @@ php -r &quot;unlink('composer-setup.php');&quot;
 <pre><code>php composer.phar
 </code></pre>
 
-<h3 id="error-resolved">Error Resolved</h3>
+<h3 id="errors-resolved">Errors Resolved</h3>
 <p>I copied the files from SuiteCRM directory to location <code>/var/www/html/suitecrm</code> because to run the application SuiteCRM. When I tried running on a browser the URL, I got this error:
 <code>Composer autoloader not found. please run "composer install"</code></p>
 <p>In terminal, I ran the <code>composer install</code> and I got the list of issues:</p>
@@ -695,7 +715,7 @@ php -r &quot;unlink('composer-setup.php');&quot;
     - Installation request for league/oauth2-server 5.1.6 -&gt; satisfiable by league/oauth2-server[5.1.6].
 </code></pre>
 
-<p>In terminal, I run the following commands to sort out the above issues and install the packages mentioned:</p>
+<p>In terminal, I ran the following commands to sort out the above issues and install the packages mentioned:</p>
 <pre><code>sudo apt install php-gd
 sudo apt install zip php-imap
 sudo apt install php-zip
@@ -708,7 +728,7 @@ sudo apt-get install php7.2-intl
   /var/www/html/suitecrm/vendor does not exist and could not be created. 
 </code></pre>
 
-<p>So I ran the command:</p>
+<p>Note: I ran the below command and added sudo so the above directory got created.</p>
 <pre><code>sudo php composer.phar install
 </code></pre>
 
@@ -718,11 +738,11 @@ sudo apt-get install php7.2-intl
 <p>Accept the License and press <code>Enter</code> a new page will open.</p>
 <p><img alt="" src="../Images/2020-08-27_13-46.png" /></p>
 <p>Again there were two issues to resolve them, I 
-went to the location /etc/php/7.2/apache2/php.ini and enter the command</p>
+went to the location <code>/etc/php/7.2/apache2/php.ini</code> and entered the command</p>
 <pre><code>sudo nano /etc/php/7.2/apache2/php.ini
 </code></pre>
 
-<p>Made these changes in the nano file:</p>
+<p>Made these changes in the <code>php.ini</code> file:</p>
 <ul>
 <li>upload_max_filesize = 100M</li>
 <li>cgi.fix_pathinfo=0</li>
@@ -732,7 +752,7 @@ went to the location /etc/php/7.2/apache2/php.ini and enter the command</p>
 <img alt="" src="../Images/2020-08-27_16-20.png" /></p>
 <p>Click <code>next</code>, and then another screen opens, enter the database name, hostname, username, and password. Also, specify the Admin user details on the right side of the screen.</p>
 <p><img alt="" src="../Images/2020-08-27_17-23.png" /></p>
-<p>I forgot my MySQL password of my database so, I ran this command mentioning the username and password.</p>
+<p>I forgot the MySQL password of my database so I ran this below command to reset the password.</p>
 <pre><code>ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
 </code></pre>
 

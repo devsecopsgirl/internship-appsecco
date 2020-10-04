@@ -15,7 +15,7 @@
     
     
       
-        <title>Problem Statement - DevSecOps</title>
+        <title>Problem Statement - DevSecOps Pipeline</title>
       
     
     
@@ -60,7 +60,7 @@
     
       <header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid" aria-label="Header">
-    <a href=".." title="DevSecOps" class="md-header-nav__button md-logo" aria-label="DevSecOps">
+    <a href=".." title="DevSecOps Pipeline" class="md-header-nav__button md-logo" aria-label="DevSecOps Pipeline">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -73,7 +73,7 @@
       
         <div class="md-header-nav__ellipsis">
           <span class="md-header-nav__topic md-ellipsis">
-            DevSecOps
+            DevSecOps Pipeline
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
@@ -134,13 +134,13 @@
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="DevSecOps" class="md-nav__button md-logo" aria-label="DevSecOps">
+    <a href=".." title="DevSecOps Pipeline" class="md-nav__button md-logo" aria-label="DevSecOps Pipeline">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
 
     </a>
-    DevSecOps
+    DevSecOps Pipeline
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -356,8 +356,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../docker/" title="Deploying SuiteCRM through Docker" class="md-nav__link">
-      Deploying SuiteCRM through Docker
+    <a href="../docker/" title="Performing DAST of SuiteCRM through Docker" class="md-nav__link">
+      Performing DAST of SuiteCRM through Docker
     </a>
   </li>
 
@@ -432,20 +432,21 @@
                 <h1 id="problem-statement">Problem Statement</h1>
 <h2 id="task-1">Task 1</h2>
 <ol>
-<li>Setup the infrastructure, required for the task, on 2 virtual machines running locally on a laptop. One VM contains the Jenkins and related infrastructure, and the second VM is for deploying SuiteCRM using the pipeline.</li>
+<li>Setup the infrastructure, required for the task, on two virtual machines running locally on a laptop. One VM contains the Jenkins and related infrastructure, and the second VM is for deploying SuiteCRM using the pipeline.</li>
 <li>Setup the infrastructure, of <a href="https://www.jenkins.io/">Jenkins</a> for basic pipeline setup.</li>
-<li>Do document extensively in markdown and deploy the documentation in a MkDocs website.</li>
-<li>Setting up the basic pipeline.</li>
-<li>Next, <a href="https://suitecrm.com/">SuiteCRM</a> should get deployed in a server that is the second VM, I installed. </li>
+<li>Do document extensively in markdown and deploy the documentation as a MkDocs website.</li>
+<li>Getting to know Jenkins pipeline.</li>
+<li><a href="https://suitecrm.com/">SuiteCRM</a> should get deployed in a server that is the second VM. </li>
 <li>Deployment of SuiteCRM on production server through jenkins pipeline.</li>
-<li>Identify suitable tools for SuiteCRM to perform SAST and generate a report.</li>
+<li>Identifying suitable tools for SuiteCRM to perform SAST and generate a report.</li>
 <li>Identifying suitable tools for SuiteCRM to perform DAST and generate a report.</li>
-<li>Generating Software Bill of Materials of SuiteCRM for all dependencies.</li>
+<li>Generate Software Bill of Materials of SuiteCRM for all dependencies.</li>
 <li>Perform Source Code Quality Analysis for linting errors to improve code quality and generate quality report.</li>
 </ol>
 <h2 id="task-2">Task 2</h2>
 <ol>
-<li>Implementing SuiteCRM through Docker container and implementing through pipeline.</li>
+<li>Bring up a temporary testing environment of SuiteCRM for running DAST tool with Docker.</li>
+<li>Start and stop the testing container and DAST tool container through jenkins pipeline.</li>
 </ol>
                 
               

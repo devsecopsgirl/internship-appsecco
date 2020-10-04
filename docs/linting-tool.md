@@ -14,8 +14,8 @@ Code Quality Analysis tools are language-specific. So for SuiteCRM which are mea
 
 ## PHP Code Sniffer
 
-PHP_CodeSniffer is a set of two PHP scripts; the main phpcs script that helps to detect violations of pre-defined coding standards and a second phpcbf script that can automatically correct those violations.
-PHP_CodeSniffer is an essential development tool that ensures code remains clean and consistent. I followed [this](https://github.com/squizlabs/PHP_CodeSniffer#about) GitHub documentation. And I will only go with phpcs I was only concerned with identifying the linting issues therefore skipped the second script.
+`PHP_CodeSniffer` is a set of two PHP scripts; the main `phpcs` script that helps to detect violations of pre-defined coding standards and a second `phpcbf` script that can automatically correct those violations.
+PHP_CodeSniffer is an essential development tool that ensures code remains clean and consistent. I followed [this](https://github.com/squizlabs/PHP_CodeSniffer#about) GitHub documentation. And I will only go with `phpcs` as I was only concerned with identifying the linting issues therefore skipped the second script.
 
 ### Code Sniffer for SuiteCRM
 
@@ -32,7 +32,8 @@ After this I ran `phpcs` on the SuiteCRM project directory
 ```
 phpcs /var/lib/jenkins/workspace/suitecrm-pipeline
 ```
-Note: The cursor was getting stuck and there was no output so I ran a single PHP file with the above command. It generated the output table. It was getting stuck due to the issue of memory run out of free memory since PHPCS was not able to scan the whole project directory at once. I generated a python script `python3_phpcs.py` to identify all PHP files present in the SuiteCRM project directory and ran PHPCS on the files individually.
+Note: The cursor was getting stuck and there was no output so I ran a single PHP file with the above command and it generated the output table. It was getting stuck due to the issue, out of free memory since `phpcs` was not able to scan the whole SuiteCRM application directory at once. I used a python script `python3_phpcs.py`
+from the [report](https://jenkins-report.netlify.app/limitations/#php-code-sniffer) to identify all PHP files present in the SuiteCRM project directory and ran `phpcs` on the files individually.
 
 ```
 #!/usr/bin/python3

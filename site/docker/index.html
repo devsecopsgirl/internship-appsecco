@@ -15,7 +15,7 @@
     
     
       
-        <title>Deploying SuiteCRM through Docker - DevSecOps</title>
+        <title>Performing DAST of SuiteCRM through Docker - DevSecOps Pipeline</title>
       
     
     
@@ -49,7 +49,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#implementing-suitecrm-through-docker" class="md-skip">
+        <a href="#performing-dast-of-suitecrm-through-docker" class="md-skip">
           Skip to content
         </a>
       
@@ -60,7 +60,7 @@
     
       <header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid" aria-label="Header">
-    <a href=".." title="DevSecOps" class="md-header-nav__button md-logo" aria-label="DevSecOps">
+    <a href=".." title="DevSecOps Pipeline" class="md-header-nav__button md-logo" aria-label="DevSecOps Pipeline">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -73,11 +73,11 @@
       
         <div class="md-header-nav__ellipsis">
           <span class="md-header-nav__topic md-ellipsis">
-            DevSecOps
+            DevSecOps Pipeline
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              Deploying SuiteCRM through Docker
+              Performing DAST of SuiteCRM through Docker
             
           </span>
         </div>
@@ -134,13 +134,13 @@
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="DevSecOps" class="md-nav__button md-logo" aria-label="DevSecOps">
+    <a href=".." title="DevSecOps Pipeline" class="md-nav__button md-logo" aria-label="DevSecOps Pipeline">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
 
     </a>
-    DevSecOps
+    DevSecOps Pipeline
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -316,14 +316,14 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        Deploying SuiteCRM through Docker
+        Performing DAST of SuiteCRM through Docker
         <span class="md-nav__icon md-icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
         </span>
       </label>
     
-    <a href="./" title="Deploying SuiteCRM through Docker" class="md-nav__link md-nav__link--active">
-      Deploying SuiteCRM through Docker
+    <a href="./" title="Performing DAST of SuiteCRM through Docker" class="md-nav__link md-nav__link--active">
+      Performing DAST of SuiteCRM through Docker
     </a>
     
       
@@ -371,8 +371,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#suitecrm-installation" class="md-nav__link">
-    SuiteCRM installation
+  <a href="#suitecrm-installation-through-a-container" class="md-nav__link">
+    SuiteCRM installation through a container
   </a>
   
 </li>
@@ -470,8 +470,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#suitecrm-installation" class="md-nav__link">
-    SuiteCRM installation
+  <a href="#suitecrm-installation-through-a-container" class="md-nav__link">
+    SuiteCRM installation through a container
   </a>
   
 </li>
@@ -511,9 +511,9 @@
                   
                 
                 
-                <h1 id="implementing-suitecrm-through-docker">Implementing SuiteCRM through Docker</h1>
+                <h1 id="performing-dast-of-suitecrm-through-docker">Performing DAST of SuiteCRM through Docker</h1>
 <h2 id="objective">Objective</h2>
-<p>This section aims to implement the application SuiteCRM through Docker and deploy it through a pipeline. Solution to the first point of the <a href="https://intern-appsecco.netlify.app/problem-statement/">problem statement</a> under Task 2.</p>
+<p>This section aims to implement the application SuiteCRM through Docker and deploy it through a pipeline and it's just improvisation of previous section <code>Dynamic Analysis of SuiteCRM</code>(https://intern-appsecco.netlify.app/dast-tools/) as here I will perform DAST of SuiteCRM through container. Solution to the first and second point of the <a href="https://intern-appsecco.netlify.app/problem-statement/">problem statement</a> under Task 2.</p>
 <h2 id="docker">Docker</h2>
 <p>An open-source project that automates the deployment of software applications inside containers by providing an additional layer of abstraction and automation of OS-level virtualization on Linux. In simple, Docker is a tool that allows developers, sys-admins, etc. to deploy applications in a sandbox (which in docker world we call it containers) to run over the host operating system. For Docker commands follow this <a href="https://github.com/wsargent/docker-cheat-sheet#dockerfile">link</a>. Before installation, let's talk about a little bit about container, image, and Dockerfile as we will come across these terms further:</p>
 <ul>
@@ -526,13 +526,17 @@
 <p>I started with building a dockerfile in which I implemented a PHP image because SuiteCRM is a PHP based application. I copied the image from dockerhub of <a href="https://hub.docker.com/_/php">php</a></p>
 <h3 id="apache-installation">Apache Installation</h3>
 <p>I begin with building the Dockerfile firstly with apache installation. </p>
-<p>Note: got an error <code>unable to prepare context: unable to evaluate symlinks in Dockerfile path: lstat /home/jenkins-infra/docker-files/Dockerfile: no such file or directory</code>. Be careful while naming the Docker file name as <code>Dockerfile</code> other names don't work.</p>
+<p>Note: got an error <code>unable to prepare context: unable to evaluate symlinks in Dockerfile path: lstat /home/jenkins-infra/docker-files/Dockerfile: no such file or directory</code>. So I renamed the Docker file name as <code>Dockerfile</code>.</p>
 <p>NOTE: I got an error my apache server was not getting served. I will explain in a little detail:</p>
 <ul>
-<li>I stopped my container <code>docker stop f9af4fb06f4c</code> and ran again <code>docker run -d --rm --name ubuntu2 -p 1234:80 4c0437bfcded</code>. After the container was build I checked If the port 1234 was open or not by <code>netstat -ntap</code> But there was no such network port 1234 open.</li>
-<li>Then I checked the <code>docker logs ubuntu2</code> It showed <code>Error: No such container: ubuntu2</code> then I checked <code>docker ps -a</code> which showed the container exited in a minute.</li>
-<li>After this I ran the above command of building container without the <code>-d flag</code> which is detached mode means running container in background then it gave the error <code>/bin/sh: 1: Syntax error: Unterminated quoted string</code>. From here I got to know I have missed a quote in my dockerfile in a command which I fixed.</li>
+<li>I stopped my container <code>docker stop f9af4fb06f4c</code> and ran again</li>
 </ul>
+<pre><code>docker run -d --rm --name dockercon -p 1234:80 4c0437bfcded`
+</code></pre>
+
+<p>After the container was build I checked If the port <code>1234</code> was open or not by <code>netstat -ntap</code> But there was no such network port <code>1234</code> open.
+* Then I checked the <code>docker logs dockercon</code> It showed <code>Error: No such container: dockercon</code> then I checked <code>docker ps -a</code> which showed the container exited in a minute.
+* After this I ran the above command of building container without the <code>-d flag</code> which is detached mode means running container in background then it gave the error <code>/bin/sh: 1: Syntax error: Unterminated quoted string</code>. From here I got to know I have missed a quote in my dockerfile in a command which I fixed.</p>
 <p>Dockerfile which finally worked is </p>
 <pre><code># getting base image PHP
 
@@ -550,7 +554,7 @@ CMD [&quot;apache2ctl&quot;,&quot;-D&quot;,&quot;FOREGROUND&quot;]
 EXPOSE 80
 </code></pre>
 
-<h3 id="suitecrm-installation">SuiteCRM installation</h3>
+<h3 id="suitecrm-installation-through-a-container">SuiteCRM installation through a container</h3>
 <ul>
 <li>Apache started running, but then I decided to use the image <code>php:7.4-apache</code> which have apache built-in and not to separately install it. </li>
 <li>This is the Dockerfile I am using for now</li>
@@ -576,7 +580,23 @@ EXPOSE 80
 </code></pre>
 
 <ul>
-<li>I got this error on the SuiteCRM install.php page</li>
+<li>I build the image by the command below:</li>
+</ul>
+<pre><code>docker build -t &lt;name&gt;:latest .
+</code></pre>
+
+<ul>
+<li>I ran the container:</li>
+</ul>
+<pre><code>docker run -d --rm --name &lt;name of container&gt; -p 1234:80 &lt;docker image name&gt;
+</code></pre>
+
+<p><strong>-d</strong> : Detached mode means running container in background.
+<strong>--rm</strong> : It removes the container when the base system restart or shutdown.
+<strong>--name</strong> : For giving name to container.
+<strong>-p</strong> : To define ports.</p>
+<ul>
+<li>I got the below error on the SuiteCRM <code>install.php</code> page when I went to the URL http://192.168.1.2:1234/suitecrm</li>
 </ul>
 <pre><code>Warning: require_once(modules/DynamicFields/DynamicField.php): failed to open stream: Permission denied in /var/www/html/suitecrm/data/SugarBean.php on line 45
 
@@ -584,19 +604,20 @@ Fatal error: require_once(): Failed opening required 'modules/DynamicFields/Dyna
 </code></pre>
 
 <p>So I changed the permission of SuiteCRM directory within the running container</p>
-<pre><code>chown -R www-data:www-data suitecrm
+<pre><code>docker exec -it &lt;container name&gt; /bin/bash
+chown -R www-data:www-data suitecrm
 </code></pre>
 
-<p>Changing permissions take too long so I mounted the directory of SuiteCRM.</p>
+<p>Changing permissions took too long so I mounted the directory of SuiteCRM.</p>
 <ul>
-<li>I installed zip because I got error Zip module not present in docker I added this command in Dockerfile</li>
+<li>I installed zip because I got error Zip module was not present in docker I added this command in Dockerfile</li>
 </ul>
 <pre><code>RUN apt-get install -y libzip-dev zip unzip zlib1g-dev
 RUN docker-php-ext-install mysqli zip
 </code></pre>
 
 <ul>
-<li>My database was not working so I firstly in <code>sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf</code> file binded the port 0.0.0.0 to allow all ports  and also allowed the ports 3306 the mysql port. Then I ran the below command to change the <code>suitecrm@localhost</code> to <code>suitecrm@%</code> so that it is accessible from anywhere.</li>
+<li>My database was not working so I firstly in <code>/etc/mysql/mysql.conf.d/mysqld.cnf</code> file binded the port 0.0.0.0 to allow all ports. I also allowed the port 3306 the mysql port. Then I ran the below command to change the <code>suitecrm@localhost</code> to <code>suitecrm@%</code> so that user is able to login from anywhere.</li>
 </ul>
 <pre><code>sudo mysql -u root -p
 UPDATE mysql.user SET Host='%' WHERE Host='localhost' AND User='suitecrm';
@@ -605,18 +626,18 @@ FLUSH PRIVILEGES;
 </code></pre>
 
 <ul>
-<li>I copied the config.php file after the installation of suitecrm done. To use scp to copy files to the remote server from your computer or copy files from the remote server to your computer, you must have the scp program available in both places (computer and remote server). This documentation will be <a href="https://linuxhint.com/linux_scp_command/">helpful</a></li>
+<li>I copied the config.php file after the installation of SuiteCRM is complete. To use scp to copy files to the remote server from your computer or copy files from the remote server to your computer, you must have the scp program available in both places (computer and remote server). This documentation will be <a href="https://linuxhint.com/linux_scp_command/">helpful</a></li>
 </ul>
 <p><code>scp -r config.php jenkins-infra@192.168.1.2:/home/jenkins-infra/docker-files</code></p>
 <p>but it gave error <code>bash: scp: command not found</code> bec. openssh not installed in container 
 <code>apt install -y openssh-client openssh-server</code> also install on client means we're saving the file the host/client <code>apt install -y openssh-client</code></p>
 <h2 id="dast-scan">DAST scan</h2>
-<p>On VM, run the dast scan similar to earlier as in the section <a href="https://intern-appsecco.netlify.app/dast-tools/">DevSecOps Dynamic Analysis of SuiteCRM</a>. Just do the changes in the command of URL same to where suitecrm is running inside the docker container</p>
+<p>On VM, run the DAST scan similar to earlier as in the section <a href="https://intern-appsecco.netlify.app/dast-tools/">DevSecOps Dynamic Analysis of SuiteCRM</a>. Just do the changes in the command of URL same to where suitecrm is running inside the docker container</p>
 <pre><code>docker run -i owasp/zap2docker-stable zap-baseline.py -t &quot;http://192.168.1.2:1234/suitecrm&quot; -l INFO
 </code></pre>
 
 <ul>
-<li>An error I was facing of no space on the device so remove the images and stopped containers by using the commands</li>
+<li>An error I was facing of no space on the device so remove the images and stopped containers by using the below commands</li>
 </ul>
 <pre><code>docker rmi &lt;image image name/ image id&gt;
 docker rm &lt;docker name/docker id&gt;
@@ -658,7 +679,7 @@ docker rm &lt;docker name/docker id&gt;
 </code></pre>
 
 <ul>
-<li>When I opened the URL http://192.168.1.2:1233/suitecrm/ the suitecrm was not getting deployed and I was getting warnings </li>
+<li>When I opened the URL <code>http://192.168.1.2:1233/suitecrm/</code>. SuiteCRM was not getting deployed and I was getting warnings </li>
 </ul>
 <pre><code>    Warning: sugar_file_put_contents_atomic() : fatal rename failure '/tmp/tempPRdtfq' -&gt; 'cache/modules/Employees/Employeevardefs.php' in /var/www/html/suitecrm/include/utils/sugar_file_utils.php on line 204
 

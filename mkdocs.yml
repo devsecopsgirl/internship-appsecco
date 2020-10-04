@@ -1,4 +1,4 @@
-site_name: 'DevSecOps'
+site_name: 'DevSecOps Pipeline'
 
 nav:
 - Introduction: 'index.md'
@@ -14,7 +14,7 @@ nav:
 - Dynamic Analysis of SuiteCRM: 'dast-tools.md'
 - Software Bill of Materials: 'sbom.md'
 - Source Code Analysis: 'linting-tool.md'
-- Deploying SuiteCRM through Docker: 'docker.md'
+- Performing DAST of SuiteCRM through Docker: 'docker.md'
 - Complete Pipeline Structure: 'complete-pipeline-structure.md'
 
 theme: material

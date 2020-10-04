@@ -12,7 +12,7 @@ Jenkins can be installed through native system packages, Docker, or even run sta
 
 ### Prerequisite
 
-1. I installed VM with Ubuntu 18.04 server for [Installing Jenkins](https://www.jenkins.io/doc/book/installing/). I followed the steps under the Debian/Ubuntu section.
+1. I have setup Ubuntu 18.04 VM for [Installing Jenkins](https://www.jenkins.io/doc/book/installing/). I followed the steps under the Debian/Ubuntu section.
 
 2. I also installed Java 8, by this [link](https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04#installing-specific-versions-of-openjdk) specific versions of OpenJDK on Ubuntu 18.04. I decided to go with this documentation as it was concise. 
 
@@ -73,22 +73,22 @@ Now again I check the status of jenkins:
 sudo service jenkins status
 ```
 
-It SHOWS its active now.
+It shows it is active now.
 
 ### Step 2 — Starting Jenkins
 
-I started Jenkins using systemctl command because systemctl is used to examine and control the state of “systemd” system and service manager.:
+I started Jenkins using systemctl command because systemctl is used to examine and control the state of “systemd” system and service manager:
 
 ```
 sudo systemctl start jenkins
 ```
 
-Since systemctl doesn’t display output, I am using its status command to verify that Jenkins started successfully:
+I checked the status of Jenkins service with the below command
 ```
 sudo systemctl status jenkins
 ``` 
 
-If it's successfully installed, the beginning of the output should show that the service is **active** and configured to start for boot. Jenkins is running now. To reach it from a web browser I will adjust the firewall rules to complete the initial setup.
+If it is successfully installed, the beginning of the output will show that the service is **active** and configured to start for boot. Jenkins is running now. To reach it from a web browser I will adjust the firewall rules to complete the initial setup.
 
 ### Step 3 - Opening the Firewall
 
@@ -98,7 +98,7 @@ By default, Jenkins runs on port 8080, opening that port using ufw(Uncomplicated
 sudo ufw allow 8080
 ```
 
-To check the ufw's status confirm the new rules:
+To check the ufw status confirm the new rules:
 
 ```
 sudo ufw status
@@ -125,7 +125,7 @@ The `Unlock Jenkins` screen opens, which will display where the initial password
 
 ![](Images/2020-08-19_13-58.png)
 
-In the terminal window I will use the cat command to display the password:
+In the terminal window, I will use the cat command to display the password:
 
 ```
 sudo cat /var/lib/jenkins/secrets/initialAdminPassword

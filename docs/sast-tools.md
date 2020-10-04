@@ -27,7 +27,7 @@ stage ('Dependency-Check Analysis'){
             }    
         }
 ```
-After this, I got the report in the `Console Output` after the pipeline is successfully build. Now to get a copy of the report add one more step to jenkinsfile under the `Dependency-Check Analysis` stage, and I also moved the report to the `reports` directory where I will be storing all other reports.
+After this, I got the report in the `Console Output` after the pipeline is successfully built. Now to get a copy of the report I added one more step to jenkinsfile under the `Dependency-Check Analysis` stage, and also moved the report to the `reports` directory where I will be storing all other reports.
 
 ```
 dependencyCheckPublisher pattern: 'dependency-check-report.xml' 
@@ -35,7 +35,7 @@ sh 'mv dependency-check-report.xml /var/lib/jenkins/workspace/reports'
 ```
 This will create a `dependency-check-report.xml` report file in the workspace and I can also see in Jenkins the `Dependency-Check Trend` that is a graphical representation of vulnerabilities found in the SuiteCRM application and they are in which category that is critical, high, medium, low or unassigned. Here is the [report](https://github.com/Priyam5/internship-appsecco/blob/master/Reports/dependency-check-report.xml) which generated after OWASP Dependency-Check.
 
-**Note:** I was getting this error `[DependencyCheck] Unable to find Dependency-Check reports to parse` because I was using the latest version 5 of OWASP Dependency-Check Plugin but writing the code according to the v4. The default path for report search was"**/dependency-check-report.xml" in v4 and has changed to "dependency-check-report.xml" in v5.
+**Note:** I was getting this error `[DependencyCheck] Unable to find Dependency-Check reports to parse` because I was using the latest version 5 of OWASP Dependency-Check Plugin but writing the code according to the v4. The default path for report search was `**/dependency-check-report.xml` in v4 and has changed to `dependency-check-report.xml` in v5.
 
 ### Snyk
 
@@ -66,12 +66,12 @@ Configure Jenkins settings to install the Snyk Security Scanner plugin:
     *Description* - optional free text
 #### Jenkins integration
 
-* From within Jenkins, generate a Snyk Security pipe:
+* From within Jenkins, generate a Snyk Security pipeline:
 
     1. Navigate to the pipeline project and click Pipeline Syntax.
-    2. From the Sample Step dropdown, select snykSecurity: Invoke Snyk Security task.
+    2. From the Sample Step dropdown, select `snykSecurity: Invoke Snyk Security task`.
     3. Configure the security task as follows when issues are found select `Let the build continue` display vulnerabilities and details, but allow the build to continue and provide the snyk token.
-    4. Click Generate Pipeline Script. The pipe syntax is generated and displayed
+    4. Clicked on `Generate Pipeline Script`. The pipeline syntax is generated and displayed.
   
 * In the pipeline add the step under the `Snyk Security` stage before build stage and I also moved the report to the `reports` directory where I will be storing all other reports:
 ```

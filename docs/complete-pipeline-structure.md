@@ -5,7 +5,7 @@ This section aims to define the final structure that is achieved for the pipelin
 
 ## Pipeline
 
-When I completed with all the stages in the pipeline of fetching code from GitHub, building it, static scan, dynamic scan, generating SBOM, code quality analysis, deploying through Docker and doing DAST scan for the SuiteCRM, the final step was to combine all the stages which are being worked so far into a single pipeline as it was done in two pipelines just for it do not take a lot of time every time we build the pipeline.
+When I completed with all the stages in the pipeline of fetching code from GitHub, building it, static scan, dynamic scan, generating SBOM, code quality analysis, deploying through Docker and doing DAST scan for the SuiteCRM, the final step was to combine all the stages which are being worked so far into a single pipeline as it was done in two separate pipelines just for it do not take a lot of time every time we build the pipeline.
 
 ### Diagrammatic representation
 

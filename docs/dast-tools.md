@@ -50,8 +50,8 @@ sudo service docker status
 
 ### Configure OWASP ZAP with Docker
 
-To understand how zap works I first manually perform the steps in the jenkins pipeline and then integrate with jenkins pipeline in the next section.
-For using OWASP ZAP with docker, I have to pull the ZAP image from [docker hub](https://hub.docker.com/)]. I went through this [documentation](https://blog.mozilla.org/fxtesteng/2016/05/11/docker-owasp-zap-part-one/) as a lot of errors are been resolved along with solutions. So firstly I ran ZAP on my Jenkins VM to figure out how it works and test the target URL. And also many flags have been used which can be found here in the official documentation of [zap](https://www.zaproxy.org/docs/docker/baseline-scan/)
+To understand how ZAP works I first manually perform the steps in the Jenkins VM and then integrated with jenkins pipeline in the next section.
+For using OWASP ZAP with docker, I have to pull the ZAP image from [docker hub](https://hub.docker.com/). I went through this [documentation](https://blog.mozilla.org/fxtesteng/2016/05/11/docker-owasp-zap-part-one/) as a lot of errors are been resolved along with solutions. So firstly I ran ZAP on my Jenkins VM to figure out how it works and test the target URL. And also many flags have been used which can be found here in the official documentation of [zap](https://www.zaproxy.org/docs/docker/baseline-scan/)
 
 * Firstly, I pulled the docker image to be tested.
 ```
@@ -107,7 +107,7 @@ docker run -v $(pwd):/zap/wrk/ -i owasp/zap2docker-stable zap-baseline.py -t "ht
 
 ### Jenkins Integration 
 
-Now I will integrate baseline-scan as part of SuiteCRM in the Jenkins-pipeline. I created a separate pipeline for DAST tools as the scan might become too long after combining both SAST and DAST scans. So in this pipeline, we have to follow the steps of fetching the code, building the pipeline, deploying the pipeline, and then at last DAST scan tools.
+Now I will integrate baseline-scan as part of SuiteCRM in the Jenkins-pipeline. I created a separate pipeline for DAST tools as the scan might become too long after combining both SAST and DAST scans also the scan should not be obstructing the business by delaying deployment to production. So in this pipeline, we have to follow the steps of fetching the code, building the pipeline, deploying the application, and then at last DAST scan tools.
 
 * Starting with the first stage that is fetching the code of SuiteCRM from the GitHub repository.
 ```
@@ -126,20 +126,7 @@ stage ('Build') {
             }
         }
 ```
-
-* The third stage is of OWASP ZAP scan. In this, we will first pull the zap image after that makes a container named `zap2`  and mention a port to run and the mentioned port should not be used by any other application or it will throw error failed to access the provided URL. Then print the report `zap_baseline_report2.html`.
-
-```
-stage ('OWASP ZAP') {
-           steps {
-                sh 'docker pull owasp/zap2docker-stable'
-                sh 'docker run --rm -e LC_ALL=C.UTF-8 -e LANG=C.UTF-8 --name zap2 -u zap -p 8090:8080 -d owasp/zap2docker-stable zap.sh -daemon -port 8080 -host 0.0.0.0 -config api.disablekey=true'
-                sh 'docker run -v $(pwd)/zap-report:/zap/wrk/:rw --rm -i owasp/zap2docker-stable zap-baseline.py -t "http://192.168.1.4/suitecrm" -I -r zap_baseline_report2.html -l PASS'
-                sh 'docker rm -f zap2'
-           }
-        }
-```
-* The fourth stage is for deploying the SuiteCRM application
+* The third stage is for deploying the SuiteCRM application
 
 ```
 stage ('Deploying App to production server'){
@@ -151,6 +138,18 @@ stage ('Deploying App to production server'){
                 sh 'ssh -o StrictHostKeyChecking=no production@192.168.1.4 "sudo cp -r /home/production/config.php /home/production/html/suitecrm"'     
                 sh 'ssh -o StrictHostKeyChecking=no production@192.168.1.4 "cd /home/production/html/suitecrm && sudo chmod -R 755 * && sudo chown -R www-data:www-data *"'
                 
+           }
+        }
+```
+* The fourth stage is of OWASP ZAP scan. In this, we will first pull the zap image after that makes a container named `zap2`  and mention a port to run and the mentioned port should not be used by any other application or it will throw error failed to access the provided URL. Then print the report `zap_baseline_report2.html`.
+
+```
+stage ('OWASP ZAP') {
+           steps {
+                sh 'docker pull owasp/zap2docker-stable'
+                sh 'docker run --rm -e LC_ALL=C.UTF-8 -e LANG=C.UTF-8 --name zap2 -u zap -p 8090:8080 -d owasp/zap2docker-stable zap.sh -daemon -port 8080 -host 0.0.0.0 -config api.disablekey=true'
+                sh 'docker run -v $(pwd)/zap-report:/zap/wrk/:rw --rm -i owasp/zap2docker-stable zap-baseline.py -t "http://192.168.1.4/suitecrm" -I -r zap_baseline_report2.html -l PASS'
+                sh 'docker rm -f zap2'
            }
         }
 ```
@@ -175,11 +174,11 @@ For this in the Jenkins VM run this command to switch to zap
 ```
 docker run -it owasp/zap2docker-stable
 ```
-Then cat the /etc/passwd to check the permissions they have. It showed this to me `zap:x:1000:1000::/home/zap:/bin/bash`. After this make a directory `zap-report` in the workspace of jenkins. Run the below command to give the permissions the directory made:
+Then cat the `/etc/passwd` to check the user id. It showed this to me `zap:x:1000:1000::/home/zap:/bin/bash`. After this make a directory `zap-report` in the workspace of jenkins. Run the below command to give the permissions to `zap:x` user in docker for the following directory that is created:
 ```
 sudo chown -R 1000:1000 /var/lib/jenkins/workspace/dast-jenkins-pipeline/zap-report/
 ```
-* So the full pipeline looks like this for DAST pipeline which was successfull.
+* So the full pipeline looks like this for DAST pipeline which was successful.
 
 ```
 pipeline {
@@ -198,14 +197,6 @@ pipeline {
             }
         }
 
-        stage ('OWASP ZAP') {
-           steps {
-                sh 'docker pull owasp/zap2docker-stable'
-                sh 'docker rm -f zap2 ; docker run --rm -e LC_ALL=C.UTF-8 -e LANG=C.UTF-8 --name zap2 -u zap -p 8090:8080 -d owasp/zap2docker-stable zap.sh -daemon -port 8080 -host 0.0.0.0 -config api.disablekey=true'
-                sh 'docker run  -v $(pwd)/zap-report:/zap/wrk/:rw --rm -i owasp/zap2docker-stable zap-baseline.py -t "http://192.168.1.4/suitecrm" -I -r zap_baseline_report2.html -l PASS'
-           }
-        }
-        
         stage ('Deploying App to production server'){
             steps {
                 sh 'echo "Deploying App to production Server"'
@@ -216,7 +207,15 @@ pipeline {
                 sh 'ssh -o StrictHostKeyChecking=no production@192.168.1.4 "cd /home/production/html/suitecrm && sudo chmod -R 755 * && sudo chown -R www-data:www-data *"'
                 
            }
-        }    
+        } 
+
+        stage ('OWASP ZAP') {
+           steps {
+                sh 'docker pull owasp/zap2docker-stable'
+                sh 'docker rm -f zap2 ; docker run --rm -e LC_ALL=C.UTF-8 -e LANG=C.UTF-8 --name zap2 -u zap -p 8090:8080 -d owasp/zap2docker-stable zap.sh -daemon -port 8080 -host 0.0.0.0 -config api.disablekey=true'
+                sh 'docker run  -v $(pwd)/zap-report:/zap/wrk/:rw --rm -i owasp/zap2docker-stable zap-baseline.py -t "http://192.168.1.4/suitecrm" -I -r zap_baseline_report2.html -l PASS'
+           }
+        }   
     }
 }   
 

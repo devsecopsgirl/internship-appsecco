@@ -15,7 +15,7 @@
     
     
       
-        <title>Source Code Analysis - DevSecOps</title>
+        <title>Source Code Analysis - DevSecOps Pipeline</title>
       
     
     
@@ -60,7 +60,7 @@
     
       <header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid" aria-label="Header">
-    <a href=".." title="DevSecOps" class="md-header-nav__button md-logo" aria-label="DevSecOps">
+    <a href=".." title="DevSecOps Pipeline" class="md-header-nav__button md-logo" aria-label="DevSecOps Pipeline">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -73,7 +73,7 @@
       
         <div class="md-header-nav__ellipsis">
           <span class="md-header-nav__topic md-ellipsis">
-            DevSecOps
+            DevSecOps Pipeline
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
@@ -134,13 +134,13 @@
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="DevSecOps" class="md-nav__button md-logo" aria-label="DevSecOps">
+    <a href=".." title="DevSecOps Pipeline" class="md-nav__button md-logo" aria-label="DevSecOps Pipeline">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
 
     </a>
-    DevSecOps
+    DevSecOps Pipeline
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -390,8 +390,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../docker/" title="Deploying SuiteCRM through Docker" class="md-nav__link">
-      Deploying SuiteCRM through Docker
+    <a href="../docker/" title="Performing DAST of SuiteCRM through Docker" class="md-nav__link">
+      Performing DAST of SuiteCRM through Docker
     </a>
   </li>
 
@@ -505,8 +505,8 @@
 <h2 id="linting-tools-for-suitecrm">Linting tools for SuiteCRM</h2>
 <p>Code Quality Analysis tools are language-specific. So for SuiteCRM which are meant for PHP applications. The tool I used is PHP Code Sniffer (PHPCS) there are many other tools available.</p>
 <h2 id="php-code-sniffer">PHP Code Sniffer</h2>
-<p>PHP_CodeSniffer is a set of two PHP scripts; the main phpcs script that helps to detect violations of pre-defined coding standards and a second phpcbf script that can automatically correct those violations.
-PHP_CodeSniffer is an essential development tool that ensures code remains clean and consistent. I followed <a href="https://github.com/squizlabs/PHP_CodeSniffer#about">this</a> GitHub documentation. And I will only go with phpcs I was only concerned with identifying the linting issues therefore skipped the second script.</p>
+<p><code>PHP_CodeSniffer</code> is a set of two PHP scripts; the main <code>phpcs</code> script that helps to detect violations of pre-defined coding standards and a second <code>phpcbf</code> script that can automatically correct those violations.
+PHP_CodeSniffer is an essential development tool that ensures code remains clean and consistent. I followed <a href="https://github.com/squizlabs/PHP_CodeSniffer#about">this</a> GitHub documentation. And I will only go with <code>phpcs</code> as I was only concerned with identifying the linting issues therefore skipped the second script.</p>
 <h3 id="code-sniffer-for-suitecrm">Code Sniffer for SuiteCRM</h3>
 <p>In the Jenkins VM firstly I installed PHPCS for Code Quality Analysis, I downloaded only the <code>phpcs.phar</code> files for the scanner with the command mentioned below. I also tried to git clone and download the PHP_CodeSniffer source but in this phpcs and phpcbf files were not present separately.</p>
 <pre><code>curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
@@ -521,7 +521,8 @@ mv phpcs.phar /usr/local/bin/phpcs
 <pre><code>phpcs /var/lib/jenkins/workspace/suitecrm-pipeline
 </code></pre>
 
-<p>Note: The cursor was getting stuck and there was no output so I ran a single PHP file with the above command. It generated the output table. It was getting stuck due to the issue of memory run out of free memory since PHPCS was not able to scan the whole project directory at once. I generated a python script <code>python3_phpcs.py</code> to identify all PHP files present in the SuiteCRM project directory and ran PHPCS on the files individually.</p>
+<p>Note: The cursor was getting stuck and there was no output so I ran a single PHP file with the above command and it generated the output table. It was getting stuck due to the issue, out of free memory since <code>phpcs</code> was not able to scan the whole SuiteCRM application directory at once. I used a python script <code>python3_phpcs.py</code>
+from the <a href="https://jenkins-report.netlify.app/limitations/#php-code-sniffer">report</a> to identify all PHP files present in the SuiteCRM project directory and ran <code>phpcs</code> on the files individually.</p>
 <pre><code>#!/usr/bin/python3
 
 import os
@@ -617,13 +618,13 @@ except KeyboardInterrupt:
           </a>
         
         
-          <a href="../docker/" title="Deploying SuiteCRM through Docker" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../docker/" title="Performing DAST of SuiteCRM through Docker" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Deploying SuiteCRM through Docker
+                Performing DAST of SuiteCRM through Docker
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">

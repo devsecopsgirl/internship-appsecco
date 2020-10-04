@@ -10,7 +10,13 @@ The application that I chose is [SuiteCRM](https://suitecrm.com/). It is a Custo
 I chose the application because it is easy to download and deployed faster and it is also an application that is used in the real-world and is not just a dummy application.
 
 I checked out the requirements for installing SuiteCRM and made a workflow on how to carry on further tasks.
-Since SuiteCRM is written in PHP, I had to install a few things on the production VM manually.
+SuiteCRM is written in PHP and I had to install dependencies on the production VM manually.
+
+### Dependencies
+
+* Install PHP(PHP version 5.5.9, or 7.0 and above)
+* Install MySQL
+* Install Apache Web Server 
 
 ### Install PHP on Ubuntu 18.04
 
@@ -48,7 +54,7 @@ quit
 ```
 ### Installing Apache Web Server
 
-For installing Apache server I followed this [documentation](https://www.digitalocean.com/community/tutorials/how-to-install-the-apache-web-server-on-ubuntu-18-04). The way documentation is written is easy to understand.
+For installing Apache server I followed this [documentation](https://www.digitalocean.com/community/tutorials/how-to-install-the-apache-web-server-on-ubuntu-18-04). This documentation is written is easy to understand.
 
 Step 1 — Installing Apache
 
@@ -126,7 +132,7 @@ git clone https://github.com/Priyam5/SuiteCRM.git
 
 ### Installing Composer 
 
-SuiteCRM packages are not built. This is due to I  cloned the repository instead of using the zip archive. Hence, I had to install Composer, the package manager for PHP. I followed the official [documentation](https://getcomposer.org/doc/00-intro.md) and performed required steps to install Composer globally. After a successful installation, I ran `composer install` in the project's root directory to build the dependencies for SuiteCRM.
+SuiteCRM packages are not built. This is because I  cloned the repository instead of using the zip archive. Hence, I had to install Composer, the package manager for PHP. I followed the official [documentation](https://getcomposer.org/doc/00-intro.md) and performed required steps to install Composer globally. After a successful installation, I ran `composer install` in the project's root directory to build the dependencies for SuiteCRM.
 
 ```
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
@@ -142,7 +148,7 @@ To check composer is installed:
 ```
 php composer.phar
 ```
-### Error Resolved
+### Errors Resolved
 
 I copied the files from SuiteCRM directory to location `/var/www/html/suitecrm` because to run the application SuiteCRM. When I tried running on a browser the URL, I got this error:
 `Composer autoloader not found. please run "composer install"`
@@ -181,7 +187,7 @@ Your requirements could not be resolved to an installable set of packages.
     - league/oauth2-server 5.1.6 requires lcobucci/jwt ^3.1 -> satisfiable by lcobucci/jwt[3.3.2].
     - Installation request for league/oauth2-server 5.1.6 -> satisfiable by league/oauth2-server[5.1.6].
 ```
-In terminal, I run the following commands to sort out the above issues and install the packages mentioned:
+In terminal, I ran the following commands to sort out the above issues and install the packages mentioned:
 ```
 sudo apt install php-gd
 sudo apt install zip php-imap
@@ -195,7 +201,7 @@ I got the next error when I ran again `composer install`
   /var/www/html/suitecrm/vendor does not exist and could not be created. 
 ```
 
-So I ran the command:
+Note: I ran the below command and added sudo so the above directory got created.
 ```
 sudo php composer.phar install
 ```
@@ -211,12 +217,12 @@ Accept the License and press `Enter` a new page will open.
 ![](Images/2020-08-27_13-46.png)
 
 Again there were two issues to resolve them, I 
-went to the location /etc/php/7.2/apache2/php.ini and enter the command
+went to the location `/etc/php/7.2/apache2/php.ini` and entered the command
 
 ```
 sudo nano /etc/php/7.2/apache2/php.ini
 ```
-Made these changes in the nano file:
+Made these changes in the `php.ini` file:
 
 * upload_max_filesize = 100M
 * cgi.fix_pathinfo=0
@@ -229,7 +235,7 @@ Click `next`, and then another screen opens, enter the database name, hostname, 
 
 ![](Images/2020-08-27_17-23.png)
 
-I forgot my MySQL password of my database so, I ran this command mentioning the username and password.
+I forgot the MySQL password of my database so I ran this below command to reset the password.
 ```
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
 ```

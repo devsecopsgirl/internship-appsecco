@@ -1,8 +1,8 @@
-# Implementing SuiteCRM through Docker
+# Performing DAST of SuiteCRM through Docker
 
 ## Objective
 
-This section aims to implement the application SuiteCRM through Docker and deploy it through a pipeline. Solution to the first point of the [problem statement](https://intern-appsecco.netlify.app/problem-statement/) under Task 2.
+This section aims to implement the application SuiteCRM through Docker and deploy it through a pipeline and it's just improvisation of previous section `Dynamic Analysis of SuiteCRM`(https://intern-appsecco.netlify.app/dast-tools/) as here I will perform DAST of SuiteCRM through container. Solution to the first and second point of the [problem statement](https://intern-appsecco.netlify.app/problem-statement/) under Task 2.
 
 ## Docker
 
@@ -22,12 +22,16 @@ I started with building a dockerfile in which I implemented a PHP image because 
 
 I begin with building the Dockerfile firstly with apache installation. 
 
-Note: got an error `unable to prepare context: unable to evaluate symlinks in Dockerfile path: lstat /home/jenkins-infra/docker-files/Dockerfile: no such file or directory`. Be careful while naming the Docker file name as `Dockerfile` other names don't work.
+Note: got an error `unable to prepare context: unable to evaluate symlinks in Dockerfile path: lstat /home/jenkins-infra/docker-files/Dockerfile: no such file or directory`. So I renamed the Docker file name as `Dockerfile`.
 
 NOTE: I got an error my apache server was not getting served. I will explain in a little detail:
 
-* I stopped my container `docker stop f9af4fb06f4c` and ran again `docker run -d --rm --name ubuntu2 -p 1234:80 4c0437bfcded`. After the container was build I checked If the port 1234 was open or not by `netstat -ntap` But there was no such network port 1234 open.
-* Then I checked the `docker logs ubuntu2` It showed `Error: No such container: ubuntu2` then I checked `docker ps -a` which showed the container exited in a minute.
+* I stopped my container `docker stop f9af4fb06f4c` and ran again
+```
+docker run -d --rm --name dockercon -p 1234:80 4c0437bfcded`
+```
+After the container was build I checked If the port `1234` was open or not by `netstat -ntap` But there was no such network port `1234` open.
+* Then I checked the `docker logs dockercon` It showed `Error: No such container: dockercon` then I checked `docker ps -a` which showed the container exited in a minute.
 * After this I ran the above command of building container without the `-d flag` which is detached mode means running container in background then it gave the error `/bin/sh: 1: Syntax error: Unterminated quoted string`. From here I got to know I have missed a quote in my dockerfile in a command which I fixed.
 
 Dockerfile which finally worked is 
@@ -47,7 +51,7 @@ RUN apt-get install -y apache2
 CMD ["apache2ctl","-D","FOREGROUND"]
 EXPOSE 80
 ```
-### SuiteCRM installation 
+### SuiteCRM installation through a container
 * Apache started running, but then I decided to use the image `php:7.4-apache` which have apache built-in and not to separately install it. 
 * This is the Dockerfile I am using for now
  
@@ -71,8 +75,20 @@ RUN chown -R www-data:www-data /var/www/html/suitecrm
 CMD ["apache2ctl","-D","FOREGROUND"]
 EXPOSE 80
 ```
+* I build the image by the command below:
+```
+docker build -t <name>:latest .
+```
+* I ran the container:
+```
+docker run -d --rm --name <name of container> -p 1234:80 <docker image name>
+```
+**-d** : Detached mode means running container in background.
+**--rm** : It removes the container when the base system restart or shutdown.
+**--name** : For giving name to container.
+**-p** : To define ports.
 
-* I got this error on the SuiteCRM install.php page
+* I got the below error on the SuiteCRM `install.php` page when I went to the URL http://192.168.1.2:1234/suitecrm
 ```
 Warning: require_once(modules/DynamicFields/DynamicField.php): failed to open stream: Permission denied in /var/www/html/suitecrm/data/SugarBean.php on line 45
 
@@ -80,23 +96,24 @@ Fatal error: require_once(): Failed opening required 'modules/DynamicFields/Dyna
 ```
 So I changed the permission of SuiteCRM directory within the running container
 ```
+docker exec -it <container name> /bin/bash
 chown -R www-data:www-data suitecrm
 ```
-Changing permissions take too long so I mounted the directory of SuiteCRM.
+Changing permissions took too long so I mounted the directory of SuiteCRM.
 
-* I installed zip because I got error Zip module not present in docker I added this command in Dockerfile
+* I installed zip because I got error Zip module was not present in docker I added this command in Dockerfile
 ```
 RUN apt-get install -y libzip-dev zip unzip zlib1g-dev
 RUN docker-php-ext-install mysqli zip
 ```
-* My database was not working so I firstly in `sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf` file binded the port 0.0.0.0 to allow all ports  and also allowed the ports 3306 the mysql port. Then I ran the below command to change the `suitecrm@localhost` to `suitecrm@%` so that it is accessible from anywhere.
+* My database was not working so I firstly in `/etc/mysql/mysql.conf.d/mysqld.cnf` file binded the port 0.0.0.0 to allow all ports. I also allowed the port 3306 the mysql port. Then I ran the below command to change the `suitecrm@localhost` to `suitecrm@%` so that user is able to login from anywhere.
 ```   
 sudo mysql -u root -p
 UPDATE mysql.user SET Host='%' WHERE Host='localhost' AND User='suitecrm';
 UPDATE mysql.db SET Host='%' WHERE Host='localhost' AND User='suitecrm';
 FLUSH PRIVILEGES;
 ```
-* I copied the config.php file after the installation of suitecrm done. To use scp to copy files to the remote server from your computer or copy files from the remote server to your computer, you must have the scp program available in both places (computer and remote server). This documentation will be [helpful](https://linuxhint.com/linux_scp_command/)
+* I copied the config.php file after the installation of SuiteCRM is complete. To use scp to copy files to the remote server from your computer or copy files from the remote server to your computer, you must have the scp program available in both places (computer and remote server). This documentation will be [helpful](https://linuxhint.com/linux_scp_command/)
 
 `scp -r config.php jenkins-infra@192.168.1.2:/home/jenkins-infra/docker-files`
 
@@ -105,12 +122,12 @@ but it gave error `bash: scp: command not found` bec. openssh not installed in c
 
 ## DAST scan 
 
-On VM, run the dast scan similar to earlier as in the section [DevSecOps Dynamic Analysis of SuiteCRM](https://intern-appsecco.netlify.app/dast-tools/). Just do the changes in the command of URL same to where suitecrm is running inside the docker container
+On VM, run the DAST scan similar to earlier as in the section [DevSecOps Dynamic Analysis of SuiteCRM](https://intern-appsecco.netlify.app/dast-tools/). Just do the changes in the command of URL same to where suitecrm is running inside the docker container
 ```
 docker run -i owasp/zap2docker-stable zap-baseline.py -t "http://192.168.1.2:1234/suitecrm" -l INFO
 ```
 
-* An error I was facing of no space on the device so remove the images and stopped containers by using the commands
+* An error I was facing of no space on the device so remove the images and stopped containers by using the below commands
 ```
 docker rmi <image image name/ image id>
 docker rm <docker name/docker id>
@@ -149,7 +166,7 @@ For integrating on pipeline I followed these steps:
 ```
     ENTRYPOINT ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
 ```
-* When I opened the URL http://192.168.1.2:1233/suitecrm/ the suitecrm was not getting deployed and I was getting warnings 
+* When I opened the URL `http://192.168.1.2:1233/suitecrm/`. SuiteCRM was not getting deployed and I was getting warnings 
 ```
     Warning: sugar_file_put_contents_atomic() : fatal rename failure '/tmp/tempPRdtfq' -> 'cache/modules/Employees/Employeevardefs.php' in /var/www/html/suitecrm/include/utils/sugar_file_utils.php on line 204
 

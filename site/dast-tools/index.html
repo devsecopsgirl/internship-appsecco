@@ -15,7 +15,7 @@
     
     
       
-        <title>Dynamic Analysis of SuiteCRM - DevSecOps</title>
+        <title>Dynamic Analysis of SuiteCRM - DevSecOps Pipeline</title>
       
     
     
@@ -60,7 +60,7 @@
     
       <header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid" aria-label="Header">
-    <a href=".." title="DevSecOps" class="md-header-nav__button md-logo" aria-label="DevSecOps">
+    <a href=".." title="DevSecOps Pipeline" class="md-header-nav__button md-logo" aria-label="DevSecOps Pipeline">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -73,7 +73,7 @@
       
         <div class="md-header-nav__ellipsis">
           <span class="md-header-nav__topic md-ellipsis">
-            DevSecOps
+            DevSecOps Pipeline
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
@@ -134,13 +134,13 @@
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="DevSecOps" class="md-nav__button md-logo" aria-label="DevSecOps">
+    <a href=".." title="DevSecOps Pipeline" class="md-nav__button md-logo" aria-label="DevSecOps Pipeline">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
 
     </a>
-    DevSecOps
+    DevSecOps Pipeline
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -390,8 +390,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../docker/" title="Deploying SuiteCRM through Docker" class="md-nav__link">
-      Deploying SuiteCRM through Docker
+    <a href="../docker/" title="Performing DAST of SuiteCRM through Docker" class="md-nav__link">
+      Performing DAST of SuiteCRM through Docker
     </a>
   </li>
 
@@ -539,8 +539,8 @@
 </code></pre>
 
 <h3 id="configure-owasp-zap-with-docker">Configure OWASP ZAP with Docker</h3>
-<p>To understand how zap works I first manually perform the steps in the jenkins pipeline and then integrate with jenkins pipeline in the next section.
-For using OWASP ZAP with docker, I have to pull the ZAP image from <a href="https://hub.docker.com/">docker hub</a>]. I went through this <a href="https://blog.mozilla.org/fxtesteng/2016/05/11/docker-owasp-zap-part-one/">documentation</a> as a lot of errors are been resolved along with solutions. So firstly I ran ZAP on my Jenkins VM to figure out how it works and test the target URL. And also many flags have been used which can be found here in the official documentation of <a href="https://www.zaproxy.org/docs/docker/baseline-scan/">zap</a></p>
+<p>To understand how ZAP works I first manually perform the steps in the Jenkins VM and then integrated with jenkins pipeline in the next section.
+For using OWASP ZAP with docker, I have to pull the ZAP image from <a href="https://hub.docker.com/">docker hub</a>. I went through this <a href="https://blog.mozilla.org/fxtesteng/2016/05/11/docker-owasp-zap-part-one/">documentation</a> as a lot of errors are been resolved along with solutions. So firstly I ran ZAP on my Jenkins VM to figure out how it works and test the target URL. And also many flags have been used which can be found here in the official documentation of <a href="https://www.zaproxy.org/docs/docker/baseline-scan/">zap</a></p>
 <ul>
 <li>Firstly, I pulled the docker image to be tested.</li>
 </ul>
@@ -595,7 +595,7 @@ For using OWASP ZAP with docker, I have to pull the ZAP image from <a href="http
 
 <p><strong>-r</strong>  file to write the full ZAP HTML report, saves scan output to Jenkins machine.</p>
 <h3 id="jenkins-integration">Jenkins Integration</h3>
-<p>Now I will integrate baseline-scan as part of SuiteCRM in the Jenkins-pipeline. I created a separate pipeline for DAST tools as the scan might become too long after combining both SAST and DAST scans. So in this pipeline, we have to follow the steps of fetching the code, building the pipeline, deploying the pipeline, and then at last DAST scan tools.</p>
+<p>Now I will integrate baseline-scan as part of SuiteCRM in the Jenkins-pipeline. I created a separate pipeline for DAST tools as the scan might become too long after combining both SAST and DAST scans also the scan should not be obstructing the business by delaying deployment to production. So in this pipeline, we have to follow the steps of fetching the code, building the pipeline, deploying the application, and then at last DAST scan tools.</p>
 <ul>
 <li>Starting with the first stage that is fetching the code of SuiteCRM from the GitHub repository.</li>
 </ul>
@@ -618,20 +618,7 @@ For using OWASP ZAP with docker, I have to pull the ZAP image from <a href="http
 </code></pre>
 
 <ul>
-<li>The third stage is of OWASP ZAP scan. In this, we will first pull the zap image after that makes a container named <code>zap2</code>  and mention a port to run and the mentioned port should not be used by any other application or it will throw error failed to access the provided URL. Then print the report <code>zap_baseline_report2.html</code>.</li>
-</ul>
-<pre><code>stage ('OWASP ZAP') {
-           steps {
-                sh 'docker pull owasp/zap2docker-stable'
-                sh 'docker run --rm -e LC_ALL=C.UTF-8 -e LANG=C.UTF-8 --name zap2 -u zap -p 8090:8080 -d owasp/zap2docker-stable zap.sh -daemon -port 8080 -host 0.0.0.0 -config api.disablekey=true'
-                sh 'docker run -v $(pwd)/zap-report:/zap/wrk/:rw --rm -i owasp/zap2docker-stable zap-baseline.py -t &quot;http://192.168.1.4/suitecrm&quot; -I -r zap_baseline_report2.html -l PASS'
-                sh 'docker rm -f zap2'
-           }
-        }
-</code></pre>
-
-<ul>
-<li>The fourth stage is for deploying the SuiteCRM application</li>
+<li>The third stage is for deploying the SuiteCRM application</li>
 </ul>
 <pre><code>stage ('Deploying App to production server'){
             steps {
@@ -642,6 +629,19 @@ For using OWASP ZAP with docker, I have to pull the ZAP image from <a href="http
                 sh 'ssh -o StrictHostKeyChecking=no production@192.168.1.4 &quot;sudo cp -r /home/production/config.php /home/production/html/suitecrm&quot;'     
                 sh 'ssh -o StrictHostKeyChecking=no production@192.168.1.4 &quot;cd /home/production/html/suitecrm &amp;&amp; sudo chmod -R 755 * &amp;&amp; sudo chown -R www-data:www-data *&quot;'
 
+           }
+        }
+</code></pre>
+
+<ul>
+<li>The fourth stage is of OWASP ZAP scan. In this, we will first pull the zap image after that makes a container named <code>zap2</code>  and mention a port to run and the mentioned port should not be used by any other application or it will throw error failed to access the provided URL. Then print the report <code>zap_baseline_report2.html</code>.</li>
+</ul>
+<pre><code>stage ('OWASP ZAP') {
+           steps {
+                sh 'docker pull owasp/zap2docker-stable'
+                sh 'docker run --rm -e LC_ALL=C.UTF-8 -e LANG=C.UTF-8 --name zap2 -u zap -p 8090:8080 -d owasp/zap2docker-stable zap.sh -daemon -port 8080 -host 0.0.0.0 -config api.disablekey=true'
+                sh 'docker run -v $(pwd)/zap-report:/zap/wrk/:rw --rm -i owasp/zap2docker-stable zap-baseline.py -t &quot;http://192.168.1.4/suitecrm&quot; -I -r zap_baseline_report2.html -l PASS'
+                sh 'docker rm -f zap2'
            }
         }
 </code></pre>
@@ -670,12 +670,12 @@ IOError: [Errno 13] Permission denied: '/zap/wrk/zap_baseline_report2.html'
 <pre><code>docker run -it owasp/zap2docker-stable
 </code></pre>
 
-<p>Then cat the /etc/passwd to check the permissions they have. It showed this to me <code>zap:x:1000:1000::/home/zap:/bin/bash</code>. After this make a directory <code>zap-report</code> in the workspace of jenkins. Run the below command to give the permissions the directory made:</p>
+<p>Then cat the <code>/etc/passwd</code> to check the user id. It showed this to me <code>zap:x:1000:1000::/home/zap:/bin/bash</code>. After this make a directory <code>zap-report</code> in the workspace of jenkins. Run the below command to give the permissions to <code>zap:x</code> user in docker for the following directory that is created:</p>
 <pre><code>sudo chown -R 1000:1000 /var/lib/jenkins/workspace/dast-jenkins-pipeline/zap-report/
 </code></pre>
 
 <ul>
-<li>So the full pipeline looks like this for DAST pipeline which was successfull.</li>
+<li>So the full pipeline looks like this for DAST pipeline which was successful.</li>
 </ul>
 <pre><code>pipeline {
     agent any
@@ -693,14 +693,6 @@ IOError: [Errno 13] Permission denied: '/zap/wrk/zap_baseline_report2.html'
             }
         }
 
-        stage ('OWASP ZAP') {
-           steps {
-                sh 'docker pull owasp/zap2docker-stable'
-                sh 'docker rm -f zap2 ; docker run --rm -e LC_ALL=C.UTF-8 -e LANG=C.UTF-8 --name zap2 -u zap -p 8090:8080 -d owasp/zap2docker-stable zap.sh -daemon -port 8080 -host 0.0.0.0 -config api.disablekey=true'
-                sh 'docker run  -v $(pwd)/zap-report:/zap/wrk/:rw --rm -i owasp/zap2docker-stable zap-baseline.py -t &quot;http://192.168.1.4/suitecrm&quot; -I -r zap_baseline_report2.html -l PASS'
-           }
-        }
-
         stage ('Deploying App to production server'){
             steps {
                 sh 'echo &quot;Deploying App to production Server&quot;'
@@ -711,7 +703,15 @@ IOError: [Errno 13] Permission denied: '/zap/wrk/zap_baseline_report2.html'
                 sh 'ssh -o StrictHostKeyChecking=no production@192.168.1.4 &quot;cd /home/production/html/suitecrm &amp;&amp; sudo chmod -R 755 * &amp;&amp; sudo chown -R www-data:www-data *&quot;'
 
            }
-        }    
+        } 
+
+        stage ('OWASP ZAP') {
+           steps {
+                sh 'docker pull owasp/zap2docker-stable'
+                sh 'docker rm -f zap2 ; docker run --rm -e LC_ALL=C.UTF-8 -e LANG=C.UTF-8 --name zap2 -u zap -p 8090:8080 -d owasp/zap2docker-stable zap.sh -daemon -port 8080 -host 0.0.0.0 -config api.disablekey=true'
+                sh 'docker run  -v $(pwd)/zap-report:/zap/wrk/:rw --rm -i owasp/zap2docker-stable zap-baseline.py -t &quot;http://192.168.1.4/suitecrm&quot; -I -r zap_baseline_report2.html -l PASS'
+           }
+        }   
     }
 }   
 

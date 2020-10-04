@@ -15,7 +15,7 @@
     
     
       
-        <title>Setup of VMs - DevSecOps</title>
+        <title>Setup of VMs - DevSecOps Pipeline</title>
       
     
     
@@ -60,7 +60,7 @@
     
       <header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid" aria-label="Header">
-    <a href=".." title="DevSecOps" class="md-header-nav__button md-logo" aria-label="DevSecOps">
+    <a href=".." title="DevSecOps Pipeline" class="md-header-nav__button md-logo" aria-label="DevSecOps Pipeline">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -73,7 +73,7 @@
       
         <div class="md-header-nav__ellipsis">
           <span class="md-header-nav__topic md-ellipsis">
-            DevSecOps
+            DevSecOps Pipeline
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
@@ -134,13 +134,13 @@
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="DevSecOps" class="md-nav__button md-logo" aria-label="DevSecOps">
+    <a href=".." title="DevSecOps Pipeline" class="md-nav__button md-logo" aria-label="DevSecOps Pipeline">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
 
     </a>
-    DevSecOps
+    DevSecOps Pipeline
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -363,8 +363,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../docker/" title="Deploying SuiteCRM through Docker" class="md-nav__link">
-      Deploying SuiteCRM through Docker
+    <a href="../docker/" title="Performing DAST of SuiteCRM through Docker" class="md-nav__link">
+      Performing DAST of SuiteCRM through Docker
     </a>
   </li>
 
@@ -448,69 +448,68 @@
 <p>This section aims to set up the required infrastructure to perform the task and solve the 1st point of the <a href="https://intern-appsecco.netlify.app/problem-statement/">problem statement</a> under Task 1.</p>
 <p>In this section, I will be setting up two VMs:</p>
 <ol>
-<li>For Jenkin's deployment.</li>
-<li>For the production server to deploy the application (SuiteCRM) on the server</li>
+<li>For Jenkins deployment.</li>
+<li>For the application(SuiteCRM) server.</li>
 </ol>
 <h2 id="steps-for-creating-vm">Steps for creating VM</h2>
 <ol>
-<li>Click on the <code>NEW</code> icon to create a new machine.</li>
-<li><code>Create Virtual Machine</code> window will open as shown in the picture.</li>
+<li>I clicked on the <code>NEW</code> icon to create a new machine.</li>
+<li><code>Create Virtual Machine</code> window opened, as shown in the picture.</li>
 </ol>
 <p><img alt="" src="../Images/2020-08-17_23-35.png" /></p>
-<p>Configure: </p>
+<p><strong>Configuration</strong></p>
 <ul>
 <li>The <code>Name</code> Jenkins-infra.</li>
 <li>The <code>Type</code> to Linux.</li>
 <li><code>Version</code> to Ubuntu (64-bit).</li>
-<li>Allocate memory size.</li>
+<li>Allocated memory size(RAM).</li>
 </ul>
-<p>Click on Create.</p>
+<p>Clicked on <code>Create</code>.</p>
 <ol>
 <li><code>Create Virtual Hard Disk</code> will open.</li>
 </ol>
 <p><img alt="" src="../Images/2020-08-17_23-38.png" /></p>
 <ul>
-<li>Allocate the memory. </li>
-<li>We will be setting the disk type to <code>VDI</code></li>
-<li>Select storage on physical hard disk <code>Dynamically allocated</code>.</li>
-<li>Click create.</li>
+<li>Allocated the storage. </li>
+<li>Set the default disk type to <code>VDI(VirtualBox Disk Image)</code></li>
+<li>Selected storage on physical hard disk <code>Dynamically allocated</code>.</li>
+<li>Clicked on <code>Create</code>.</li>
 </ul>
-<p>And that’s it! VM is ready for Ubuntu 18.04 server installation.</p>
-<p>To download the server image 18.04 on VirtualBox as it is an LTS (Long Term Support) version which is a desirable feature for a CI pipeline. I followed this <a href="https://releases.ubuntu.com/18.04/">link</a> because it is the official link.</p>
+<p>VM is ready for Ubuntu 18.04 server installation.</p>
+<p>To download the server image 18.04 on VirtualBox as it is an LTS (Long Term Support) version which is a desirable feature for a CI pipeline. I followed the official link <a href="https://releases.ubuntu.com/18.04/">link</a>.</p>
 <p><img alt="" src="../Images/2020-08-18_17-18.png" /></p>
 <p><strong>What is LTS?</strong></p>
 <ol>
-<li>It is a product lifecycle management policy in which a stable release of computer software is maintained for a longer period than the standard edition.</li>
+<li>It is a product life cycle management policy in which a stable release of computer software is maintained for a longer period than the standard edition.</li>
 <li>The term is typically reserved for open-source software.</li>
+<li>Ubuntu 18.04 server has 5 years of support.</li>
 </ol>
 <h2 id="installation-steps-for-ubuntu-server-1804">Installation steps for Ubuntu Server 18.04</h2>
-<p>I decided to install the Ubuntu Server 18.04 because my system was not able to support the Desktop Image of Ubuntu 18.04 server .</p>
-<p>In the VM box, I selected the VM &lt; Jenkins-infra &gt; to install the server.
-Click on <code>Start</code></p>
-<p><img alt="" src="../Images/2020-08-18_22-06.png" /></p>
-<p>When the <code>Select start-up disk</code> window opens click on the folder.</p>
-<p>A new screen opens <code>Optical Disk Selector</code>. Select the server image and clicked the option <code>Choose</code></p>
+<p>I decided to install the Ubuntu Server 18.04 because my system was not able to support the Desktop Image of Ubuntu 18.04 server.</p>
+<p>In the VM box, I selected the VM &lt; Jenkins-infra &gt; to install the server and click on <code>Start</code>.</p>
+<p><img alt="" src="../Images/jenkins-infra-vm-start.png" /></p>
+<p>Then the <code>Select start-up disk</code> window opened and I clicked on the folder which gave a new screen <code>Optical Disk Selector</code>. I selected the server image and clicked on <code>Choose</code>.</p>
 <p><img alt="" src="../Images/2020-08-18_22-08.png" /></p>
-<p>Server image is now selected and click on <code>Start</code></p>
+<p>Server image is now selected and I clicked on <code>Start</code>.</p>
 <p><img alt="" src="../Images/2020-08-18_22-09.png" /></p>
-<p>After clicking on <code>Start</code> Jenkins VM start's running.</p>
+<p>After clicking on <code>Start</code> Jenkins VM starts running.</p>
 <p><img alt="" src="../Images/2020-08-18_22-10.png" /></p>
-<p>The installer is designed to be easy to use and have sensible defaults so for a first install I have mostly just accepted the defaults for the most straightforward install. Beginning with installation:</p>
+<p>The installer is designed to be easy to use and have sensible defaults so for a first install I have mostly just accepted the defaults for the most straightforward installation. Beginning with installation:</p>
 <p><strong>Language selection</strong></p>
 <p><img alt="" src="../Images/2020-08-18_22-12.png" /></p>
-<p>This screen selects the language. The default language for the installed system is selected as English. Press the <code>Enter</code> button.</p>
+<p>This screen selects the language. The default language for the installed system is selected as English as I did not want to make changes so pressed <code>Enter</code> button.</p>
 <p><strong>Keyboard configuration</strong></p>
 <p><img alt="" src="../Images/2020-08-18_22-13.png" /></p>
-<p>By default, the English (US) layout and variant keyboard is selected. Press the <code>Enter</code> button.</p>
+<p>By default, the English (US) layout and variant keyboard is selected as here also I do not want to make changes, pressed <code>Enter</code> button.</p>
 <p><strong>Network</strong></p>
 <p><img alt="" src="../Images/2020-08-18_22-14.png" /></p>
-<p>Configuration of the network is done from here and I left it as default because I did not want to do any changes. Select <code>Done</code> and press <code>Enter</code>.</p>
+<p>Configuration of the network is done from here and I left it as default because I did not want to do any changes. Selected <code>Done</code> and pressed <code>Enter</code>.</p>
 <p><strong>Configure proxy</strong></p>
 <p><img alt="" src="../Images/2020-08-18_22-15.png" /></p>
 <p>The proxy configured on this screen is used for accessing the package repository and the snap store both in the installer environment and in the installed system. I did not provide any <code>Proxy address</code>, kept it default and selected <code>Done</code></p>
 <p><strong>Mirror</strong></p>
 <p><img alt="" src="../Images/2020-08-18_22-15_1.png" /></p>
-<p>The installer will attempt to use GeoIP to lookup an appropriate default package mirror for
+<p>The installer will attempt to use GeoIP to lookup an appropriate default package mirror for your
 location. I kept this too as default and selected <code>Done</code>  </p>
 <p><strong>Guided Storage Configuration</strong></p>
 <p><img alt="" src="../Images/2020-08-18_22-16.png" /></p>
@@ -518,23 +517,23 @@ location. I kept this too as default and selected <code>Done</code>  </p>
 pressed the <code>Enter</code> button.</p>
 <p><strong>Storage Configuration</strong></p>
 <p><img alt="" src="../Images/2020-08-18_22-16_1.png" /></p>
-<p>Select <code>Done</code>. I didn't make any changes.</p>
+<p>Selected <code>Done</code> and I did not make any changes.</p>
 <p><img alt="" src="../Images/2020-08-18_22-19.png" /></p>
-<p>Select <code>continue</code> and press <code>Enter</code> to begin the installation.</p>
+<p>Selected <code>continue</code> and pressed <code>Enter</code> to begin the installation.</p>
 <p><strong>Profile Setup</strong></p>
 <p><img alt="" src="../Images/2020-08-18_22-27.png" /></p>
-<p>I filled the required details. Select <code>Done</code> and press the <code>Enter</code> button.</p>
+<p>I filled the required details. Selected <code>Done</code> and pressed the <code>Enter</code> button.</p>
 <p><strong>SSH</strong></p>
 <p><img alt="" src="../Images/2020-08-18_22-27_1.png" /></p>
-<p>Select the option <code>Install OpenSSH server</code> because by default Ubuntu does not have an SSH server installed. It has only an SSH client installed. It is very common practice for administrators to SSH into the Ubuntu server so later on, I will also have to SSH to connect the two VM's. It's better to install the OpenSSH server here only with one click of a button.
-Select <code>Done</code> and press the <code>Enter</code> button.</p>
+<p>I Selected the option <code>Install OpenSSH server</code> because by default Ubuntu does not have an SSH server installed. It has only an SSH client installed. It is very common practice for administrators to SSH into the Ubuntu server so later on, I will also have to SSH to connect the two VMs. It is better to install the OpenSSH server here only with one click of a button.
+Selected <code>Done</code> and pressed the <code>Enter</code> button.</p>
 <p><strong>Snaps</strong></p>
 <p><img alt="" src="../Images/2020-08-18_22-28.png" /></p>
 <p>If a network connection is enabled, a selection of snaps that are useful in a server environment is presented and can be selected for installation.</p>
-<p>After this, select <code>Done</code> and press <code>Enter</code>.</p>
+<p>After this, selected <code>Done</code> and pressed <code>Enter</code>.</p>
 <p><strong>Installation logs</strong></p>
 <p><img alt="" src="../Images/2020-08-18_22-29.png" /></p>
-<p>Once the installation is complete, select <code>Reboot</code>. Press <code>Enter</code>. Similarly, the second VM can be installed. Here I finished with the installation of <code>Ubuntu 18.04(LTS)</code> server.</p>
+<p>Once the installation is complete, I selected <code>Reboot</code> pressed <code>Enter</code> button. Similarly, the second VM can be installed. Here, I finished with the installation of <code>Ubuntu 18.04(LTS)</code> server.</p>
                 
               
               

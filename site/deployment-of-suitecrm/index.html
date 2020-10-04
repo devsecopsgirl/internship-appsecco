@@ -15,7 +15,7 @@
     
     
       
-        <title>Deployment of SuiteCRM - DevSecOps</title>
+        <title>Deployment of SuiteCRM - DevSecOps Pipeline</title>
       
     
     
@@ -60,7 +60,7 @@
     
       <header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid" aria-label="Header">
-    <a href=".." title="DevSecOps" class="md-header-nav__button md-logo" aria-label="DevSecOps">
+    <a href=".." title="DevSecOps Pipeline" class="md-header-nav__button md-logo" aria-label="DevSecOps Pipeline">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -73,7 +73,7 @@
       
         <div class="md-header-nav__ellipsis">
           <span class="md-header-nav__topic md-ellipsis">
-            DevSecOps
+            DevSecOps Pipeline
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
@@ -134,13 +134,13 @@
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="DevSecOps" class="md-nav__button md-logo" aria-label="DevSecOps">
+    <a href=".." title="DevSecOps Pipeline" class="md-nav__button md-logo" aria-label="DevSecOps Pipeline">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
 
     </a>
-    DevSecOps
+    DevSecOps Pipeline
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -390,8 +390,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../docker/" title="Deploying SuiteCRM through Docker" class="md-nav__link">
-      Deploying SuiteCRM through Docker
+    <a href="../docker/" title="Performing DAST of SuiteCRM through Docker" class="md-nav__link">
+      Performing DAST of SuiteCRM through Docker
     </a>
   </li>
 
@@ -501,7 +501,7 @@
 <h2 id="objective">Objective</h2>
 <p>This section aims to set up a basic pipeline in Jenkins to provide a solution to the 1st, 2nd, 5th and 6th points of the <a href="https://intern-appsecco.netlify.app/problem-statement/">problem statement</a> under Task 1.</p>
 <h2 id="jenkins-pipeline-project-created">Jenkins pipeline project created</h2>
-<p>I set up Jenkins as mentioned in the Setup of Jenkins section. For building a pipeline for Maven project. I clicked on New Item from the main dashboard which leads me to a different page. I gave <code>suitecrm-pipeline</code> as the project's name and chose <code>Pipeline</code> as the project type amongst all the options present.</p>
+<p>I clicked on New Item from the main dashboard which leads me to a different page. I gave <code>suitecrm-pipeline</code> as the project's name and chose <code>Pipeline</code> as the project type amongst all the options present.</p>
 <p>Next came the project configurations page. Here:</p>
 <ul>
 <li>
@@ -520,7 +520,7 @@
 <li>
 <p>Under <code>Pipeline</code> section:</p>
 <ul>
-<li>For Definition, I chose <code>Pipeline Script</code> option and written the pipeline code in the <code>script</code> section.</li>
+<li>For Definition, I chose <code>Pipeline Script</code> option and wrote the pipeline code in the <code>script</code> section.</li>
 </ul>
 </li>
 </ul>
@@ -560,7 +560,7 @@
 </code></pre>
 
 <ul>
-<li><code>StrictHostKeyChecking=no</code>  In host key checking, ssh automatically maintains and checks a database containing identification for all hosts it has ever been used with. If this property is set to yes, ssh will never automatically add host keys to the $HOME/.ssh/known_hosts file, and refuses to connect to hosts whose host key has changed. This property forces the user to manually add all new hosts. If this property is set to no, ssh will automatically add new host keys to the user known hosts files.</li>
+<li><code>StrictHostKeyChecking=no</code>  In host key checking, SSH automatically maintains and checks a database containing identification for all hosts it has ever been used with. If this property is set to yes, SSH will never automatically add host keys to the $HOME/.ssh/known_hosts file, and refuses to connect to hosts whose host key has changed. This property forces the user to manually add all new hosts. If this property is set to no, ssh will automatically add new host keys to the user known hosts files.</li>
 </ul>
 <h3 id="the-stages-of-pipeline">The stages of pipeline</h3>
 <ul>
@@ -569,29 +569,29 @@
 In this stage git repository of SuiteCRM is cloned. </p>
 </li>
 <li>
-<p><strong>Build :</strong>
+<p><strong>Build:</strong>
 In the build stage, application is built and dependencies are installed using  <code>composer</code> in the build stage on the Jenkins VM. This loads all the dependencies that the app (SuiteCRM) requires.</p>
 </li>
 <li>
 <p><strong>Deploying App to production server:</strong> 
-In this stage, the files are deployed from Jenkins to production VM and also removed the files of suitecrm from production server as it might cause conflict in between the files.</p>
+In this stage, the files are deployed from Jenkins to production VM and also removes the files of SuiteCRM from production server as it might cause conflict in between the files.</p>
 </li>
 </ul>
 <h3 id="build-stage-permission-denied">Build Stage - Permission denied</h3>
 <p>In the build stage, I was getting an error for permission denied for the folder was not getting deleted and permission denied for regular files not being created. So to solve this I followed this <a href="https://www.digitalocean.com/community/tutorials/how-to-move-an-apache-web-root-to-a-new-location-on-ubuntu-16-04">documentation</a></p>
-<ol>
+<ul>
 <li>I changed <code>root directory</code> to <code>home directory</code> as the <code>DocumentRoot</code> was set to <code>/var/www/html</code>. It was configured in the following file: <code>/etc/apache2/sites-enabled/000-default.conf</code>.</li>
-<li>I run this command in terminal to make the changes in the nano file. </li>
-</ol>
+<li>I ran this command in terminal to make the changes: </li>
+</ul>
 <pre><code>sudo nano /etc/apache2/sites-enabled/000-default.conf
 </code></pre>
 
-<ol>
+<ul>
 <li>I changed it to <code>/home/production/html/suitecrm</code> from <code>/var/www/html</code></li>
 <li>Then created a file <code>suitecrm</code> under <code>/home/production/html</code></li>
 <li>Made changes in the last path in <code>Jenkinsfile</code> to <code>/home/production/html/suitecrm</code></li>
-<li>Click On <code>Save</code> and then build the pipeline, it was successfully build this time.</li>
-</ol>
+<li>Click On <code>Save</code> and then build the pipeline, it is successfully built this time.</li>
+</ul>
 <h3 id="suitecrm-web-page">SuiteCRM Web Page</h3>
 <p>When I opened the webpage  <code>http://192.168.1.4/suitecrm/install.php</code> there it showed to set the <code>session.save_path</code>. So I changed it from this <code>session.save_path = "var/www/html/suitecrm/"</code> to <code>session.save_path = "tmp/"</code> by going in the file:</p>
 <pre><code>sudo nano /etc/php/7.2/apache2/php.ini
@@ -599,8 +599,8 @@ In this stage, the files are deployed from Jenkins to production VM and also rem
 
 <p>This was displayed when I opened the webpage again:</p>
 <pre><code>Component Status
-Writeable Custom Directory The Custom Directory exists but is not writeable. You may have to change permissions on it (chmod 766) or right click on it and uncheck the read only option, depending on your Operating System. Please take the needed steps to make the file writeable.
-Writable Cache Sub-Directories The files or directories listed below are not writeable or are missing and cannot be created. Depending on your Operating System, correcting this may require you to change permissions on the files or parent directory (chmod 755), or to right click on the parent directory and uncheck the ‘read only’ option and apply it to all subfolders.
+Writeable Custom Directory The Custom Directory exists but is not writeable. You may have to change permissions on it (chmod 766) or right-click on it and uncheck the read-only option, depending on your Operating System. Please take the needed steps to make the file writeable.
+Writable Cache Sub-Directories The files or directories listed below are not writeable or are missing and cannot be created. Depending on your Operating System, correcting this may require you to change permissions on the files or parent directory (chmod 755), or to right-click on the parent directory and uncheck the ‘read only’ option and apply it to all subfolders.
 Please fix the following files or directories before proceeding:
 /home/bro303/public_html/crm/cache/images
 /home/bro303/public_html/crm/cache/layout
@@ -617,14 +617,14 @@ sudo chmod -R 755 .
 sudo chmod -R 775 cache custom modules themes data upload config_override.php
 </code></pre>
 
-<p>After this the web page opened for making the configurations of database and Site.</p>
+<p>After this, the web page opened for making the configurations of database and Site.</p>
 <p><strong>Note:</strong></p>
 <ul>
 <li>
-<p>I was getting an error of <code>database not connected</code> because every time I build the pipeline, it deletes the older files and creates a new one. So <code>config.php</code> file is missing. So copy the file when SuiteCRM installed manually to another place and also in suitecrm instance. and in the pipeline pass the step to copy the config.php file. After it's successfully done the application will be directly deployed by the pipeline.</p>
+<p>I was getting an error of <code>database not connected</code> because every time I build the pipeline, it deletes the older files and creates a new one. Hence, <code>config.php</code> file is missing that has the database credentials. So copy the <code>config.php</code> file when SuiteCRM installed manually to another place and also in SuiteCRM instance. and in the pipeline pass the step to copy the <code>config.php</code> file. After it is successfully done the application will be directly deployed by the pipeline.</p>
 </li>
 <li>
-<p>To open the config page multiple times in config.php file make the change <code>installer_locked = True</code> to <code>false</code>.</p>
+<p>To open the config page multiple times on the browser, I made the changes in config.php file <code>installer_locked = True</code> to <code>false</code>.</p>
 </li>
 </ul>
                 
