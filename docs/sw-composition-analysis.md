@@ -22,7 +22,7 @@ SCA tools come in different forms, offering a range of capabilities from those f
 
 ## Software Composition Analysis Tools
 
-Software Composition Analysis Tools scan open-source code software to inventory all open-source components. Then they enable companies to eliminate vulnerabilities and compatibility issues with open-source licenses like GPL(General Public License is a free, copyleft license used primarily for software. The GNU GPL allows users to change and share all versions of a program).
+Software Composition Analysis Tools scan open-source code software to inventory all open-source components. Then they enable companies to eliminate vulnerabilities and compatibility issues with open-source licenses like GPL(General Public License is a free, copyleft license used primarily for software and copyleft is the practice of granting the right to freely distribute and modify intellectual property with the requirement that the same rights be preserved in derivative works created from that property. The GNU GPL allows users to change and share all versions of a program.)
 
 This becomes increasingly important as modern enterprise applications can comprise 80% to 90% open-source components. Given this ubiquity, the risk of security and IP risks of open-source components can be very significant, and tools to help mitigate these risks become critically important.
 
