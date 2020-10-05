@@ -50,7 +50,7 @@ sudo service docker status
 
 ### Configure OWASP ZAP with Docker
 
-To understand how ZAP works I first manually perform the steps in the Jenkins VM and then integrated with jenkins pipeline in the next section.
+To understand how ZAP works I first manually performed the steps in the Jenkins VM and then integrated with jenkins pipeline in the next section.
 For using OWASP ZAP with docker, I have to pull the ZAP image from [docker hub](https://hub.docker.com/). I went through this [documentation](https://blog.mozilla.org/fxtesteng/2016/05/11/docker-owasp-zap-part-one/) as a lot of errors are been resolved along with solutions. So firstly I ran ZAP on my Jenkins VM to figure out how it works and test the target URL. And also many flags have been used which can be found here in the official documentation of [zap](https://www.zaproxy.org/docs/docker/baseline-scan/)
 
 * Firstly, I pulled the docker image to be tested.
@@ -141,7 +141,7 @@ stage ('Deploying App to production server'){
            }
         }
 ```
-* The fourth stage is of OWASP ZAP scan. In this, we will first pull the zap image after that makes a container named `zap2`  and mention a port to run and the mentioned port should not be used by any other application or it will throw error failed to access the provided URL. Then print the report `zap_baseline_report2.html`.
+* The fourth stage is of OWASP ZAP scan. In this, I will first pull the zap image after that make a container named `zap2`, mention a port to run, and the mentioned port should not be used by any other application or it will give error failed to access the provided URL. Then print the report `zap_baseline_report2.html`.
 
 ```
 stage ('OWASP ZAP') {
