@@ -11,7 +11,7 @@ When I completed with all the stages in the pipeline of fetching code from GitHu
 
 Below is the Diagrammatic representation of the final Pipeline:
 
-![Image](Images/complete-pipeline.png)
+![Image](Images/complete-pipeline1.png)
 
 ### Final Pipeline script
 

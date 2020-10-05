@@ -271,6 +271,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../sw-composition-analysis/" title="Software Composition Analysis" class="md-nav__link">
+      Software Composition Analysis
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
     <a href="../dast-tools/" title="Dynamic Analysis of SuiteCRM" class="md-nav__link">
       Dynamic Analysis of SuiteCRM
     </a>
@@ -309,18 +321,6 @@
   <li class="md-nav__item">
     <a href="../docker/" title="Performing DAST of SuiteCRM through Docker" class="md-nav__link">
       Performing DAST of SuiteCRM through Docker
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../sw-composition-analysis/" title="Software Composition Analysis" class="md-nav__link">
-      Software Composition Analysis
     </a>
   </li>
 
@@ -488,7 +488,7 @@
 <p>When I completed with all the stages in the pipeline of fetching code from GitHub, building it, static scan, dynamic scan, generating SBOM, code quality analysis, deploying through Docker and doing DAST scan for the SuiteCRM, the final step was to combine all the stages which are being worked so far into a single pipeline as it was done in two separate pipelines just for it do not take a lot of time every time we build the pipeline.</p>
 <h3 id="diagrammatic-representation">Diagrammatic representation</h3>
 <p>Below is the Diagrammatic representation of the final Pipeline:</p>
-<p><img alt="Image" src="../Images/complete-pipeline.png" /></p>
+<p><img alt="Image" src="../Images/complete-pipeline1.png" /></p>
 <h3 id="final-pipeline-script">Final Pipeline script</h3>
 <p>The final pipeline script that was the result of combining the two segregated pipelines and removing redundancies is mentioned below and also I copied the required files to the pwd like <code>Dockerfile</code> for <code>docker deployment</code> stage and the <code>python3_phpcs.py</code> script that is required for the stage <code>Code Sniffer for linting</code>:</p>
 <pre><code>pipeline {
@@ -585,7 +585,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../sw-composition-analysis/" title="Software Composition Analysis" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../docker/" title="Performing DAST of SuiteCRM through Docker" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -594,7 +594,7 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Software Composition Analysis
+                Performing DAST of SuiteCRM through Docker
               </div>
             </div>
           </a>
