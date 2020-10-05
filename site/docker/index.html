@@ -546,9 +546,15 @@
 <pre><code>docker run -d --rm --name dockercon -p 1234:80 4c0437bfcded`
 </code></pre>
 
-<p>After the container was build I checked If the port <code>1234</code> was open or not by <code>netstat -ntap</code> But there was no such network port <code>1234</code> open.
-* Then I checked the <code>docker logs dockercon</code> It showed <code>Error: No such container: dockercon</code> then I checked <code>docker ps -a</code> which showed the container exited in a minute.
-* After this I ran the above command of building container without the <code>-d flag</code> which is detached mode means running container in background then it gave the error <code>/bin/sh: 1: Syntax error: Unterminated quoted string</code>. From here I got to know I have missed a quote in my dockerfile in a command which I fixed.</p>
+<p>After the container was build I checked If the port <code>1234</code> was open or not by <code>netstat -ntap</code> But there was no such network port <code>1234</code> open.</p>
+<ul>
+<li>
+<p>Then I checked the <code>docker logs dockercon</code> It showed <code>Error: No such container: dockercon</code> then I checked <code>docker ps -a</code> which showed the container exited in a minute.</p>
+</li>
+<li>
+<p>After this I ran the above command of building container without the <code>-d flag</code> which is detached mode means running container in background then it gave the error <code>/bin/sh: 1: Syntax error: Unterminated quoted string</code>. From here I got to know I have missed a quote in my dockerfile in a command which I fixed.</p>
+</li>
+</ul>
 <p>Dockerfile which finally worked is </p>
 <pre><code># getting base image PHP
 

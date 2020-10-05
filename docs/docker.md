@@ -31,7 +31,9 @@ NOTE: I got an error my apache server was not getting served. I will explain in 
 docker run -d --rm --name dockercon -p 1234:80 4c0437bfcded`
 ```
 After the container was build I checked If the port `1234` was open or not by `netstat -ntap` But there was no such network port `1234` open.
+
 * Then I checked the `docker logs dockercon` It showed `Error: No such container: dockercon` then I checked `docker ps -a` which showed the container exited in a minute.
+ 
 * After this I ran the above command of building container without the `-d flag` which is detached mode means running container in background then it gave the error `/bin/sh: 1: Syntax error: Unterminated quoted string`. From here I got to know I have missed a quote in my dockerfile in a command which I fixed.
 
 Dockerfile which finally worked is 
