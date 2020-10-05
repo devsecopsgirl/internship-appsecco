@@ -1,4 +1,4 @@
-# Setting up pipeline
+# Getting to know Jenkins pipeline
 
 ## Objective
 

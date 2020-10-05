@@ -9,7 +9,7 @@ The following is the report/documentation for the ```Problem Statement``` stated
 * [Setting Up VM](https://intern-appsecco.netlify.app/ubuntu-server-vm-setup/)
 * [Setting Up Jenkins](https://intern-appsecco.netlify.app/jenkins-installation/)
 * [Setting Up MkDocs for report](https://intern-appsecco.netlify.app/mkdocs-setup-usage/)
-* [Setting Up Pipeline](https://intern-appsecco.netlify.app/setting-up-pipeline/)
+* [Getting to know Jenkins pipeline](https://intern-appsecco.netlify.app/setting-up-pipeline/)
 * [Setting Up SuiteCRM](https://intern-appsecco.netlify.app/setting-up-suitecrm/)
 * [Deployment of SuiteCRM](https://intern-appsecco.netlify.app/deployment-of-suitecrm/)
 * [Static Analysis of SuiteCRM](https://intern-appsecco.netlify.app/sast-tools/)
