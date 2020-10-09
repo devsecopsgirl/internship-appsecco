@@ -1,4 +1,4 @@
-# Github Action
+# SAST through Github Action
 
 ## Objective
 
@@ -11,14 +11,14 @@ GitHub Actions make it easy to automate all software workflows. Github Actions l
 
 Whether we want to build a container, deploy a web service, or automate welcoming a new user to our open-source project — there’s an automated action for that.
 
-### Creating first Workflow 
+### Creating Workflow 
 
 I followed this official link for [creating the first workflow](https://docs.github.com/en/free-pro-team@latest/actions/quickstart#next-steps).
 
 
 1. On GitHub, I forked ``angular-realworld-example-app`` and I created a new file in the `.github/workflows`.
 
-2. I made the following YAML contents into the sast-scan.yml file. For knowing the syntax of Github action I followed [this](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobs) official link.
+2. I made the following YAML contents into the `sast-scan.yml` file. For knowing the syntax of Github action I followed [this](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobs) official link.
 ```
 name: "sast-scan"
 
@@ -39,7 +39,7 @@ jobs:
        sudo apt install npm
        sudo npm install --package-lock
        npm audit fix
-          
+          first 
      
     - name: OWASP Dependency Check
       run: |
@@ -55,8 +55,8 @@ jobs:
 
 ### Viewing workflow results
 
-1. Under repository name, click Actions. 
-2. In the left sidebar, click the workflow to see. 
+1. Under repository name, click `Actions`. 
+2. In the left sidebar, click the `workflow` to see. 
 3. From the list of workflow runs, click the name of the run to see. 
 4. In the left sidebar, click the Lint code base job. 
-5. Expand the Run Super-Linter step to view the results. 
+5. Expand the Run `sast-scan` step to view the results. 
