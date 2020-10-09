@@ -1,4 +1,4 @@
-site_name: 'DevSecOps Pipeline'
+site_name: 'DevSecOps Pipeline - cloud'
 
 nav:
 - Introduction: 'index.md'

@@ -1,7 +1,7 @@
 
 # Introduction 
 
-**Project Title:** DevSecOps Pipeline and cloud
+**Project Title:** DevSecOps Pipeline - Cloud
 
 **Author:** [Priyam Singh](https://www.linkedin.com/in/priyamsingh1337/)
 
