@@ -1,7 +1,7 @@
 
 # Introduction 
 
-**Project Title:** Cloud Native implementation of DevSecOps Concepts
+**Project Title:** Cloud Native Implementation of DevSecOps Concepts
 
 **Author:** [Priyam Singh](https://twitter.com/DevSecOpsgirl_)
 
