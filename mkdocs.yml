@@ -1,4 +1,4 @@
-site_name: 'DevSecOps Pipeline - cloud'
+site_name: 'Cloud Native implementation of DevSecOps Concepts'
 
 nav:
 - Introduction: 'index.md'
