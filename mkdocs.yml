@@ -6,5 +6,6 @@ nav:
 - Problem Statement: 'problem-statement.md'
 - SAST Github Action: 'github-action.md'
 - Code Quality Analysis: 'code-quality-analysis.md'
+- Software Bill of Materials: 'sbom.md'
 
 theme: material

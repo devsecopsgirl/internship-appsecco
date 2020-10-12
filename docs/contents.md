@@ -8,3 +8,4 @@ The following is the report/documentation for the ```Problem Statement``` stated
 * [Problem Statement](https://cloud-native.netlify.app/problem-statement/)
 * [SAST through GitHub Action](https://cloud-native.netlify.app/github-action/)
 * [Code Quality Analysis](https://cloud-native.netlify.app/code-quality-analysis/)
+* [Software Bill of Materials](https://cloud-native.netlify.app/sbom/)
