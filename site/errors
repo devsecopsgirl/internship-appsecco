@@ -1,0 +1,13 @@
+1. apt-get fails: The method driver /usr/lib/apt/methods/https could not be found
+
+apt-get install apt-transport-https ca-certificates
+
+link : https://unix.stackexchange.com/questions/263801/apt-get-fails-the-method-driver-usr-lib-apt-methods-https-could-not-be-found
+
+2. FOR INSTALLING ANGULAR CLI
+https://angular.io/cli
+
+3. for installing yarn official site
+https://classic.yarnpkg.com/en/docs/install#debian-stable
+
+4. 

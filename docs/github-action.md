@@ -60,3 +60,7 @@ jobs:
 3. From the list of workflow runs, click the name of the run to see. 
 4. In the left sidebar, click the Lint code base job. 
 5. Expand the Run `sast-scan` step to view the results. 
+
+
+
+![](Images/2020-10-11_19-22.png)
