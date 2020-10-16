@@ -1,0 +1,728 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.7">
+    
+    
+      
+        <title>Set up GitHub Actions Workflow for DAST - Cloud Native Implementation of DevSecOps Concepts</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.b8ac9624.min.css">
+      
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dast-scan" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href=".." title="Cloud Native Implementation of DevSecOps Concepts" class="md-header-nav__button md-logo" aria-label="Cloud Native Implementation of DevSecOps Concepts">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            Cloud Native Implementation of DevSecOps Concepts
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Set up GitHub Actions Workflow for DAST
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Cloud Native Implementation of DevSecOps Concepts" class="md-nav__button md-logo" aria-label="Cloud Native Implementation of DevSecOps Concepts">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Cloud Native Implementation of DevSecOps Concepts
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../contents/" title="Contents" class="md-nav__link">
+      Contents
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../problem-statement/" title="Problem Statement" class="md-nav__link">
+      Problem Statement
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../github-action/" title="SAST Github Action" class="md-nav__link">
+      SAST Github Action
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../code-quality-analysis/" title="Code Quality Analysis" class="md-nav__link">
+      Code Quality Analysis
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../sbom/" title="Software Bill of Materials" class="md-nav__link">
+      Software Bill of Materials
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Set up GitHub Actions Workflow for DAST
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
+        </span>
+      </label>
+    
+    <a href="./" title="Set up GitHub Actions Workflow for DAST" class="md-nav__link md-nav__link--active">
+      Set up GitHub Actions Workflow for DAST
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objective" class="md-nav__link">
+    Objective
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installing-the-application-manually" class="md-nav__link">
+    Installing the application manually
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installing-the-application-through-docker" class="md-nav__link">
+    Installing the application through Docker
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installing-application-through-aws" class="md-nav__link">
+    Installing application through AWS
+  </a>
+  
+    <nav class="md-nav" aria-label="Installing application through AWS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installing-aws-cli-in-terminal" class="md-nav__link">
+    Installing AWS CLI in terminal
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setting-up-aws-profile" class="md-nav__link">
+    setting up AWS profile
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ecr" class="md-nav__link">
+    ECR
+  </a>
+  
+    <nav class="md-nav" aria-label="ECR">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creating-an-ecr-repository" class="md-nav__link">
+    Creating an ECR Repository
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deleting-an-ecr-repository" class="md-nav__link">
+    Deleting an ECR repository
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pushing-an-ecr-repository" class="md-nav__link">
+    Pushing an ECR Repository
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-aws-through-github-actions" class="md-nav__link">
+    Adding AWS through GitHub Actions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objective" class="md-nav__link">
+    Objective
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installing-the-application-manually" class="md-nav__link">
+    Installing the application manually
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installing-the-application-through-docker" class="md-nav__link">
+    Installing the application through Docker
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installing-application-through-aws" class="md-nav__link">
+    Installing application through AWS
+  </a>
+  
+    <nav class="md-nav" aria-label="Installing application through AWS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installing-aws-cli-in-terminal" class="md-nav__link">
+    Installing AWS CLI in terminal
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setting-up-aws-profile" class="md-nav__link">
+    setting up AWS profile
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ecr" class="md-nav__link">
+    ECR
+  </a>
+  
+    <nav class="md-nav" aria-label="ECR">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creating-an-ecr-repository" class="md-nav__link">
+    Creating an ECR Repository
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deleting-an-ecr-repository" class="md-nav__link">
+    Deleting an ECR repository
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pushing-an-ecr-repository" class="md-nav__link">
+    Pushing an ECR Repository
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-aws-through-github-actions" class="md-nav__link">
+    Adding AWS through GitHub Actions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  
+                
+                
+                <h1 id="dast-scan">DAST scan</h1>
+<h2 id="objective">Objective</h2>
+<p>This section aims to perform a DAST scan on angular-realworld-example-app and generate a report to provide a solution to the 4th point of the problem statement under Task 1.</p>
+<h2 id="installing-the-application-manually">Installing the application manually</h2>
+<p>Firstly I installed the application manually to know how it works I cloned the application </p>
+<ul>
+<li>Install npm</li>
+</ul>
+<pre><code>sudo apt update
+sudo apt install nodejs
+sudo apt install npm
+nodejs -v
+</code></pre>
+
+<ul>
+<li>Install Yarn (https://classic.yarnpkg.com/en/docs/install/#debian-stable)</li>
+</ul>
+<pre><code>curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo &quot;deb https://dl.yarnpkg.com/debian/ stable main&quot; | sudo tee /etc/apt/sources.list.d/yarn.list
+sudo apt update &amp;&amp; sudo apt install yarn
+export PATH=&quot;$PATH:`yarn global bin`&quot;
+yarn install
+yarn -version
+</code></pre>
+
+<ul>
+<li>Install Angular CLI(https://angular.io/cli)</li>
+</ul>
+<pre><code>npm install -g @angular/cli
+</code></pre>
+
+<ul>
+<li>Got an error as ng serve opens editor instead of loading local URL
+(https://askubuntu.com/questions/980708/ng-serve-opens-editor-instead-of-loading-local-url)
+This is the terminal editor on the 'ng' alias. Uninstall it with:</li>
+</ul>
+<pre><code>sudo apt purge ng-common ng-latin
+</code></pre>
+
+<p>And then install Angular CLI (assuming you have npm installed) with </p>
+<pre><code>npm install -g @angular/cli
+</code></pre>
+
+<ul>
+<li>ng serve it worked and in the browser write localhost:4200 (4200 is default port). The window that opened is shown below:
+<img alt="" src="../Images/angular%20app.png" /></li>
+</ul>
+<h2 id="installing-the-application-through-docker">Installing the application through Docker</h2>
+<p>I firstly cloned the application folder and made a Dockerfile. I used a node <a href="https://hub.docker.com/_/node">image</a></p>
+<pre><code>nano Dockerfile
+</code></pre>
+
+<p>In Dockerfile written this code</p>
+<pre><code>#getting base image PHP
+FROM node
+
+MAINTAINER Priyam Singh &lt;2020priyamsingh@gmail.com&gt;
+
+RUN apt-get update
+COPY . /src
+WORKDIR /src
+
+#Installing Angular CLI
+RUN npm install
+RUN npm install -y -g @angular-devkit/build-angular
+RUN npm install -y -g @angular/cli
+
+EXPOSE 4200
+CMD [&quot;ng&quot;, &quot;serve&quot;, &quot;--host&quot;, &quot;0.0.0.0&quot;]
+</code></pre>
+
+<ul>
+<li>My application was not running on browser but it was getting compiled because I made a mistake that I was not writing "--host", "0.0.0.0" (--host 0.0.0.0 to listen to all the interfaces from the container).</li>
+<li>I was facing many errors such of packages getting failed so I removed my code of Yarn and only installed with Angular CLI</li>
+</ul>
+<p>After this build the image</p>
+<pre><code>docker build -t angular5:latest .
+</code></pre>
+
+<p>Then ran the container</p>
+<pre><code>docker run --rm --name docker5 -p 1234:4200 angular5:latest
+</code></pre>
+
+<p>On the browser I opened localhost:1234 it worked and the below window got opened.
+<img alt="" src="../Images/application%20docker%20running.png" /></p>
+<h2 id="installing-application-through-aws">Installing application through AWS</h2>
+<h3 id="installing-aws-cli-in-terminal">Installing AWS CLI in terminal</h3>
+<p>I followed this official link for the installation of AWS CLI(https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux.html#cliv2-linux-install)</p>
+<pre><code>curl &quot;https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip&quot; -o &quot;awscliv2.zip&quot;
+unzip awscliv2.zip
+sudo ./aws/install
+aws --version
+</code></pre>
+
+<p>I got the version output as shown below. It shows AWS CLI is successfully installed.</p>
+<pre><code>aws-cli/2.0.56 Python/3.7.3 Linux/5.3.0-64-generic exe/x86_64.ubuntu.19
+</code></pre>
+
+<h3 id="setting-up-aws-profile">setting up AWS profile</h3>
+<p>(https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html)</p>
+<pre><code>aws configure
+AWS Access Key ID [****************4529]: &lt;Enter the ID&gt;
+AWS Secret Access Key [None]: &lt;Enter the Access Key&gt;
+Default region name [None]: us-east-2
+Default output format [None]: json
+</code></pre>
+
+<p>aws sts get-caller-identity
+"UserId": "AIDAVXTWDFXQ2SJNKMMAV",
+    "Account": "394310921697",
+    "Arn": "arn:aws:iam::394310921697:user/priyam"</p>
+<h3 id="ecr">ECR</h3>
+<p>Amazon Elastic Container Registry (ECR) is a fully-managed Docker container registry that makes it easy for developers to store, manage, and deploy Docker container images. Amazon ECR eliminates the need to operate your own container repositories or worry about scaling the underlying infrastructure. Amazon ECR hosts your images in a highly available and scalable architecture, allowing you to reliably deploy containers for your applications. </p>
+<h4 id="creating-an-ecr-repository">Creating an ECR Repository</h4>
+<ul>
+<li>Open the Amazon ECR console</li>
+<li>In the navigation pane, choose Repositories. </li>
+<li>On the Repositories page, choose Create repository. </li>
+<li>Repository name, enter a unique name for your repository.</li>
+<li>For Tag immutability, choose the tag mutability setting for the repository. Repositories configured with immutable tags will prevent image tags from being overwritten.</li>
+<li>For Scan on push, choose the image scanning setting for the repository. Repositories configured to scan on push will start an image scan whenever an image is pushed, otherwise image scans need to be started manually.</li>
+<li>For KMS encryption, choose whether to enable encryption of the images in the repository using AWS Key Management Service. </li>
+</ul>
+<h4 id="deleting-an-ecr-repository">Deleting an ECR repository</h4>
+<p>To delete a repository</p>
+<ul>
+<li>
+<p>Open the Amazon ECR console.</p>
+</li>
+<li>
+<p>From the navigation bar, choose the Region that contains the repository to delete.</p>
+</li>
+<li>
+<p>In the navigation pane, choose Repositories.</p>
+</li>
+<li>
+<p>On the Repositories page, select the repository to delete and choose Delete.</p>
+</li>
+<li>
+<p>In the Delete repository_name window, verify that the selected repositories should be deleted and choose Delete. </p>
+</li>
+</ul>
+<h4 id="pushing-an-ecr-repository">Pushing an ECR Repository</h4>
+<p>When be create a repository it shows commands for pushing. So we have have to follow these commands and we can easily push the image to our ECR Repository.</p>
+<pre><code>aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 394310921697.dkr.ecr.us-east-2.amazonaws.com 
+
+docker tag angular5:latest 394310921697.dkr.ecr.us-east-2.amazonaws.com/angular-app-repo:latest
+
+docker push 394310921697.dkr.ecr.us-east-2.amazonaws.com/angular-app-repo:latest
+</code></pre>
+
+<h3 id="adding-aws-through-github-actions">Adding AWS through GitHub Actions</h3>
+<p>secrets(https://github.com/marketplace/actions/configure-aws-credentials-action-for-github-actions)</p>
+<p>In the YML file I also added the AWS CLI portion</p>
+<pre><code>- name: Installing AWS CLI
+      run: |
+        curl &quot;https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip&quot; -o &quot;awscliv2.zip&quot;
+        unzip awscliv2.zip
+        sudo ./aws/install
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.DEMO_ID }}
+        aws-secret-access-key: ${{ secrets.DEMO_K }}
+        aws-region: us-east-2
+
+    - name: Pushing image to AWS
+      run: |
+        aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 394310921697.dkr.ecr.us-east-2.amazonaws.com     
+        docker tag angular5:latest 394310921697.dkr.ecr.us-east-2.amazonaws.com/angular-app-repo:latest
+        docker push 394310921697.dkr.ecr.us-east-2.amazonaws.com/angular-app-repo:latest
+</code></pre>
+
+<p>The image got successfully pushed to ECR.</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../sbom/" title="Software Bill of Materials" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Software Bill of Materials
+              </div>
+            </div>
+          </a>
+        
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/vendor.d1f5a259.min.js"></script>
+      <script src="../assets/javascripts/bundle.d5fec882.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "..",
+          features: [],
+          search: Object.assign({
+            worker: "../assets/javascripts/worker/search.fae956e7.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>

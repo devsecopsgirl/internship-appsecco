@@ -7,5 +7,6 @@ nav:
 - SAST Github Action: 'github-action.md'
 - Code Quality Analysis: 'code-quality-analysis.md'
 - Software Bill of Materials: 'sbom.md'
+- Set up GitHub Actions Workflow for DAST: 'dast.md'
 
 theme: material
