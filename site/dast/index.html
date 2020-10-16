@@ -595,49 +595,82 @@ Default output format [None]: json
 </code></pre>
 
 <h3 id="ecr">ECR</h3>
-<p>Amazon Elastic Container Registry (ECR) is a fully-managed Docker container registry that makes it easy for developers to store, manage, and deploy Docker container images. Amazon ECR eliminates the need to operate your own container repositories or worry about scaling the underlying infrastructure. Amazon ECR hosts your images in a highly available and scalable architecture, allowing you to reliably deploy containers for your applications. </p>
+<p>Amazon Elastic Container Registry (ECR) is a fully-managed Docker container registry that makes it easy for developers to store, manage, and deploy Docker container images. Amazon ECR eliminates the need to operate our container repositories or worry about scaling the underlying infrastructure. Amazon ECR hosts our images in a highly available and scalable architecture, allowing us to reliably deploy containers for our applications. </p>
 <h4 id="creating-an-ecr-repository">Creating an ECR Repository</h4>
+<p>To Create the ECR Repository I followed the below steps:</p>
 <ul>
-<li>Open the Amazon ECR console</li>
-<li>In the navigation pane, choose Repositories. </li>
-<li>On the Repositories page, choose Create repository. </li>
-<li>Repository name, enter a unique name for your repository.</li>
-<li>For Tag immutability, choose the tag mutability setting for the repository. Repositories configured with immutable tags will prevent image tags from being overwritten.</li>
-<li>For Scan on push, choose the image scanning setting for the repository. Repositories configured to scan on push will start an image scan whenever an image is pushed, otherwise image scans need to be started manually.</li>
-<li>For KMS encryption, choose whether to enable encryption of the images in the repository using AWS Key Management Service. </li>
+<li>I opened the Amazon ECR console</li>
+<li>In the navigation pane, choose <code>Repositories</code></li>
+<li>On the Repositories page, choose <code>Create repository</code></li>
+<li>In <code>Repository name</code>, enter a unique name for repository</li>
+<li>For <code>Tag immutability</code>, I choose the tag mutability setting for the repository. Repositories configured with immutable tags will prevent image tags from being overwritten</li>
+<li>For <code>Scan on push</code>,I choose the image scanning setting for the repository. Repositories configured to scan on push will start an image scan whenever an image is pushed, otherwise image scans need to be started manually</li>
+<li>For <code>KMS encryption</code>, I choose to enable encryption of the images in the repository using AWS Key Management Service</li>
 </ul>
 <h4 id="deleting-an-ecr-repository">Deleting an ECR repository</h4>
-<p>To delete a repository</p>
+<p>To delete a an ECR repository I followed the below steps:</p>
 <ul>
 <li>
-<p>Open the Amazon ECR console.</p>
+<p>I opened the Amazon ECR console</p>
 </li>
 <li>
-<p>From the navigation bar, choose the Region that contains the repository to delete.</p>
+<p>In the navigation pane, I choose <code>Repositories</code></p>
 </li>
 <li>
-<p>In the navigation pane, choose Repositories.</p>
+<p>On the Repositories page, I selected the repository to delete and choose <code>Delete</code></p>
 </li>
 <li>
-<p>On the Repositories page, select the repository to delete and choose Delete.</p>
-</li>
-<li>
-<p>In the Delete repository_name window, verify that the selected repositories should be deleted and choose Delete. </p>
+<p>In the Delete repository_name window, I verified that the selected repositories to be deleted and choose <code>Delete</code> option.</p>
 </li>
 </ul>
 <h4 id="pushing-an-ecr-repository">Pushing an ECR Repository</h4>
 <p>When be create a repository it shows commands for pushing. So we have have to follow these commands and we can easily push the image to our ECR Repository.</p>
 <pre><code>aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 394310921697.dkr.ecr.us-east-2.amazonaws.com 
 
-docker tag angular5:latest 394310921697.dkr.ecr.us-east-2.amazonaws.com/angular-app-repo:latest
+docker tag &lt;image name:tag&gt; 394310921697.dkr.ecr.us-east-2.amazonaws.com/angular-app-repo:latest
 
 docker push 394310921697.dkr.ecr.us-east-2.amazonaws.com/angular-app-repo:latest
 </code></pre>
 
 <h3 id="adding-aws-through-github-actions">Adding AWS through GitHub Actions</h3>
-<p>secrets(https://github.com/marketplace/actions/configure-aws-credentials-action-for-github-actions)</p>
-<p>In the YML file I also added the AWS CLI portion</p>
-<pre><code>- name: Installing AWS CLI
+<ul>
+<li>I created a new file <code>image.yml</code> in the <code>.github/workflows</code>. </li>
+<li>I stored my credentials in secrets section of my application repository.</li>
+<li>
+<p>I used this <a href="https://github.com/marketplace/actions/configure-aws-credentials-action-for-github-actions">plugin</a> <code>"Configure AWS Credentials" Action For GitHub Actions</code> for AWS configuration.</p>
+</li>
+<li>
+<p>Below is the YML file:</p>
+</li>
+</ul>
+<pre><code>name: &quot;build image from Dockerfile&quot;
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - uses: actions/checkout@v2
+
+    - name: Install docker
+      run: |
+        sudo apt update
+        sudo apt install apt-transport-https ca-certificates curl software-properties-common
+        curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+        sudo add-apt-repository &quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable&quot; &amp;&amp; sudo apt update
+        apt-cache policy docker-ce
+        sudo apt install docker-ce
+
+    - name: Build Docker image
+      run: |
+        docker build -t angular5 .
+
+    - name: Installing AWS CLI
       run: |
         curl &quot;https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip&quot; -o &quot;awscliv2.zip&quot;
         unzip awscliv2.zip
@@ -657,7 +690,7 @@ docker push 394310921697.dkr.ecr.us-east-2.amazonaws.com/angular-app-repo:latest
         docker push 394310921697.dkr.ecr.us-east-2.amazonaws.com/angular-app-repo:latest
 </code></pre>
 
-<p>The image got successfully pushed to ECR.</p>
+<p>After this the image got successfully pushed to ECR.</p>
                 
               
               
