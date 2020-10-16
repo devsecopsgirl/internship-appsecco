@@ -41,7 +41,7 @@ Now again I ran `ng serve` and in the browser I typed `localhost:4200` (4200 is 
 
 ## Installing the application through Docker
 
-I firstly cloned the application folder and made a file `Dockerfile`. In this I used a node [image](https://hub.docker.com/_/node)
+I firstly cloned the application and in cloned folder made a file `Dockerfile`. In this I used a node [image](https://hub.docker.com/_/node)
 ```
 nano Dockerfile
 ```
@@ -83,7 +83,7 @@ On the browser I opened `localhost:1234` it worked and the below window got open
 ## Installing application through AWS
 
 ### Installing AWS CLI in terminal
-I followed this official link for the installation of AWS CLI(https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux.html#cliv2-linux-install)
+I followed this official link for the installation of [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux.html#cliv2-linux-install) and ran the below commands:
 
 ```
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
@@ -91,7 +91,7 @@ unzip awscliv2.zip
 sudo ./aws/install
 aws --version
 ```
-I got the version output as shown below. It shows AWS CLI is successfully installed.
+I got the version output as shown below. It means AWS CLI is successfully installed.
 ```
 aws-cli/2.0.56 Python/3.7.3 Linux/5.3.0-64-generic exe/x86_64.ubuntu.19
 ```
@@ -107,9 +107,9 @@ Default region name [None]: us-east-2
 Default output format [None]: json
 ```
 aws sts get-caller-identity
-"UserId": "AIDAVXTWDFXQ2SJNKMMAV",
-    "Account": "394310921697",
-    "Arn": "arn:aws:iam::394310921697:user/priyam"
+"UserId": <"AWS Access Key ID ">,
+    "Account": <"ACCOUNT NO.">,
+    "Arn": "******"
 
 ### ECR 
 
