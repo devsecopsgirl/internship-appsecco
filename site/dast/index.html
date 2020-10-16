@@ -335,8 +335,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#adding-aws-through-github-actions" class="md-nav__link">
-    Adding AWS through GitHub Actions
+  <a href="#adding-an-image-to-ecr-repository-through-github-actions" class="md-nav__link">
+    Adding an image to ECR Repository through GitHub Actions
   </a>
   
 </li>
@@ -456,8 +456,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#adding-aws-through-github-actions" class="md-nav__link">
-    Adding AWS through GitHub Actions
+  <a href="#adding-an-image-to-ecr-repository-through-github-actions" class="md-nav__link">
+    Adding an image to ECR Repository through GitHub Actions
   </a>
   
 </li>
@@ -523,14 +523,14 @@ yarn -version
 <pre><code>sudo apt purge ng-common ng-latin
 </code></pre>
 
-<p>Now again I ran <code>ng serve</code> and in the browser I typed <code>localhost:4200</code> (4200 is default port). The application was successfully installed and window that opened is shown below:
+<p>Now again I ran <code>ng serve</code> and in the browser I typed <code>localhost:4200</code> (4200 is the default port). The application was successfully installed and window that opened is shown below:
 <img alt="" src="../Images/angular%20app.png" /></p>
 <h2 id="installing-the-application-through-docker">Installing the application through Docker</h2>
-<p>I firstly cloned the application and in cloned folder made a file <code>Dockerfile</code>. In this I used a node <a href="https://hub.docker.com/_/node">image</a></p>
+<p>I firstly cloned the application and in the cloned folder made a file <code>Dockerfile</code>. In this, I used a node <a href="https://hub.docker.com/_/node">image</a></p>
 <pre><code>nano Dockerfile
 </code></pre>
 
-<p>I written this code in Dockerfile</p>
+<p>I wrote this code in Dockerfile</p>
 <pre><code>#getting base image
 FROM node
 
@@ -551,9 +551,9 @@ CMD [&quot;ng&quot;, &quot;serve&quot;, &quot;--host&quot;, &quot;0.0.0.0&quot;]
 
 <ul>
 <li>My application was not running on browser but it was getting compiled because I made a mistake that I was not writing "--host", "0.0.0.0" (--host 0.0.0.0 to listen to all the interfaces from the container).</li>
-<li>I was facing many errors such of packages getting failed so I removed my code of Yarn and only installed with Angular CLI</li>
+<li>I was facing many errors such as packages getting failed so I removed my code of Yarn and only installed with Angular CLI</li>
 </ul>
-<p>After this I build the image</p>
+<p>After this, I build the image</p>
 <pre><code>docker build -t angular5:latest .
 </code></pre>
 
@@ -577,14 +577,14 @@ aws --version
 </code></pre>
 
 <h3 id="setting-up-aws-profile">Setting up AWS profile</h3>
-<p>For setting up AWS profile I followed thid official<a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html"> documentation</a>. I ran the command <code>aws configure</code> to set up AWS CLI installation. It will ask for some information which we have to enter:</p>
+<p>For setting up AWS profile I followed this official<a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html"> documentation</a>. I ran the command <code>aws configure</code> to set up AWS CLI installation. It will ask for some information which we have to enter:</p>
 <pre><code>AWS Access Key ID [****************4529]: &lt;Enter the ID&gt;
 AWS Secret Access Key [None]: &lt;Enter the Access Key&gt;
 Default region name [None]: us-east-2
 Default output format [None]: json
 </code></pre>
 
-<p>Then run the the below command:</p>
+<p>Then run the below command:</p>
 <pre><code>aws sts get-caller-identity
 </code></pre>
 
@@ -604,11 +604,11 @@ Default output format [None]: json
 <li>On the Repositories page, choose <code>Create repository</code></li>
 <li>In <code>Repository name</code>, enter a unique name for repository</li>
 <li>For <code>Tag immutability</code>, I choose the tag mutability setting for the repository. Repositories configured with immutable tags will prevent image tags from being overwritten</li>
-<li>For <code>Scan on push</code>,I choose the image scanning setting for the repository. Repositories configured to scan on push will start an image scan whenever an image is pushed, otherwise image scans need to be started manually</li>
+<li>For <code>Scan on push</code>, I choose the image scanning setting for the repository. Repositories configured to scan on push will start an image scan whenever an image is pushed, otherwise, image scans need to be started manually</li>
 <li>For <code>KMS encryption</code>, I choose to enable encryption of the images in the repository using AWS Key Management Service</li>
 </ul>
 <h4 id="deleting-an-ecr-repository">Deleting an ECR repository</h4>
-<p>To delete a an ECR repository I followed the below steps:</p>
+<p>To delete an ECR repository I followed the below steps:</p>
 <ul>
 <li>
 <p>I opened the Amazon ECR console</p>
@@ -624,7 +624,7 @@ Default output format [None]: json
 </li>
 </ul>
 <h4 id="pushing-an-ecr-repository">Pushing an ECR Repository</h4>
-<p>When be create a repository it shows commands for pushing. So we have have to follow these commands and we can easily push the image to our ECR Repository.</p>
+<p>When we create a repository it shows commands for pushing. So we have to follow these commands and we can easily push the image to our ECR Repository.</p>
 <pre><code>aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 394310921697.dkr.ecr.us-east-2.amazonaws.com 
 
 docker tag &lt;image name:tag&gt; 394310921697.dkr.ecr.us-east-2.amazonaws.com/angular-app-repo:latest
@@ -632,10 +632,10 @@ docker tag &lt;image name:tag&gt; 394310921697.dkr.ecr.us-east-2.amazonaws.com/a
 docker push 394310921697.dkr.ecr.us-east-2.amazonaws.com/angular-app-repo:latest
 </code></pre>
 
-<h3 id="adding-aws-through-github-actions">Adding AWS through GitHub Actions</h3>
+<h3 id="adding-an-image-to-ecr-repository-through-github-actions">Adding an image to ECR Repository through GitHub Actions</h3>
 <ul>
 <li>I created a new file <code>image.yml</code> in the <code>.github/workflows</code>. </li>
-<li>I stored my credentials in secrets section of my application repository.</li>
+<li>I stored my credentials in the secrets section of my application repository.</li>
 <li>
 <p>I used this <a href="https://github.com/marketplace/actions/configure-aws-credentials-action-for-github-actions">plugin</a> <code>"Configure AWS Credentials" Action For GitHub Actions</code> for AWS configuration.</p>
 </li>
@@ -690,7 +690,7 @@ jobs:
         docker push 394310921697.dkr.ecr.us-east-2.amazonaws.com/angular-app-repo:latest
 </code></pre>
 
-<p>After this the image got successfully pushed to ECR.</p>
+<p>After this, the image got successfully pushed to ECR.</p>
                 
               
               

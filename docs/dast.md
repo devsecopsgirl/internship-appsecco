@@ -36,16 +36,16 @@ npm install -g @angular/cli
 ```
 sudo apt purge ng-common ng-latin
 ```
-Now again I ran `ng serve` and in the browser I typed `localhost:4200` (4200 is default port). The application was successfully installed and window that opened is shown below:
+Now again I ran `ng serve` and in the browser I typed `localhost:4200` (4200 is the default port). The application was successfully installed and window that opened is shown below:
 ![](Images/angular%20app.png)
 
 ## Installing the application through Docker
 
-I firstly cloned the application and in cloned folder made a file `Dockerfile`. In this I used a node [image](https://hub.docker.com/_/node)
+I firstly cloned the application and in the cloned folder made a file `Dockerfile`. In this, I used a node [image](https://hub.docker.com/_/node)
 ```
 nano Dockerfile
 ```
-I written this code in Dockerfile
+I wrote this code in Dockerfile
 ```
 #getting base image
 FROM node
@@ -65,9 +65,9 @@ EXPOSE 4200
 CMD ["ng", "serve", "--host", "0.0.0.0"]
 ```
 * My application was not running on browser but it was getting compiled because I made a mistake that I was not writing "--host", "0.0.0.0" (--host 0.0.0.0 to listen to all the interfaces from the container).
-* I was facing many errors such of packages getting failed so I removed my code of Yarn and only installed with Angular CLI
+* I was facing many errors such as packages getting failed so I removed my code of Yarn and only installed with Angular CLI
 
-After this I build the image
+After this, I build the image
 ```
 docker build -t angular5:latest .
 ```
@@ -98,14 +98,14 @@ aws-cli/2.0.56 Python/3.7.3 Linux/5.3.0-64-generic exe/x86_64.ubuntu.19
 
 ### Setting up AWS profile
 
-For setting up AWS profile I followed thid official[ documentation](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html). I ran the command `aws configure` to set up AWS CLI installation. It will ask for some information which we have to enter:
+For setting up AWS profile I followed this official[ documentation](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html). I ran the command `aws configure` to set up AWS CLI installation. It will ask for some information which we have to enter:
 ```
 AWS Access Key ID [****************4529]: <Enter the ID>
 AWS Secret Access Key [None]: <Enter the Access Key>
 Default region name [None]: us-east-2
 Default output format [None]: json
 ```
-Then run the the below command:
+Then run the below command:
 ```
 aws sts get-caller-identity
 ```
@@ -128,12 +128,12 @@ To Create the ECR Repository I followed the below steps:
 * On the Repositories page, choose `Create repository`
 * In `Repository name`, enter a unique name for repository
 * For `Tag immutability`, I choose the tag mutability setting for the repository. Repositories configured with immutable tags will prevent image tags from being overwritten
-* For `Scan on push`,I choose the image scanning setting for the repository. Repositories configured to scan on push will start an image scan whenever an image is pushed, otherwise image scans need to be started manually
+* For `Scan on push`, I choose the image scanning setting for the repository. Repositories configured to scan on push will start an image scan whenever an image is pushed, otherwise, image scans need to be started manually
 * For `KMS encryption`, I choose to enable encryption of the images in the repository using AWS Key Management Service
 
 #### Deleting an ECR repository
 
-To delete a an ECR repository I followed the below steps:
+To delete an ECR repository I followed the below steps:
 
 * I opened the Amazon ECR console
 
@@ -145,7 +145,7 @@ To delete a an ECR repository I followed the below steps:
 
 #### Pushing an ECR Repository
 
-When be create a repository it shows commands for pushing. So we have have to follow these commands and we can easily push the image to our ECR Repository.
+When we create a repository it shows commands for pushing. So we have to follow these commands and we can easily push the image to our ECR Repository.
 ```
 aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 394310921697.dkr.ecr.us-east-2.amazonaws.com 
 
@@ -154,10 +154,10 @@ docker tag <image name:tag> 394310921697.dkr.ecr.us-east-2.amazonaws.com/angular
 docker push 394310921697.dkr.ecr.us-east-2.amazonaws.com/angular-app-repo:latest
 ```
 
-### Adding AWS through GitHub Actions
+### Adding an image to ECR Repository through GitHub Actions
 
 * I created a new file `image.yml` in the `.github/workflows`. 
-* I stored my credentials in secrets section of my application repository.
+* I stored my credentials in the secrets section of my application repository.
 * I used this [plugin](https://github.com/marketplace/actions/configure-aws-credentials-action-for-github-actions) `"Configure AWS Credentials" Action For GitHub Actions` for AWS configuration.
 
 * Below is the YML file:
@@ -208,4 +208,4 @@ jobs:
         docker tag angular5:latest 394310921697.dkr.ecr.us-east-2.amazonaws.com/angular-app-repo:latest
         docker push 394310921697.dkr.ecr.us-east-2.amazonaws.com/angular-app-repo:latest
 ```
-After this the image got successfully pushed to ECR.
+After this, the image got successfully pushed to ECR.
