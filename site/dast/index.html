@@ -295,7 +295,7 @@
         
           <li class="md-nav__item">
   <a href="#setting-up-aws-profile" class="md-nav__link">
-    setting up AWS profile
+    Setting up AWS profile
   </a>
   
 </li>
@@ -416,7 +416,7 @@
         
           <li class="md-nav__item">
   <a href="#setting-up-aws-profile" class="md-nav__link">
-    setting up AWS profile
+    Setting up AWS profile
   </a>
   
 </li>
@@ -576,19 +576,24 @@ aws --version
 <pre><code>aws-cli/2.0.56 Python/3.7.3 Linux/5.3.0-64-generic exe/x86_64.ubuntu.19
 </code></pre>
 
-<h3 id="setting-up-aws-profile">setting up AWS profile</h3>
-<p>(https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html)</p>
-<pre><code>aws configure
-AWS Access Key ID [****************4529]: &lt;Enter the ID&gt;
+<h3 id="setting-up-aws-profile">Setting up AWS profile</h3>
+<p>For setting up AWS profile I followed thid official<a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html"> documentation</a>. I ran the command <code>aws configure</code> to set up AWS CLI installation. It will ask for some information which we have to enter:</p>
+<pre><code>AWS Access Key ID [****************4529]: &lt;Enter the ID&gt;
 AWS Secret Access Key [None]: &lt;Enter the Access Key&gt;
 Default region name [None]: us-east-2
 Default output format [None]: json
 </code></pre>
 
-<p>aws sts get-caller-identity
-"UserId": &lt;"AWS Access Key ID "&gt;,
-    "Account": &lt;"ACCOUNT NO."&gt;,
-    "Arn": "<strong>*</strong>*"</p>
+<p>Then run the the below command:</p>
+<pre><code>aws sts get-caller-identity
+</code></pre>
+
+<p>We will get the below output and our profile has been successfully configured:</p>
+<pre><code>&quot;UserId&quot;: &lt;&quot;AWS Access Key ID &quot;&gt;,
+    &quot;Account&quot;: &lt;&quot;ACCOUNT NO.&quot;&gt;,
+    &quot;Arn&quot;: &quot;******&quot;
+</code></pre>
+
 <h3 id="ecr">ECR</h3>
 <p>Amazon Elastic Container Registry (ECR) is a fully-managed Docker container registry that makes it easy for developers to store, manage, and deploy Docker container images. Amazon ECR eliminates the need to operate your own container repositories or worry about scaling the underlying infrastructure. Amazon ECR hosts your images in a highly available and scalable architecture, allowing you to reliably deploy containers for your applications. </p>
 <h4 id="creating-an-ecr-repository">Creating an ECR Repository</h4>

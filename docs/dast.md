@@ -96,21 +96,25 @@ I got the version output as shown below. It means AWS CLI is successfully instal
 aws-cli/2.0.56 Python/3.7.3 Linux/5.3.0-64-generic exe/x86_64.ubuntu.19
 ```
 
-### setting up AWS profile
+### Setting up AWS profile
 
-(https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html)
+For setting up AWS profile I followed thid official[ documentation](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html). I ran the command `aws configure` to set up AWS CLI installation. It will ask for some information which we have to enter:
 ```
-aws configure
 AWS Access Key ID [****************4529]: <Enter the ID>
 AWS Secret Access Key [None]: <Enter the Access Key>
 Default region name [None]: us-east-2
 Default output format [None]: json
 ```
+Then run the the below command:
+```
 aws sts get-caller-identity
+```
+We will get the below output and our profile has been successfully configured:
+```
 "UserId": <"AWS Access Key ID ">,
     "Account": <"ACCOUNT NO.">,
     "Arn": "******"
-
+```
 ### ECR 
 
 Amazon Elastic Container Registry (ECR) is a fully-managed Docker container registry that makes it easy for developers to store, manage, and deploy Docker container images. Amazon ECR eliminates the need to operate your own container repositories or worry about scaling the underlying infrastructure. Amazon ECR hosts your images in a highly available and scalable architecture, allowing you to reliably deploy containers for your applications. 
