@@ -1,4 +1,4 @@
-# DAST scan
+# Set up GitHub Actions Workflow for DAST
 
 ##  Objective 
 
