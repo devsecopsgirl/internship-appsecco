@@ -265,25 +265,25 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#installing-the-application-manually" class="md-nav__link">
-    Installing the application manually
+  <a href="#setting-up-the-application-manually" class="md-nav__link">
+    Setting Up the application manually
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#installing-the-application-through-docker" class="md-nav__link">
-    Installing the application through Docker
+  <a href="#setting-up-the-application-through-docker" class="md-nav__link">
+    Setting Up the application through Docker
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#installing-application-through-aws" class="md-nav__link">
-    Installing application through AWS
+  <a href="#setting-up-application-through-aws" class="md-nav__link">
+    Setting Up application through AWS
   </a>
   
-    <nav class="md-nav" aria-label="Installing application through AWS">
+    <nav class="md-nav" aria-label="Setting Up application through AWS">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -386,25 +386,25 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#installing-the-application-manually" class="md-nav__link">
-    Installing the application manually
+  <a href="#setting-up-the-application-manually" class="md-nav__link">
+    Setting Up the application manually
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#installing-the-application-through-docker" class="md-nav__link">
-    Installing the application through Docker
+  <a href="#setting-up-the-application-through-docker" class="md-nav__link">
+    Setting Up the application through Docker
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#installing-application-through-aws" class="md-nav__link">
-    Installing application through AWS
+  <a href="#setting-up-application-through-aws" class="md-nav__link">
+    Setting Up application through AWS
   </a>
   
-    <nav class="md-nav" aria-label="Installing application through AWS">
+    <nav class="md-nav" aria-label="Setting Up application through AWS">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -486,7 +486,7 @@
                 <h1 id="set-up-github-actions-workflow-for-dast">Set up GitHub Actions Workflow for DAST</h1>
 <h2 id="objective">Objective</h2>
 <p>This section aims to perform a DAST scan on <a href="https://github.com/gothinkster/angular-realworld-example-app">angular-realworld-example-app</a> and generate a report to provide a solution to the 4th point of the <a href="https://cloud-native.netlify.app/problem-statement/">problem statement</a> under Task 1.</p>
-<h2 id="installing-the-application-manually">Installing the application manually</h2>
+<h2 id="setting-up-the-application-manually">Setting Up the application manually</h2>
 <p>Firstly, I installed the application manually and ran it on my browser to know how it works. So I cloned the application in my terminal</p>
 <pre><code>git clone https://github.com/gothinkster/angular-realworld-example-app.git
 </code></pre>
@@ -525,7 +525,7 @@ yarn -version
 
 <p>Now again I ran <code>ng serve</code> and in the browser I typed <code>localhost:4200</code> (4200 is the default port). The application was successfully installed and window that opened is shown below:
 <img alt="" src="../Images/angular%20app.png" /></p>
-<h2 id="installing-the-application-through-docker">Installing the application through Docker</h2>
+<h2 id="setting-up-the-application-through-docker">Setting Up the application through Docker</h2>
 <p>I firstly cloned the application and in the cloned folder made a file <code>Dockerfile</code>. In this, I used a node <a href="https://hub.docker.com/_/node">image</a></p>
 <pre><code>nano Dockerfile
 </code></pre>
@@ -563,7 +563,7 @@ CMD [&quot;ng&quot;, &quot;serve&quot;, &quot;--host&quot;, &quot;0.0.0.0&quot;]
 
 <p>On the browser I opened <code>localhost:1234</code> it worked and the below window got opened.
 <img alt="" src="../Images/application%20docker%20running.png" /></p>
-<h2 id="installing-application-through-aws">Installing application through AWS</h2>
+<h2 id="setting-up-application-through-aws">Setting Up application through AWS</h2>
 <h3 id="installing-aws-cli-in-terminal">Installing AWS CLI in terminal</h3>
 <p>I followed this official link for the installation of <a href="https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux.html#cliv2-linux-install">AWS CLI</a> and ran the below commands:</p>
 <pre><code>curl &quot;https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip&quot; -o &quot;awscliv2.zip&quot;

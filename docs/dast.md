@@ -4,7 +4,7 @@
 
 This section aims to perform a DAST scan on [angular-realworld-example-app](https://github.com/gothinkster/angular-realworld-example-app) and generate a report to provide a solution to the 4th point of the [problem statement](https://cloud-native.netlify.app/problem-statement/) under Task 1.
 
-## Installing the application manually
+## Setting Up the application manually
 
 Firstly, I installed the application manually and ran it on my browser to know how it works. So I cloned the application in my terminal
 ```
@@ -39,7 +39,7 @@ sudo apt purge ng-common ng-latin
 Now again I ran `ng serve` and in the browser I typed `localhost:4200` (4200 is the default port). The application was successfully installed and window that opened is shown below:
 ![](Images/angular%20app.png)
 
-## Installing the application through Docker
+## Setting Up the application through Docker
 
 I firstly cloned the application and in the cloned folder made a file `Dockerfile`. In this, I used a node [image](https://hub.docker.com/_/node)
 ```
@@ -80,7 +80,7 @@ On the browser I opened `localhost:1234` it worked and the below window got open
 ![](Images/application%20docker%20running.png)
 
 
-## Installing application through AWS
+## Setting Up application through AWS
 
 ### Installing AWS CLI in terminal
 I followed this official link for the installation of [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux.html#cliv2-linux-install) and ran the below commands:
