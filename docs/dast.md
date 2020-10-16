@@ -2,12 +2,14 @@
 
 ##  Objective 
 
-This section aims to perform a DAST scan on angular-realworld-example-app and generate a report to provide a solution to the 4th point of the problem statement under Task 1.
+This section aims to perform a DAST scan on [angular-realworld-example-app](https://github.com/gothinkster/angular-realworld-example-app) and generate a report to provide a solution to the 4th point of the [problem statement](https://cloud-native.netlify.app/problem-statement/) under Task 1.
 
 ## Installing the application manually
 
-Firstly I installed the application manually to know how it works I cloned the application 
-
+Firstly, I installed the application manually and ran it on my browser to know how it works. So I cloned the application in my terminal
+```
+git clone https://github.com/gothinkster/angular-realworld-example-app.git
+```
 * Install npm
 
 ```
@@ -30,28 +32,22 @@ yarn -version
 ```
 npm install -g @angular/cli
 ```
-* Got an error as ng serve opens editor instead of loading local URL
-(https://askubuntu.com/questions/980708/ng-serve-opens-editor-instead-of-loading-local-url)
-This is the terminal editor on the 'ng' alias. Uninstall it with:
+* Got an error as on running `ng serve` opens editor instead of loading local URL. This is the terminal editor on the 'ng' alias. I uninstalled it with:
 ```
 sudo apt purge ng-common ng-latin
 ```
-And then install Angular CLI (assuming you have npm installed) with 
-```
-npm install -g @angular/cli
-```
-* ng serve it worked and in the browser write localhost:4200 (4200 is default port). The window that opened is shown below:
+Now again I ran `ng serve` and in the browser I typed `localhost:4200` (4200 is default port). The application was successfully installed and window that opened is shown below:
 ![](Images/angular%20app.png)
 
 ## Installing the application through Docker
 
-I firstly cloned the application folder and made a Dockerfile. I used a node [image](https://hub.docker.com/_/node)
+I firstly cloned the application folder and made a file `Dockerfile`. In this I used a node [image](https://hub.docker.com/_/node)
 ```
 nano Dockerfile
 ```
-In Dockerfile written this code
+I written this code in Dockerfile
 ```
-#getting base image PHP
+#getting base image
 FROM node
 
 MAINTAINER Priyam Singh <2020priyamsingh@gmail.com>
@@ -71,7 +67,7 @@ CMD ["ng", "serve", "--host", "0.0.0.0"]
 * My application was not running on browser but it was getting compiled because I made a mistake that I was not writing "--host", "0.0.0.0" (--host 0.0.0.0 to listen to all the interfaces from the container).
 * I was facing many errors such of packages getting failed so I removed my code of Yarn and only installed with Angular CLI
 
-After this build the image
+After this I build the image
 ```
 docker build -t angular5:latest .
 ```
@@ -80,7 +76,7 @@ Then ran the container
 ```
 docker run --rm --name docker5 -p 1234:4200 angular5:latest
 ```
-On the browser I opened localhost:1234 it worked and the below window got opened.
+On the browser I opened `localhost:1234` it worked and the below window got opened.
 ![](Images/application%20docker%20running.png)
 
 
