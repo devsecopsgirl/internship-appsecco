@@ -625,12 +625,7 @@ Default output format [None]: json
 </ul>
 <h4 id="pushing-an-ecr-repository">Pushing an ECR Repository</h4>
 <p>When we create a repository it shows commands for pushing. So we have to follow these commands and we can easily push the image to our ECR Repository.</p>
-<pre><code>aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 394310921697.dkr.ecr.us-east-2.amazonaws.com 
-
-docker tag &lt;image name:tag&gt; 394310921697.dkr.ecr.us-east-2.amazonaws.com/angular-app-repo:latest
-
-docker push 394310921697.dkr.ecr.us-east-2.amazonaws.com/angular-app-repo:latest
-</code></pre>
+<pre><code></code></pre>
 
 <h3 id="adding-an-image-to-ecr-repository-through-github-actions">Adding an image to ECR Repository through GitHub Actions</h3>
 <ul>
@@ -683,11 +678,7 @@ jobs:
         aws-secret-access-key: ${{ secrets.DEMO_K }}
         aws-region: us-east-2
 
-    - name: Pushing image to AWS
-      run: |
-        aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 394310921697.dkr.ecr.us-east-2.amazonaws.com     
-        docker tag angular5:latest 394310921697.dkr.ecr.us-east-2.amazonaws.com/angular-app-repo:latest
-        docker push 394310921697.dkr.ecr.us-east-2.amazonaws.com/angular-app-repo:latest
+
 </code></pre>
 
 <p>After this, the image got successfully pushed to ECR.</p>

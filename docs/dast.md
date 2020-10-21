@@ -147,11 +147,6 @@ To delete an ECR repository I followed the below steps:
 
 When we create a repository it shows commands for pushing. So we have to follow these commands and we can easily push the image to our ECR Repository.
 ```
-aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 394310921697.dkr.ecr.us-east-2.amazonaws.com 
-
-docker tag <image name:tag> 394310921697.dkr.ecr.us-east-2.amazonaws.com/angular-app-repo:latest
-
-docker push 394310921697.dkr.ecr.us-east-2.amazonaws.com/angular-app-repo:latest
 ```
 
 ### Adding an image to ECR Repository through GitHub Actions
@@ -202,10 +197,6 @@ jobs:
         aws-secret-access-key: ${{ secrets.DEMO_K }}
         aws-region: us-east-2
 
-    - name: Pushing image to AWS
-      run: |
-        aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 394310921697.dkr.ecr.us-east-2.amazonaws.com     
-        docker tag angular5:latest 394310921697.dkr.ecr.us-east-2.amazonaws.com/angular-app-repo:latest
-        docker push 394310921697.dkr.ecr.us-east-2.amazonaws.com/angular-app-repo:latest
+    
 ```
 After this, the image got successfully pushed to ECR.
