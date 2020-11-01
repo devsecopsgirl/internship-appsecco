@@ -229,6 +229,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#sast" class="md-nav__link">
+    SAST
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#github-action" class="md-nav__link">
     Github Action
   </a>
@@ -331,6 +338,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#sast" class="md-nav__link">
+    SAST
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#github-action" class="md-nav__link">
     Github Action
   </a>
@@ -376,19 +390,21 @@
                 <h1 id="sast-through-github-action">SAST through Github Action</h1>
 <h2 id="objective">Objective</h2>
 <p>This section aims to perform SAST for <a href="https://github.com/gothinkster/angular-realworld-example-app">angular-realworld-example-app</a> and generate a report to provide a solution to the 1st point of the <a href="https://cloud-native.netlify.app/problem-statement/">problem statement</a> under Task 1.</p>
+<h2 id="sast">SAST</h2>
+<p>Static analysis or Static application security testing (SAST), is a testing methodology that analyzes source code to find security vulnerabilities that make organization’s applications susceptible to attack. SAST scans an application before the code is compiled. It’s also known as white box testing. SAST takes place very early in the software development life cycle (SDLC) as it does not require a working application and can take place without code being executed. It helps in identifying vulnerabilities in the initial stages of development and quickly resolve issues without breaking builds or passing on vulnerabilities to the final release of the application.</p>
 <h2 id="github-action">Github Action</h2>
 <p>GitHub Actions make it easy to automate all software workflows. Github Actions let us build, test, and deploy our code right from GitHub. We can also assign code reviews, manage branches, and triage issues the way we want with actions. GitHub Actions are designed to help in building robust and dynamic automation's.</p>
 <p>Whether we want to build a container, deploy a web service, or automate welcoming a new user to our open-source project — there’s an automated action for that.</p>
 <h3 id="creating-workflow">Creating Workflow</h3>
 <p>I followed this official link for <a href="https://docs.github.com/en/free-pro-team@latest/actions/quickstart#next-steps">creating the first workflow</a>.</p>
-<ol>
+<ul>
 <li>
-<p>On GitHub, I forked <code>angular-realworld-example-app</code> and I created a new file in the <code>.github/workflows</code>.</p>
+<p>On GitHub, I forked <code>angular-realworld-example-app</code> and I created a new file in the <code>.github/workflows</code></p>
 </li>
 <li>
-<p>I made the following YAML contents into the <code>sast-scan.yml</code> file. For knowing the syntax of Github action I followed <a href="https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobs">this</a> official link.</p>
+<p>I made the following YAML contents into the <code>sast-scan.yml</code> file. For knowing the syntax of Github action I followed <a href="https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobs">this</a> official link</p>
 </li>
-</ol>
+</ul>
 <pre><code>name: &quot;sast-scan&quot;
 
 on:
@@ -420,17 +436,25 @@ jobs:
         dependency-check/bin/dependency-check.sh --project &quot;angular-realworld-example-app&quot; --scan .
 </code></pre>
 
-<ol>
-<li>To run workflow, I scrolled to the bottom of the page and select Commit directly to the <code>main</code> branch. Then, to create a pull request, click <code>Propose new file</code>. Committing the workflow file in repository triggers the push event and runs workflow.</li>
-</ol>
+<ul>
+<li>To run workflow, I scrolled to the bottom of the page and select Commit directly to the <code>main</code> branch. Then, to create a pull request, click <code>Propose new file</code>. Committing the workflow file in repository triggers the push event and runs workflow</li>
+</ul>
 <h3 id="viewing-workflow-results">Viewing workflow results</h3>
 <ol>
-<li>Under repository name, click <code>Actions</code>. </li>
-<li>In the left sidebar, click the <code>workflow</code> to see. </li>
-<li>From the list of workflow runs, click the name of the run to see. </li>
-<li>In the left sidebar, click the Lint code base job. </li>
-<li>Expand the Run <code>sast-scan</code> step to view the results. </li>
+<li>On GitHub, I navigated to the main page of the repository.</li>
+<li>Under repository name, click <code>Actions</code>. 
+<img alt="" src="../Images/actions.png" /></li>
+<li>In the left sidebar, select the <code>workflow</code> to see under <code>All Workflows</code> section. From the list of workflow runs, I selected the name <code>sast-scan</code> of the run to see. 
+<img alt="" src="../Images/action1.png" /></li>
+<li>
+<p>In the left sidebar, I selected <code>test</code> and I can also check the <code>sast-scan.yml</code> by selecting <code>Workflow file</code>.
+<img alt="" src="../Images/action3.png" /></p>
+</li>
+<li>
+<p>Expand the <code>test</code> to view the results and each step expanded further to see the logs. </p>
+</li>
 </ol>
+<p><img alt="" src="../Images/action4.png" /></p>
                 
               
               

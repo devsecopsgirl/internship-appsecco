@@ -16,7 +16,7 @@ CycloneDX is available to use a node.js package that can generate SBOMs but also
 
 ## Generating SBOM through YAML file in GitHub Action
 
-* I created a new file sbom.yml in the .github/workflows.
+* I created a new file sbom.yml in the .github/workflows
 * I used this plugin [CycloneDX Node.js Generate SBOM](https://github.com/marketplace/actions/cyclonedx-node-js-generate-sbom)
 * The YAML file is this for generating the SBOM is:
 ```

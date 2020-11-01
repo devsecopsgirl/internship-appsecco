@@ -14,9 +14,9 @@ Linting is the automated checking of source code for programmatic and stylistic 
 
 ### Writing YAML file in GitHub Action
 
-* I created a new file `linting-tool.yml` in the .github/workflows.
+* I created a new file `linting-tool.yml` in the .github/workflows
 
-* The YAML file is this:
+* The YAML file is shown below:
 
 ```
   
@@ -49,5 +49,5 @@ jobs:
        sudo jshint --exclude="node_modules/" --reporter=unix .
 ```
 
-* `node_modules` It excludes the `node_modules/` directory and also exclude any files which do not have a .js or .ejs extension.
-* `--reporter` By using this option, I can change the output format. I selected `unix`, as it will become easier to count the rows and words. There are other options like `checkstyle`, the output will be in an `xml` format.
+* `node_modules` It excludes the `node_modules/` directory and also exclude any files which do not have a .js or .ejs extension
+* `--reporter` By using this option, I can change the output format. I selected `unix`, as it will become easier to count the rows and words. There are other options like `checkstyle`, the output will be in an `xml` format

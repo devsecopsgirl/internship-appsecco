@@ -15,7 +15,7 @@
     
     
       
-        <title>Software Bill of Materials - Cloud Native Implementation of DevSecOps Concepts</title>
+        <title>Errors - Cloud Native Implementation of DevSecOps Concepts</title>
       
     
     
@@ -49,7 +49,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#software-bill-of-materials" class="md-skip">
+        <a href="#_1" class="md-skip">
           Skip to content
         </a>
       
@@ -77,7 +77,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              Software Bill of Materials
+              Errors
             
           </span>
         </div>
@@ -209,74 +209,11 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Software Bill of Materials
-        <span class="md-nav__icon md-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
-        </span>
-      </label>
-    
-    <a href="./" title="Software Bill of Materials" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../sbom/" title="Software Bill of Materials" class="md-nav__link">
       Software Bill of Materials
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-      </span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#objective" class="md-nav__link">
-    Objective
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#software-bill-of-materials_1" class="md-nav__link">
-    Software Bill of Materials
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#cyclonedx" class="md-nav__link">
-    CycloneDX
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#generating-sbom-through-yaml-file-in-github-action" class="md-nav__link">
-    Generating SBOM through YAML file in GitHub Action
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
     
@@ -306,8 +243,6 @@
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon">
@@ -318,29 +253,15 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#objective" class="md-nav__link">
-    Objective
+  <a href="#_1" class="md-nav__link">
+    
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#software-bill-of-materials_1" class="md-nav__link">
-    Software Bill of Materials
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#cyclonedx" class="md-nav__link">
-    CycloneDX
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#generating-sbom-through-yaml-file-in-github-action" class="md-nav__link">
-    Generating SBOM through YAML file in GitHub Action
+  <a href="#vpc" class="md-nav__link">
+    VPC
   </a>
   
 </li>
@@ -361,47 +282,109 @@
                   
                 
                 
-                <h1 id="software-bill-of-materials">Software Bill of Materials</h1>
-<h2 id="objective">Objective</h2>
-<p>This section aims to generate a Software Bill of Materials for <a href="https://github.com/gothinkster/angular-realworld-example-app">angular-realworld-example-app</a> and generate a report to provide a solution to the 3rd point of the <a href="https://cloud-native.netlify.app/problem-statement/">problem statement</a> under Task 1.</p>
-<h2 id="software-bill-of-materials_1">Software Bill of Materials</h2>
-<p>A software bill of materials is a list of all the open source and third-party components present in a codebase. A software BOM also lists the licenses that govern those components, the versions of the components used in the codebase, and their patch status. With a software bill of materials, we can respond quickly to the security, license, and operational risks that come with open source use.</p>
-<h2 id="cyclonedx">CycloneDX</h2>
-<p>CycloneDX is a tool of lightweight software bill of materials (SBOM) specification designed for use in application security contexts and supply chain component analysis. Angular-realworld-example-app, like most other applications, is built with various dependencies. So I used CycloneDX to generate the SBOM for Angular-realworld-example-app.</p>
-<p>CycloneDX is available to use a node.js package that can generate SBOMs but also comes in a variety of implementations that can be found here to serve projects which use different stacks such as Auditjs, Python, Maven, .NET, PHP, etc. </p>
-<h2 id="generating-sbom-through-yaml-file-in-github-action">Generating SBOM through YAML file in GitHub Action</h2>
-<ul>
-<li>I created a new file sbom.yml in the .github/workflows</li>
-<li>I used this plugin <a href="https://github.com/marketplace/actions/cyclonedx-node-js-generate-sbom">CycloneDX Node.js Generate SBOM</a></li>
-<li>The YAML file is this for generating the SBOM is:</li>
-</ul>
-<pre><code>name: &quot;sbom-scan&quot;
-
-on:
-  push:
-    branches: [master]
-
-jobs:
-  test:
-    runs-on: ubuntu-latest
-
-    steps:
-
-    - uses: actions/checkout@v2
-
-    - name: install dependencies
-      run: | 
-       sudo apt install npm
-       sudo npm install --package-lock
-       npm audit fix
-
-    - name: Installing SBOM
-      run: |
-       sudo npm install -g @cyclonedx/bom
-
-    - name: CycloneDX Node.js Generate SBOM
-      uses: CycloneDX/gh-node-module-generatebom@v1.0.0
+                  <h1>Errors</h1>
+                
+                <h2 id="_1"></h2>
+<ol>
+<li>apt-get fails: The method driver /usr/lib/apt/methods/https could not be found</li>
+</ol>
+<p>apt-get install apt-transport-https ca-certificates</p>
+<p>link : https://unix.stackexchange.com/questions/263801/apt-get-fails-the-method-driver-usr-lib-apt-methods-https-could-not-be-found</p>
+<ol>
+<li>
+<p>FOR INSTALLING ANGULAR CLI
+https://angular.io/cli</p>
+</li>
+<li>
+<p>for installing yarn official site
+https://classic.yarnpkg.com/en/docs/install#debian-stable</p>
+</li>
+</ol>
+<hr />
+<p><a href="https://levelup.gitconnected.com/aws-fargate-running-a-serverless-node-js-app-on-aws-ecs-c5d8dea0a85a">AWS Fargate: Running a serverless Node.js app on AWS ECS</a>.</p>
+<p>error: tag invalid: The image tag 'latest' already exists in the 'angular-app-repo' repository and cannot be overwritten because the repository is immutable.
+Error: Process completed with exit code 1.</p>
+<pre><code>aws ecs update-service --cluster &lt;cluster name&gt; --service &lt;service name&gt; --force-new-deployment
 </code></pre>
+
+<h2 id="vpc">VPC</h2>
+<p>A VPC is an isolated portion of the AWS cloud populated by AWS objects, such as Amazon EC2 instances. Use the Classless Inter-Domain Routing(CIDR) block format to specify your VPC's contiguous IP address range, for example, 10.0.0.0/16 and we cannot create VPC larger than /16</p>
+<ul>
+<li>name: Pushing image to AWS
+      run: |
+        aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 394310921697.dkr.ecr.us-east-2.amazonaws.com   <br />
+        docker tag angular5:latest 394310921697.dkr.ecr.us-east-2.amazonaws.com/angular-app-repo:latest
+        docker push 394310921697.dkr.ecr.us-east-2.amazonaws.com/angular-app-repo:latest</li>
+</ul>
+<p>aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 394310921697.dkr.ecr.us-east-2.amazonaws.com </p>
+<p>docker tag <image name:tag> 394310921697.dkr.ecr.us-east-2.amazonaws.com/angular-app-repo:latest</p>
+<p>docker push 394310921697.dkr.ecr.us-east-2.amazonaws.com/angular-app-repo:latest</p>
+<hr />
+<p>Github action ZAP scan
+1. env: |
+     INTERNET_PROTOCOL: "curl -4 ifconfig.co"</p>
+<p>ERROR: The workflow is not valid. .github/workflows/image.yml (Line: 55, Col: 12): Unexpected value 'INTERNET_PROTOCOL:<code>curl -4 ifconfig.co</code>
+',.github/workflows/image.yml (Line: 57, Col: 12): Unrecognized named-value: 'INTERNET_PROTOCOL'. Located at position 1 within expression: INTERNET_PROTOCOL</p>
+<ol>
+<li>
+<p>env: |
+     INTERNET_PROTOCOL: <code>curl -4 ifconfig.co</code></p>
+</li>
+<li>
+<p>echo ::set-env name=IP::$(curl -4 ifconfig.co)</p>
+</li>
+</ol>
+<p>ERROR: The workflow is not valid. .github/workflows/image.yml (Line: 55, Col: 12): Unrecognized named-value: 'INTERNETPROTOCOL'. Located at position 1 within expression: INTERNETPROTOCOL</p>
+<ol>
+<li>ERROR: The workflow is not valid. .github/workflows/image.yml (Line: 54, Col: 12): Unrecognized named-value: 'export'. Located at position 1 within expression: export URL</li>
+</ol>
+<hr />
+<ol>
+<li>VPC security group updation commands used:</li>
+</ol>
+<p>aws ec2 authorize-security-group-ingress --group-id sg-12345678 --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 22, "ToPort": 22, "IpRanges": [{"CidrIp": "${{env.export_URL}}/32"}]}]</p>
+<p>refer: https://github.com/aws/aws-cli/issues/3463</p>
+<ul>
+<li>aws ec2 authorize-security-group-ingress --group-id sg-aaaa1111 --protocol tcp --port 80 --source-group sg-bbbb2222</li>
+</ul>
+<p>refer: https://docs.amazonaws.cn/en_us/vpc/latest/peering/vpc-peering-security-groups.html</p>
+<ul>
+<li>
+<p>vpc security-group update-security-group-rule-descriptions-ingress [-h]
+                                                                   [-f {adaptive_table,json,shell,table,value,yaml}]
+                                                                   [-c COLUMN]
+                                                                   [--max-width <integer>]
+                                                                   [--noindent]
+                                                                   [--prefix PREFIX]
+                                                                   [-m [NAME=VALUE [NAME=VALUE ...]]]
+                                                                   [--ip-permissions IP_PERMISSIONS]
+                                                                   group_id
+refer: https://www.stratoscale.com/knowledge/tools-and-sdks/stratoscale-cli-tools/symphony-cli-reference/vpc-commands/vpc-security-group-update-security-group-rule-descriptions-ingress/</p>
+</li>
+<li>
+<p>aws ec2 describe-vpcs --vpc-ids vpc-dfbc4ab4 --group-id ${{ secrets.GROUP_ID }} --protocol tcp --port 4200 --source ${{env.export_URL}}/32 </p>
+</li>
+</ul>
+<p><strong>hint</strong></p>
+<ul>
+<li>authorize-security-group-ingress --group-id ${{ secrets.GROUP_ID }} --protocol tcp --port 4200 --cidr ${{env.export_URL}}/32</li>
+</ul>
+<p>error: authorize-security-group-ingress command not found</p>
+<ul>
+<li>aws ec2 authorize-security-group-ingress --group-id ${{ secrets.GROUP_ID }} --protocol tcp --port 4200 --cidr ${{env.export_URL}}/32</li>
+</ul>
+<p>An error occurred (InvalidParameterValue) when calling the AuthorizeSecurityGroupIngress operation: CIDR block /32 is malformed
+Error: Process completed with exit code 254.</p>
+<ul>
+<li>
+<p>aws ec2 authorize-security-group-ingress --group-id ${{ secrets.GROUP_ID }} --protocol tcp --port 4200 --cidr ${env.export_URL}/32
+/home/runner/work/_temp/e7710386-d2e8-405b-9348-254821bd2300.sh: line 3: ${env.export_URL}/32: bad substitution</p>
+</li>
+<li>
+<p>aws ec2 authorize-security-group-ingress --group-id ${{ secrets.GROUP_ID }} --protocol tcp --port 4200 --cidr ${env.export_URL}\32
+/home/runner/work/_temp/e7710386-d2e8-405b-9348-254821bd2300.sh: line 3: ${env.export_URL}\32: bad substitution</p>
+</li>
+</ul>
                 
               
               
@@ -416,41 +399,6 @@ jobs:
       
         
 <footer class="md-footer">
-  
-    <div class="md-footer-nav">
-      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
-        
-          <a href="../code-quality-analysis/" title="Code Quality Analysis" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
-            <div class="md-footer-nav__button md-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-            </div>
-            <div class="md-footer-nav__title">
-              <div class="md-ellipsis">
-                <span class="md-footer-nav__direction">
-                  Previous
-                </span>
-                Code Quality Analysis
-              </div>
-            </div>
-          </a>
-        
-        
-          <a href="../dast/" title="Set up GitHub Actions Workflow for DAST" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
-            <div class="md-footer-nav__title">
-              <div class="md-ellipsis">
-                <span class="md-footer-nav__direction">
-                  Next
-                </span>
-                Set up GitHub Actions Workflow for DAST
-              </div>
-            </div>
-            <div class="md-footer-nav__button md-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
-            </div>
-          </a>
-        
-      </nav>
-    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">

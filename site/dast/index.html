@@ -346,6 +346,54 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#ecs" class="md-nav__link">
+    ECS
+  </a>
+  
+    <nav class="md-nav" aria-label="ECS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setting-up-ecs-cluster" class="md-nav__link">
+    Setting Up ECS cluster
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setting-up-service" class="md-nav__link">
+    Setting Up Service
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setting-up-task-definitions" class="md-nav__link">
+    Setting Up Task Definitions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setting-up-task" class="md-nav__link">
+    Setting Up Task
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#yaml-file-for-zap-scan" class="md-nav__link">
+    YAML file for ZAP scan
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -458,6 +506,54 @@
           <li class="md-nav__item">
   <a href="#adding-an-image-to-ecr-repository-through-github-actions" class="md-nav__link">
     Adding an image to ECR Repository through GitHub Actions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ecs" class="md-nav__link">
+    ECS
+  </a>
+  
+    <nav class="md-nav" aria-label="ECS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setting-up-ecs-cluster" class="md-nav__link">
+    Setting Up ECS cluster
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setting-up-service" class="md-nav__link">
+    Setting Up Service
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setting-up-task-definitions" class="md-nav__link">
+    Setting Up Task Definitions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setting-up-task" class="md-nav__link">
+    Setting Up Task
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#yaml-file-for-zap-scan" class="md-nav__link">
+    YAML file for ZAP scan
   </a>
   
 </li>
@@ -625,7 +721,10 @@ Default output format [None]: json
 </ul>
 <h4 id="pushing-an-ecr-repository">Pushing an ECR Repository</h4>
 <p>When we create a repository it shows commands for pushing. So we have to follow these commands and we can easily push the image to our ECR Repository.</p>
-<pre><code></code></pre>
+<pre><code>aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin ${{ secrets.AWS_LOG }}.dkr.ecr.us-east-2.amazonaws.com  
+docker tag angular5:latest ${{ secrets.AWS_LOG }}.dkr.ecr.us-east-2.amazonaws.com/angular-app-repo:latest
+docker push ${{ secrets.AWS_LOG }}.dkr.ecr.us-east-2.amazonaws.com/angular-app-repo:latest
+</code></pre>
 
 <h3 id="adding-an-image-to-ecr-repository-through-github-actions">Adding an image to ECR Repository through GitHub Actions</h3>
 <ul>
@@ -676,12 +775,52 @@ jobs:
       with:
         aws-access-key-id: ${{ secrets.DEMO_ID }}
         aws-secret-access-key: ${{ secrets.DEMO_K }}
-        aws-region: us-east-2
+        aws-region: us-east-2    
 
+    - name: Pushing image to AWS
+      run: |
+        aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin ${{ secrets.AWS_LOG }}.dkr.ecr.us-east-2.amazonaws.com  
+        docker tag angular5:latest ${{ secrets.AWS_LOG }}.dkr.ecr.us-east-2.amazonaws.com/angular-app-repo:latest
+        docker push ${{ secrets.AWS_LOG }}.dkr.ecr.us-east-2.amazonaws.com/angular-app-repo:latest
 
 </code></pre>
 
 <p>After this, the image got successfully pushed to ECR.</p>
+<h2 id="ecs">ECS</h2>
+<p>Amazon Elastic Container Service (ECS) is a highly scalable, high performance container management service that supports Docker containers and allows to easily run applications on a managed cluster of Amazon EC2 instances. It eliminates the need for us to install, operate, and scale cluster management infrastructure. </p>
+<h3 id="setting-up-ecs-cluster">Setting Up ECS cluster</h3>
+<p>To create cluster I followed the steps given below and also followed the official <a href="https://docs.aws.amazon.com/AmazonECS/latest/userguide/create_cluster.html">link</a>.</p>
+<p>For creating a cluster:</p>
+<ol>
+<li>I clicked on <code>services</code> in the left upper corner and searched for ECS under <code>All services</code> and clicked  <code>Elastic Container Service</code>.
+<img alt="" src="" /></li>
+<li>I selected <code>Clusters</code> option and then <code>Create Clusters</code>
+<img alt="" src="" /></li>
+<li>
+<p>For <code>Select cluster template</code>, I selected <code>Networking only</code> because I wanted to make it by Fargate as Fargate is a technology that can be used with Amazon ECS to run containers without having to manage servers or clusters of Amazon EC2 instances. With AWS Fargate, no longer have to provision, configure, or scale clusters of virtual machines to run containers., then I selected <code>Next Step</code>.</p>
+</li>
+<li>
+<p>Then the next page opened, here we have to fill the <code>cluster name</code> and click <code>create</code>.</p>
+</li>
+<li>
+<p>The <code>Launch status</code> page will open showing it is successfully created.</p>
+</li>
+</ol>
+<h3 id="setting-up-service">Setting Up Service</h3>
+<p>Once the ECS cluster is created I can now create <code>Services</code> for the cluster. I followed this official <a href="">documentation</a>.</p>
+<ol>
+<li>I firstly clicked on the cluster which I made and selected the <code>Service</code> option then clicked on <code>Create</code>. </li>
+<li>The next page <code>Configure service</code> opens</li>
+</ol>
+<p>(a). In the <code>Launch Type</code> I selected <code>FARGATE</code> then filled the <code>Service name</code> and then in <code>NUmber of tasks</code> I typed 1. Other options I kept as default and then selected <code>Next step</code>.</p>
+<p>(b). The next pages opened <code>Configure network</code> and <code>Set Auto Scaling</code> that too I kept default and selected the <code>Next step</code></p>
+<p>(c). Then <code>Review page</code> opens in which we can review the changes and finally create the service.</p>
+<h3 id="setting-up-task-definitions">Setting Up Task Definitions</h3>
+<p>From the side bar select <code>Create new Task Definition</code> and the page opens to select <code>FARGATE</code> and click <code>Next step</code> </p>
+<p>Over here give the <code>Task Definition Name</code> and <code>Task Role</code> select <code>ecsTaskExecutionRole</code> </p>
+<p><code>Task memory (GB)</code> select <code>0.5GB</code> and in <code>Task CPU (vCPU)</code> select <code>0.25 vCPU</code> and finally select <code>Create</code> option.</p>
+<h3 id="setting-up-task">Setting Up Task</h3>
+<h3 id="yaml-file-for-zap-scan">YAML file for ZAP scan</h3>
                 
               
               
