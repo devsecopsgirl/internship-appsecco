@@ -373,6 +373,7 @@
 <ul>
 <li>I created a new file sbom.yml in the .github/workflows</li>
 <li>I used this plugin <a href="https://github.com/marketplace/actions/cyclonedx-node-js-generate-sbom">CycloneDX Node.js Generate SBOM</a></li>
+<li>I also stored the report in artifacts by using the action <code>actions/upload-artifact@v2</code></li>
 <li>The YAML file is this for generating the SBOM is:</li>
 </ul>
 <pre><code>name: &quot;sbom-scan&quot;
@@ -401,6 +402,13 @@ jobs:
 
     - name: CycloneDX Node.js Generate SBOM
       uses: CycloneDX/gh-node-module-generatebom@v1.0.0
+
+    - name: Archive production artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: sbom report
+        path: |
+          ./bom.xml
 </code></pre>
                 
               

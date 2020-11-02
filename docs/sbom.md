@@ -18,6 +18,7 @@ CycloneDX is available to use a node.js package that can generate SBOMs but also
 
 * I created a new file sbom.yml in the .github/workflows
 * I used this plugin [CycloneDX Node.js Generate SBOM](https://github.com/marketplace/actions/cyclonedx-node-js-generate-sbom)
+* I also stored the report in artifacts by using the action `actions/upload-artifact@v2`
 * The YAML file is this for generating the SBOM is:
 ```
 name: "sbom-scan"
@@ -46,6 +47,13 @@ jobs:
           
     - name: CycloneDX Node.js Generate SBOM
       uses: CycloneDX/gh-node-module-generatebom@v1.0.0
+
+    - name: Archive production artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: sbom report
+        path: |
+          ./bom.xml
 ```
 
 

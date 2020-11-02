@@ -225,7 +225,33 @@ For creating a cluster:
 ![](Images/ECS2.png)
 3. For `Select cluster template`, I selected `Networking only` because I wanted to make it by Fargate as Fargate is a technology that can be used with Amazon ECS to run containers without having to manage servers or clusters of Amazon EC2 instances. With AWS Fargate, no longer have to provision, configure, or scale clusters of virtual machines to run containers., then I selected `Next Step`.
 
-4. Then the next page opened, here we have to fill the `cluster name` and click `create`.
+4. The next page opened, here I have to fill the `cluster name` and click `create`.
 
-5. The `Launch status` page will open showing it is successfully created.
+5. The `Launch status` page opened showing it is successfully created.
 
+### Setting Up Service
+
+Once the ECS cluster is created I can now create `Services` for the cluster. I followed this official [documentation]().
+
+1. I firstly clicked on the cluster which I made and selected the `Service` option then clicked on `Create`. 
+![](Images/ECS3.png)
+2. The next page `Configure service` opens
+
+(a). In the `Launch Type` I selected `FARGATE` then filled the `Service name` and then in `NUmber of tasks` I typed 1. Other options I kept as default and then selected `Next step`.
+
+(b). The next pages opened `Configure network` and `Set Auto Scaling` that too I kept default and selected the `Next step`
+
+(c). Then `Review page` opens in which we can review the changes and finally create the service.
+
+note: container was also created step missing
+### Setting Up Task Definitions
+
+* From the side bar select `Create new Task Definition` and the page opens to select `FARGATE` and click `Next step` 
+
+* Over here give the `Task Definition Name` and `Task Role` select `ecsTaskExecutionRole` 
+
+* `Task memory (GB)` select `0.5GB` and in `Task CPU (vCPU)` select `0.25 vCPU` and finally select `Create` option.
+
+### Setting Up Task
+
+### Setting Up YAML file for ZAP scan

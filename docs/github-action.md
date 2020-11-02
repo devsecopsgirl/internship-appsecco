@@ -21,7 +21,14 @@ I followed this official link for [creating the first workflow](https://docs.git
 
 * On GitHub, I forked ``angular-realworld-example-app`` and I created a new file in the `.github/workflows`
 
-* I made the following YAML contents into the `sast-scan.yml` file. For knowing the syntax of Github action I followed [this](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobs) official link
+* I wrote the YAML contents into the `sast-scan.yml` file. For knowing the syntax of Github action I followed [this](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobs) official link
+  
+* I also stored the report in artifacts from where it can be downloaded as `sast report`
+
+![](Images/sast-report.png)
+
+* The YML file for SAST scan as follows:
+
 ```
 name: "sast-scan"
 
@@ -52,6 +59,13 @@ jobs:
     - name: Run scan with ODC
       run: |
         dependency-check/bin/dependency-check.sh --project "angular-realworld-example-app" --scan .
+
+    - name: Archive production artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: sast report
+        path: |
+          ./dependency-check-6.0.2-release.zip
 ```
 
 * To run workflow, I scrolled to the bottom of the page and select Commit directly to the `main` branch. Then, to create a pull request, click `Propose new file`. Committing the workflow file in repository triggers the push event and runs workflow

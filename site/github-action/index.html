@@ -402,8 +402,15 @@
 <p>On GitHub, I forked <code>angular-realworld-example-app</code> and I created a new file in the <code>.github/workflows</code></p>
 </li>
 <li>
-<p>I made the following YAML contents into the <code>sast-scan.yml</code> file. For knowing the syntax of Github action I followed <a href="https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobs">this</a> official link</p>
+<p>I wrote the YAML contents into the <code>sast-scan.yml</code> file. For knowing the syntax of Github action I followed <a href="https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobs">this</a> official link</p>
 </li>
+<li>
+<p>I also stored the report in artifacts from where it can be downloaded as <code>sast report</code></p>
+</li>
+</ul>
+<p><img alt="" src="../Images/sast-report.png" /></p>
+<ul>
+<li>The YML file for SAST scan as follows:</li>
 </ul>
 <pre><code>name: &quot;sast-scan&quot;
 
@@ -434,6 +441,13 @@ jobs:
     - name: Run scan with ODC
       run: |
         dependency-check/bin/dependency-check.sh --project &quot;angular-realworld-example-app&quot; --scan .
+
+    - name: Archive production artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: sast report
+        path: |
+          ./dependency-check-6.0.2-release.zip
 </code></pre>
 
 <ul>
