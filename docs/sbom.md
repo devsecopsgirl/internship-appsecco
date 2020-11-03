@@ -2,7 +2,7 @@
 
 ## Objective
 
-This section aims to generate a Software Bill of Materials for [angular-realworld-example-app](https://github.com/gothinkster/angular-realworld-example-app) and generate a report to provide a solution to the 3rd point of the [problem statement](https://cloud-native.netlify.app/problem-statement/) under Task 1.
+This section aims to generate a Software Bill of Materials for [angular-realworld-example-app](https://github.com/gothinkster/angular-realworld-example-app) and generate a report to provide a solution to the third point of the [problem statement](https://cloud-native.netlify.app/problem-statement/) under Task 1.
 
 ## Software Bill of Materials
 

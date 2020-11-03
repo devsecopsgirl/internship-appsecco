@@ -2,7 +2,7 @@
 
 ##  Objective 
 
-This section aims to perform a DAST scan on [angular-realworld-example-app](https://github.com/gothinkster/angular-realworld-example-app) and generate a report to provide a solution to the 4th point of the [problem statement](https://cloud-native.netlify.app/problem-statement/) under Task 1.
+This section aims to perform a DAST scan on [angular-realworld-example-app](https://github.com/gothinkster/angular-realworld-example-app) and generate a report to provide a solution to the fourth point of the [problem statement](https://cloud-native.netlify.app/problem-statement/) under Task 1.
 
 ## Setting Up the application manually
 

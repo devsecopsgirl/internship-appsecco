@@ -3,7 +3,7 @@
 
 ## Objective
 
-This section aims to generate a Software Bill of Materials for [angular-realworld-example-app](https://github.com/gothinkster/angular-realworld-example-app) and generate a report to provide a solution to the 5rd point of the [problem statement](https://cloud-native.netlify.app/problem-statement/) under Task 1.
+This section aims to generate a Software Bill of Materials for [angular-realworld-example-app](https://github.com/gothinkster/angular-realworld-example-app) and generate a report to provide a solution to the fifth point of the [problem statement](https://cloud-native.netlify.app/problem-statement/) under Task 1.
 
 ## Running GitHub Actions Sequentially
 
@@ -11,15 +11,15 @@ I set up the sequential workflows by using a `repository_dispatch` action in the
 
 * Step1: Creating a Personal Access Token (PAT)
 
-    I followed the GitHub’s instructions [here](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token) for creating PAT and in `Select scopes` I checked `repo` as the repository is a private repository and if it is a public repo `public_repo` option is checked.
+    I followed GitHub’s instructions [here](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token) for creating PAT and in `Select scopes` I checked `repo` as the repository is private repository and if it is a public repo `public_repo` option is checked.
 
 * Step 2 - Adding the PAT as an actions secret in the repository
 
-    In the second step I added the token to secrets and named it as `REPO_TRIGGER_PAT`.
+    In the second step, I added the token to secrets and named it as `REPO_TRIGGER_PAT`.
 
-* Step 3 - Adding the `repository_dispatch` event to Workflow 1 that is workflow I made for ZAP scan
+* Step 3 - Adding the `repository_dispatch` event to Workflow 1 that is the workflow I made for ZAP scan
 
-    `Workflow 1` is the workflow, and the jobs contained within it, is the one which I want to exacute first. `Workflow 2` is the workflow I want to execute after `WOrkflow 1`. Given below is the last step of my `Workflow 1`:
+    `Workflow 1` is the workflow, and the jobs contained within it are the one which I want to execute first. `Workflow 2` is the workflow I want to execute after `WOrkflow 1`. Given below is the last step of my `Workflow 1`:
 
 ```
 
@@ -37,7 +37,7 @@ In this `if: success()` means only if all the prior steps in the `Workflow 1` ar
 ```
 client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'
 ```
-The above command is used to pass the data from `Workflow 1` to `Workflow 2`. It tells `Workflow2` the branch and commit hash to checkout and use so that `Workflows 1` and `Workflow 2` are using the same exact code. 
+The above command is used to pass the data from `Workflow 1` to `Workflow 2`. It tells `Workflow2` the branch and commit hash to checkout and use so that `Workflows 1` and `Workflow 2` are using the same code. 
 
 * Step 4 - Adding the repository_dispatch event as trigger in Workflow 2 YAML
 
@@ -57,7 +57,7 @@ I used the client payload data from the event to checkout the same code. I modif
       with:
         ref: ${{ github.event.client_payload.sha }}
 ```
-After this I add all other steps in `Workflow 2` for deployment of application.
+After this, I add all other steps in `Workflow 2` for deployment of application.
 
 ## YAML file for deployment
 

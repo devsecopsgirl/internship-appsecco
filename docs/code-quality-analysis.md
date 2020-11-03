@@ -2,7 +2,7 @@
 
 ## Objective
 
-This section aims to perform a linting check on the source code of [angular-realworld-example-app](https://github.com/gothinkster/angular-realworld-example-app) and generate a report to provide a solution to the 2nd point of the [problem statement](https://cloud-native.netlify.app/problem-statement/) under Task 1.
+This section aims to perform a linting check on the source code of [angular-realworld-example-app](https://github.com/gothinkster/angular-realworld-example-app) and generate a report to provide a solution to the second point of the [problem statement](https://cloud-native.netlify.app/problem-statement/) under Task 1.
 
 ## Code Linting
 

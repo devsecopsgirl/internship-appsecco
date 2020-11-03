@@ -361,21 +361,21 @@
                 
                 <h1 id="set-up-github-actions-workflow-for-deployment">Set up GitHub Actions Workflow for Deployment</h1>
 <h2 id="objective">Objective</h2>
-<p>This section aims to generate a Software Bill of Materials for <a href="https://github.com/gothinkster/angular-realworld-example-app">angular-realworld-example-app</a> and generate a report to provide a solution to the 5rd point of the <a href="https://cloud-native.netlify.app/problem-statement/">problem statement</a> under Task 1.</p>
+<p>This section aims to generate a Software Bill of Materials for <a href="https://github.com/gothinkster/angular-realworld-example-app">angular-realworld-example-app</a> and generate a report to provide a solution to the fifth point of the <a href="https://cloud-native.netlify.app/problem-statement/">problem statement</a> under Task 1.</p>
 <h2 id="running-github-actions-sequentially">Running GitHub Actions Sequentially</h2>
 <p>I set up the sequential workflows by using a <code>repository_dispatch</code> action in the following four steps and followed the documentation(https://stevenmortimer.com/running-github-actions-sequentially/) :</p>
 <ul>
 <li>
 <p>Step1: Creating a Personal Access Token (PAT)</p>
-<p>I followed the GitHub’s instructions <a href="https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token">here</a> for creating PAT and in <code>Select scopes</code> I checked <code>repo</code> as the repository is a private repository and if it is a public repo <code>public_repo</code> option is checked.</p>
+<p>I followed GitHub’s instructions <a href="https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token">here</a> for creating PAT and in <code>Select scopes</code> I checked <code>repo</code> as the repository is private repository and if it is a public repo <code>public_repo</code> option is checked.</p>
 </li>
 <li>
 <p>Step 2 - Adding the PAT as an actions secret in the repository</p>
-<p>In the second step I added the token to secrets and named it as <code>REPO_TRIGGER_PAT</code>.</p>
+<p>In the second step, I added the token to secrets and named it as <code>REPO_TRIGGER_PAT</code>.</p>
 </li>
 <li>
-<p>Step 3 - Adding the <code>repository_dispatch</code> event to Workflow 1 that is workflow I made for ZAP scan</p>
-<p><code>Workflow 1</code> is the workflow, and the jobs contained within it, is the one which I want to exacute first. <code>Workflow 2</code> is the workflow I want to execute after <code>WOrkflow 1</code>. Given below is the last step of my <code>Workflow 1</code>:</p>
+<p>Step 3 - Adding the <code>repository_dispatch</code> event to Workflow 1 that is the workflow I made for ZAP scan</p>
+<p><code>Workflow 1</code> is the workflow, and the jobs contained within it are the one which I want to execute first. <code>Workflow 2</code> is the workflow I want to execute after <code>WOrkflow 1</code>. Given below is the last step of my <code>Workflow 1</code>:</p>
 </li>
 </ul>
 <pre><code>
@@ -393,7 +393,7 @@
 <pre><code>client-payload: '{&quot;ref&quot;: &quot;${{ github.ref }}&quot;, &quot;sha&quot;: &quot;${{ github.sha }}&quot;}'
 </code></pre>
 
-<p>The above command is used to pass the data from <code>Workflow 1</code> to <code>Workflow 2</code>. It tells <code>Workflow2</code> the branch and commit hash to checkout and use so that <code>Workflows 1</code> and <code>Workflow 2</code> are using the same exact code. </p>
+<p>The above command is used to pass the data from <code>Workflow 1</code> to <code>Workflow 2</code>. It tells <code>Workflow2</code> the branch and commit hash to checkout and use so that <code>Workflows 1</code> and <code>Workflow 2</code> are using the same code. </p>
 <ul>
 <li>Step 4 - Adding the repository_dispatch event as trigger in Workflow 2 YAML</li>
 </ul>
@@ -413,7 +413,7 @@ on:
         ref: ${{ github.event.client_payload.sha }}
 </code></pre>
 
-<p>After this I add all other steps in <code>Workflow 2</code> for deployment of application.</p>
+<p>After this, I add all other steps in <code>Workflow 2</code> for deployment of application.</p>
 <h2 id="yaml-file-for-deployment">YAML file for deployment</h2>
 <p>The YAML file for deployment of application is similar to the one I used for <a href="https://cloud-native.netlify.app/dast/#adding-an-image-to-ecr-repository-through-github-actions">Adding an image to ECR Repository through GitHub Actions</a>. In this I have also used the step of redeploying the application. The YAML file is as follows:</p>
 <pre><code>name: &quot;deployment workflow&quot;
