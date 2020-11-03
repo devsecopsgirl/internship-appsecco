@@ -6,3 +6,4 @@
 2. Performing source Code Quality Analysis for linting errors to improve code quality and generate quality report.
 3. Generating Software Bill of Materials of application for all dependencies.
 4. Setting up GitHub Actions Workflow for DAST.
+5. Setting up GitHub Actions Workflow for the Deployment of Application.

@@ -8,5 +8,6 @@ nav:
 - Code Quality Analysis: 'code-quality-analysis.md'
 - Software Bill of Materials: 'sbom.md'
 - Set up GitHub Actions Workflow for DAST: 'dast.md'
+- Set up GitHub Actions Workflow for Deployment: 'deployment.md'
 
 theme: material

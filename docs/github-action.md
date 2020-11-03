@@ -23,11 +23,11 @@ I followed this official link for [creating the first workflow](https://docs.git
 
 * I wrote the YAML contents into the `sast-scan.yml` file. For knowing the syntax of Github action I followed [this](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobs) official link
   
-* I also stored the report in artifacts from where it can be downloaded as `sast report`
+* I also stored the report as `sast report` in artifacts from where it can be downloaded 
 
 ![](Images/sast-report.png)
 
-* The YML file for SAST scan as follows:
+* The YAML file for SAST scan is as follows:
 
 ```
 name: "sast-scan"

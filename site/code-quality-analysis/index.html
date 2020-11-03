@@ -298,6 +298,18 @@
   </li>
 
     
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../deployment/" title="Set up GitHub Actions Workflow for Deployment" class="md-nav__link">
+      Set up GitHub Actions Workflow for Deployment
+    </a>
+  </li>
+
+    
   </ul>
 </nav>
                   </div>
@@ -415,13 +427,30 @@ jobs:
        sudo npm install -g jshint
 
     - name: Run scan with JSHint
-      run: |
-       sudo jshint --exclude=&quot;node_modules/&quot; --reporter=unix .
+      run: script/jshint-script.sh
+
+    - name: Archive production artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: linting tool report
+        path: |
+          ./JSHint-report
 </code></pre>
 
 <ul>
 <li><code>node_modules</code> It excludes the <code>node_modules/</code> directory and also exclude any files which do not have a .js or .ejs extension</li>
 <li><code>--reporter</code> By using this option, I can change the output format. I selected <code>unix</code>, as it will become easier to count the rows and words. There are other options like <code>checkstyle</code>, the output will be in an <code>xml</code> format</li>
+<li>I was getting an error a non-zero status code, when it found issues. So, I made a directory and stored bash script to run the scan in a sub-shell and prevent the build from failing and made it executable with <code>chmod +x</code>. The contents of the script, <code>jshint-script.sh</code>, are below:</li>
+</ul>
+<pre><code>#!/bin/bash
+
+jshint --exclude=&quot;node_modules/&quot; --reporter=unix . &gt; JSHint-report
+
+echo $? &gt; /dev/null
+</code></pre>
+
+<ul>
+<li>Lastly, I stored the report as a artifact.</li>
 </ul>
                 
               

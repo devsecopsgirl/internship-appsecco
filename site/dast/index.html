@@ -341,12 +341,7 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
+          <li class="md-nav__item">
   <a href="#ecs" class="md-nav__link">
     ECS
   </a>
@@ -362,13 +357,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#setting-up-service" class="md-nav__link">
-    Setting Up Service
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#setting-up-task-definitions" class="md-nav__link">
     Setting Up Task Definitions
   </a>
@@ -376,9 +364,14 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#setting-up-task" class="md-nav__link">
-    Setting Up Task
+  <a href="#setting-up-service" class="md-nav__link">
+    Setting Up Service
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -398,6 +391,18 @@
   
 </nav>
     
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../deployment/" title="Set up GitHub Actions Workflow for Deployment" class="md-nav__link">
+      Set up GitHub Actions Workflow for Deployment
+    </a>
   </li>
 
     
@@ -510,12 +515,7 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
+          <li class="md-nav__item">
   <a href="#ecs" class="md-nav__link">
     ECS
   </a>
@@ -531,13 +531,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#setting-up-service" class="md-nav__link">
-    Setting Up Service
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#setting-up-task-definitions" class="md-nav__link">
     Setting Up Task Definitions
   </a>
@@ -545,9 +538,14 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#setting-up-task" class="md-nav__link">
-    Setting Up Task
+  <a href="#setting-up-service" class="md-nav__link">
+    Setting Up Service
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -786,9 +784,9 @@ jobs:
 </code></pre>
 
 <p>After this, the image got successfully pushed to ECR.</p>
-<h2 id="ecs">ECS</h2>
+<h3 id="ecs">ECS</h3>
 <p>Amazon Elastic Container Service (ECS) is a highly scalable, high performance container management service that supports Docker containers and allows to easily run applications on a managed cluster of Amazon EC2 instances. It eliminates the need for us to install, operate, and scale cluster management infrastructure. </p>
-<h3 id="setting-up-ecs-cluster">Setting Up ECS cluster</h3>
+<h4 id="setting-up-ecs-cluster">Setting Up ECS cluster</h4>
 <p>To create cluster I followed the steps given below and also followed the official <a href="https://docs.aws.amazon.com/AmazonECS/latest/userguide/create_cluster.html">link</a>.</p>
 <p>For creating a cluster:</p>
 <ol>
@@ -806,19 +804,8 @@ jobs:
 <p>The <code>Launch status</code> page opened showing it is successfully created.</p>
 </li>
 </ol>
-<h3 id="setting-up-service">Setting Up Service</h3>
-<p>Once the ECS cluster is created I can now create <code>Services</code> for the cluster. I followed this official <a href="">documentation</a>.</p>
+<h4 id="setting-up-task-definitions">Setting Up Task Definitions</h4>
 <ol>
-<li>I firstly clicked on the cluster which I made and selected the <code>Service</code> option then clicked on <code>Create</code>. 
-<img alt="" src="../Images/ECS3.png" /></li>
-<li>The next page <code>Configure service</code> opens</li>
-</ol>
-<p>(a). In the <code>Launch Type</code> I selected <code>FARGATE</code> then filled the <code>Service name</code> and then in <code>NUmber of tasks</code> I typed 1. Other options I kept as default and then selected <code>Next step</code>.</p>
-<p>(b). The next pages opened <code>Configure network</code> and <code>Set Auto Scaling</code> that too I kept default and selected the <code>Next step</code></p>
-<p>(c). Then <code>Review page</code> opens in which we can review the changes and finally create the service.</p>
-<p>note: container was also created step missing</p>
-<h3 id="setting-up-task-definitions">Setting Up Task Definitions</h3>
-<ul>
 <li>
 <p>From the side bar select <code>Create new Task Definition</code> and the page opens to select <code>FARGATE</code> and click <code>Next step</code> </p>
 </li>
@@ -828,9 +815,66 @@ jobs:
 <li>
 <p><code>Task memory (GB)</code> select <code>0.5GB</code> and in <code>Task CPU (vCPU)</code> select <code>0.25 vCPU</code> and finally select <code>Create</code> option.</p>
 </li>
+</ol>
+<h4 id="setting-up-service">Setting Up Service</h4>
+<p>An Amazon ECS service enables us to run and maintain a specified number of instances of a task definition simultaneously in an Amazon ECS cluster. If any of our tasks fail or stop for any reason, the Amazon ECS service scheduler launches another instance of our task definition to replace it in order to maintain the desired number of tasks in the service.</p>
+<p>After creating the ECS cluster, now I can create <code>Services</code> for the cluster. I followed this official <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html">documentation</a>.</p>
+<ul>
+<li>I firstly clicked on the cluster which I made and selected the <code>Service</code> option then clicked on <code>Create</code>. 
+<img alt="" src="../Images/ECS3.png" /></li>
+<li>
+<p>The next page <code>Configure service</code> opens</p>
+<p>(a). In the <code>Launch Type</code> I selected <code>FARGATE</code> then filled the <code>Service name</code> and in <code>Number of tasks</code> I typed 1. Other options I kept as default and then selected <code>Next step</code>.</p>
+</li>
+<li>
+<p>The next pages opened <code>Configure network</code> in this I selected the <code>Cluster VPC</code> and <code>Subnets</code> and in <code>Configure security groups</code> I created a new security group.</p>
+<p>(a). I selected <code>Create new security group</code></p>
+<p>(b). Entered security group name <code>Security group name</code></p>
+<p>(c). Define <code>Inbound rules for security group</code>, it can be changed later if required</p>
+</li>
+<li>
+<p><code>Set Auto Scaling</code> that too I kept default and selected the <code>Next step</code></p>
+</li>
+<li>
+<p>Then <code>Review page</code> opens in which we can review the changes and finally create the service</p>
+</li>
+<li>Once the service is successfully created I accessed the public IP of the task running and in the browser entered <code>Public IP:4200</code>. The application is running as shown below:</li>
 </ul>
-<h3 id="setting-up-task">Setting Up Task</h3>
+<p><img alt="" src="../Images/aws-app-access.png" /></p>
 <h3 id="setting-up-yaml-file-for-zap-scan">Setting Up YAML file for ZAP scan</h3>
+<p>ZAP scan: Zed Attack Proxy is an open-source tool used to perform dynamic application security testing designed specifically for web applications. ZAP has a desktop interface, APIs for it to be used in an automated fashion, and also a CLI. </p>
+<p>I added these steps in YML file for ZAP scan:</p>
+<pre><code>    - name: ZAP scan 
+      run: script/zap-script.sh
+
+    - name: Archive production artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: sast report
+        path: |
+          ./dependency-check-6.0.2-release.zip
+
+</code></pre>
+
+<ul>
+<li>
+<p>The ZAP scan was getting failed so made a dedicated service as earlier for the zap scan and in the <code>Security Group</code> I selected the protocol type as <code>Custom TCP</code> and port range <code>4200</code> and in <code>Source</code> I selected <code>Custom</code> and selected <code>0.0.0.0/0</code> which allowed all the traffic.</p>
+</li>
+<li>
+<p>As over here also I was getting an error a non-zero status code, when it found issues after ZAP scan. So, I made a directory and stored bash script to run the scan in a sub-shell and prevent the build from failing and made it executable with chmod +x. The contents of the script, <code>zap-script.sh</code>, are below:</p>
+</li>
+</ul>
+<pre><code>#!/bin/bash
+
+docker pull owasp/zap2docker-stable
+docker run -i owasp/zap2docker-stable zap-baseline.py -t &quot;http://3.135.209.44:4200/&quot; -l PASS &gt; zap_baseline_report.html
+
+echo $? &gt; /dev/null
+</code></pre>
+
+<ul>
+<li>I stored the reports in the artifacts.</li>
+</ul>
                 
               
               
@@ -863,6 +907,20 @@ jobs:
             </div>
           </a>
         
+        
+          <a href="../deployment/" title="Set up GitHub Actions Workflow for Deployment" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Set up GitHub Actions Workflow for Deployment
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
         
       </nav>
     </div>

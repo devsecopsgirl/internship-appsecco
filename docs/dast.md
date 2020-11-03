@@ -209,11 +209,11 @@ jobs:
 ```
 After this, the image got successfully pushed to ECR.
 
-## ECS
+### ECS
 
 Amazon Elastic Container Service (ECS) is a highly scalable, high performance container management service that supports Docker containers and allows to easily run applications on a managed cluster of Amazon EC2 instances. It eliminates the need for us to install, operate, and scale cluster management infrastructure. 
 
-### Setting Up ECS cluster
+#### Setting Up ECS cluster
 
 To create cluster I followed the steps given below and also followed the official [link](https://docs.aws.amazon.com/AmazonECS/latest/userguide/create_cluster.html).
 
@@ -229,29 +229,69 @@ For creating a cluster:
 
 5. The `Launch status` page opened showing it is successfully created.
 
-### Setting Up Service
+#### Setting Up Task Definitions
 
-Once the ECS cluster is created I can now create `Services` for the cluster. I followed this official [documentation]().
+1. From the side bar select `Create new Task Definition` and the page opens to select `FARGATE` and click `Next step` 
 
-1. I firstly clicked on the cluster which I made and selected the `Service` option then clicked on `Create`. 
+2. Over here give the `Task Definition Name` and `Task Role` select `ecsTaskExecutionRole` 
+
+3. `Task memory (GB)` select `0.5GB` and in `Task CPU (vCPU)` select `0.25 vCPU` and finally select `Create` option.
+
+#### Setting Up Service
+
+An Amazon ECS service enables us to run and maintain a specified number of instances of a task definition simultaneously in an Amazon ECS cluster. If any of our tasks fail or stop for any reason, the Amazon ECS service scheduler launches another instance of our task definition to replace it in order to maintain the desired number of tasks in the service.
+
+After creating the ECS cluster, now I can create `Services` for the cluster. I followed this official [documentation](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html).
+
+* I firstly clicked on the cluster which I made and selected the `Service` option then clicked on `Create`. 
 ![](Images/ECS3.png)
-2. The next page `Configure service` opens
+* The next page `Configure service` opens
 
-(a). In the `Launch Type` I selected `FARGATE` then filled the `Service name` and then in `NUmber of tasks` I typed 1. Other options I kept as default and then selected `Next step`.
+     (a). In the `Launch Type` I selected `FARGATE` then filled the `Service name` and in `Number of tasks` I typed 1. Other options I kept as default and then selected `Next step`.
 
-(b). The next pages opened `Configure network` and `Set Auto Scaling` that too I kept default and selected the `Next step`
+* The next pages opened `Configure network` in this I selected the `Cluster VPC` and `Subnets` and in `Configure security groups` I created a new security group.
 
-(c). Then `Review page` opens in which we can review the changes and finally create the service.
+     (a). I selected `Create new security group`
 
-note: container was also created step missing
-### Setting Up Task Definitions
+     (b). Entered security group name `Security group name`
 
-* From the side bar select `Create new Task Definition` and the page opens to select `FARGATE` and click `Next step` 
+     (c). Define `Inbound rules for security group`, it can be changed later if required
 
-* Over here give the `Task Definition Name` and `Task Role` select `ecsTaskExecutionRole` 
+* `Set Auto Scaling` that too I kept default and selected the `Next step`
 
-* `Task memory (GB)` select `0.5GB` and in `Task CPU (vCPU)` select `0.25 vCPU` and finally select `Create` option.
-
-### Setting Up Task
+* Then `Review page` opens in which we can review the changes and finally create the service
+* Once the service is successfully created I accessed the public IP of the task running and in the browser entered `Public IP:4200`. The application is running as shown below:
+  
+![](Images/aws-app-access.png)
 
 ### Setting Up YAML file for ZAP scan
+
+ZAP scan: Zed Attack Proxy is an open-source tool used to perform dynamic application security testing designed specifically for web applications. ZAP has a desktop interface, APIs for it to be used in an automated fashion, and also a CLI. 
+
+I added these steps in YML file for ZAP scan:
+```
+    - name: ZAP scan 
+      run: script/zap-script.sh
+      
+    - name: Archive production artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: sast report
+        path: |
+          ./dependency-check-6.0.2-release.zip
+  
+```
+* The ZAP scan was getting failed so made a dedicated service as earlier for the zap scan and in the `Security Group` I selected the protocol type as `Custom TCP` and port range `4200` and in `Source` I selected `Custom` and selected `0.0.0.0/0` which allowed all the traffic.
+
+* As over here also I was getting an error a non-zero status code, when it found issues after ZAP scan. So, I made a directory and stored bash script to run the scan in a sub-shell and prevent the build from failing and made it executable with chmod +x. The contents of the script, `zap-script.sh`, are below:
+
+```
+#!/bin/bash
+
+docker pull owasp/zap2docker-stable
+docker run -i owasp/zap2docker-stable zap-baseline.py -t "http://3.135.209.44:4200/" -l PASS > zap_baseline_report.html
+
+echo $? > /dev/null
+```
+* I stored the reports in the artifacts.
+

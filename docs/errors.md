@@ -100,11 +100,4 @@ Error: Process completed with exit code 254.
 * aws ec2 authorize-security-group-ingress --group-id ${{ secrets.GROUP_ID }} --protocol tcp --port 4200 --cidr ${env.export_URL}\32
 /home/runner/work/_temp/e7710386-d2e8-405b-9348-254821bd2300.sh: line 3: ${env.export_URL}\32: bad substitution
 
-1. So I have got a list of IPs from the meta link of github - https://api.github.com/meta but how to find which one to use. and also I downloaded the Azure IP Ranges (https://www.microsoft.com/en-us/download/details.aspx?id=56519). So do I have to find the GitHub link from here or somewhere else.
-
-2. Is there need to allow the port 4200 by any means.
-
-3. Why we are not allowing all IP ranges.
-
-4. And I was searching for downloading the reports of the scans but I got the results that artifacts can be downloaded the one uploaded. https://docs.github.com/en/free-pro-team@latest/actions/guides/storing-workflow-data-as-artifacts
 

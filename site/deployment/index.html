@@ -15,7 +15,7 @@
     
     
       
-        <title>Errors - Cloud Native Implementation of DevSecOps Concepts</title>
+        <title>Set up GitHub Actions Workflow for Deployment - Cloud Native Implementation of DevSecOps Concepts</title>
       
     
     
@@ -49,7 +49,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#set-up-github-actions-workflow-for-deployment" class="md-skip">
           Skip to content
         </a>
       
@@ -77,7 +77,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              Errors
+              Set up GitHub Actions Workflow for Deployment
             
           </span>
         </div>
@@ -233,11 +233,67 @@
       
       
 
+  
 
-  <li class="md-nav__item">
-    <a href="../deployment/" title="Set up GitHub Actions Workflow for Deployment" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Set up GitHub Actions Workflow for Deployment
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
+        </span>
+      </label>
+    
+    <a href="./" title="Set up GitHub Actions Workflow for Deployment" class="md-nav__link md-nav__link--active">
       Set up GitHub Actions Workflow for Deployment
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objective" class="md-nav__link">
+    Objective
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-github-actions-sequentially" class="md-nav__link">
+    Running GitHub Actions Sequentially
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#yaml-file-for-deployment" class="md-nav__link">
+    YAML file for deployment:
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
     
@@ -255,6 +311,8 @@
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon">
@@ -265,15 +323,22 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    
+  <a href="#objective" class="md-nav__link">
+    Objective
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#vpc" class="md-nav__link">
-    VPC
+  <a href="#running-github-actions-sequentially" class="md-nav__link">
+    Running GitHub Actions Sequentially
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#yaml-file-for-deployment" class="md-nav__link">
+    YAML file for deployment:
   </a>
   
 </li>
@@ -294,109 +359,115 @@
                   
                 
                 
-                  <h1>Errors</h1>
-                
-                <h2 id="_1"></h2>
-<ol>
-<li>apt-get fails: The method driver /usr/lib/apt/methods/https could not be found</li>
-</ol>
-<p>apt-get install apt-transport-https ca-certificates</p>
-<p>link : https://unix.stackexchange.com/questions/263801/apt-get-fails-the-method-driver-usr-lib-apt-methods-https-could-not-be-found</p>
-<ol>
+                <h1 id="set-up-github-actions-workflow-for-deployment">Set up GitHub Actions Workflow for Deployment</h1>
+<h2 id="objective">Objective</h2>
+<p>This section aims to generate a Software Bill of Materials for <a href="https://github.com/gothinkster/angular-realworld-example-app">angular-realworld-example-app</a> and generate a report to provide a solution to the 5rd point of the <a href="https://cloud-native.netlify.app/problem-statement/">problem statement</a> under Task 1.</p>
+<h2 id="running-github-actions-sequentially">Running GitHub Actions Sequentially</h2>
+<p>I set up the sequential workflows by using a <code>repository_dispatch</code> action in the following four steps and followed the documentation(https://stevenmortimer.com/running-github-actions-sequentially/) :</p>
+<ul>
 <li>
-<p>FOR INSTALLING ANGULAR CLI
-https://angular.io/cli</p>
+<p>Step1: Creating a Personal Access Token (PAT)</p>
+<p>I followed the GitHub’s instructions <a href="https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token">here</a> for creating PAT and in <code>Select scopes</code> I checked <code>repo</code> as the repository is a private repository and if it is a public repo <code>public_repo</code> option is checked.</p>
 </li>
 <li>
-<p>for installing yarn official site
-https://classic.yarnpkg.com/en/docs/install#debian-stable</p>
+<p>Step 2 - Adding the PAT as an actions secret in the repository</p>
+<p>In the second step I added the token to secrets and named it as <code>REPO_TRIGGER_PAT</code>.</p>
 </li>
-</ol>
-<hr />
-<p><a href="https://levelup.gitconnected.com/aws-fargate-running-a-serverless-node-js-app-on-aws-ecs-c5d8dea0a85a">AWS Fargate: Running a serverless Node.js app on AWS ECS</a>.</p>
-<p>error: tag invalid: The image tag 'latest' already exists in the 'angular-app-repo' repository and cannot be overwritten because the repository is immutable.
-Error: Process completed with exit code 1.</p>
-<pre><code>aws ecs update-service --cluster &lt;cluster name&gt; --service &lt;service name&gt; --force-new-deployment
+<li>
+<p>Step 3 - Adding the <code>repository_dispatch</code> event to Workflow 1 that is workflow I made for ZAP scan</p>
+<p><code>Workflow 1</code> is the workflow, and the jobs contained within it, is the one which I want to exacute first. <code>Workflow 2</code> is the workflow I want to execute after <code>WOrkflow 1</code>. Given below is the last step of my <code>Workflow 1</code>:</p>
+</li>
+</ul>
+<pre><code>
+    - name: Trigger next workflow
+      if: success()
+      uses: peter-evans/repository-dispatch@v1
+      with:
+        token: ${{ secrets.REPO_TRIGGER_PAT }}
+        repository: ${{ github.repository }}
+        event-type: trigger-deployment-workflow
+        client-payload: '{&quot;ref&quot;: &quot;${{ github.ref }}&quot;, &quot;sha&quot;: &quot;${{ github.sha }}&quot;}'
 </code></pre>
 
-<h2 id="vpc">VPC</h2>
-<p>A VPC is an isolated portion of the AWS cloud populated by AWS objects, such as Amazon EC2 instances. Use the Classless Inter-Domain Routing(CIDR) block format to specify your VPC's contiguous IP address range, for example, 10.0.0.0/16 and we cannot create VPC larger than /16</p>
+<p>In this <code>if: success()</code> means only if all the prior steps in the <code>Workflow 1</code> are successful, then only run the steps that triggers <code>Workflow 2</code>.</p>
+<pre><code>client-payload: '{&quot;ref&quot;: &quot;${{ github.ref }}&quot;, &quot;sha&quot;: &quot;${{ github.sha }}&quot;}'
+</code></pre>
+
+<p>The above command is used to pass the data from <code>Workflow 1</code> to <code>Workflow 2</code>. It tells <code>Workflow2</code> the branch and commit hash to checkout and use so that <code>Workflows 1</code> and <code>Workflow 2</code> are using the same exact code. </p>
 <ul>
-<li>name: Pushing image to AWS
+<li>Step 4 - Adding the repository_dispatch event as trigger in Workflow 2 YAML</li>
+</ul>
+<p>Firstly, in <code>Workflow 2</code> I added <code>event name</code> as the <code>types</code> of repository dispatch that should trigger <code>Workflow 2</code>. This name matches exactly as the one specified in the <code>event-type</code> and in the <code>types</code> also same name is used.</p>
+<pre><code>name: &quot;deployment workflow&quot;
+
+on:
+  repository_dispatch:
+    types: [trigger-deployment-workflow]
+</code></pre>
+
+<p>Second, I used the client payload data from the event to checkout the same code. I modified the checkout step, the first step in job.</p>
+<pre><code>    steps:
+
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{ github.event.client_payload.sha }}
+</code></pre>
+
+<p>After this we can add all other steps in <code>Workflow 2</code> for deployment of application.</p>
+<h2 id="yaml-file-for-deployment">YAML file for deployment:</h2>
+<p>The YAML file for deployment of application is as follows:</p>
+<pre><code>name: &quot;deployment workflow&quot;
+
+on:
+  repository_dispatch:
+    types: [trigger-deployment-workflow]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{ github.event.client_payload.sha }}
+
+    - name: Install docker
       run: |
-        aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 394310921697.dkr.ecr.us-east-2.amazonaws.com   <br />
-        docker tag angular5:latest 394310921697.dkr.ecr.us-east-2.amazonaws.com/angular-app-repo:latest
-        docker push 394310921697.dkr.ecr.us-east-2.amazonaws.com/angular-app-repo:latest</li>
-</ul>
-<p>aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 394310921697.dkr.ecr.us-east-2.amazonaws.com </p>
-<p>docker tag <image name:tag> 394310921697.dkr.ecr.us-east-2.amazonaws.com/angular-app-repo:latest</p>
-<p>docker push 394310921697.dkr.ecr.us-east-2.amazonaws.com/angular-app-repo:latest</p>
-<hr />
-<p>Github action ZAP scan
-1. env: |
-     INTERNET_PROTOCOL: "curl -4 ifconfig.co"</p>
-<p>ERROR: The workflow is not valid. .github/workflows/image.yml (Line: 55, Col: 12): Unexpected value 'INTERNET_PROTOCOL:<code>curl -4 ifconfig.co</code>
-',.github/workflows/image.yml (Line: 57, Col: 12): Unrecognized named-value: 'INTERNET_PROTOCOL'. Located at position 1 within expression: INTERNET_PROTOCOL</p>
-<ol>
-<li>
-<p>env: |
-     INTERNET_PROTOCOL: <code>curl -4 ifconfig.co</code></p>
-</li>
-<li>
-<p>echo ::set-env name=IP::$(curl -4 ifconfig.co)</p>
-</li>
-</ol>
-<p>ERROR: The workflow is not valid. .github/workflows/image.yml (Line: 55, Col: 12): Unrecognized named-value: 'INTERNETPROTOCOL'. Located at position 1 within expression: INTERNETPROTOCOL</p>
-<ol>
-<li>ERROR: The workflow is not valid. .github/workflows/image.yml (Line: 54, Col: 12): Unrecognized named-value: 'export'. Located at position 1 within expression: export URL</li>
-</ol>
-<hr />
-<ol>
-<li>VPC security group updation commands used:</li>
-</ol>
-<p>aws ec2 authorize-security-group-ingress --group-id sg-12345678 --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 22, "ToPort": 22, "IpRanges": [{"CidrIp": "${{env.export_URL}}/32"}]}]</p>
-<p>refer: https://github.com/aws/aws-cli/issues/3463</p>
-<ul>
-<li>aws ec2 authorize-security-group-ingress --group-id sg-aaaa1111 --protocol tcp --port 80 --source-group sg-bbbb2222</li>
-</ul>
-<p>refer: https://docs.amazonaws.cn/en_us/vpc/latest/peering/vpc-peering-security-groups.html</p>
-<ul>
-<li>
-<p>vpc security-group update-security-group-rule-descriptions-ingress [-h]
-                                                                   [-f {adaptive_table,json,shell,table,value,yaml}]
-                                                                   [-c COLUMN]
-                                                                   [--max-width <integer>]
-                                                                   [--noindent]
-                                                                   [--prefix PREFIX]
-                                                                   [-m [NAME=VALUE [NAME=VALUE ...]]]
-                                                                   [--ip-permissions IP_PERMISSIONS]
-                                                                   group_id
-refer: https://www.stratoscale.com/knowledge/tools-and-sdks/stratoscale-cli-tools/symphony-cli-reference/vpc-commands/vpc-security-group-update-security-group-rule-descriptions-ingress/</p>
-</li>
-<li>
-<p>aws ec2 describe-vpcs --vpc-ids vpc-dfbc4ab4 --group-id ${{ secrets.GROUP_ID }} --protocol tcp --port 4200 --source ${{env.export_URL}}/32 </p>
-</li>
-</ul>
-<p><strong>hint</strong></p>
-<ul>
-<li>authorize-security-group-ingress --group-id ${{ secrets.GROUP_ID }} --protocol tcp --port 4200 --cidr ${{env.export_URL}}/32</li>
-</ul>
-<p>error: authorize-security-group-ingress command not found</p>
-<ul>
-<li>aws ec2 authorize-security-group-ingress --group-id ${{ secrets.GROUP_ID }} --protocol tcp --port 4200 --cidr ${{env.export_URL}}/32</li>
-</ul>
-<p>An error occurred (InvalidParameterValue) when calling the AuthorizeSecurityGroupIngress operation: CIDR block /32 is malformed
-Error: Process completed with exit code 254.</p>
-<ul>
-<li>
-<p>aws ec2 authorize-security-group-ingress --group-id ${{ secrets.GROUP_ID }} --protocol tcp --port 4200 --cidr ${env.export_URL}/32
-/home/runner/work/_temp/e7710386-d2e8-405b-9348-254821bd2300.sh: line 3: ${env.export_URL}/32: bad substitution</p>
-</li>
-<li>
-<p>aws ec2 authorize-security-group-ingress --group-id ${{ secrets.GROUP_ID }} --protocol tcp --port 4200 --cidr ${env.export_URL}\32
-/home/runner/work/_temp/e7710386-d2e8-405b-9348-254821bd2300.sh: line 3: ${env.export_URL}\32: bad substitution</p>
-</li>
-</ul>
+        sudo apt update
+        sudo apt install apt-transport-https ca-certificates curl software-properties-common
+        curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+        sudo add-apt-repository &quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable&quot; &amp;&amp; sudo apt update
+        apt-cache policy docker-ce
+        sudo apt install docker-ce
+
+    - name: Build Docker image
+      run: |
+        docker build -t angular5 .
+
+    - name: Installing AWS CLI
+      run: |
+        curl &quot;https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip&quot; -o &quot;awscliv2.zip&quot;
+        unzip awscliv2.zip
+        sudo ./aws/install
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.DEMO_ID }}
+        aws-secret-access-key: ${{ secrets.DEMO_K }}
+        aws-region: us-east-2
+
+    - name: Pushing image to AWS
+      run: |
+        aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin ${{ secrets.AWS_LOG }}.dkr.ecr.us-east-2.amazonaws.com  
+        docker tag angular5:latest ${{ secrets.AWS_LOG }}.dkr.ecr.us-east-2.amazonaws.com/angular-app-repo:latest        
+        docker push ${{ secrets.AWS_LOG }}.dkr.ecr.us-east-2.amazonaws.com/angular-app-repo:latest
+
+    - name: redeploy the latest image
+      run: |
+        aws ecs update-service --cluster angular-app --service angular-service --force-new-deployment
+</code></pre>
                 
               
               
@@ -411,6 +482,27 @@ Error: Process completed with exit code 254.</p>
       
         
 <footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../dast/" title="Set up GitHub Actions Workflow for DAST" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Set up GitHub Actions Workflow for DAST
+              </div>
+            </div>
+          </a>
+        
+        
+      </nav>
+    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">

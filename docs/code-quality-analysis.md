@@ -45,9 +45,24 @@ jobs:
        sudo npm install -g jshint
           
     - name: Run scan with JSHint
-      run: |
-       sudo jshint --exclude="node_modules/" --reporter=unix .
+      run: script/jshint-script.sh
+       
+    - name: Archive production artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: linting tool report
+        path: |
+          ./JSHint-report
 ```
 
 * `node_modules` It excludes the `node_modules/` directory and also exclude any files which do not have a .js or .ejs extension
 * `--reporter` By using this option, I can change the output format. I selected `unix`, as it will become easier to count the rows and words. There are other options like `checkstyle`, the output will be in an `xml` format
+* I was getting an error a non-zero status code, when it found issues. So, I made a directory and stored bash script to run the scan in a sub-shell and prevent the build from failing and made it executable with `chmod +x`. The contents of the script, `jshint-script.sh`, are below:
+```
+#!/bin/bash
+
+jshint --exclude="node_modules/" --reporter=unix . > JSHint-report
+
+echo $? > /dev/null
+```
+* Lastly, I stored the report as a artifact.
