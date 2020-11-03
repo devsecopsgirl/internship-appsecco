@@ -65,4 +65,4 @@ jshint --exclude="node_modules/" --reporter=unix . > JSHint-report
 
 echo $? > /dev/null
 ```
-* Lastly, I stored the report as a artifact.
+* Lastly, I stored the [report](https://github.com/devsecopsgirl/internship-appsecco/blob/internship-part2/Reports/JSHint-report) as a artifact.

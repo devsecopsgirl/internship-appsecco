@@ -68,7 +68,8 @@ jobs:
           ./dependency-check-6.0.2-release.zip
 ```
 
-* To run workflow, I scrolled to the bottom of the page and select Commit directly to the `main` branch. Then, to create a pull request, click `Propose new file`. Committing the workflow file in repository triggers the push event and runs workflow
+* To run workflow, I scrolled to the bottom of the page and select Commit directly to the `main` branch. Then, to create a pull request, click `Propose new file`. Committing the workflow file in repository triggers the push event and runs workflow.
+* The report that got generated is [here](https://github.com/devsecopsgirl/internship-appsecco/blob/internship-part2/Reports/sast report.zip)
 
 ### Viewing workflow results
 

@@ -1,0 +1,73 @@
+Total of 8 URLs
+PASS: Cookie No HttpOnly Flag [10010]
+PASS: Cookie Without Secure Flag [10011]
+PASS: Incomplete or No Cache-control and Pragma HTTP Header Set [10015]
+PASS: Cross-Domain JavaScript Source File Inclusion [10017]
+PASS: Content-Type Header Missing [10019]
+PASS: Information Disclosure - Debug Error Messages [10023]
+PASS: Information Disclosure - Sensitive Information in URL [10024]
+PASS: Information Disclosure - Sensitive Information in HTTP Referrer Header [10025]
+PASS: HTTP Parameter Override [10026]
+PASS: Information Disclosure - Suspicious Comments [10027]
+PASS: Open Redirect [10028]
+PASS: Cookie Poisoning [10029]
+PASS: User Controllable Charset [10030]
+PASS: User Controllable HTML Element Attribute (Potential XSS) [10031]
+PASS: Viewstate Scanner [10032]
+PASS: Directory Browsing [10033]
+PASS: Heartbleed OpenSSL Vulnerability (Indicative) [10034]
+PASS: Strict-Transport-Security Header Scanner [10035]
+PASS: HTTP Server Response Header Scanner [10036]
+PASS: X-Backend-Server Header Information Leak [10039]
+PASS: Secure Pages Include Mixed Content [10040]
+PASS: HTTP to HTTPS Insecure Transition in Form Post [10041]
+PASS: HTTPS to HTTP Insecure Transition in Form Post [10042]
+PASS: User Controllable JavaScript Event (XSS) [10043]
+PASS: Big Redirect Detected (Potential Sensitive Information Leak) [10044]
+PASS: Retrieved from Cache [10050]
+PASS: X-ChromeLogger-Data (XCOLD) Header Information Leak [10052]
+PASS: Cookie Without SameSite Attribute [10054]
+PASS: X-Debug-Token Information Leak [10056]
+PASS: Username Hash Found [10057]
+PASS: X-AspNet-Version Response Header Scanner [10061]
+PASS: PII Disclosure [10062]
+PASS: Timestamp Disclosure [10096]
+PASS: Hash Disclosure [10097]
+PASS: Weak Authentication Method [10105]
+PASS: Reverse Tabnabbing [10108]
+PASS: Modern Web Application [10109]
+PASS: Absence of Anti-CSRF Tokens [10202]
+PASS: Private IP Disclosure [2]
+PASS: Session ID in URL Rewrite [3]
+PASS: Script Passive Scan Rules [50001]
+PASS: Insecure JSF ViewState [90001]
+PASS: Charset Mismatch [90011]
+PASS: Loosely Scoped Cookie [90033]
+WARN-NEW: X-Frame-Options Header Not Set [10020] x 1 
+	http://3.135.209.44:4200/ (200 OK)
+WARN-NEW: X-Content-Type-Options Header Missing [10021] x 5 
+	http://3.135.209.44:4200/ (200 OK)
+	http://3.135.209.44:4200/runtime.js (200 OK)
+	http://3.135.209.44:4200/styles.js (200 OK)
+	http://3.135.209.44:4200/polyfills.js (200 OK)
+	http://3.135.209.44:4200/main.js (200 OK)
+WARN-NEW: Server Leaks Information via "X-Powered-By" HTTP Response Header Field(s) [10037] x 7 
+	http://3.135.209.44:4200/ (200 OK)
+	http://3.135.209.44:4200/robots.txt (404 Not Found)
+	http://3.135.209.44:4200/sitemap.xml (404 Not Found)
+	http://3.135.209.44:4200/runtime.js (200 OK)
+	http://3.135.209.44:4200/styles.js (200 OK)
+WARN-NEW: Content Security Policy (CSP) Header Not Set [10038] x 1 
+	http://3.135.209.44:4200/ (200 OK)
+WARN-NEW: CSP Scanner: Wildcard Directive [10055] x 2 
+	http://3.135.209.44:4200/robots.txt (404 Not Found)
+	http://3.135.209.44:4200/sitemap.xml (404 Not Found)
+WARN-NEW: Cross-Domain Misconfiguration [10098] x 8 
+	http://3.135.209.44:4200/ (200 OK)
+	http://3.135.209.44:4200/robots.txt (404 Not Found)
+	http://3.135.209.44:4200/sitemap.xml (404 Not Found)
+	http://3.135.209.44:4200/runtime.js (200 OK)
+	http://3.135.209.44:4200/styles.js (200 OK)
+WARN-NEW: Application Error Disclosure [90022] x 1 
+	http://3.135.209.44:4200/vendor.js (200 OK)
+FAIL-NEW: 0	FAIL-INPROG: 0	WARN-NEW: 7	WARN-INPROG: 0	INFO: 0	IGNORE: 0	PASS: 44

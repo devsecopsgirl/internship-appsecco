@@ -49,7 +49,7 @@ on:
   repository_dispatch:
     types: [trigger-deployment-workflow]
 ```
-Second, I used the client payload data from the event to checkout the same code. I modified the checkout step, the first step in job.
+I used the client payload data from the event to checkout the same code. I modified the checkout step, the first step in job.
 ```
     steps:
     
@@ -57,11 +57,11 @@ Second, I used the client payload data from the event to checkout the same code.
       with:
         ref: ${{ github.event.client_payload.sha }}
 ```
-After this we can add all other steps in `Workflow 2` for deployment of application.
+After this I add all other steps in `Workflow 2` for deployment of application.
 
-## YAML file for deployment: 
+## YAML file for deployment
 
-The YAML file for deployment of application is as follows:
+The YAML file for deployment of application is similar to the one I used for [Adding an image to ECR Repository through GitHub Actions](https://cloud-native.netlify.app/dast/#adding-an-image-to-ecr-repository-through-github-actions). In this I have also used the step of redeploying the application. The YAML file is as follows:
 
 ```
 name: "deployment workflow"

@@ -55,7 +55,6 @@ jobs:
         path: |
           ./bom.xml
 ```
-
-
+* The report which got generated is [here](https://github.com/devsecopsgirl/internship-appsecco/blob/internship-part2/Reports/bom.xml).
 
 

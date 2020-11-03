@@ -850,9 +850,9 @@ jobs:
     - name: Archive production artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: sast report
+        name: zap report
         path: |
-          ./dependency-check-6.0.2-release.zip
+          ./zap_baseline_report.html
 
 </code></pre>
 
@@ -873,7 +873,7 @@ echo $? &gt; /dev/null
 </code></pre>
 
 <ul>
-<li>I stored the reports in the artifacts.</li>
+<li>I stored the <a href="https://github.com/devsecopsgirl/internship-appsecco/blob/internship-part2/Reports/zap_baseline_report.html">reports</a> in the artifacts.</li>
 </ul>
                 
               

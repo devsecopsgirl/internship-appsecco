@@ -285,7 +285,7 @@
       
         <li class="md-nav__item">
   <a href="#yaml-file-for-deployment" class="md-nav__link">
-    YAML file for deployment:
+    YAML file for deployment
   </a>
   
 </li>
@@ -338,7 +338,7 @@
       
         <li class="md-nav__item">
   <a href="#yaml-file-for-deployment" class="md-nav__link">
-    YAML file for deployment:
+    YAML file for deployment
   </a>
   
 </li>
@@ -405,7 +405,7 @@ on:
     types: [trigger-deployment-workflow]
 </code></pre>
 
-<p>Second, I used the client payload data from the event to checkout the same code. I modified the checkout step, the first step in job.</p>
+<p>I used the client payload data from the event to checkout the same code. I modified the checkout step, the first step in job.</p>
 <pre><code>    steps:
 
     - uses: actions/checkout@v2
@@ -413,9 +413,9 @@ on:
         ref: ${{ github.event.client_payload.sha }}
 </code></pre>
 
-<p>After this we can add all other steps in <code>Workflow 2</code> for deployment of application.</p>
-<h2 id="yaml-file-for-deployment">YAML file for deployment:</h2>
-<p>The YAML file for deployment of application is as follows:</p>
+<p>After this I add all other steps in <code>Workflow 2</code> for deployment of application.</p>
+<h2 id="yaml-file-for-deployment">YAML file for deployment</h2>
+<p>The YAML file for deployment of application is similar to the one I used for <a href="https://cloud-native.netlify.app/dast/#adding-an-image-to-ecr-repository-through-github-actions">Adding an image to ECR Repository through GitHub Actions</a>. In this I have also used the step of redeploying the application. The YAML file is as follows:</p>
 <pre><code>name: &quot;deployment workflow&quot;
 
 on:

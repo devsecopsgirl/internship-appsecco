@@ -276,9 +276,9 @@ I added these steps in YML file for ZAP scan:
     - name: Archive production artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: sast report
+        name: zap report
         path: |
-          ./dependency-check-6.0.2-release.zip
+          ./zap_baseline_report.html
   
 ```
 * The ZAP scan was getting failed so made a dedicated service as earlier for the zap scan and in the `Security Group` I selected the protocol type as `Custom TCP` and port range `4200` and in `Source` I selected `Custom` and selected `0.0.0.0/0` which allowed all the traffic.
@@ -293,5 +293,5 @@ docker run -i owasp/zap2docker-stable zap-baseline.py -t "http://3.135.209.44:42
 
 echo $? > /dev/null
 ```
-* I stored the reports in the artifacts.
+* I stored the [reports](https://github.com/devsecopsgirl/internship-appsecco/blob/internship-part2/Reports/zap_baseline_report.html) in the artifacts.
 
