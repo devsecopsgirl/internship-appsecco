@@ -58,18 +58,18 @@ jobs:
   
     - name: Run scan with ODC
       run: |
-        dependency-check/bin/dependency-check.sh --project "angular-realworld-example-app" --scan .
+        dependency-check/bin/dependency-check.sh --project "angular-realworld-example-app" --scan . > ODC-report
 
     - name: Archive production artifacts
       uses: actions/upload-artifact@v2
       with:
         name: sast report
         path: |
-          ./dependency-check-6.0.2-release.zip
+          ./ODC-report
 ```
 
 * To run workflow, I scrolled to the bottom of the page and select Commit directly to the `main` branch. Then, to create a pull request, click `Propose new file`. Committing the workflow file in repository triggers the push event and runs workflow.
-* The report that got generated is [here](https://github.com/devsecopsgirl/internship-appsecco/blob/internship-part2/Reports/sast report.zip)
+* The report that got generated is [here](https://github.com/devsecopsgirl/internship-appsecco/blob/internship-part2/Reports/ODC-report)
 
 ### Viewing workflow results
 

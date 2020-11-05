@@ -15,7 +15,7 @@
     
     
       
-        <title>Cloud Native Implementation of DevSecOps Concepts</title>
+        <title>Cloud Native DevSecOps</title>
       
     
     
@@ -60,7 +60,7 @@
     
       <header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid" aria-label="Header">
-    <a href="." title="Cloud Native Implementation of DevSecOps Concepts" class="md-header-nav__button md-logo" aria-label="Cloud Native Implementation of DevSecOps Concepts">
+    <a href="." title="Cloud Native DevSecOps" class="md-header-nav__button md-logo" aria-label="Cloud Native DevSecOps">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -73,7 +73,7 @@
       
         <div class="md-header-nav__ellipsis">
           <span class="md-header-nav__topic md-ellipsis">
-            Cloud Native Implementation of DevSecOps Concepts
+            Cloud Native DevSecOps
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
@@ -134,13 +134,13 @@
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="Cloud Native Implementation of DevSecOps Concepts" class="md-nav__button md-logo" aria-label="Cloud Native Implementation of DevSecOps Concepts">
+    <a href="." title="Cloud Native DevSecOps" class="md-nav__button md-logo" aria-label="Cloud Native DevSecOps">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
 
     </a>
-    Cloud Native Implementation of DevSecOps Concepts
+    Cloud Native DevSecOps
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -232,8 +232,8 @@
 
 
   <li class="md-nav__item">
-    <a href="dast/" title="Set up GitHub Actions Workflow for DAST" class="md-nav__link">
-      Set up GitHub Actions Workflow for DAST
+    <a href="setting-app-aws/" title="Setting Up Application through AWS" class="md-nav__link">
+      Setting Up Application through AWS
     </a>
   </li>
 
@@ -244,8 +244,44 @@
 
 
   <li class="md-nav__item">
-    <a href="deployment/" title="Set up GitHub Actions Workflow for Deployment" class="md-nav__link">
-      Set up GitHub Actions Workflow for Deployment
+    <a href="dast/" title="Setting Up GitHub Actions Workflow for DAST" class="md-nav__link">
+      Setting Up GitHub Actions Workflow for DAST
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="deployment/" title="Setting Up GitHub Actions Workflow for Deployment" class="md-nav__link">
+      Setting Up GitHub Actions Workflow for Deployment
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Conclusion/" title="Conclusion" class="md-nav__link">
+      Conclusion
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="resources/" title="Resources" class="md-nav__link">
+      Resources
     </a>
   </li>
 
@@ -282,10 +318,23 @@
                 
                 
                 <h1 id="introduction">Introduction</h1>
-<p><strong>Project Title:</strong> Cloud Native Implementation of DevSecOps Concepts</p>
+<p><strong>Project Title:</strong> Cloud Native DevSecOps </p>
 <p><strong>Author:</strong> <a href="https://twitter.com/DevSecOpsgirl_">Priyam Singh</a></p>
 <p><strong>Mentor:</strong> <a href="https://twitter.com/makash">Akash Mahajan</a>, <a href="https://twitter.com/suneshgovind">Sunesh Govindaraj</a>, <a href="https://twitter.com/ayushpriya10">Ayush Priya</a></p>
-<p>The report documents the tasks I am working and practicing as a part of my internship at <a href="https://appsecco.com/">Appsecco</a> on Cloud Native implementation of DevSecOps concepts for an application as well as the issues I am facing while working, and how I resolved them. </p>
+<p>The report documents the tasks I am working and practicing as a part of my internship at <a href="https://appsecco.com/">Appsecco</a> on Cloud Native implementation of DevSecOps concepts for an application as well as the issues I am facing while working, and how I resolved them.</p>
+<p>Cloud-Native means that an application or a product is designed in such a way that it inherits the advantages of cloud along with the scale, agility, and cost-efficiency. There are many features of a cloud-native application. The three main features are:</p>
+<ul>
+<li>
+<p><strong>Microservices Architecture:</strong> A microservices is a structure in which an application is a collection of small services each responsible for doing a particular job. These small services are independent of each other and make a complex unit that is more efficient and easy to manage.</p>
+</li>
+<li>
+<p><strong>Containerized infrastructure:</strong> Containers encapsulate all the software code and dependencies of microservices into lightweight packages so that they can be tested and deployed on any infrastructure. The benefit of containers is that it is faster and more secure development of applications and features. It is also more reliable and flexible. If there is an issue with a particular microservice, the issue can be isolated and fixed within the container without affecting the entire application.</p>
+</li>
+<li>
+<p><strong>CI/CD development framework :</strong> CI/CD is continuous integration &amp; continuous delivery. In CI developers regularly merge their code changes into a central repository, after which automated builds and tests are run to find any issues with any of the components or microservices as early as possible. Continuous delivery means the code is ready at any given time to push to production and goes live when scheduled.</p>
+</li>
+</ul>
+<p><strong>Cloud Native DevSecOps</strong> The term Cloud-native DevSecOps refers to implementing development, operations, and security practices in a way that fully integrates with cloud capabilities. A cloud-native implementation uses and secures scalable, dynamic components. This can include containers, microservices, service meshes, declarative APIs, and immutable infrastructures.  </p>
                 
               
               

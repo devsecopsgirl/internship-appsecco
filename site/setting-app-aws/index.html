@@ -1,0 +1,947 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.7">
+    
+    
+      
+        <title>Setting Up Application through AWS - Cloud Native DevSecOps</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.b8ac9624.min.css">
+      
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#setting-up-application-through-aws" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href=".." title="Cloud Native DevSecOps" class="md-header-nav__button md-logo" aria-label="Cloud Native DevSecOps">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            Cloud Native DevSecOps
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Setting Up Application through AWS
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Cloud Native DevSecOps" class="md-nav__button md-logo" aria-label="Cloud Native DevSecOps">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Cloud Native DevSecOps
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../contents/" title="Contents" class="md-nav__link">
+      Contents
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../problem-statement/" title="Problem Statement" class="md-nav__link">
+      Problem Statement
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../github-action/" title="SAST Github Action" class="md-nav__link">
+      SAST Github Action
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../code-quality-analysis/" title="Code Quality Analysis" class="md-nav__link">
+      Code Quality Analysis
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../sbom/" title="Software Bill of Materials" class="md-nav__link">
+      Software Bill of Materials
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Setting Up Application through AWS
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
+        </span>
+      </label>
+    
+    <a href="./" title="Setting Up Application through AWS" class="md-nav__link md-nav__link--active">
+      Setting Up Application through AWS
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objective" class="md-nav__link">
+    Objective
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setting-up-the-application-manually" class="md-nav__link">
+    Setting Up the application manually
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setting-up-the-application-through-docker" class="md-nav__link">
+    Setting Up the application through Docker
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setting-up-application-through-aws_1" class="md-nav__link">
+    Setting Up application through AWS
+  </a>
+  
+    <nav class="md-nav" aria-label="Setting Up application through AWS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installing-aws-cli-in-terminal" class="md-nav__link">
+    Installing AWS CLI in terminal
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setting-up-aws-profile" class="md-nav__link">
+    Setting up AWS profile
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ecr" class="md-nav__link">
+    ECR
+  </a>
+  
+    <nav class="md-nav" aria-label="ECR">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creating-an-ecr-repository" class="md-nav__link">
+    Creating an ECR Repository
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deleting-an-ecr-repository" class="md-nav__link">
+    Deleting an ECR repository
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pushing-an-ecr-repository" class="md-nav__link">
+    Pushing an ECR Repository
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-an-image-to-ecr-repository-through-github-actions" class="md-nav__link">
+    Adding an image to ECR Repository through GitHub Actions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ecs" class="md-nav__link">
+    ECS
+  </a>
+  
+    <nav class="md-nav" aria-label="ECS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setting-up-ecs-cluster" class="md-nav__link">
+    Setting Up ECS cluster
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setting-up-task-definitions" class="md-nav__link">
+    Setting Up Task Definitions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setting-up-service" class="md-nav__link">
+    Setting Up Service
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../dast/" title="Setting Up GitHub Actions Workflow for DAST" class="md-nav__link">
+      Setting Up GitHub Actions Workflow for DAST
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../deployment/" title="Setting Up GitHub Actions Workflow for Deployment" class="md-nav__link">
+      Setting Up GitHub Actions Workflow for Deployment
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../Conclusion/" title="Conclusion" class="md-nav__link">
+      Conclusion
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../resources/" title="Resources" class="md-nav__link">
+      Resources
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objective" class="md-nav__link">
+    Objective
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setting-up-the-application-manually" class="md-nav__link">
+    Setting Up the application manually
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setting-up-the-application-through-docker" class="md-nav__link">
+    Setting Up the application through Docker
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setting-up-application-through-aws_1" class="md-nav__link">
+    Setting Up application through AWS
+  </a>
+  
+    <nav class="md-nav" aria-label="Setting Up application through AWS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installing-aws-cli-in-terminal" class="md-nav__link">
+    Installing AWS CLI in terminal
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setting-up-aws-profile" class="md-nav__link">
+    Setting up AWS profile
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ecr" class="md-nav__link">
+    ECR
+  </a>
+  
+    <nav class="md-nav" aria-label="ECR">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creating-an-ecr-repository" class="md-nav__link">
+    Creating an ECR Repository
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deleting-an-ecr-repository" class="md-nav__link">
+    Deleting an ECR repository
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pushing-an-ecr-repository" class="md-nav__link">
+    Pushing an ECR Repository
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-an-image-to-ecr-repository-through-github-actions" class="md-nav__link">
+    Adding an image to ECR Repository through GitHub Actions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ecs" class="md-nav__link">
+    ECS
+  </a>
+  
+    <nav class="md-nav" aria-label="ECS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setting-up-ecs-cluster" class="md-nav__link">
+    Setting Up ECS cluster
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setting-up-task-definitions" class="md-nav__link">
+    Setting Up Task Definitions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setting-up-service" class="md-nav__link">
+    Setting Up Service
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  
+                
+                
+                <h1 id="setting-up-application-through-aws">Setting Up Application through AWS</h1>
+<h2 id="objective">Objective</h2>
+<p>This section aims to set up the application <a href="https://github.com/gothinkster/angular-realworld-example-app">angular-realworld-example-app</a> to provide a solution to the fourth point of the <a href="https://cloud-native.netlify.app/problem-statement/">problem statement</a> under Task 1.</p>
+<h2 id="setting-up-the-application-manually">Setting Up the application manually</h2>
+<p>Firstly, I installed the application manually and ran it on my browser to know how it works. So I cloned the application in my terminal</p>
+<pre><code>git clone https://github.com/gothinkster/angular-realworld-example-app.git
+</code></pre>
+
+<ul>
+<li>Install npm</li>
+</ul>
+<pre><code>sudo apt update
+sudo apt install nodejs
+sudo apt install npm
+nodejs -v
+</code></pre>
+
+<ul>
+<li>Install Yarn (https://classic.yarnpkg.com/en/docs/install/#debian-stable)</li>
+</ul>
+<pre><code>curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo &quot;deb https://dl.yarnpkg.com/debian/ stable main&quot; | sudo tee /etc/apt/sources.list.d/yarn.list
+sudo apt update &amp;&amp; sudo apt install yarn
+export PATH=&quot;$PATH:`yarn global bin`&quot;
+yarn install
+yarn -version
+</code></pre>
+
+<ul>
+<li>Install Angular CLI(https://angular.io/cli)</li>
+</ul>
+<pre><code>npm install -g @angular/cli
+</code></pre>
+
+<ul>
+<li>Got an error as on running <code>ng serve</code> opens editor instead of loading local URL. This is the terminal editor on the 'ng' alias. I uninstalled it with:</li>
+</ul>
+<pre><code>sudo apt purge ng-common ng-latin
+</code></pre>
+
+<p>Now again I ran <code>ng serve</code> and in the browser I typed <code>localhost:4200</code> (4200 is the default port). The application was successfully installed and window that opened is shown below:
+<img alt="" src="../Images/angular%20app.png" /></p>
+<h2 id="setting-up-the-application-through-docker">Setting Up the application through Docker</h2>
+<p>I firstly cloned the application and in the cloned folder made a file <code>Dockerfile</code>. In this, I used a node <a href="https://hub.docker.com/_/node">image</a></p>
+<pre><code>nano Dockerfile
+</code></pre>
+
+<p>I wrote this code in Dockerfile</p>
+<pre><code>#getting base image
+FROM node
+
+MAINTAINER Priyam Singh &lt;2020priyamsingh@gmail.com&gt;
+
+RUN apt-get update
+COPY . /src
+WORKDIR /src
+
+#Installing Angular CLI
+RUN npm install
+RUN npm install -y -g @angular-devkit/build-angular
+RUN npm install -y -g @angular/cli
+
+EXPOSE 4200
+CMD [&quot;ng&quot;, &quot;serve&quot;, &quot;--host&quot;, &quot;0.0.0.0&quot;]
+</code></pre>
+
+<ul>
+<li>My application was not running on browser but it was getting compiled because I made a mistake that I was not writing "--host", "0.0.0.0" (--host 0.0.0.0 to listen to all the interfaces from the container).</li>
+<li>I was facing many errors such as packages getting failed so I removed my code of Yarn and only installed with Angular CLI</li>
+</ul>
+<p>After this, I build the image</p>
+<pre><code>docker build -t angular5:latest .
+</code></pre>
+
+<p>Then ran the container</p>
+<pre><code>docker run --rm --name docker5 -p 1234:4200 angular5:latest
+</code></pre>
+
+<p>On the browser I opened <code>localhost:1234</code> it worked and the below window got opened.
+<img alt="" src="../Images/application%20docker%20running.png" /></p>
+<h2 id="setting-up-application-through-aws_1">Setting Up application through AWS</h2>
+<h3 id="installing-aws-cli-in-terminal">Installing AWS CLI in terminal</h3>
+<p>I followed this official link for the installation of <a href="https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux.html#cliv2-linux-install">AWS CLI</a> and ran the below commands:</p>
+<pre><code>curl &quot;https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip&quot; -o &quot;awscliv2.zip&quot;
+unzip awscliv2.zip
+sudo ./aws/install
+aws --version
+</code></pre>
+
+<p>I got the version output as shown below. It means AWS CLI is successfully installed.</p>
+<pre><code>aws-cli/2.0.56 Python/3.7.3 Linux/5.3.0-64-generic exe/x86_64.ubuntu.19
+</code></pre>
+
+<h3 id="setting-up-aws-profile">Setting up AWS profile</h3>
+<p>For setting up AWS profile I followed this official<a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html"> documentation</a>. I ran the command <code>aws configure</code> to set up AWS CLI installation. It will ask for some information which we have to enter:</p>
+<pre><code>AWS Access Key ID [****************4529]: &lt;Enter the ID&gt;
+AWS Secret Access Key [None]: &lt;Enter the Access Key&gt;
+Default region name [None]: us-east-2
+Default output format [None]: json
+</code></pre>
+
+<p>Then run the below command:</p>
+<pre><code>aws sts get-caller-identity
+</code></pre>
+
+<p>We will get the below output and our profile has been successfully configured:</p>
+<pre><code>&quot;UserId&quot;: &lt;&quot;AWS Access Key ID &quot;&gt;,
+    &quot;Account&quot;: &lt;&quot;ACCOUNT NO.&quot;&gt;,
+    &quot;Arn&quot;: &quot;******&quot;
+</code></pre>
+
+<h3 id="ecr">ECR</h3>
+<p>Amazon Elastic Container Registry (ECR) is a fully-managed Docker container registry that makes it easy for developers to store, manage, and deploy Docker container images. Amazon ECR eliminates the need to operate our container repositories or worry about scaling the underlying infrastructure. Amazon ECR hosts our images in a highly available and scalable architecture, allowing us to reliably deploy containers for our applications. </p>
+<h4 id="creating-an-ecr-repository">Creating an ECR Repository</h4>
+<p>To Create the ECR Repository I followed the below steps:</p>
+<ul>
+<li>I opened the Amazon ECR console</li>
+<li>In the navigation pane, choose <code>Repositories</code></li>
+<li>On the Repositories page, choose <code>Create repository</code></li>
+<li>In <code>Repository name</code>, enter a unique name for repository</li>
+<li>For <code>Tag immutability</code>, I choose the tag mutability setting for the repository. Repositories configured with immutable tags will prevent image tags from being overwritten</li>
+<li>For <code>Scan on push</code>, I choose the image scanning setting for the repository. Repositories configured to scan on push will start an image scan whenever an image is pushed, otherwise, image scans need to be started manually</li>
+<li>For <code>KMS encryption</code>, I choose to enable encryption of the images in the repository using AWS Key Management Service</li>
+</ul>
+<h4 id="deleting-an-ecr-repository">Deleting an ECR repository</h4>
+<p>To delete an ECR repository I followed the below steps:</p>
+<ul>
+<li>
+<p>I opened the Amazon ECR console</p>
+</li>
+<li>
+<p>In the navigation pane, I choose <code>Repositories</code></p>
+</li>
+<li>
+<p>On the Repositories page, I selected the repository to delete and choose <code>Delete</code></p>
+</li>
+<li>
+<p>In the Delete repository_name window, I verified that the selected repositories to be deleted and choose <code>Delete</code> option.</p>
+</li>
+</ul>
+<h4 id="pushing-an-ecr-repository">Pushing an ECR Repository</h4>
+<p>When we create a repository it shows commands for pushing. So we have to follow these commands and we can easily push the image to our ECR Repository.</p>
+<pre><code>aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin ${{ secrets.AWS_LOG }}.dkr.ecr.us-east-2.amazonaws.com  
+docker tag angular5:latest ${{ secrets.AWS_LOG }}.dkr.ecr.us-east-2.amazonaws.com/angular-app-repo:latest
+docker push ${{ secrets.AWS_LOG }}.dkr.ecr.us-east-2.amazonaws.com/angular-app-repo:latest
+</code></pre>
+
+<h3 id="adding-an-image-to-ecr-repository-through-github-actions">Adding an image to ECR Repository through GitHub Actions</h3>
+<ul>
+<li>I created a new file <code>image.yml</code> in the <code>.github/workflows</code>. </li>
+<li>I stored my credentials in the secrets section of my application repository.</li>
+<li>
+<p>I used this <a href="https://github.com/marketplace/actions/configure-aws-credentials-action-for-github-actions">plugin</a> <code>"Configure AWS Credentials" Action For GitHub Actions</code> for AWS configuration.</p>
+</li>
+<li>
+<p>Below is the YML file:</p>
+</li>
+</ul>
+<pre><code>name: &quot;build image from Dockerfile&quot;
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - uses: actions/checkout@v2
+
+    - name: Install docker
+      run: |
+        sudo apt update
+        sudo apt install apt-transport-https ca-certificates curl software-properties-common
+        curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+        sudo add-apt-repository &quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable&quot; &amp;&amp; sudo apt update
+        apt-cache policy docker-ce
+        sudo apt install docker-ce
+
+    - name: Build Docker image
+      run: |
+        docker build -t angular5 .
+
+    - name: Installing AWS CLI
+      run: |
+        curl &quot;https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip&quot; -o &quot;awscliv2.zip&quot;
+        unzip awscliv2.zip
+        sudo ./aws/install
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.DEMO_ID }}
+        aws-secret-access-key: ${{ secrets.DEMO_K }}
+        aws-region: us-east-2    
+
+    - name: Pushing image to AWS
+      run: |
+        aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin ${{ secrets.AWS_LOG }}.dkr.ecr.us-east-2.amazonaws.com  
+        docker tag angular5:latest ${{ secrets.AWS_LOG }}.dkr.ecr.us-east-2.amazonaws.com/angular-app-repo:latest
+        docker push ${{ secrets.AWS_LOG }}.dkr.ecr.us-east-2.amazonaws.com/angular-app-repo:latest
+
+</code></pre>
+
+<p>After this, the image got successfully pushed to ECR.</p>
+<h3 id="ecs">ECS</h3>
+<p>Amazon Elastic Container Service (ECS) is a highly scalable, high performance container management service that supports Docker containers and allows to easily run applications on a managed cluster of Amazon EC2 instances. It eliminates the need for us to install, operate, and scale cluster management infrastructure. </p>
+<h4 id="setting-up-ecs-cluster">Setting Up ECS cluster</h4>
+<p>To create cluster I followed the steps given below and also followed the official <a href="https://docs.aws.amazon.com/AmazonECS/latest/userguide/create_cluster.html">link</a>.</p>
+<p>For creating a cluster:</p>
+<ol>
+<li>I clicked on <code>services</code> in the left upper corner and searched for ECS under <code>All services</code> and clicked  <code>Elastic Container Service</code>.
+<img alt="" src="../Images/ECS1.png" /></li>
+<li>I selected <code>Clusters</code> option and then <code>Create Clusters</code>
+<img alt="" src="../Images/ECS2.png" /></li>
+<li>
+<p>For <code>Select cluster template</code>, I selected <code>Networking only</code> because I wanted to make it by Fargate as Fargate is a technology that can be used with Amazon ECS to run containers without having to manage servers or clusters of Amazon EC2 instances. With AWS Fargate, no longer have to provision, configure, or scale clusters of virtual machines to run containers., then I selected <code>Next Step</code>.</p>
+</li>
+<li>
+<p>The next page opened, here I have to fill the <code>cluster name</code> and click <code>create</code>.</p>
+</li>
+<li>
+<p>The <code>Launch status</code> page opened showing it is successfully created.</p>
+</li>
+</ol>
+<h4 id="setting-up-task-definitions">Setting Up Task Definitions</h4>
+<ol>
+<li>
+<p>From the side bar select <code>Create new Task Definition</code> and the page opens to select <code>FARGATE</code> and click <code>Next step</code> </p>
+</li>
+<li>
+<p>Over here give the <code>Task Definition Name</code> and <code>Task Role</code> select <code>ecsTaskExecutionRole</code> </p>
+</li>
+<li>
+<p><code>Task memory (GB)</code> select <code>0.5GB</code> and in <code>Task CPU (vCPU)</code> select <code>0.25 vCPU</code> and finally select <code>Create</code> option.</p>
+</li>
+</ol>
+<h4 id="setting-up-service">Setting Up Service</h4>
+<p>An Amazon ECS service enables us to run and maintain a specified number of instances of a task definition simultaneously in an Amazon ECS cluster. If any of our tasks fail or stop for any reason, the Amazon ECS service scheduler launches another instance of our task definition to replace it in order to maintain the desired number of tasks in the service.</p>
+<p>After creating the ECS cluster, now I can create <code>Services</code> for the cluster. I followed this official <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html">documentation</a>.</p>
+<ul>
+<li>I firstly clicked on the cluster which I made and selected the <code>Service</code> option then clicked on <code>Create</code>. 
+<img alt="" src="../Images/ECS3.png" /></li>
+<li>
+<p>The next page <code>Configure service</code> opens</p>
+<p>(a). In the <code>Launch Type</code> I selected <code>FARGATE</code> then filled the <code>Service name</code> and in <code>Number of tasks</code> I typed 1. Other options I kept as default and then selected <code>Next step</code>.</p>
+</li>
+<li>
+<p>The next pages opened <code>Configure network</code> in this I selected the <code>Cluster VPC</code> and <code>Subnets</code> and in <code>Configure security groups</code> I created a new security group.</p>
+<p>(a). I selected <code>Create new security group</code></p>
+<p>(b). Entered security group name <code>Security group name</code></p>
+<p>(c). Define <code>Inbound rules for security group</code>, it can be changed later if required</p>
+</li>
+<li>
+<p><code>Set Auto Scaling</code> that too I kept default and selected the <code>Next step</code></p>
+</li>
+<li>
+<p>Then <code>Review page</code> opens in which we can review the changes and finally create the service</p>
+</li>
+<li>Once the service is successfully created I accessed the public IP of the task running and in the browser entered <code>Public IP:4200</code>. The application is running as shown below:</li>
+</ul>
+<p><img alt="" src="../Images/aws-app-access.png" /></p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../sbom/" title="Software Bill of Materials" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Software Bill of Materials
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../dast/" title="Setting Up GitHub Actions Workflow for DAST" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Setting Up GitHub Actions Workflow for DAST
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/vendor.d1f5a259.min.js"></script>
+      <script src="../assets/javascripts/bundle.d5fec882.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "..",
+          features: [],
+          search: Object.assign({
+            worker: "../assets/javascripts/worker/search.fae956e7.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>

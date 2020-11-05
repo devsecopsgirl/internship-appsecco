@@ -3,11 +3,11 @@
 
 ## Objective
 
-This section aims to generate a Software Bill of Materials for [angular-realworld-example-app](https://github.com/gothinkster/angular-realworld-example-app) and generate a report to provide a solution to the fifth point of the [problem statement](https://cloud-native.netlify.app/problem-statement/) under Task 1.
+This section aims to generate a Software Bill of Materials for [angular-realworld-example-app](https://github.com/gothinkster/angular-realworld-example-app) and generate a report to provide a solution to the sixth and seventh point of the [problem statement](https://cloud-native.netlify.app/problem-statement/) under Task 1.
 
 ## Running GitHub Actions Sequentially
 
-I set up the sequential workflows by using a `repository_dispatch` action in the following four steps and followed the documentation(https://stevenmortimer.com/running-github-actions-sequentially/) :
+I set up the sequential workflows by using a `repository_dispatch` action in the following four steps and followed this [documentation](https://stevenmortimer.com/running-github-actions-sequentially/) :
 
 * Step1: Creating a Personal Access Token (PAT)
 

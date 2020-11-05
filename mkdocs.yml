@@ -1,4 +1,4 @@
-site_name: 'Cloud Native Implementation of DevSecOps Concepts'
+site_name: 'Cloud Native DevSecOps'
 
 nav:
 - Introduction: 'index.md'
@@ -7,7 +7,10 @@ nav:
 - SAST Github Action: 'github-action.md'
 - Code Quality Analysis: 'code-quality-analysis.md'
 - Software Bill of Materials: 'sbom.md'
-- Set up GitHub Actions Workflow for DAST: 'dast.md'
-- Set up GitHub Actions Workflow for Deployment: 'deployment.md'
+- Setting Up Application through AWS: 'setting-app-aws.md'
+- Setting Up GitHub Actions Workflow for DAST: 'dast.md'
+- Setting Up GitHub Actions Workflow for Deployment: 'deployment.md'
+- Conclusion: 'Conclusion.md'
+- Resources: 'resources.md'
 
 theme: material
