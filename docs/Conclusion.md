@@ -10,9 +10,9 @@ After VMware came, we were able to run multiple applications over a single serve
 
 ## Cloud Native Advantages
 
-* **RESOURCES** Now, I do not have to worry about the memory, storage my system have as over here I have to deploy the applications on cloud and no more my system hanged as I was facing the issue while I was working with VMs in this [report](https://devsecops-pipeline.devsecopsgirl.in/ubuntu-server-vm-setup/)
+* **RESOURCES** Now, I do not have to worry about the memory, storage of my system because in cloud native I have to deploy my application on cloud and no more my system hanged as I was facing the issue while I was working with VMs in this [report](https://devsecops-pipeline.devsecopsgirl.in/ubuntu-server-vm-setup/)
 
-* **SPEED** One of the great advantages of using cloud-native was it decreased the time of deploying the application, SAST scan, DAST scan, code quality analysis, SBOM on an average in my case by 80% as compared to the one I was doing while deploying the application through Jenkins pipeline in my [DevSecOps pipeline](https://devsecops-pipeline.devsecopsgirl.in).
+* **SPEED** One of the great advantages of using cloud-native was it decreased the time of deploying the application, SAST scan, DAST scan, code quality analysis, SBOM on an average in my case by 80% as compared to the one I was doing while deploying the application through Jenkins pipeline in my [DevSecOps pipeline](https://devsecops-pipeline.devsecopsgirl.in)
 
-* **SECURITY** Cloud-native applications are more robust when their development integrates with pipelines based on the CI/CD approach. AWS allows us to automate manual security tasks so we can shift our focus to scaling. With AWS, we can improve core security and compliance requirements, such as data locality, protection, and confidentiality with comprehensive services and features of AWS.  
+* **SECURITY** Cloud-native applications are more robust when their development integrates with pipelines based on the CI/CD approach. AWS allows us to automate manual security tasks so we can shift our focus to scaling. With AWS, we can improve core security and compliance requirements, such as data locality, protection, and confidentiality with comprehensive services and features of AWS
 
