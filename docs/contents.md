@@ -3,8 +3,9 @@
 
 The following is the report/documentation for the ```Problem Statement``` stated in next section. The contents of the report are:
 
-* [Introduction](https://cloud-native.netlify.app/)
+* [Project](https://cloud-native.netlify.app/)
 * [Contents](https://cloud-native.netlify.app/contents/)
+* [Introduction](https://cloud-native.netlify.app/introduction/)
 * [Problem Statement](https://cloud-native.netlify.app/problem-statement/)
 * [SAST through GitHub Action](https://cloud-native.netlify.app/github-action/)
 * [Code Quality Analysis](https://cloud-native.netlify.app/code-quality-analysis/)

@@ -1,8 +1,9 @@
 site_name: 'Cloud Native DevSecOps'
 
 nav:
-- Introduction: 'index.md'
+- Project: 'index.md'
 - Contents: 'contents.md'
+- Introduction: 'introduction.md' 
 - Problem Statement: 'problem-statement.md'
 - SAST Github Action: 'github-action.md'
 - Code Quality Analysis: 'code-quality-analysis.md'

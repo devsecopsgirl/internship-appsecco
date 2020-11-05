@@ -8,7 +8,7 @@ It is important to understand what used to happen in earlier days to understand 
 
 After VMware came, we were able to run multiple applications over a single server at the same time. But in this also system resources were consumed by the VMware only. My guest OS consumed my system resources(CPU, MEMORY, DISK), and also applications were running over these virtual OS. We need licenses for each OS which will again we have to pay. But this is not all, we also need to safely and securely run our apps directly on the server. Each VM needs patching security issues, updation, and even other firewalls and anti-viruses.
 
-## Cloud Native
+## Cloud Native Advantages
 
 * **RESOURCES** Now, I do not have to worry about the memory, storage my system have as over here I have to deploy the applications on cloud and no more my system hanged as I was facing the issue while I was working with VMs in this [report](https://devsecops-pipeline.devsecopsgirl.in/ubuntu-server-vm-setup/)
 
