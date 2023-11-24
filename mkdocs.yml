@@ -18,4 +18,4 @@ nav:
 - Performing DAST of SuiteCRM through Docker: 'docker.md'
 - Complete Pipeline Structure: 'complete-pipeline-structure.md'
 
-theme: material
+theme: readthedocs
